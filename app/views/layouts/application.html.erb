@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Arthur </title>
+		<%= csrf_meta_tag %>
+		<%= render 'layouts/stylesheets' %>
+	</head>
+	<body>
+		<div class="container">
+			<%= render 'layouts/header' %>
+			<section class="round">
+			<% flash.each do |key, value| %>
+				<div class="flash <%= key %>"><%= value %></div>
+			<% end %>
+			<aside>
+			<h1>L'Auteur</h1>
+			<p>C'est moi, Arthur ! Je fais mon premier site web.</p>
+			</aside>
+			<article>
+			<%= yield %>
+			</article>
+			<div class="colonnedroite">
+				<h1>Colonne de droite</h1>
+				<p>Ceci est le contenu de la colonne de droite</p>
+			</div>
+			</section>
+			<%= render 'layouts/footer' %>
+			<%= debug(params) if Rails.env.development? %>
+		</div>
+	</body>
+</html>
