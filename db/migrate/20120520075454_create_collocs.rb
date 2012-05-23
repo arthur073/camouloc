@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateCollocs < ActiveRecord::Migration
   def change
     create_table :collocs do |t|

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateMicroposts < ActiveRecord::Migration
   def change
     create_table :microposts do |t|

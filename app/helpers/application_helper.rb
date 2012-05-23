@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 module ApplicationHelper
 
 	base_titre = "Simple App du Tutoriel Ruby on Rails"

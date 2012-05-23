@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class MicropostsController < ApplicationController
   # GET /microposts
   # GET /microposts.json
