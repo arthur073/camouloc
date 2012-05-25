@@ -204,7 +204,7 @@ tr.depenses {
 	padding: 1em;
 	color: black;
 	background-color: white;
-	border-radius: 10px;
+	box-shadow: 0px 2px 5px #1c1a19;
 }
 
 td.sidebar {
@@ -220,11 +220,28 @@ td.sidebar {
 	margin-bottom: -15px;
 }
 
-ul.users {
+div.users {
 	margin-top: 1em;
 }
 
 .users li {
 	list-style: none;
+}
+
+/* coloc show page */
+
+div.colocataire {
+	background-color: black;
+	color: black;
+}
+
+
+/* page du tableau de bord */
+
+table.tabbord {
+	color: black;
+	background-color: white;
+	box-shadow: 0px 2px 5px #1c1a19;
+
 }
 

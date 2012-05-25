@@ -11,7 +11,7 @@
 				<strong>Nom</strong> <%= @user.nom %><br />
 				<strong>URL</strong>  <%= link_to user_path(@user), @user %><br />
 				<strong>Id</strong>  <%= @user.id %><br />
-				<strong>Coloc</strong>  <%= link_to Coloc.find(@user.coloc_id).nom, coloc_path(Coloc.find(@user.coloc.id))  %> <br />
+				<strong>Membre de</strong>  <%= link_to Coloc.find(@user.coloc_id).nom, coloc_path(Coloc.find(@user.coloc.id))  %> <br />
 				<strong>email</strong>  <%= @user.email %>
 				<strong>Dépenses</strong>  <%= @user.depenses.count %>
 
@@ -35,14 +35,16 @@
 				<tr class="depenses">
 					<td >	<%= User.find(depenses.user_id).nom %> </td>
 					<td>	<%= User.find(depenses.destinataire_id).nom %> </td>
-					<td>	<%= depenses.montant %> </td>
+					<td>	<%= depenses.montant %> € </td>
 					<td>	<%= depenses.raison %> </td>
 				</tr>
 			<% end %>
 		</table>
 	<% end %>
 	<br>
-	<%= link_to "Nouvelle dépense", new_depense_path(@depense) %> </br>
-	<%= link_to "Editer mon profil", edit_user_path(@user) %>
+	<% if @user.id == current_user.id %>
+		<%= link_to "Nouvelle dépense", new_depense_path(@depense) %> </br>
+		<%= link_to "Editer mon profil", edit_user_path(@user) %>
+	<% end %>
 	</p>
 </table>

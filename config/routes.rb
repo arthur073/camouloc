@@ -9,13 +9,11 @@ Demo::Application.routes.draw do
 
 	match '/contact', :to => 'pages#contact'
 	match '/signup', :to => 'colocs#new'
-	match '/colocs', :to => 'colocs#index'
-	match '/colocs/new', :to => 'colocs#new'
-	match '/depenses/new', :to => 'depenses#new'
 	match '/signin',  :to => 'sessions#new'
 	match '/signout', :to => 'sessions#destroy'
 	match '/about',   :to => 'pages#about'
 	match '/help',    :to => 'pages#help'
+	match '/tabbord/:id/tabbord', :controller => 'colocs', :action => 'tabbord', :as => 'tableau_bord'
 	root :to => 'pages#home'
 
 
