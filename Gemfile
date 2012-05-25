@@ -1,7 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'rails', '3.2.3'
-gem 'will_paginate', '3.0.pre2'
+gem "will_paginate", :git => "https://github.com/p7r/will_paginate.git", :branch => "rails3"
+#gem 'will_paginate', '3.0.pre2'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'

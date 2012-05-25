@@ -8,6 +8,11 @@ class CollocController < ApplicationController
     		#@titre = @colloc.nom
 	end
 
+	def index
+		@titre = "Toutes les collocs"
+		@colloc = Colloc.paginate(:page => params[:page])
+	end
+
 	def new
 		@colloc = Colloc.new
 		@titre = "Inscription de la Collocation"

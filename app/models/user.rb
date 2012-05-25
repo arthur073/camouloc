@@ -3,6 +3,8 @@ class User < ActiveRecord::Base
 	attr_accessor :password
 	attr_accessible :nom, :email, :password, :password_confirmation
 
+	belongs_to :colloc
+	
 	# Crée automatique l'attribut virtuel 'password_confirmation'.
 	validates :password, :presence     => true,
 		:confirmation => true,
