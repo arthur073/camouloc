@@ -1,18 +1,48 @@
 <table class="profile" summary="Information profil">
-  <tr>
-    <td class="main">
-      <h1>
-        <%= gravatar_for @user %>
-        <%= @user.nom %>
-      </h1>
-    </td>
-    <td class="sidebar round">
-      <strong>Nom</strong> <%= @user.nom %><br />
-      <strong>URL</strong>  <%= link_to user_path(@user), @user %><br />
-      <strong>Id</strong>  <%= @user.id %><br />
-	<strong>Coloc</strong>  <%= link_to Coloc.find(@user.coloc_id).nom, coloc_path(Coloc.find(@user.coloc.id))  %> <br />
-	<strong>email</strong>  <%= @user.email %>
+	<table>
+		<tr>
+			<td class="main">
+				<h1>
+					<%= gravatar_for @user %>
+					<%= @user.nom %>
+				</h1>
+			</td>
+			<td class="sidebar round">
+				<strong>Nom</strong> <%= @user.nom %><br />
+				<strong>URL</strong>  <%= link_to user_path(@user), @user %><br />
+				<strong>Id</strong>  <%= @user.id %><br />
+				<strong>Coloc</strong>  <%= link_to Coloc.find(@user.coloc_id).nom, coloc_path(Coloc.find(@user.coloc.id))  %> <br />
+				<strong>email</strong>  <%= @user.email %>
+				<strong>Dépenses</strong>  <%= @user.depenses.count %>
 
-    </td>
-  </tr>
+			</td>
+		</tr>
+	</table>
+	<p>
+	<% if @user.depenses.size == 0 %>
+		Aucune dépense à répertorier.
+	<% else %>
+		Liste des dépenses de l'utilisateur :
+		<% liste = @user.depenses.all %>
+		<table>
+			<tr>
+				<td> Source </td>
+				<td> Destinataire </td>
+				<td> Montant </td>
+				<td> Raison </td>
+			</tr>
+			<% liste.reverse.each do |depenses|%>
+				<tr class="depenses">
+					<td >	<%= User.find(depenses.user_id).nom %> </td>
+					<td>	<%= User.find(depenses.destinataire_id).nom %> </td>
+					<td>	<%= depenses.montant %> </td>
+					<td>	<%= depenses.raison %> </td>
+				</tr>
+			<% end %>
+		</table>
+	<% end %>
+	<br>
+	<%= link_to "Nouvelle dépense", new_depense_path(@depense) %> </br>
+	<%= link_to "Editer mon profil", edit_user_path(@user) %>
+	</p>
 </table>

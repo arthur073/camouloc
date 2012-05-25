@@ -2,10 +2,12 @@
 
 <p>
 <font size="3", color=white>
-	MyColloc est un logiciel permettant de gérer les dépenses au sein d'une collocation. Commencez tout de suite en inscrivant votre collocation.
+	MyColoc est un logiciel permettant de gérer les dépenses au sein d'une collocation. Commencez tout de suite en inscrivant votre collocation.
 </font>
 </p>
 
-<% unless signed_in? %>
-	<%= link_to "Inscrire sa collocation !", signup_path, :class => "signup_button round" %>
+<% if signed_in? %>
+	<%= link_to "Voir ma colocation !", Coloc.find(current_user.coloc_id), :class => "signup_button round" %>
+<% else %>
+	<%= link_to "Inscrire sa colocation !", signup_path, :class => "signup_button round" %>
 <% end %>

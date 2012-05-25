@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
 	belongs_to :coloc
+	has_many :depenses
 	attr_accessor :password
 	attr_accessible :nom, :email, :password, :password_confirmation, :coloc_id
 

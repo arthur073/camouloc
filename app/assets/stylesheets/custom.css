@@ -6,7 +6,6 @@ body {
 	background-image:url('fond.jpg');
 	background-attachment: fixed;
 	/*background-color: #fff;*/
-	color: white;
 }
 
 
@@ -49,6 +48,7 @@ article, aside, .colonnedroite
 	display: inline-block;
 	vertical-align: top;
 	background-color: #175475;
+	color: white;
 }
 
 
@@ -199,11 +199,20 @@ td.main {
 	padding: 1em;
 }
 
+tr.depenses {
+	width: 25%;
+	padding: 1em;
+	color: black;
+	background-color: white;
+	border-radius: 10px;
+}
+
 td.sidebar {
 	width: 40%;
 	padding: 1em;
 	vertical-align: top;
-	background: black;
+	background-color: black;
+	color: white;
 }
 
 .profile img.gravatar {
