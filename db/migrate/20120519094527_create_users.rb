@@ -4,6 +4,7 @@ class CreateUsers < ActiveRecord::Migration
     create_table :users do |t|
       t.string :nom
       t.string :email
+      t.integer :colloc_id
 
       t.timestamps
     end

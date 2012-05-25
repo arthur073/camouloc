@@ -2,14 +2,14 @@
 
 <%= image_tag("mc-logo.jpg", :alt => "Application exemple", :class => "round") %>
 <div class="titre">
-	<font size="15", color=#5DA7CF>MyColloc</font> <br /> <font size="5", color=white>Logiciel de gestion de Collocation en ligne.</font>
+	<font size="15", color=#5DA7CF>MyColoc</font> <br /> <font size="5", color=white>Logiciel de gestion de Colocation en ligne.</font>
 </div>
 <nav class="round">
 
 <ul>
 	<li><%= link_to "Accueil", root_path %></li>
 	<li><%= link_to "Utilisateurs", users_path %></li>
-	<li><%= link_to "Collocations", collocs_path %></li>
+	<li><%= link_to "Colocations", colocs_path %></li>
 	<% if signed_in? %>
 		<li><%= link_to "Profil", edit_user_path(current_user) %></li>
 	<% end %>

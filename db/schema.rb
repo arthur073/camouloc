@@ -11,9 +11,9 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120523164733) do
+ActiveRecord::Schema.define(:version => 20120525130811) do
 
-  create_table "collocs", :force => true do |t|
+  create_table "colocs", :force => true do |t|
     t.string   "nom"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(:version => 20120523164733) do
     t.string   "encrypted_password"
     t.string   "salt"
     t.boolean  "admin",              :default => false
+    t.integer  "colloc_id"
   end
 
 end
