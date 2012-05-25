@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class PagesController < ApplicationController
   def home
-	@titre = "Accueil"
+	@titre = "MyColloc"
   end
 
   def contact
@@ -12,7 +12,4 @@ class PagesController < ApplicationController
 	@titre = "A propos"
   end
 
-  def help
-	@titre = "Aide"
-  end
 end

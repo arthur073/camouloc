@@ -14,7 +14,7 @@
 			<% end %>
 			<aside>
 			<h1>L'Auteur</h1>
-			<p>C'est moi, Arthur ! Je fais mon premier site web.</p>
+			<p>C'est moi, Arthur ! Ceci est le contenu de la colonne de gauche.</p>
 			</aside>
 			<article>
 			<%= yield %>
@@ -25,7 +25,6 @@
 			</div>
 			</section>
 			<%= render 'layouts/footer' %>
-			<%= debug(params) if Rails.env.development? %>
 		</div>
 	</body>
 </html>

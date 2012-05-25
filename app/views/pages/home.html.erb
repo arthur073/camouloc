@@ -1,14 +1,11 @@
-<h1>MyColloc</h1>
+<h1> <%= @titre %> </h1>
 
 <p>
 <font size="3", color=white>
-	MyColloc est un logiciel permettant de gérer les dépenses au sein d'une collocation. Commencez tout de suite, ou suivez le   
-	<a href="http://railstutorial.org/">Tutoriel</a>.
+	MyColloc est un logiciel permettant de gérer les dépenses au sein d'une collocation. Commencez tout de suite en inscrivant votre collocation.
 </font>
 </p>
 
-<% if signed_in? %>
-	Le bouton sign_in a disparu !
-<% else %>
+<% unless signed_in? %>
 	<%= link_to "Inscrire sa collocation !", signup_path, :class => "signup_button round" %>
 <% end %>

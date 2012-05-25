@@ -1,9 +1,9 @@
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
-	attr_accessor :password
-	attr_accessible :nom, :email, :password, :password_confirmation
-
 	belongs_to :colloc
+	attr_accessor :password
+	attr_accessible :nom, :email, :password, :password_confirmation, :colloc_id
+
 	
 	# Crée automatique l'attribut virtuel 'password_confirmation'.
 	validates :password, :presence     => true,

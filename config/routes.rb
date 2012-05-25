@@ -6,8 +6,9 @@ Demo::Application.routes.draw do
 	resources :sessions, :only => [:new, :create, :destroy]
 
 	match '/contact', :to => 'pages#contact'
-	match '/signup', :to => 'users#new'
-	match '/collocs', :to => 'colloc#index'
+	match '/signup', :to => 'collocs#new'
+	match '/collocs', :to => 'collocs#index'
+	match '/collocs/new', :to => 'collocs#new'
 	match '/signin',  :to => 'sessions#new'
 	match '/signout', :to => 'sessions#destroy'
 	match '/about',   :to => 'pages#about'
