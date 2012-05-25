@@ -20,8 +20,11 @@
 			<%= yield %>
 			</article>
 			<div class="colonnedroite">
-				<h1>Colonne de droite</h1>
-				<p>Ceci est le contenu de la colonne de droite</p>
+				<h1>Liste des colocations</h1>
+					<% @liste_coloc = Coloc.all %>
+					<% @liste_coloc.each do |colocs|%>
+						<%= link_to colocs.nom, colocs %> </br>
+					<% end %>
 			</div>
 			</section>
 			<%= render 'layouts/footer' %>

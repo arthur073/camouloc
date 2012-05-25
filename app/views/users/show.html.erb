@@ -11,6 +11,8 @@
       <strong>URL</strong>  <%= link_to user_path(@user), @user %><br />
       <strong>Id</strong>  <%= @user.id %><br />
 	<strong>Coloc</strong>  <%= link_to Coloc.find(@user.coloc_id).nom, coloc_path(Coloc.find(@user.coloc.id))  %> <br />
+	<strong>email</strong>  <%= @user.email %>
+
     </td>
   </tr>
 </table>

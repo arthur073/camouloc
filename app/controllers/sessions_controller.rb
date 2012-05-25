@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
 			@titre = "S'identifier"
 			render 'new'
 		else
+			flash[:notice] = "Vous êtes connecté."
 			sign_in user
 			redirect_back_or user
 		end
