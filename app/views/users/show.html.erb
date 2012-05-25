@@ -9,7 +9,8 @@
     <td class="sidebar round">
       <strong>Nom</strong> <%= @user.nom %><br />
       <strong>URL</strong>  <%= link_to user_path(@user), @user %><br />
-      <strong>Id</strong>  <%= @user.id %>
+      <strong>Id</strong>  <%= @user.id %><br />
+      <strong>Coloc</strong>  <%= Coloc.find(@user.coloc_id).nom %><br />
     </td>
   </tr>
 </table>
