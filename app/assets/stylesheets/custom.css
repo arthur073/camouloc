@@ -32,11 +32,12 @@ header, .titre {
 
 nav, .titre {
 	display: inline-block;
-	vertical-align: -28px;
+	vertical-align: -52px;
 }
 
 .titre {
 	font-size: 120%;
+	width: 40%;
 	font-family: 'RieslingRegular', Arial, sans-serif;
 	margin-left: 10px;
 }

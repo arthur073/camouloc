@@ -10,7 +10,7 @@
 	<li><%= link_to "Utilisateurs", users_path %></li>
 	<% if signed_in? %>
 		<li><%= link_to "Ma Colocation", Coloc.find(current_user.coloc_id) %></li>
-		<li><%= link_to "Déconnexion", signout_path, :method => :delete %></li>
+		<li><%= link_to "Déconnexion ("+current_user.nom + ")", signout_path, :method => :delete %></li>
 	<% else %>
 		<li><%= link_to "Colocations", colocs_path %></li>
 		<li><%= link_to "S'identifier", signin_path %></li>
