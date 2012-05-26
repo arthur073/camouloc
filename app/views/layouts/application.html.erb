@@ -14,20 +14,22 @@
 				<div class="flash <%= key %>"><%= value %></div>
 			<% end %>
 			<aside>
-			<h1>L'Auteur</h1>
-			<p>C'est moi, Arthur ! Ceci est le contenu de la colonne de gauche.</p>
+			<h1>Liens</h1>
+			<%= link_to "Utilisateurs", users_path %></br>
+			<%= link_to "Colocations", colocs_path %></br>
+			<p>C'est moi, Arthur ! à faire pour demain : envoyer des mails à chaque dépense, mettre dans la colonne de gauche des liens rapides</p>
 			</aside>
 			<article>
 			<%= yield %>
 			</article>
 			<div class="colonnedroite">
 				<h1> <%= link_to "Liste des colocations", colocs_path %> </h1>
-					<% @liste_coloc = Coloc.all %>
-					<% @liste_coloc.each do |colocs|%>
-						<% if colocs.users.size > 0 %>
-							<%= link_to colocs.nom, colocs %> </br>
-						<% end %>
+				<% @liste_coloc = Coloc.all %>
+				<% @liste_coloc.each do |colocs|%>
+					<% if colocs.users.size > 0 %>
+						<%= link_to colocs.nom, colocs %> </br>
 					<% end %>
+				<% end %>
 			</div>
 			</section>
 			<%= render 'layouts/footer' %>

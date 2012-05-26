@@ -10,7 +10,7 @@
 			<td class="sidebar round">
 				<strong>Nom</strong> <%= @user.nom %><br />
 				<strong>Membre de</strong>  <%= link_to Coloc.find(@user.coloc_id).nom, coloc_path(Coloc.find(@user.coloc.id))  %> <br />
-				<strong>email</strong>  <a href="mailto:<%= @user.email %>"><%= @user.email %></a>
+				<strong>email</strong>  <a href="mailto:<%= @user.email %>"><%= @user.email %></a> </br>
 				<strong>Dépenses</strong>  <%= @user.depenses.count %>
 
 			</td>
@@ -29,6 +29,7 @@
 					<td> Destinataire </td>
 					<td> Montant </td>
 					<td> Raison </td>
+					<td> Date </td>
 				</tr>
 				<% liste.reverse.each do |depenses|%>
 					<tr class="depenses">
@@ -36,18 +37,25 @@
 						<td>	<%= User.find(depenses.destinataire_id).nom %> </td>
 						<td>	<%= depenses.montant %> € </td>
 						<td>	<%= depenses.raison %> </td>
+						<td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
 					</tr>
+					<% if signed_in? and current_user.admin? %>
+						<td> <%= button_to "supprimer", depenses, :method => :delete, :confirm => "Etes-vous certain&nbsp;?",:title => "Supprimer #{depenses.raison}" %> </td>
+					<% end %>
 				<% end %>
 			</table>
 		<% else %>
-		Vous devez appartenir à la colocation pour voir les dépenses de cet utilisateur.
+			Vous devez appartenir à la colocation pour voir les dépenses de cet utilisateur.
 
 		<% end %>
 	<% end %>
 	<br>
+	<% if signed_in? and (@user.id == current_user.id or current_user.admin?) %>
+		<%= link_to "Editer le profil", edit_user_path(@user) %> </br>
+	<% end %>
 	<% if signed_in? and @user.id == current_user.id %>
 		<%= link_to "Nouvelle dépense", new_depense_path(@depense) %> </br>
-		<%= link_to "Editer mon profil", edit_user_path(@user) %>
 	<% end %>
+
 	</p>
 </table>

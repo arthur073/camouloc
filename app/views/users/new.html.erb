@@ -1,4 +1,5 @@
-<h1>Inscription</h1>
+<h1> <%= @titre %> </h1>
+<p>Remplissez le formulaire suivant pour ajouter l'utilisateur. Veuillez laisser les champs préremplis tels quels. </p>
 
 <%= form_for(@user) do |f| %>
 	<%= render 'shared/error_messages', :object => f.object %>
@@ -12,7 +13,7 @@
 	</div>
 	<div class="field">
 		<%= f.label :coloc_id %><br />
-		<%= f.text_field :coloc_id %>
+		<%= f.text_field :coloc_id %> ( <%= Coloc.find(params[:coloc_id]).nom %> )
 	</div>
 
 	<div class="field">

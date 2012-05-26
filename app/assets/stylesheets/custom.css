@@ -32,12 +32,12 @@ header, .titre {
 
 nav, .titre {
 	display: inline-block;
-	vertical-align: -52px;
+	vertical-align: top;
 }
 
 .titre {
 	font-size: 120%;
-	width: 40%;
+	width: 41%;
 	font-family: 'RieslingRegular', Arial, sans-serif;
 	margin-left: 10px;
 }
@@ -67,7 +67,6 @@ aside
 	border-radius: 10px;
 	padding: 10px;
 	color: white;
-	font-size: 0.9em;
 }
 
 article
@@ -185,6 +184,11 @@ footer nav {
 	float: none;
 }
 div.field, div.actions {
+	margin-bottom: 10px;
+}
+
+div.field2 {
+	background-color: gray;
 	margin-bottom: 10px;
 }
 
