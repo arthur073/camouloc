@@ -9,10 +9,8 @@
 			</td>
 			<td class="sidebar round">
 				<strong>Nom</strong> <%= @user.nom %><br />
-				<strong>URL</strong>  <%= link_to user_path(@user), @user %><br />
-				<strong>Id</strong>  <%= @user.id %><br />
 				<strong>Membre de</strong>  <%= link_to Coloc.find(@user.coloc_id).nom, coloc_path(Coloc.find(@user.coloc.id))  %> <br />
-				<strong>email</strong>  <%= @user.email %>
+				<strong>email</strong>  <a href="mailto:<%= @user.email %>"><%= @user.email %></a>
 				<strong>Dépenses</strong>  <%= @user.depenses.count %>
 
 			</td>

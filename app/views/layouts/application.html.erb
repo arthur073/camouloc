@@ -24,7 +24,9 @@
 				<h1> <%= link_to "Liste des colocations", colocs_path %> </h1>
 					<% @liste_coloc = Coloc.all %>
 					<% @liste_coloc.each do |colocs|%>
-						<%= link_to colocs.nom, colocs %> </br>
+						<% if colocs.users.size > 0 %>
+							<%= link_to colocs.nom, colocs %> </br>
+						<% end %>
 					<% end %>
 			</div>
 			</section>
