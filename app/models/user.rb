@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
 	private
 
 	def encrypt_password
-		self.encrypted_password = encrypt(password)
+		self.encrypted_password = encrypt(password) if password.present?
 	end
 
 	def encrypt(string)

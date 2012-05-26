@@ -9,6 +9,7 @@ Demo::Application.routes.draw do
 
 	match '/contact', :to => 'pages#contact'
 	match '/signup', :to => 'colocs#new'
+	#match '/users/new/:coloc_id', :to => 'users#new'
 	match '/signin',  :to => 'sessions#new'
 	match '/signout', :to => 'sessions#destroy'
 	match '/about',   :to => 'pages#about'

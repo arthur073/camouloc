@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class UsersController < ApplicationController
 	before_filter :authenticate, :only => [:edit, :update]
+	before_filter :admin_user,   :only => :destroy
 	before_filter :correct_user, :only => [:edit, :update]
 
 	def index
@@ -16,6 +17,7 @@ class UsersController < ApplicationController
 	def new
 		@user = User.new
 		@titre = "Inscription"
+		@user.coloc_id = Coloc.find(params[:coloc_id]).id
 	end
 
 	def create
@@ -47,6 +49,14 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def destroy
+		@user = User.find(params[:id])
+		@user.destroy
+		flash[:success] = "Utilisateur supprimé."
+		redirect_to users_path
+	end
+
+
 	private
 
 	def authenticate
@@ -56,5 +66,9 @@ class UsersController < ApplicationController
 	def correct_user
 		@user = User.find(params[:id])
 		redirect_to(root_path) unless current_user?(@user)
+	end
+
+	def admin_user
+		redirect_to(root_path) unless current_user.admin?
 	end
 end

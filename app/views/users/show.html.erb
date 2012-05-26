@@ -22,27 +22,32 @@
 	<% if @user.depenses.size == 0 %>
 		Aucune dépense à répertorier.
 	<% else %>
-		Liste des dépenses de l'utilisateur :
-		<% liste = @user.depenses.all %>
-		<table>
-			<tr>
-				<td> Source </td>
-				<td> Destinataire </td>
-				<td> Montant </td>
-				<td> Raison </td>
-			</tr>
-			<% liste.reverse.each do |depenses|%>
-				<tr class="depenses">
-					<td >	<%= User.find(depenses.user_id).nom %> </td>
-					<td>	<%= User.find(depenses.destinataire_id).nom %> </td>
-					<td>	<%= depenses.montant %> € </td>
-					<td>	<%= depenses.raison %> </td>
+		<% if signed_in? and (current_user.coloc_id == @user.coloc_id or current_user.admin?)%>
+			Liste des dépenses de l'utilisateur :
+			<% liste = @user.depenses.all %>
+			<table>
+				<tr>
+					<td> Source </td>
+					<td> Destinataire </td>
+					<td> Montant </td>
+					<td> Raison </td>
 				</tr>
-			<% end %>
-		</table>
+				<% liste.reverse.each do |depenses|%>
+					<tr class="depenses">
+						<td >	<%= User.find(depenses.user_id).nom %> </td>
+						<td>	<%= User.find(depenses.destinataire_id).nom %> </td>
+						<td>	<%= depenses.montant %> € </td>
+						<td>	<%= depenses.raison %> </td>
+					</tr>
+				<% end %>
+			</table>
+		<% else %>
+		Vous devez appartenir à la colocation pour voir les dépenses de cet utilisateur.
+
+		<% end %>
 	<% end %>
 	<br>
-	<% if @user.id == current_user.id %>
+	<% if signed_in? and @user.id == current_user.id %>
 		<%= link_to "Nouvelle dépense", new_depense_path(@depense) %> </br>
 		<%= link_to "Editer mon profil", edit_user_path(@user) %>
 	<% end %>

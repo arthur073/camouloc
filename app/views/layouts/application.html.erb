@@ -4,6 +4,7 @@
 		<title> MyColoc </title>
 		<%= csrf_meta_tag %>
 		<%= render 'layouts/stylesheets' %>
+		<%= javascript_include_tag :defaults %>
 	</head>
 	<body>
 		<div class="container">
@@ -20,7 +21,7 @@
 			<%= yield %>
 			</article>
 			<div class="colonnedroite">
-				<h1>Liste des colocations</h1>
+				<h1> <%= link_to "Liste des colocations", colocs_path %> </h1>
 					<% @liste_coloc = Coloc.all %>
 					<% @liste_coloc.each do |colocs|%>
 						<%= link_to colocs.nom, colocs %> </br>
