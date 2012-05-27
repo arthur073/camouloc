@@ -19,6 +19,6 @@ MyColoc::Application.routes.draw do
 	root :to => 'pages#home'
 
 	# permet d'utiliser Heroku
-	break if ARGV.join.include? 'assets:precompile'
+	#break if ARGV.join.include? 'assets:precompile'
 
 end
