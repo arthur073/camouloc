@@ -24,6 +24,7 @@ end
 
 # Gems used only for assets and not required
 # in production environments by default.
+# mis dans production pour heroku
 gem 'sass-rails',   '~> 3.2.3'
 gem 'coffee-rails', '~> 3.2.1'
 
