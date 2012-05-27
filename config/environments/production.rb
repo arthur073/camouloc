@@ -67,7 +67,7 @@ MyColoc::Application.configure do
 	# config.active_record.auto_explain_threshold_in_seconds = 0.5
 
 	#pour heroku
-	config.assets.precompile += %w( *.css *.js )
+	config.assets.compile = true
 
 
 
