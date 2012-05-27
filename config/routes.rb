@@ -18,5 +18,7 @@ MyColoc::Application.routes.draw do
 	match '/tabbord/:id/tabbord', :controller => 'colocs', :action => 'tabbord', :as => 'tableau_bord'
 	root :to => 'pages#home'
 
+	# permet d'utiliser Heroku
+	break if ARGV.join.include? 'assets:precompile'
 
 end
