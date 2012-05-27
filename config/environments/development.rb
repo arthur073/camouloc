@@ -38,4 +38,8 @@ MyColoc::Application.configure do
 
 	# Expands the lines which load the assets
 	config.assets.debug = true
+
+	#utilisation de heroku
+	config.assets.prefix = "/dev-assets"
+
 end
