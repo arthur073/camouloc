@@ -33,9 +33,14 @@
 <br>
 <% if @coloc.users.size < 2 %>
 	<% if signed_in? and (@coloc.users.where(:coloc_id => @coloc.id) != [] or current_user.admin?) or @coloc.users.size == 0%>
-		<%= link_to "Inscrire un nouveau colocataire ?", new_user_path(:coloc_id => @coloc[:id]) %></p>
+		<%= link_to "Inscrire un nouveau colocataire ?", new_user_path(:coloc_id => @coloc[:id]) %> </br>
 	<% end %>
 <% else %>
-	Nombre max de colocataires atteint.
+	Nombre max de colocataires atteint.</br>
+
+<% end %>
+
+<% if signed_in? and current_user.coloc_id == @coloc.id %>
+	<%= link_to "Editer le nom de la coloc", edit_coloc_path %>
 <% end %>
 

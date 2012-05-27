@@ -47,4 +47,21 @@ class ColocsController < ApplicationController
 		flash[:error] = "Cette colocation n'existe pas."
      	 	redirect_to colocs_path	     
 	end
+
+	def edit
+		@coloc = Coloc.find(params[:id])
+		@titre = "Edition Colocation"
+	end
+
+	def update
+		@coloc = Coloc.find(params[:id])
+		if @coloc.update_attributes(params[:coloc])
+			redirect_to @coloc
+			flash[:success] = "Nom actualisé"
+		else
+			@titre = "Edition Colocation"
+			render 'edit'
+		end
+	end
+
 end
