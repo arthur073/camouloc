@@ -200,7 +200,7 @@ table.profile {
 }
 
 td.main {
-	width: 60%;
+	width: 57%;
 	padding: 1em;
 }
 
@@ -213,7 +213,7 @@ tr.depenses {
 }
 
 td.sidebar {
-	width: 40%;
+	width: 43%;
 	padding: 1em;
 	vertical-align: top;
 	background-color: black;

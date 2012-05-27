@@ -1,5 +1,5 @@
 # -*- encoding : utf-8 -*-
-Demo::Application.routes.draw do
+MyColoc::Application.routes.draw do
 
 
 	resources :users

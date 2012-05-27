@@ -25,6 +25,8 @@ class UsersController < ApplicationController
 		@user = User.new(params[:user])
 		if @user.save
 			# Traite un succès d'enregistrement.
+			# Envoie un email de bienvenue
+			UserMailer.welcome_email(@user).deliver
 			unless signed_in?
 				sign_in @user
 			end
