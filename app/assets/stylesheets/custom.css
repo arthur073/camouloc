@@ -249,4 +249,8 @@ table.tabbord {
 	box-shadow: 0px 2px 5px #1c1a19;
 
 }
+/* changelog */
+strong.changelog {
+	color: black;
+}
 

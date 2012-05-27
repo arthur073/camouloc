@@ -1,15 +1,19 @@
 # -*- encoding : utf-8 -*-
 class PagesController < ApplicationController
-  def home
-	@titre = "MyColoc"
-  end
+	def home
+		@titre = "MyColoc"
+	end
 
-  def contact
-	@titre = "Contact"
-  end
+	def contact
+		@titre = "Contact"
+	end
 
-  def about
-	@titre = "A propos"
-  end
+	def about
+		@titre = "A propos"
+	end
+
+	def changelog
+		@titre = "Changelog"
+	end
 
 end
