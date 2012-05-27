@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Demo::Application.load_tasks
+MyColoc::Application.load_tasks
