@@ -9,13 +9,12 @@ gem "will_paginate", :git => "https://github.com/p7r/will_paginate.git", :branch
 gem 'gravatar_image_tag', '1.0.0.pre2'
 gem "squeel"  # Last officially released gem
 # gem "squeel", :git => "git://github.com/ernie/squeel.git" # Track git repo
-gem 'uglifier', '>= 1.0.3'
 gem 'jquery-rails'
 
 
 group :production, :test do
 	gem 'pg'
-	gem 'rspec-rails', '2.5.0'
+	#gem 'rspec-rails', '2.5.0'
 	gem 'faker', '0.3.1'
 end
 group :development do
@@ -30,6 +29,7 @@ end
 group :assets do
 	gem 'sass-rails',   '~> 3.2.3'
 	gem 'coffee-rails', '~> 3.2.1'
+	gem 'uglifier', '>= 1.0.3'
 end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
