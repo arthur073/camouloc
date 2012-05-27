@@ -3,13 +3,16 @@
 	<head>
 		<title> MyColoc </title>
 		<%= csrf_meta_tag %>
-		<%= #render 'layouts/stylesheets' %>
+		<%= render 'layouts/stylesheets' %>
 		<%= javascript_include_tag :defaults %>
 	</head>
 	<body>
 		<div class="container">
 			<%= render 'layouts/header' %>
 			<section class="round">
+			<% flash.each do |key, value| %>
+				<div class="flash <%= key %>"><%= value %></div>
+			<% end %>
 			<aside>
 			<h1>Liens</h1>
 			<%= link_to "Utilisateurs", users_path %></br>
