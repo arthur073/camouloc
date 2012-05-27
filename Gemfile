@@ -13,6 +13,8 @@ gem "squeel"  # Last officially released gem
 # gem "squeel", :git => "git://github.com/ernie/squeel.git" # Track git repo
 group :production do
 	gem 'pg'
+	gem 'rspec-rails', '2.5.0'
+	gem 'faker', '0.3.1'
 end
 group :development, :test do
 	gem 'sqlite3', '1.3.6', :require => 'sqlite3'
