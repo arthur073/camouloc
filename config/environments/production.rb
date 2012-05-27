@@ -68,7 +68,6 @@ MyColoc::Application.configure do
 
 	#pour heroku
 	config.assets.compile = true
-
-
+	config.action_mailer.delivery_method = :smtp
 
 end

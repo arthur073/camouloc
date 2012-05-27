@@ -19,7 +19,7 @@ class DepensesController < ApplicationController
 		if @depense.save
 			#Traite un succès d'enregistrement.
 			#envoie le mail de confirmation de la dépense
-			DepenseMailer.new_depense_email(@depense).deliver
+			#DepenseMailer.new_depense_email(@depense).deliver
 			flash[:success] = "Dépense enregistrée!"
 			redirect_to current_user
 		else
