@@ -10,7 +10,7 @@
 
     ssh_options[:forward_agent] = true
     set :scm, :git
-    set :repository, "ssh://user@ssh.alwaysdata.com/~/git/monsite.git"
+    set :repository, "ssh://mycolloc_arthur@ssh.alwaysdata.com/home/mycolloc/git/monsite.git"
     set :deploy_via, :remote_cache
     set :git_enable_submodules, 1
     set (:deploy_to) {"/home/user/rails/#{application}"}
