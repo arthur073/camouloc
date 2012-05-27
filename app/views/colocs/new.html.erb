@@ -1,0 +1,13 @@
+<h1> <%= @titre %> </h1>
+
+<%= form_for(@coloc) do |f| %>
+Inscrivez d'abord votre colocation, vous créerez votre profil par la suite.
+	<div class="field">
+		<%= f.label :nom %><br />
+		<%= f.text_field :nom %>
+	</div>
+	<div class="actions">
+		<%= f.submit "Inscription" %>
+	</div>
+<% end %>
+

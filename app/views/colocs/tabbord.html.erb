@@ -1,0 +1,55 @@
+<h1> <%= @titre %> de <%= @coloc.nom %> </h1>
+<% liste_user=@coloc.users.all %>
+<% somme_depenses = 0 %>
+
+
+
+<table class="tabbord">
+	<tr> 
+		<td> <strong> Résumé personnel :</strong> </td>
+	</tr>
+
+	<% liste_user.each do |users| %>
+		<% liste_user.each do |users2| %>
+			<% if users.id != users2.id %>
+				<tr>
+					<% # permet de calculer le solde de chaque user %>
+					<% solde1 = users.depenses.where(:destinataire_id => users2.id).sum(:montant) %>
+					<% solde2 = users2.depenses.where(:destinataire_id => users.id).sum(:montant) %>
+					<% solde =  ((solde1 - solde2).abs) /2 %>
+					<% #solde = users2.depenses.where(:destinataire_id => users.id).sum(:montant) /2 %>
+					<td> <%= users.nom %> doit </td>
+					<% if solde1 >= solde2 %>
+						<td> 0.0 € </td> 
+					<% else %>
+						<td><font color="red"> <strong> <%= solde %> € </strong></font></td> 
+					<% end %>
+					<td> à <%= users2.nom %> </td>
+				</tr>
+			<% end %>
+		<% end %>
+	<% end %>
+</table>
+
+
+
+<table class="tabbord">
+	<tr> 
+		<td> <strong> Total dépenses :</strong> </td>
+		<% liste_user.each do |users| %>
+			<td> De <%=users.nom %> </td> 
+		<% end %>
+	</tr>
+
+	<% liste_user.each do |users| %>
+		<tr>
+			<td> à <%= users.nom %> </td> 
+			<% liste_user.each do |users2| %>
+				<td> <%= users2.depenses.where(:destinataire_id => users.id).sum(:montant) %> € </td>	
+			<% end %>
+		</tr>
+	<% end %>
+
+</table>
+
+<%= link_to "Retour à la colocation", @coloc%>

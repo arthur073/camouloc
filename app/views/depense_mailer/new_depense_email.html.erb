@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Rapport de nouvelle dépense,<%= @coloc.nom %></h1>
+    <p> L'utilisateur <%= @user_source %> a rajouté une nouvelle dépense. </br>
+	<li> Montant : <%= @depense.montant %> </li>
+	<li> Raison : <%= @depense.raison %> </li>
+	<li> Source : <%= @user_source.nom %> </li>
+	<li> Destinataire : <%= @user_dest.nom %> </li>
+    </p>
+    <p>Merci de nous faire confiance et bonne journée !</p>
+  </body>
+</html>

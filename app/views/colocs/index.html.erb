@@ -1,0 +1,17 @@
+<h1> <%= @titre %> </h1>
+
+<%= will_paginate %>
+
+<ul class="coloc">
+	<% @colocs.each do |colocs| %>
+		<li>
+		<strong> <%= link_to colocs.nom, colocs %> </strong>
+		<% if signed_in? and current_user.admin? %>
+			<%= button_to "supprimer", colocs, :method => :delete, :confirm => "Etes-vous certain&nbsp;?",:title => "Supprimer #{colocs.nom}" %>
+		<% end %> 
+
+		</li>
+	<% end %>
+</ul>
+
+<%= will_paginate %>

@@ -1,0 +1,28 @@
+<h1> <%= @titre %> </h1>
+<p>Remplissez le formulaire suivant pour ajouter votre dépense. Veuillez laisser les champs préremplis tels quels. </p>
+
+
+<%= form_for(@depense) do |f| %>
+	<%= render 'shared/error_messages', :object => f.object %>
+	<div class="field">
+		<%= f.label :destinataire_id %><br />
+		<%= f.text_field :destinataire_id %> ( 	
+		<% if current_user.id == @colocataires.first.id %>
+			<%= @colocataires.last.nom %> 
+		<% else %>
+			<%= @colocataires.first.nom %>
+		<% end %> )
+
+	</div>
+	<div class="field">
+		<%= f.label :montant %><br />
+		<%= f.text_field :montant %>
+	</div>
+	<div class="field">
+		<%= f.label :raison %><br />
+		<%= f.text_field :raison %>
+	</div><div class="actions">
+		<%= f.submit "Enregistrer" %>
+	</div>
+<% end %>
+
