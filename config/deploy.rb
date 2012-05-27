@@ -13,7 +13,7 @@
     set :repository, "ssh://mycolloc_arthur@ssh.alwaysdata.com/home/mycolloc/git/monsite.git"
     set :deploy_via, :remote_cache
     set :git_enable_submodules, 1
-    set (:deploy_to) {"/home/user/rails/#{application}"}
+    set (:deploy_to) {"/home/mycolloc/rails/#{application}"}
     set :keep_releases, 5
     default_run_options[:pty] = true
     set :use_sudo, false
