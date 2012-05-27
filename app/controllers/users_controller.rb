@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 	before_filter :authenticate, :only => [:edit, :update]
 	before_filter :admin_user,   :only => :destroy
 	before_filter :correct_user, :only => [:edit, :update]
+	rescue_from ActiveRecord::RecordNotFound, :with => :user_manquant
 
 	def index
 		@titre = "Tous les utilisateurs"
@@ -58,6 +59,10 @@ class UsersController < ApplicationController
 		redirect_to users_path
 	end
 
+	def user_manquant
+		flash[:error] = "Cette utilisateur n'existe pas."
+     	 	redirect_to users_path	     
+	end
 
 	private
 

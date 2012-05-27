@@ -7,8 +7,8 @@
 
 <ul>
 	<li><%= link_to "Accueil", root_path %></li>
-	<li><%= link_to "Utilisateurs", users_path %></li>
 	<% if signed_in? %>
+		<li><%= link_to "Mon Profil", current_user %></li>
 		<li><%= link_to "Ma Colocation", Coloc.find(current_user.coloc_id) %></li>
 		<li><%= link_to "Déconnexion ("+current_user.nom + ")", signout_path, :method => :delete %></li>
 	<% else %>
