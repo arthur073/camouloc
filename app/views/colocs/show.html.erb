@@ -10,7 +10,7 @@
 			<strong>Colocataires</strong> <%= @coloc.users.count %>/2<br />
 			<% # à changer pour empêcher de voir tableau de bord %>
 			<% if signed_in? and (current_user.coloc_id == @coloc.id or current_user.admin?)%>
-				<strong> <%= link_to "Tableau de bord", tableau_bord_path(@coloc.id) %> </strong>
+				<strong> <%= link_to "TABLEAU de BORD", tableau_bord_path(@coloc.id) %> </strong>
 			<% else %>
 				</br>
 				Vous devez appartenir à cette colocation pour voir son tableau de bord. 

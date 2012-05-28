@@ -30,9 +30,10 @@ class UsersController < ApplicationController
 			unless signed_in?
 				sign_in @user
 			end
-			redirect_to @user
-			flash[:success] = "Bienvenue dans l'Application Exemple!"
+			redirect_to Coloc.find(@user.coloc_id)
+			flash[:success] = "Utilisateur enregistré !"
 		else
+			flash[:error] = "Cet email existe déjà"
 			@titre = "Inscription"
 			render 'new'
 		end

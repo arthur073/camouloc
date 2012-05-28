@@ -5,7 +5,8 @@ class User < ActiveRecord::Base
 	attr_accessor :password
 	attr_accessible :nom, :email, :password, :password_confirmation, :coloc_id
 
-	validates_uniqueness_of :nom
+
+	validates_uniqueness_of :email
 	# Crée automatique l'attribut virtuel 'password_confirmation'.
 	validates :password, :presence     => true,
 		:confirmation => true,
@@ -38,6 +39,6 @@ class User < ActiveRecord::Base
 	end
 
 	def encrypt(string)
-		string # Implémentation provisoire !
+		string # Implémentation provisoire 
 	end
 end
