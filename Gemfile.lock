@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/p7r/will_paginate.git
+  revision: 53d1da6da003dc172ee054e4cc416d0723f00b88
+  branch: rails3
+  specs:
+    will_paginate (3.0.pre3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -126,7 +133,6 @@ GEM
       nokogiri (>= 1.2.0)
       rack (>= 1.0)
       rack-test (>= 0.5.3)
-    will_paginate (3.0.pre2)
 
 PLATFORMS
   ruby
@@ -145,4 +151,4 @@ DEPENDENCIES
   squeel
   uglifier (>= 1.0.3)
   webrat
-  will_paginate (>= 3.0.pre)
+  will_paginate!

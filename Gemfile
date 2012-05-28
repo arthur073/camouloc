@@ -13,7 +13,7 @@ gem "mail"
 gem 'rspec-rails',      ">= 2.0.0.beta"
 gem 'faker', '0.3.1'
 
-# utilisation de pg pour mysql
+# utilisation de pg pour mysql sur heroku
 group :production do
 	gem 'pg'
 end
@@ -32,6 +32,7 @@ group :assets do
 end
 
 
+#options pas défaut :
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', :platform => :ruby
