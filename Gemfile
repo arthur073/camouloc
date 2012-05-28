@@ -7,7 +7,7 @@ gem 'gravatar_image_tag', '1.0.0.pre2'
 gem "squeel"  # Last officially released gem
 gem 'jquery-rails'
 gem "mail"
-gem 'rspec-rails', '2.5.0'
+gem 'rspec', '2.9.0.rc2'
 gem 'faker', '0.3.1'
 
 # utilisation de pg pour mysql

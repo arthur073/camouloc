@@ -49,12 +49,13 @@
 
 		<% end %>
 	<% end %>
-	<br>
-	<% if signed_in? and (@user.id == current_user.id or current_user.admin?) %>
-		<%= link_to "Editer le profil", edit_user_path(@user) %> </br>
-	<% end %>
+	<br>	
 	<% if signed_in? and @user.id == current_user.id %>
 		<%= link_to "Nouvelle dépense", new_depense_path(@depense) %> </br>
+	<% end %>
+
+	<% if signed_in? and (@user.id == current_user.id or current_user.admin?) %>
+		<%= link_to "Editer le profil", edit_user_path(@user) %> </br>
 	<% end %>
 
 	</p>

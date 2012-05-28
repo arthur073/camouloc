@@ -20,6 +20,8 @@
 			<% if signed_in? %>
 				<%= link_to "Mon Profil", current_user %></br>
 				<%= link_to "Ma Colocation", Coloc.find(current_user.coloc_id) %></br>
+				<%= link_to "Mon Tableau de bord", tableau_bord_path(Coloc.find(current_user.coloc_id).id) %> </strong>
+
 			<% end %>
 			</aside>
 			<article>
