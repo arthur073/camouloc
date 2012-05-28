@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class UserMailer < ActionMailer::Base
-	default from: "mycoloc@gmail.com"
+	default from: "arthur.verger@gmail.com"
 
 	def welcome_email(user)
 		@user = user
