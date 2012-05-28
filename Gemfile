@@ -2,20 +2,25 @@ source 'https://rubygems.org'
 
 # Gems nécessaires dans tous les environnements
 gem 'rails', '3.2.3'
-gem "will_paginate", :git => "https://github.com/p7r/will_paginate.git", :branch => "rails3"
+#gem "will_paginate", :git => "https://github.com/p7r/will_paginate.git", :branch => "rails3"
+gem 'will_paginate', '>= 3.0.pre'
+
+
 gem 'gravatar_image_tag', '1.0.0.pre2'
 gem "squeel"  # Last officially released gem
 gem 'jquery-rails'
 gem "mail"
-gem 'rspec', '2.9.0.rc2'
+gem 'rspec-rails',      ">= 2.0.0.beta"
 gem 'faker', '0.3.1'
 
 # utilisation de pg pour mysql
-group :production, :test do
+group :production do
 	gem 'pg'
 end
-group :development do
+group :development, :test do
 	gem 'sqlite3', '1.3.6', :require => 'sqlite3'
+	gem 'webrat'
+
 end
 
 # Gems used only for assets and not required

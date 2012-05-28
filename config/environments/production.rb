@@ -86,6 +86,6 @@ MyColoc::Application.configure do
 		}
 	end
 
-
-
+	#enlever depreciation warnings
+	ActiveSupport::Deprecation.silenced = true
 end

@@ -42,4 +42,6 @@ MyColoc::Application.configure do
 	#utilisation de heroku
 	config.assets.prefix = "/dev-assets"
 
+	#enlever depreciation warnings
+	ActiveSupport::Deprecation.silenced = true
 end
