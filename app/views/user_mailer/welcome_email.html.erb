@@ -4,12 +4,12 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Bienvenue sur MyColoc, <%= @user.nom %></h1>
+    <h1>Bienvenue sur MyColoc, <%= @user.nom %>,</h1>
     <p>
-      Vous vous êtes inscrit sur MyColoc, l'application de gestion en ligne de colocations.
-      Votre login est: <%= @user.nom %>.<br/>
-      Votre email est: <%= @user.email %>.<br/>
-      Votre mot de passe est: <%= @user.password %>.<br/>
+    Vous vous êtes inscrit sur MyColoc, l'application de gestion en ligne de colocations.
+    <li> Votre login est: <%= @user.nom %>.</li>
+    <li> Votre email est: <%= @user.email %>.</li>
+    <li> Votre mot de passe est: <%= @user.password %>.</li>
     </p>
     <p>
       Pour vous connecter et profiter pleinement de l'application : <%= @url %>.
