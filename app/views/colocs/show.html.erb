@@ -40,7 +40,7 @@
 
 <% end %>
 
-<% if signed_in? and current_user.coloc_id == @coloc.id %>
+<% if signed_in? and (current_user.coloc_id == @coloc.id or current_user.admin?) %>
 	<%= link_to "Editer le nom de la coloc", edit_coloc_path %>
 	<%= button_to "Supprimer définitivement la colocation.", @coloc, :method => :delete, :confirm => "Etes-vous certain&nbsp;?",:title => "Supprimer #{@coloc.nom}" %>
 <% end %>
