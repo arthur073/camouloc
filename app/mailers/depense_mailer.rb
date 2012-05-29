@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class DepenseMailer < ActionMailer::Base
-	default from: "mycoloc@gmail.com"
+	default from: "contact.mycoloc@gmail.com"
 
 	def new_depense_email(depense)
 		@depense = depense

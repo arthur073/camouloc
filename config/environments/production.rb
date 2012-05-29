@@ -80,7 +80,7 @@ MyColoc::Application.configure do
 			:port	=> 587,
 			:domain => "www.gmail.com",
 			:authentication => "plain",
-			:user_name	=> "arthur.verger@gmail.com",
+			:user_name	=> "contact.mycoloc@gmail.com",
 			:password => "3.141592",
 			:enable_starttls_auto => true
 		}
