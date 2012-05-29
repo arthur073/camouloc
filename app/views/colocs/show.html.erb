@@ -1,47 +1,35 @@
 <table class="profile" summary="Information profil">
-	<tr>
-		<td class="main">
-			<h1>
-				<%= @coloc.nom %>
-			</h1>
-		</td>
-		<td class="sidebar round">
-			<strong>Nom</strong> <%= @coloc.nom %><br />
-			<strong>Colocataires</strong> <%= @coloc.users.count %>/2<br />
-			<% # à changer pour empêcher de voir tableau de bord %>
-			<% if signed_in? and (current_user.coloc_id == @coloc.id or current_user.admin?)%>
-				<strong> <%= link_to "TABLEAU de BORD", tableau_bord_path(@coloc.id) %> </strong>
-			<% else %>
-				</br>
-				Vous devez appartenir à cette colocation pour voir son tableau de bord. 
-			<% end %>
-		</td>
-	</tr>
+        <tr>
+                <td class="main">
+                        <h1>
+                                <%= @coloc.nom %>
+                        </h1>
+                </td>
+                <td class="sidebar round">
+                        <strong>Nom</strong> <%= @coloc.nom %><br />
+                        <strong>Colocataires</strong> <%= @coloc.users.count %>/2<br />
+                        <%= tableau_bord? %>
+                </td>
+        </tr>
 </table>
 
 <% if @coloc.users.size == 0 %>
-	Aucun colocataire inscrit.
+        Pas de colocataire inscrit.
 <% else %>
-	<table class="tabbord">
-		<tr> <strong> Liste des membres de la colocation : </strong> </br></tr>
-		<% liste = @coloc.users.all %> 
-		<% liste.each do |users|%>
-			<tr> <strong> <%= link_to users.nom, user_path(users) %> </strong> </br> </tr> 
-		<% end %>
-	</table>
+        <table class="tabbord">
+                <tr> <strong> Liste des membres de la colocation : </strong> </br></tr>
+                        <% @liste.each do |users| %>
+                               <tr> <strong> <%= liste_users(users) %> </strong></br></tr> 
+                        <% end %>
+        </table>
 <% end %>
 <br>
 <% if @coloc.users.size < 2 %>
-	<% if signed_in? and (@coloc.users.where(:coloc_id => @coloc.id) != [] or current_user.admin?) or @coloc.users.size == 0%>
-		<%= link_to "Inscrire un nouveau colocataire ?", new_user_path(:coloc_id => @coloc[:id]) %> </br>
-	<% end %>
+        <%= nouveau_coloc? %> </br>
 <% else %>
-	Nombre max de colocataires atteint.</br>
+        Nombre max de colocataires atteint.</br>
 
 <% end %>
 
-<% if signed_in? and (current_user.coloc_id == @coloc.id or current_user.admin?) %>
-	<%= link_to "Editer le nom de la coloc", edit_coloc_path %>
-	<%= button_to "Supprimer définitivement la colocation.", @coloc, :method => :delete, :confirm => "Etes-vous certain&nbsp;?",:title => "Supprimer #{@coloc.nom}" %>
-<% end %>
-
+<%= edit_coloc? %>
+<%= delete_coloc? %>

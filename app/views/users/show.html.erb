@@ -9,7 +9,7 @@
 			</td>
 			<td class="sidebar round">
 				<strong>Nom</strong> <%= @user.nom %><br />
-				<strong>Membre de</strong>  <%= link_to Coloc.find(@user.coloc_id).nom, coloc_path(Coloc.find(@user.coloc.id))  %> <br />
+				<strong>Membre de</strong>  <%= link_to @coloc.nom, coloc_path(@coloc)  %> <br />
 				<strong>email</strong>  <a href="mailto:<%= @user.email %>"><%= @user.email %></a> </br>
 				<strong>Dépenses</strong>  <%= @user.depenses.count %>
 
@@ -22,7 +22,6 @@
 	<% else %>
 		<% if signed_in? and (current_user.coloc_id == @user.coloc_id or current_user.admin?)%>
 			Liste des dépenses de l'utilisateur :
-			<% liste = @user.depenses.all %>
 			<table>
 				<tr>
 					<td> Source </td>
@@ -31,8 +30,9 @@
 					<td> Raison </td>
 					<td> Date </td>
 				</tr>
-				<% liste.reverse.each do |depenses|%>
+				<% @liste.reverse.each do |depenses|%>
 					<tr class="depenses">
+                                                <% #TODO: à remplacer pour enlever les accès à la BD %>
 						<td >	<%= User.find(depenses.user_id).nom %> </td>
 						<td>	<%= User.find(depenses.destinataire_id).nom %> </td>
 						<td>	<%= depenses.montant %> € </td>
@@ -40,7 +40,7 @@
 						<td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
 					</tr>
 					<% if signed_in? and current_user.admin? %>
-						<td> <%= button_to "supprimer", depenses, :method => :delete, :confirm => "Etes-vous certain&nbsp;?",:title => "Supprimer #{depenses.raison}" %> </td>
+						<td> <%= button_to "supprimer", depenses, :method => :delete  %> </td>
 					<% end %>
 				<% end %>
 			</table>

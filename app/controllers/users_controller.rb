@@ -13,6 +13,8 @@ class UsersController < ApplicationController
 	def show
 		@user = User.find(params[:id])
 		@titre = @user.nom
+                @coloc = Coloc.find(@user.coloc_id)
+                @liste = @user.depenses.all
 	end
 
 	def new

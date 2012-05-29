@@ -5,6 +5,8 @@ class ColocsController < ApplicationController
 	def show
 		@coloc = Coloc.find(params[:id])
 		@titre = @coloc.nom
+		@liste = @coloc.users.all 
+                #@ = @coloc.users.where(:coloc_id => @coloc.id)
 	end
 
 	def index
@@ -63,5 +65,4 @@ class ColocsController < ApplicationController
 			render 'edit'
 		end
 	end
-
 end
