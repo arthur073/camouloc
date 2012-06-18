@@ -15,12 +15,11 @@
 			<% end %>
 			<aside>
 			<h1>Liens</h1>
-			<%= link_to "Utilisateurs", users_path %></br>
-			<%= link_to "Colocations", colocs_path %></br>
 			<% if signed_in? %>
 				<%= link_to "Mon Profil", current_user %></br>
 				<%= link_to "Ma Colocation", Coloc.find(current_user.coloc_id) %></br>
 				<%= link_to "Mon Tableau de bord", tableau_bord_path(Coloc.find(current_user.coloc_id).id) %> </strong>
+				<%= link_to "Nouvelle dépense", choix_nbr_path(Coloc.find(current_user.coloc_id).id) %> </strong>
 
 			<% end %>
 			</aside>

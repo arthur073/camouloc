@@ -38,6 +38,12 @@ class ColocsController < ApplicationController
 		@titre = "Tableau de bord"
 	end
 
+	def choixnbr 
+		@coloc = Coloc.find(params[:id])
+                @user = current_user
+		@titre = "Nouvelle dépense pour "
+	end
+
 	def destroy
 		@coloc = Coloc.find(params[:id])
 		@coloc.destroy

@@ -7,7 +7,7 @@
                 </td>
                 <td class="sidebar round">
                         <strong>Nom</strong> <%= @coloc.nom %><br />
-                        <strong>Colocataires</strong> <%= @coloc.users.count %>/2<br />
+                        <strong>Colocataires</strong> <%= @coloc.users.count %>/3<br />
                         <%= tableau_bord? %>
                 </td>
         </tr>
@@ -18,18 +18,22 @@
 <% else %>
         <table class="tabbord">
                 <tr> <strong> Liste des membres de la colocation : </strong> </br></tr>
-                        <% @liste.each do |users| %>
-                               <tr> <strong> <%= liste_users(users) %> </strong></br></tr> 
-                        <% end %>
+                <% @liste.each do |users| %>
+                        <tr> <strong> <%= liste_users(users) %> </strong></br></tr> 
+                <% end %>
         </table>
 <% end %>
 <br>
-<% if @coloc.users.size < 2 %>
+<% if @coloc.users.size < 3 %>
         <%= nouveau_coloc? %> </br>
 <% else %>
         Nombre max de colocataires atteint.</br>
 
 <% end %>
 
+
+
+
+<%= new_dep? %> </br>
 <%= edit_coloc? %>
 <%= delete_coloc? %>

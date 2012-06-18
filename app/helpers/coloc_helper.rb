@@ -21,6 +21,11 @@ module ColocHelper
                 end
         end
 
+        def new_dep?
+                if signed_in? and (current_user.coloc_id == @coloc.id or current_user.admin?) 
+                        link_to "Nouvelle dépense", choix_nbr_path(@coloc.id)
+                end
+        end
 
         def liste_users(users)
                 link_to users.nom, user_path(users)  
