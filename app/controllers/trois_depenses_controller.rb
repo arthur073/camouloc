@@ -1,19 +1,19 @@
 # -*- encoding : utf-8 -*-
-class DepensesController < ApplicationController
+class TroisDepensesController < ApplicationController
         def new
-                @depense = Depense.new
+                @troisdepense = TroisDepense.new
                 @titre = "Nouvelle dépense pour " + current_user.nom
                 @colocataires = User.where(:coloc_id => current_user.coloc_id).all
         end
 
         def create
-                @depense = Depense.new(params[:depense])
-                @depense.user_id = current_user.id
-                @depense.nbr_users = @depense.destinataire_part + @depense.destinataire_part2
-                if @depense.save
+                @troisdepense = TroisDepense.new(params[:trois_depense])
+                @troisdepense.user_id = current_user.id
+                @troisdepense.nbr_users = @troisdepense.destinataire_part + @troisdepense.destinataire_part2 + @troisdepense.destinataire_part3
+                if @troisdepense.save
                         #Traite un succès d'enregistrement.
                         #envoie le mail de confirmation de la dépense
-                        DepenseMailer.new_depense_email(@depense).deliver
+                        #DepenseMailer.new_depense_email(@troisdepense).deliver
                         flash[:success] = "Dépense enregistrée!"
                         redirect_to current_user
                 else
@@ -23,8 +23,8 @@ class DepensesController < ApplicationController
         end
 
         def destroy
-                @depense = Depense.find(params[:id])
-                @depense.destroy
+                @troisdepense = TroisDepense.find(params[:id])
+                @troisdepense.destroy
                 flash[:success] = "Dépense supprimée."
                 redirect_to(:back)
         end

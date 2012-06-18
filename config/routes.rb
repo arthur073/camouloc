@@ -4,6 +4,8 @@ MyColoc::Application.routes.draw do
 
 	resources :users
 	resources :depenses
+	resources :trois_depenses
+	resources :quatre_depenses
 	resources :colocs
 	resources :sessions, :only => [:new, :create, :destroy]
 

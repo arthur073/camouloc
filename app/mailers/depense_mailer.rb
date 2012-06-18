@@ -4,9 +4,9 @@ class DepenseMailer < ActionMailer::Base
 
 	def new_depense_email(depense)
 		@depense = depense
-		@user_dest = User.find(depense.destinataire_id)
 		@user_source = User.find(depense.user_id)
-		@coloc = Coloc.find(@user_dest.coloc_id)
+		@coloc = Coloc.find(@user_source.coloc_id)
+                @colocataires = @coloc.users.all
 		mail(:to => @coloc.users.all.map(&:email), :subject => "MyColoc, nouvelle dépense.")
 	end
 

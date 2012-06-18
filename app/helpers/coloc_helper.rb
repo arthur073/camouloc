@@ -9,7 +9,7 @@ module ColocHelper
 
         def edit_coloc?
                 if signed_in? and (current_user.coloc_id == @coloc.id or current_user.admin?) 
-                        link_to "Editer le nom de la coloc", edit_coloc_path 
+                        link_to "Editer la colocation", edit_coloc_path 
                 end 
         end 
 
@@ -17,7 +17,6 @@ module ColocHelper
         def delete_coloc?
                 if signed_in? and (current_user.coloc_id == @coloc.id or current_user.admin?) 
                         button_to "Supprimer définitivement la colocation.", @coloc, :method => :delete 
-
                 end
         end
 
@@ -36,7 +35,7 @@ module ColocHelper
                 if signed_in? and (current_user.coloc_id == @coloc.id or current_user.admin?)
                         link_to "TABLEAU de BORD", tableau_bord_path(@coloc.id) 
                 else 
-                        "<p>Vous devez appartenir à cette colocation pour voir son tableau de bord. </p>"
+                        "Vous devez appartenir à cette colocation pour voir son tableau de bord. "
                 end
         end
 end

@@ -1,58 +1,92 @@
 <table class="profile" summary="Information profil">
-	<table>
-		<tr>
-			<td class="main">
-				<h1>
-					<%= gravatar_for @user %>
-					<%= @user.nom %>
-				</h1>
-			</td>
-			<td class="sidebar round">
-				<strong>Nom</strong> <%= @user.nom %><br />
-				<strong>Membre de</strong>  <%= link_to @coloc.nom, coloc_path(@coloc)  %> <br />
-				<strong>email</strong>  <a href="mailto:<%= @user.email %>"><%= @user.email %></a> </br>
-				<strong>Dépenses</strong>  <%= @user.depenses.count %>
+        <table>
+                <tr>
+                        <td class="main">
+                                <h1>
+                                        <%= gravatar_for @user %>
+                                        <%= @user.nom %>
+                                </h1>
+                        </td>
+                        <td class="sidebar round">
+                                <strong>Nom</strong> <%= @user.nom %><br />
+                                <strong>Membre de</strong>  <%= link_to @coloc.nom, coloc_path(@coloc)  %> <br />
+                                <strong>email</strong>  <a href="mailto:<%= @user.email %>"><%= @user.email %></a> </br>
+                                <strong>Dépenses</strong>  <%= @nbrdep %>
 
-			</td>
-		</tr>
-	</table>
-	<p>
-	<% if @user.depenses.size == 0 %>
-		Aucune dépense à répertorier.
-	<% else %>
-		<% if signed_in? and (current_user.coloc_id == @user.coloc_id or current_user.admin?)%>
-			Liste des dépenses de l'utilisateur :
-			<table>
-				<tr>
-					<td> Source </td>
-					<td> Destinataire </td>
-					<td> Montant </td>
-					<td> Raison </td>
-					<td> Date </td>
-				</tr>
-				<% @liste.reverse.each do |depenses|%>
-					<tr class="depenses">
-                                                <% #TODO: à remplacer pour enlever les accès à la BD %>
-						<td >	<%= User.find(depenses.user_id).nom %> </td>
-						<td>	<%= User.find(depenses.destinataire_id).nom %> </td>
-						<td>	<%= depenses.montant %> € </td>
-						<td>	<%= depenses.raison %> </td>
-						<td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
-					</tr>
-					<% if signed_in? and current_user.admin? %>
-						<td> <%= button_to "supprimer", depenses, :method => :delete  %> </td>
-					<% end %>
-				<% end %>
-			</table>
-		<% else %>
-			Vous devez appartenir à la colocation pour voir les dépenses de cet utilisateur.
+                        </td>
+                </tr>
+        </table>
+        <p>
+        <% if @nbrdep == 0 %>
+                Aucune dépense à répertorier.
+        <% else %>
+                <% if signed_in? and (current_user.coloc_id == @user.coloc_id or current_user.admin?)%>
+                        <strong>  Liste des dépenses de l'utilisateur : </strong>
+                        <table>
+                                <tr>
+                                        <td> Source </td>
+                                        <% @colocataires.each do |colocataires| %>
+                                                <td> <%= colocataires.nom %> </td>
+                                        <% end %>
+                                        <td> Montant </td>
+                                        <td> Raison </td>
+                                        <td> Date </td>
+                                </tr>
+                                <% if @colocataires.size == 2 %>
+                                        <% @liste1.reverse.each do |depenses|%>
+                                                <tr class="depenses">
+                                                        <td >	<%= User.find(depenses.user_id).nom %> </td>
+                                                        <td>	<%= depenses.destinataire_part %>  </td>
+                                                        <td>	<%= depenses.destinataire_part2 %>  </td>
+                                                        <td>	<%= depenses.montant %> € </td>
+                                                        <td>	<%= depenses.raison %> </td>
+                                                        <td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
+                                                        <% if signed_in? and current_user.id == @user.id %>
+                                                                <td> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
+                                                        <% end %>
+                                                </tr>
+                                        <% end %>
+                                <% elsif @colocataires.size == 3 %>
+                                        <% @liste2.reverse.each do |depenses|%>
+                                                <tr class="depenses">
+                                                        <td >	<%= User.find(depenses.user_id).nom %> </td>
+                                                        <td>	<%= depenses.destinataire_part %>  </td>
+                                                        <td>	<%= depenses.destinataire_part2 %>  </td>
+                                                        <td>	<%= depenses.destinataire_part3 %>  </td>
+                                                        <td>	<%= depenses.montant %> € </td>
+                                                        <td>	<%= depenses.raison %> </td>
+                                                        <td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
+                                                        <% if signed_in? and current_user.id == @user.id %>
+                                                                <td> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
+                                                        <% end %>
+                                                </tr>
+                                        <% end %>
+                                <% elsif @colocataires.size == 4 %>
+                                        <% @liste3.reverse.each do |depenses|%>
+                                                <tr class="depenses">
+                                                        <td >	<%= User.find(depenses.user_id).nom %> </td>
+                                                        <td>	<%= depenses.destinataire_part %>  </td>
+                                                        <td>	<%= depenses.destinataire_part2 %>  </td>
+                                                        <td>	<%= depenses.destinataire_part3 %>  </td>
+                                                        <td>	<%= depenses.destinataire_part4 %>  </td>
+                                                        <td>	<%= depenses.montant %> € </td>
+                                                        <td>	<%= depenses.raison %> </td>
+                                                        <td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
+                                                        <% if signed_in? and current_user.id == @user.id %>
+                                                                <td> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
+                                                        <% end %>
+                                                </tr>
+                                        <% end %>
+                                <% end %>
+                        </table>
+                <% else %>
+                        Vous devez appartenir à la colocation pour voir les dépenses de cet utilisateur.
+                <% end %>
+        <% end %>
+        <br>	
+        <% if signed_in? and (@user.id == current_user.id or current_user.admin?) %>
+                <%= link_to "Editer le profil", edit_user_path(@user) %> </br>
+        <% end %>
 
-		<% end %>
-	<% end %>
-	<br>	
-	<% if signed_in? and (@user.id == current_user.id or current_user.admin?) %>
-		<%= link_to "Editer le profil", edit_user_path(@user) %> </br>
-	<% end %>
-
-	</p>
+        </p>
 </table>

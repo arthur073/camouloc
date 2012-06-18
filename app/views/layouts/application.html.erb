@@ -19,7 +19,13 @@
 				<%= link_to "Mon Profil", current_user %></br>
 				<%= link_to "Ma Colocation", Coloc.find(current_user.coloc_id) %></br>
 				<%= link_to "Mon Tableau de bord", tableau_bord_path(Coloc.find(current_user.coloc_id).id) %> </strong>
-				<%= link_to "Nouvelle dépense", choix_nbr_path(Coloc.find(current_user.coloc_id).id) %> </strong>
+                                <% if Coloc.find(current_user.coloc_id).users.size == 2 %>
+                                        <%= link_to "Nouvelle dépense", new_depense_path(@depense) %> </br>
+                                <% elsif Coloc.find(current_user.coloc_id).users.size == 3 %>
+                                        <%= link_to "Nouvelle dépense", new_trois_depense_path(@depense) %> </br>
+                                <% elsif Coloc.find(current_user.coloc_id).users.size == 4 %>
+                                        <%= link_to "Nouvelle dépense", new_quatre_depense_path(@depense) %> </br>
+                                <% end %>
 
 			<% end %>
 			</aside>
@@ -31,7 +37,7 @@
 				Par nom : </br>
 				<% @liste_coloc = Coloc.order(:nom).all %>
 				<% @liste_coloc.each do |colocs|%>
-					<% if colocs.users.size == 2 %>
+                                        <% if colocs.users.size > 1 %>
 						<%= link_to colocs.nom, colocs %> </br>
 					<% end %>
 				<% end %>

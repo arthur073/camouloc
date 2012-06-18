@@ -14,7 +14,19 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@titre = @user.nom
                 @coloc = Coloc.find(@user.coloc_id)
-                @liste = @user.depenses.all
+                @colocataires = @coloc.users.all
+                @liste1 = @user.depenses.all
+                @liste2 = @user.trois_depenses.all
+                @liste3 = @user.quatre_depenses.all
+                if @colocataires.size == 2 
+                        @nbrdep = @liste1.size
+                elsif  @colocataires.size == 3 
+                        @nbrdep = @liste2.size
+                elsif  @colocataires.size == 4
+                        @nbrdep = @liste3.size
+                else
+                        @nbrdep = 0
+                end
 	end
 
 	def new
@@ -65,7 +77,7 @@ class UsersController < ApplicationController
 	end
 
 	def user_manquant
-		flash[:error] = "Cette utilisateur n'existe pas."
+		flash[:error] = "Cet utilisateur n'existe pas."
      	 	redirect_to users_path	     
 	end
 

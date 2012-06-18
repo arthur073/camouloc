@@ -7,7 +7,7 @@
                 </td>
                 <td class="sidebar round">
                         <strong>Nom</strong> <%= @coloc.nom %><br />
-                        <strong>Colocataires</strong> <%= @coloc.users.count %>/3<br />
+                        <strong>Colocataires</strong> <%= @coloc.users.count %>/4<br />
                         <%= tableau_bord? %>
                 </td>
         </tr>
@@ -24,7 +24,7 @@
         </table>
 <% end %>
 <br>
-<% if @coloc.users.size < 3 %>
+<% if @coloc.users.size < 4 %>
         <%= nouveau_coloc? %> </br>
 <% else %>
         Nombre max de colocataires atteint.</br>
@@ -34,6 +34,4 @@
 
 
 
-<%= new_dep? %> </br>
 <%= edit_coloc? %>
-<%= delete_coloc? %>

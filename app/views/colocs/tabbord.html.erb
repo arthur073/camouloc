@@ -1,55 +1,62 @@
 <h1> <%= @titre %> de <%= @coloc.nom %> </h1>
-<% liste_user=@coloc.users.all %>
-<% somme_depenses = 0 %>
 
 
 
 <table class="tabbord">
-	<tr> 
-		<td> <strong> Résumé personnel :</strong> </td>
-	</tr>
-
-	<% liste_user.each do |users| %>
-		<% liste_user.each do |users2| %>
-			<% if users.id != users2.id %>
-				<tr>
-					<% # permet de calculer le solde de chaque user %>
-					<% solde1 = users.depenses.where(:destinataire_id => users2.id).sum(:montant) %>
-					<% solde2 = users2.depenses.where(:destinataire_id => users.id).sum(:montant) %>
-					<% solde =  ((solde1 - solde2).abs) /2 %>
-					<% #solde = users2.depenses.where(:destinataire_id => users.id).sum(:montant) /2 %>
-					<td> <%= users.nom %> doit </td>
-					<% if solde1 >= solde2 %>
-						<td> 0.0 € </td> 
-					<% else %>
-						<td><font color="red"> <strong> <%= solde %> € </strong></font></td> 
-					<% end %>
-					<td> à <%= users2.nom %> </td>
-				</tr>
-			<% end %>
-		<% end %>
-	<% end %>
-</table>
-
-
-
-<table class="tabbord">
-	<tr> 
-		<td> <strong> Total dépenses :</strong> </td>
-		<% liste_user.each do |users| %>
-			<td> De <%=users.nom %> </td> 
-		<% end %>
-	</tr>
-
-	<% liste_user.each do |users| %>
-		<tr>
-			<td> à <%= users.nom %> </td> 
-			<% liste_user.each do |users2| %>
-				<td> <%= users2.depenses.where(:destinataire_id => users.id).sum(:montant) %> € </td>	
-			<% end %>
-		</tr>
-	<% end %>
+        <tr> 
+                <td> <strong> Résumé personnel :</strong> </td>
+        </tr>
+        <% @colocataires.each do |colocataires| %>
+                <tr>
+                        <td>  <%= colocataires.nom %> </td>
+                        <td>  <%= colocataires.tot %> </td>
+                </tr>
+        <% end %>
 
 </table>
 
-<%= link_to "Retour à la colocation", @coloc%>
+
+<a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="link">[Plus de détails]</a><span id="spoiler_id" style="display: none"><a onclick="document.getElementById('spoiler_id').style.display='none'; document.getElementById('show_id').style.display='';" class="link">[Moins de détails]</a><br>
+
+
+        <table class="tabbord">
+
+                <tr>
+                        <td><strong> Source </strong> </td>
+                        <% @colocataires.each do |colocataires| %>
+                                <td><strong> <%= colocataires.nom %></strong> </td>
+                        <% end %>
+                        <td><strong> Montant </strong></td>
+                        <td><strong> Raison </strong></td>
+                        <td><strong> Date </strong></td>
+                </strong>
+        </tr>
+
+        <% @colocataires.each do |colocataires| %>
+                <% if @nbrcoloc == 2 %>
+                        <% @dep = colocataires.depenses %>
+                <% elsif @nbrcoloc == 3 %>
+                        <% @dep = colocataires.trois_depenses %>
+                <% elsif @nbrcoloc == 4 %>
+                        <% @dep = colocataires.quatre_depenses %>
+                <% end %>
+                <% @dep.reverse.each do |depenses| %>
+                        <tr>
+                                <td>	<%= User.find(depenses.user_id).nom %> </td>
+                                <td>	<%= depenses.destinataire_part %>  </td>
+                                <td>	<%= depenses.destinataire_part2 %>  </td>
+                                <% if @nbrcoloc > 2 %>
+                                        <td>	<%= depenses.destinataire_part3 %>  </td>
+                                <% end %>
+                                <% if @nbrcoloc > 3 %>
+                                        <td>	<%= depenses.destinataire_part4 %>  </td>
+                                <% end %>
+                                <td>	<%= depenses.montant %> € </td>
+                                <td>	<%= depenses.raison %> </td>
+                                <td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
+                        </tr>
+                <% end %>
+        <% end %>
+</table>
+</span> </br> </br>
+&larr; <%= link_to "Retour à la colocation", @coloc%>
