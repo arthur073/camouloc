@@ -15,14 +15,14 @@ class UsersController < ApplicationController
 		@titre = @user.nom
                 @coloc = Coloc.find(@user.coloc_id)
                 @colocataires = @coloc.users.all
-                @liste1 = @user.depenses.all
-                @liste2 = @user.trois_depenses.all
-                @liste3 = @user.quatre_depenses.all
                 if @colocataires.size == 2 
+                        @liste1 = @user.depenses.all
                         @nbrdep = @liste1.size
                 elsif  @colocataires.size == 3 
+                        @liste2 = @user.trois_depenses.all
                         @nbrdep = @liste2.size
                 elsif  @colocataires.size == 4
+                        @liste3 = @user.quatre_depenses.all
                         @nbrdep = @liste3.size
                 else
                         @nbrdep = 0

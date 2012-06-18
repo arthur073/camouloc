@@ -59,7 +59,8 @@ class ColocsController < ApplicationController
                                                 @dep1inv = @dep1inv + colocataires2.quatre_depenses.where(:nbr_users => 1).sum(:montant)
                                         end
                                 end
-                                colocataires.tot = 3*@dep4/4 + @dep3/3 + @dep2/2 + @dep1 - @dep4inv/4 - @dep3inv/3 - @dep2inv/2 - @dep1inv
+                                #prendre en compte l'appartenance à une dépense ou non 
+                                colocataires.tot = 3*@dep4/4 + 2*@dep3/3 + @dep2/2 + @dep1 - @dep4inv/4 - @dep3inv/3 - @dep2inv/2 - @dep1inv
                         end
                 end
         end
