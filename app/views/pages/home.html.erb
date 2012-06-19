@@ -1,13 +1,28 @@
 <h1> <%= @titre %> </h1>
 
-<p>
-<font size="3", color=white>
-	MyColoc est un logiciel permettant de gérer les dépenses au sein d'une colocation. Commencez tout de suite en inscrivant votre colocation.
-</font>
-</p>
+<% unless signed_in? %>
+        <p>
+        <font size="3", color=white>
+                MyColoc est un logiciel gratuit permettant de gérer les dépenses au sein d'une colocation. </br>
+                La marche à suivre est <strong> très simple : </strong> </br>
+        </font> </br>
+                <font size="10", color=#5DA7CF> 1 _ </font>
+                <font size="6", color=white> Créer sa colocation. </font> 
+                <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="link">[Plus]</a><span id="spoiler_id" style="display: none"><a onclick="document.getElementById('spoiler_id').style.display='none'; document.getElementById('show_id').style.display='';" class="link">[Moins de détails]</a><i><br>Ajoutez simplement le nom de votre colocation, elle sera automatiquement entrée dans la base de données. </br> Vous pourrez à tout moment modifier le nom de votre colocation ou même la supprimer.</i></span> </br>
+                <font size="10", color=#5DA7CF> 2 _ </font>
+                <font size="6", color=white> Inscrire ses colocataires. </font> 
+                <a id="show_id2" onclick="document.getElementById('spoiler_id2').style.display=''; document.getElementById('show_id2').style.display='none';" class="link">[Plus]</a><span id="spoiler_id2" style="display: none"><a onclick="document.getElementById('spoiler_id2').style.display='none'; document.getElementById('show_id2').style.display='';" class="link">[Moins de détails]</a><i><br>Vous pouvez inscrire vos colocataires dès que la colocation est créée, l'application supporte jusqu'à 4 colocataires par colocation. </i></span> </br>
+                <font size="10", color=#5DA7CF> 3 _ </font>
+                <font size="6", color=white> Ajouter ses dépenses </font>
+                <a id="show_id3" onclick="document.getElementById('spoiler_id3').style.display=''; document.getElementById('show_id3').style.display='none';" class="link">[Plus]</a><span id="spoiler_id3" style="display: none"><a onclick="document.getElementById('spoiler_id3').style.display='none'; document.getElementById('show_id3').style.display='';" class="link">[Moins de détails]</a><i><br> Dès que votre colocation est complète vous pouvez ajouter des dépenses. L'application se charge elle même de faire vos comptes, et les résume dans la page "tableau de bord". </i></span> </br>
 
-<% if signed_in? %>
-	<%= link_to "Voir ma colocation !", Coloc.find(current_user.coloc_id), :class => "signup_button round" %>
+
+        </p>
+        <%= link_to "C'est parti !", signup_path, :class => "signup_button round" %> </br>
 <% else %>
-	<%= link_to "Inscrire sa colocation !", signup_path, :class => "signup_button round" %>
+        <p>
+        <font size="3", color=white>
+                Rendez vous tout de suite sur le profil de votre colocation. </br>
+        </font> </p>
+        <%= link_to "Voir ma colocation !", Coloc.find(current_user.coloc_id), :class => "signup_button round" %>
 <% end %>

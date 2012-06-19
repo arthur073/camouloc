@@ -28,7 +28,7 @@
                         <% end %>
 
                 <% end %> </br> </br>
-                <h1> <%= link_to "Palmarès", colocs_path %> </h1>
+                <h1> Palmarès </h1>
                 <% @liste_coloc = Coloc.order(:nom).all %>
                 <% @liste_coloc.each do |colocs|%>
                         <% if colocs.users.size > 1 %>
