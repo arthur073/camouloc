@@ -6,7 +6,7 @@ class ColocsController < ApplicationController
         def show
                 @coloc = Coloc.find(params[:id])
                 @titre = @coloc.nom
-                @liste = @coloc.users.all 
+                @liste = @coloc.users.order(:nom) 
         end
 
         def index
