@@ -6,7 +6,6 @@ class ColocsController < ApplicationController
                 @coloc = Coloc.find(params[:id])
                 @titre = @coloc.nom
                 @liste = @coloc.users.all 
-                #@ = @coloc.users.where(:coloc_id => @coloc.id)
         end
 
         def index
@@ -40,28 +39,191 @@ class ColocsController < ApplicationController
                 @titre = "Tableau de bord"
 
                 #calcul des dettes :
-                if @nbrcoloc == 4
-                        @colocataires.each do |colocataires|
-                                @dep4inv = 0
-                                @dep3inv = 0
-                                @dep2inv = 0
-                                @dep1inv = 0
-
-                                @dep4 = colocataires.quatre_depenses.where(:nbr_users => 4).sum(:montant)
-                                @dep3 = colocataires.quatre_depenses.where(:nbr_users => 3).sum(:montant)
-                                @dep2 = colocataires.quatre_depenses.where(:nbr_users => 2).sum(:montant)
-                                @dep1 = colocataires.quatre_depenses.where(:nbr_users => 1).sum(:montant)
-                                @colocataires.each do |colocataires2|
-                                        if colocataires.id != colocataires2.id 
-                                                @dep4inv = @dep4inv + colocataires2.quatre_depenses.where(:nbr_users => 4).sum(:montant)
-                                                @dep3inv = @dep3inv + colocataires2.quatre_depenses.where(:nbr_users => 3).sum(:montant)
-                                                @dep2inv = @dep2inv + colocataires2.quatre_depenses.where(:nbr_users => 2).sum(:montant)
-                                                @dep1inv = @dep1inv + colocataires2.quatre_depenses.where(:nbr_users => 1).sum(:montant)
-                                        end
+                if @nbrcoloc == 2
+                       #pour le coloc 1 :
+                        @sesdep1 = @colocataires[0].depenses.where(:nbr_users => 1, :destinataire_part => 0).sum(:montant)
+                        @mesdep2 = @colocataires[0].depenses.where(:nbr_users => 2, :destinataire_part => 1).sum(:montant)
+                        @dep1inv = 0
+                        @dep2inv = 0
+                        @colocataires.each do |colocataires2|
+                                if @colocataires[0].id != colocataires2.id 
+                                        @dep2inv = @dep2inv + colocataires2.depenses.where(:nbr_users => 2, :destinataire_part => 1).sum(:montant)
+                                        @dep1inv = @dep1inv + colocataires2.depenses.where(:nbr_users => 1, :destinataire_part => 1).sum(:montant)
                                 end
-                                #prendre en compte l'appartenance à une dépense ou non 
-                                colocataires.tot = 3*@dep4/4 + 2*@dep3/3 + @dep2/2 + @dep1 - @dep4inv/4 - @dep3inv/3 - @dep2inv/2 - @dep1inv
                         end
+                        #calcul du total
+                        @colocataires[0].tot = @sesdep1 + @mesdep2/2  - @dep1inv - @dep2inv/2 
+
+                        #pour le coloc 2 :
+                        @sesdep1 = @colocataires[1].depenses.where(:nbr_users => 1, :destinataire_part2 => 0).sum(:montant)
+                        @mesdep2 = @colocataires[1].depenses.where(:nbr_users => 2, :destinataire_part2 => 1).sum(:montant)
+                        @dep1inv = 0
+                        @dep2inv = 0
+                        @colocataires.each do |colocataires2|
+                                if @colocataires[1].id != colocataires2.id 
+                                        @dep2inv = @dep2inv + colocataires2.depenses.where(:nbr_users => 2, :destinataire_part2 => 1).sum(:montant)
+                                        @dep1inv = @dep1inv + colocataires2.depenses.where(:nbr_users => 1, :destinataire_part2 => 1).sum(:montant)
+                                end
+                        end
+                        #calcul du total
+                        @colocataires[1].tot = @sesdep1 + @mesdep2/2  - @dep1inv - @dep2inv/2 
+
+
+
+                elsif @nbrcoloc == 3
+                        #pour le coloc 1 :
+                        #@mesdep1 = @colocataires[0].trois_depenses.where(:nbr_users => 1, :destinataire_part => 1).sum(:montant)
+                        @sesdep1 = @colocataires[0].trois_depenses.where(:nbr_users => 1, :destinataire_part => 0).sum(:montant)
+                        @mesdep2 = @colocataires[0].trois_depenses.where(:nbr_users => 2, :destinataire_part => 1).sum(:montant)
+                        @sesdep2 = @colocataires[0].trois_depenses.where(:nbr_users => 2, :destinataire_part => 0).sum(:montant)
+                        @mesdep3 = @colocataires[0].trois_depenses.where(:nbr_users => 3, :destinataire_part => 1).sum(:montant)
+                        @dep1inv = 0
+                        @dep2inv = 0
+                        @dep3inv = 0
+                        @colocataires.each do |colocataires2|
+                                if @colocataires[0].id != colocataires2.id 
+                                        @dep3inv = @dep3inv + colocataires2.trois_depenses.where(:nbr_users => 3, :destinataire_part => 1).sum(:montant)
+                                        @dep2inv = @dep2inv + colocataires2.trois_depenses.where(:nbr_users => 2, :destinataire_part => 1).sum(:montant)
+                                        @dep1inv = @dep1inv + colocataires2.trois_depenses.where(:nbr_users => 1, :destinataire_part => 1).sum(:montant)
+                                end
+                        end
+                        #calcul du total
+                        @colocataires[0].tot = @sesdep1 + @mesdep2/2 + @sesdep2 + @mesdep3*2/3  - @dep1inv - @dep2inv/2 - @dep3inv/3 
+
+                        #pour le coloc 2 :
+                        @mesdep1 = @colocataires[1].trois_depenses.where(:nbr_users => 1, :destinataire_part2 => 1).sum(:montant)
+                        @sesdep1 = @colocataires[1].trois_depenses.where(:nbr_users => 1, :destinataire_part2 => 0).sum(:montant)
+                        @mesdep2 = @colocataires[1].trois_depenses.where(:nbr_users => 2, :destinataire_part2 => 1).sum(:montant)
+                        @sesdep2 = @colocataires[1].trois_depenses.where(:nbr_users => 2, :destinataire_part2 => 0).sum(:montant)
+                        @mesdep3 = @colocataires[1].trois_depenses.where(:nbr_users => 3, :destinataire_part2 => 1).sum(:montant)
+                        @dep1inv = 0
+                        @dep2inv = 0
+                        @dep3inv = 0
+                        @colocataires.each do |colocataires2|
+                                if @colocataires[1].id != colocataires2.id 
+                                        @dep3inv = @dep3inv + colocataires2.trois_depenses.where(:nbr_users => 3, :destinataire_part2 => 1).sum(:montant)
+                                        @dep2inv = @dep2inv + colocataires2.trois_depenses.where(:nbr_users => 2, :destinataire_part2 => 1).sum(:montant)
+                                        @dep1inv = @dep1inv + colocataires2.trois_depenses.where(:nbr_users => 1, :destinataire_part2 => 1).sum(:montant)
+                                end
+                        end
+                        #calcul du total
+                        @colocataires[1].tot = @sesdep1 + @mesdep2/2 + @sesdep2 + @mesdep3*2/3 - @dep1inv - @dep2inv/2 - @dep3inv/3 
+
+                        #pour le coloc 3 :
+                        @mesdep1 = @colocataires[2].trois_depenses.where(:nbr_users => 1, :destinataire_part3 => 1).sum(:montant)
+                        @sesdep1 = @colocataires[2].trois_depenses.where(:nbr_users => 1, :destinataire_part3 => 0).sum(:montant)
+                        @mesdep2 = @colocataires[2].trois_depenses.where(:nbr_users => 2, :destinataire_part3 => 1).sum(:montant)
+                        @sesdep2 = @colocataires[2].trois_depenses.where(:nbr_users => 2, :destinataire_part3 => 0).sum(:montant)
+                        @mesdep3 = @colocataires[2].trois_depenses.where(:nbr_users => 3, :destinataire_part3 => 1).sum(:montant)
+                        @dep1inv = 0
+                        @dep2inv = 0
+                        @dep3inv = 0
+                        @colocataires.each do |colocataires2|
+                                if @colocataires[2].id != colocataires2.id 
+                                        @dep3inv = @dep3inv + colocataires2.trois_depenses.where(:nbr_users => 3, :destinataire_part3 => 1).sum(:montant)
+                                        @dep2inv = @dep2inv + colocataires2.trois_depenses.where(:nbr_users => 2, :destinataire_part3 => 1).sum(:montant)
+                                        @dep1inv = @dep1inv + colocataires2.trois_depenses.where(:nbr_users => 1, :destinataire_part3 => 1).sum(:montant)
+                                end
+                        end
+                        #calcul du total
+                        @colocataires[2].tot = @sesdep1 + @mesdep2/2 + @sesdep2 + @mesdep3*2/3 - @dep1inv - @dep2inv/2 - @dep3inv/3 
+
+
+
+                elsif @nbrcoloc == 4
+                        #pour le coloc 1 :
+                        @mesdep1 = @colocataires[0].quatre_depenses.where(:nbr_users => 1, :destinataire_part => 1).sum(:montant)
+                        @sesdep1 = @colocataires[0].quatre_depenses.where(:nbr_users => 1, :destinataire_part => 0).sum(:montant)
+                        @mesdep2 = @colocataires[0].quatre_depenses.where(:nbr_users => 2, :destinataire_part => 1).sum(:montant)
+                        @sesdep2 = @colocataires[0].quatre_depenses.where(:nbr_users => 2, :destinataire_part => 0).sum(:montant)
+                        @mesdep3 = @colocataires[0].quatre_depenses.where(:nbr_users => 3, :destinataire_part => 1).sum(:montant)
+                        @sesdep3 = @colocataires[0].quatre_depenses.where(:nbr_users => 3, :destinataire_part => 0).sum(:montant)
+                        @mesdep4 = @colocataires[0].quatre_depenses.where(:nbr_users => 4, :destinataire_part => 1).sum(:montant)
+                        @dep1inv = 0
+                        @dep2inv = 0
+                        @dep3inv = 0
+                        @dep4inv = 0
+                        @colocataires.each do |colocataires2|
+                                if @colocataires[0].id != colocataires2.id 
+                                        @dep4inv = @dep4inv + colocataires2.quatre_depenses.where(:nbr_users => 4).sum(:montant)
+                                        @dep3inv = @dep3inv + colocataires2.quatre_depenses.where(:nbr_users => 3, :destinataire_part => 1).sum(:montant)
+                                        @dep2inv = @dep2inv + colocataires2.quatre_depenses.where(:nbr_users => 2, :destinataire_part => 1).sum(:montant)
+                                        @dep1inv = @dep1inv + colocataires2.quatre_depenses.where(:nbr_users => 1, :destinataire_part => 1).sum(:montant)
+                                end
+                        end
+                        #calcul du total
+                        @colocataires[0].tot = @sesdep1 + @mesdep2/2 + @sesdep2 + @mesdep3*2/3 + @sesdep3 + @mesdep4*3/4 - @dep1inv - @dep2inv/2 - @dep3inv/3 - @dep4inv/4
+
+
+                        #pour le coloc 2 :
+                        @mesdep1 = @colocataires[1].quatre_depenses.where(:nbr_users => 1, :destinataire_part2 => 1).sum(:montant)
+                        @sesdep1 = @colocataires[1].quatre_depenses.where(:nbr_users => 1, :destinataire_part2 => 0).sum(:montant)
+                        @mesdep2 = @colocataires[1].quatre_depenses.where(:nbr_users => 2, :destinataire_part2 => 1).sum(:montant)
+                        @sesdep2 = @colocataires[1].quatre_depenses.where(:nbr_users => 2, :destinataire_part2 => 0).sum(:montant)
+                        @mesdep3 = @colocataires[1].quatre_depenses.where(:nbr_users => 3, :destinataire_part2 => 1).sum(:montant)
+                        @sesdep3 = @colocataires[1].quatre_depenses.where(:nbr_users => 3, :destinataire_part2 => 0).sum(:montant)
+                        @mesdep4 = @colocataires[1].quatre_depenses.where(:nbr_users => 4, :destinataire_part2 => 1).sum(:montant)
+                        @dep1inv = 0
+                        @dep2inv = 0
+                        @dep3inv = 0
+                        @dep4inv = 0
+                        @colocataires.each do |colocataires2|
+                                if @colocataires[1].id != colocataires2.id 
+                                        @dep4inv = @dep4inv + colocataires2.quatre_depenses.where(:nbr_users => 4).sum(:montant)
+                                        @dep3inv = @dep3inv + colocataires2.quatre_depenses.where(:nbr_users => 3, :destinataire_part2 => 1).sum(:montant)
+                                        @dep2inv = @dep2inv + colocataires2.quatre_depenses.where(:nbr_users => 2, :destinataire_part2 => 1).sum(:montant)
+                                        @dep1inv = @dep1inv + colocataires2.quatre_depenses.where(:nbr_users => 1, :destinataire_part2 => 1).sum(:montant)
+                                end
+                        end
+                        #calcul du total
+                        @colocataires[1].tot = @sesdep1 + @mesdep2/2 + @sesdep2 + @mesdep3*2/3 + @sesdep3 + @mesdep4*3/4 - @dep1inv - @dep2inv/2 - @dep4inv/4 - @dep3inv/3
+
+                        #pour le coloc 3 :
+                        @mesdep1 = @colocataires[2].quatre_depenses.where(:nbr_users => 1, :destinataire_part3 => 1).sum(:montant)
+                        @sesdep1 = @colocataires[2].quatre_depenses.where(:nbr_users => 1, :destinataire_part3 => 0).sum(:montant)
+                        @mesdep2 = @colocataires[2].quatre_depenses.where(:nbr_users => 2, :destinataire_part3 => 1).sum(:montant)
+                        @sesdep2 = @colocataires[2].quatre_depenses.where(:nbr_users => 2, :destinataire_part3 => 0).sum(:montant)
+                        @mesdep3 = @colocataires[2].quatre_depenses.where(:nbr_users => 3, :destinataire_part3 => 1).sum(:montant)
+                        @sesdep3 = @colocataires[2].quatre_depenses.where(:nbr_users => 3, :destinataire_part3 => 0).sum(:montant)
+                        @mesdep4 = @colocataires[2].quatre_depenses.where(:nbr_users => 4, :destinataire_part3 => 1).sum(:montant)
+                        @dep1inv = 0
+                        @dep2inv = 0
+                        @dep3inv = 0
+                        @dep4inv = 0
+                        @colocataires.each do |colocataires2|
+                                if @colocataires[2].id != colocataires2.id 
+                                        @dep4inv = @dep4inv + colocataires2.quatre_depenses.where(:nbr_users => 4).sum(:montant)
+                                        @dep3inv = @dep3inv + colocataires2.quatre_depenses.where(:nbr_users => 3, :destinataire_part3 => 1).sum(:montant)
+                                        @dep2inv = @dep2inv + colocataires2.quatre_depenses.where(:nbr_users => 2, :destinataire_part3 => 1).sum(:montant)
+                                        @dep1inv = @dep1inv + colocataires2.quatre_depenses.where(:nbr_users => 1, :destinataire_part3 => 1).sum(:montant)
+                                end
+                        end
+                        #calcul du total
+                        @colocataires[2].tot = @sesdep1 + @mesdep2/2 + @sesdep2 + @mesdep3*2/3 + @sesdep3 + @mesdep4*3/4 - @dep1inv - @dep2inv/2 - @dep4inv/4 - @dep3inv/3
+
+                        #pour le coloc 4 :
+                        @mesdep1 = @colocataires[3].quatre_depenses.where(:nbr_users => 1, :destinataire_part4 => 1).sum(:montant)
+                        @sesdep1 = @colocataires[3].quatre_depenses.where(:nbr_users => 1, :destinataire_part4 => 0).sum(:montant)
+                        @mesdep2 = @colocataires[3].quatre_depenses.where(:nbr_users => 2, :destinataire_part4 => 1).sum(:montant)
+                        @sesdep2 = @colocataires[3].quatre_depenses.where(:nbr_users => 2, :destinataire_part4 => 0).sum(:montant)
+                        @mesdep3 = @colocataires[3].quatre_depenses.where(:nbr_users => 3, :destinataire_part4 => 1).sum(:montant)
+                        @sesdep3 = @colocataires[3].quatre_depenses.where(:nbr_users => 3, :destinataire_part4 => 0).sum(:montant)
+                        @mesdep4 = @colocataires[3].quatre_depenses.where(:nbr_users => 4, :destinataire_part4 => 1).sum(:montant)
+                        @dep1inv = 0
+                        @dep2inv = 0
+                        @dep3inv = 0
+                        @dep4inv = 0
+                        @colocataires.each do |colocataires2|
+                                if @colocataires[3].id != colocataires2.id 
+                                        @dep4inv = @dep4inv + colocataires2.quatre_depenses.where(:nbr_users => 4).sum(:montant)
+                                        @dep3inv = @dep3inv + colocataires2.quatre_depenses.where(:nbr_users => 3, :destinataire_part4 => 1).sum(:montant)
+                                        @dep2inv = @dep2inv + colocataires2.quatre_depenses.where(:nbr_users => 2, :destinataire_part4 => 1).sum(:montant)
+                                        @dep1inv = @dep1inv + colocataires2.quatre_depenses.where(:nbr_users => 1, :destinataire_part4 => 1).sum(:montant)
+                                end
+                        end
+                        #calcul du total
+                        @colocataires[3].tot = @sesdep1 + @mesdep2/2 + @sesdep2 + @mesdep3*2/3 + @sesdep3 + @mesdep4*3/4 - @dep1inv - @dep2inv/2 - @dep4inv/4 - @dep3inv/3
+
                 end
         end
 

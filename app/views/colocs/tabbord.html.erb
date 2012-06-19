@@ -9,7 +9,7 @@
         <% @colocataires.each do |colocataires| %>
                 <tr>
                         <td>  <%= colocataires.nom %> </td>
-                        <td>  <%= colocataires.tot %> </td>
+                        <td>  <%= "%0.2f" % colocataires.tot %> </td>
                 </tr>
         <% end %>
 
