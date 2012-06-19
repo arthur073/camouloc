@@ -3,7 +3,7 @@
                 <tr>
                         <td class="main">
                                 <h1>
-                                        <%= gravatar_for @user %>
+                                        <%= gravatar_for @user %> 
                                         <%= @user.nom %>
                                 </h1>
                         </td>
@@ -11,7 +11,8 @@
                                 <strong>Nom</strong> <%= @user.nom %><br />
                                 <strong>Membre de</strong>  <%= link_to @coloc.nom, coloc_path(@coloc)  %> <br />
                                 <strong>email</strong>  <a href="mailto:<%= @user.email %>"><%= @user.email %></a> </br>
-                                <strong>Dépenses</strong>  <%= @nbrdep %>
+                                <strong>Dépenses</strong>  <%= @nbrdep %> </br>
+                                <strong>Compte crée le </strong>  <%= @user.created_at.strftime("%d %b. %Y") %>
 
                         </td>
                 </tr>
