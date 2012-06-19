@@ -21,13 +21,21 @@ header {
 	margin-bottom: 3em;
 }
 
+.mycoloc {
+        font-size:180%;
+        color:#5DA7CF;
+}
+
+
+.subtitle {
+        font-size:70%;
+        color:white;
+}
 header img {
 	/*background-color: #00CC33;*/
 	width: 10em;
 }
 
-header, .titre {
-}
 
 
 nav, .titre {
@@ -36,7 +44,7 @@ nav, .titre {
 }
 
 .titre {
-	font-size: 120%;
+	font-size: 220%;
 	width: 41%;
 	font-family: 'RieslingRegular', Arial, sans-serif;
 	margin-left: 10px;
