@@ -28,9 +28,9 @@
                         <% end %>
                         </br> </br>
                 <% end %> 
-                <h1> Top 5 </h1>
-                <% @liste_coloc = Coloc.order(:nom).all %>
-                <% @liste_coloc.each do |colocs|%>
+                <h1> <%= link_to "Top 3", colocs_path %> </h1>
+                <% @liste_coloc = Coloc.order(:nom) %>
+                <% @liste_coloc.limit(4).each do |colocs|%>
                         <% if colocs.users.size > 1 %>
                                 <%= link_to colocs.nom, colocs %> </br>
                         <% end %>

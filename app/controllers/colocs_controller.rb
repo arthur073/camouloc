@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class ColocsController < ApplicationController
         rescue_from ActiveRecord::RecordNotFound, :with => :coloc_manquante
+        helper_method :sort_column, :sort_direction
 
         def show
                 @coloc = Coloc.find(params[:id])
@@ -9,8 +10,9 @@ class ColocsController < ApplicationController
         end
 
         def index
-                @titre = "Toutes les colocs"
-                @colocs = Coloc.paginate(:page => params[:page], :per_page => 10)
+                @titre = "Palmarès des colocs"
+                @colocs = Coloc.order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 10)
+
 
         end
 
@@ -40,7 +42,7 @@ class ColocsController < ApplicationController
 
                 #calcul des dettes :
                 if @nbrcoloc == 2
-                       #pour le coloc 1 :
+                        #pour le coloc 1 :
                         @sesdep1 = @colocataires[0].depenses.where(:nbr_users => 1, :destinataire_part => 0).sum(:montant)
                         @mesdep2 = @colocataires[0].depenses.where(:nbr_users => 2, :destinataire_part => 1).sum(:montant)
                         @dep1inv = 0
@@ -260,5 +262,16 @@ class ColocsController < ApplicationController
                         @titre = "Edition Colocation"
                         render 'edit'
                 end
+        end
+
+
+        private
+
+        def sort_column
+                Coloc.column_names.include?(params[:sort]) ? params[:sort] : "nom"
+        end
+
+        def sort_direction
+                %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
         end
 end

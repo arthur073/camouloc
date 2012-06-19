@@ -1,5 +1,5 @@
 .container {
-	width: 1000px;
+	width: 900px;
 }
 
 body { 
@@ -73,7 +73,7 @@ article
 	padding: 10px;
 	margin-left: 2em;
 	border-radius: 10px;
-	width: 720px;
+	width: 620px;
 	box-shadow: 0px 2px 5px #1c1a19;
 }
 
@@ -144,9 +144,10 @@ a.signup_button {
 	margin-right: auto;
 	display: block;
 	text-align: center;
-	width: 300px;
+	width: 200px;
 	color: #fff;
-	background: #006400;
+	/*background: #006400;*/
+	background: #5DA7CF;
 	font-size: 150%;
 	font-weight: bold;
 	padding: 20px;
@@ -243,3 +244,17 @@ strong.changelog {
 	color: black;
 }
 
+/* index des colocs */
+.pretty th .current {
+  padding-right: 12px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.pretty th .asc {
+  background-image: url(up_arrow.gif);
+}
+
+.pretty th .desc {
+  background-image: url(down_arrow.gif);
+}
