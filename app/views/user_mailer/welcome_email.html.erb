@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
-  </head>
-  <body>
-    <h1>Bienvenue sur MyColoc, <%= @user.nom %>,</h1>
-    <p>
-    Vous vous êtes inscrit sur MyColoc, l'application de gestion en ligne de colocations.
-    <li> Votre login est: <%= @user.nom %>.</li>
-    <li> Votre email est: <%= @user.email %>.</li>
-    <li> Votre mot de passe est: <%= @user.password %>.</li>
-    </p>
-    <p>
-      Pour vous connecter et profiter pleinement de l'application : <%= @url %>.
-    </p>
-    <p>Merci de nous faire confiance et bonne journée !</p>
-  </body>
+        <head>
+                <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+        </head>
+        <body>
+                <h1>Bienvenue sur MyColoc, <%= @user.nom %></h1>
+                <p>
+                <% if current_user.id == @user.id %>
+                        Vous vous êtes inscrit sur MyColoc, l'application de gestion en ligne de colocations.
+                <% else %>
+                        L'utilisateur <%= current_user.nom %> vous a inscrit sur MyColoc, l'application de gestion en ligne de colocations.
+                <% end %>
+                <li> Votre login est: <%= @user.nom %>.</li>
+                <li> Votre email est: <%= @user.email %>.</li>
+                <li> Votre mot de passe est: <%= @user.password %>.</li>
+                </p>
+                <p>
+                Pour vous connecter et profiter pleinement de l'application : <%= @url %>.
+                </p>
+                <p>Merci de nous faire confiance et bonne journée !</p>
+        </body>
 </html>

@@ -11,28 +11,28 @@
 	<li> Source : <%= @user_source.nom %> </li>
         <li> Répartition des parts : </li>
         <% if @depense.destinataire_part == 1 %>
-                <%= @colocataires[0].nom %> : oui </br>
+                <dd> <%= @colocataires[0].nom %> : oui </br>
         <% else %>
-                <%= @colocataires[0].nom %> : non </br>
+                <dd><%= @colocataires[0].nom %> : non </br>
         <% end %>
 
         <% if @depense.destinataire_part2 == 1 %>
-                <%= @colocataires[1].nom %> : oui </br>
+                <dd><%= @colocataires[1].nom %> : oui </br>
         <% else %>
-                <%= @colocataires[1].nom %> : non </br>
+                <dd><%= @colocataires[1].nom %> : non </br>
         <% end %>
         
         <% if @nbrcoloc > 2 %>
                 <% if @depense.destinataire_part3 == 1 %>
-                        <%= @colocataires[2].nom %> : oui </br>
+                        <dd><%= @colocataires[2].nom %> : oui </br>
                 <% else %>
-                        <%= @colocataires[2].nom %> : non </br>
+                        <dd><%= @colocataires[2].nom %> : non </br>
                 <% end %>
                  <% if @nbrcoloc > 3 %>
                         <% if @depense.destinataire_part4 == 1 %>
-                                <%= @colocataires[3].nom %> : oui </br>
+                                <dd><%= @colocataires[3].nom %> : oui </br>
                         <% else %>
-                                <%= @colocataires[3].nom %> : non </br>
+                                <dd><%= @colocataires[3].nom %> : non </br>
                         <% end %>
                 <% end %>
         <% end %>
