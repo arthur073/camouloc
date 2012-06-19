@@ -4,13 +4,39 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Rapport de nouvelle dépense, <%= @coloc.nom %></h1>
+    <h1>Rapport de nouvelle dépense, colocation <%= @coloc.nom %></h1>
     <p> L'utilisateur <%= @user_source.nom %> a rajouté une nouvelle dépense. </br>
 	<li> Montant : <%= @depense.montant %> </li>
 	<li> Raison : <%= @depense.raison %> </li>
 	<li> Source : <%= @user_source.nom %> </li>
         <li> Répartition des parts : </li>
-        TODO !!
+        <% if @depense.destinataire_part == 1 %>
+                <%= @colocataires[0].nom %> : oui </br>
+        <% else %>
+                <%= @colocataires[0].nom %> : non </br>
+        <% end %>
+
+        <% if @depense.destinataire_part2 == 1 %>
+                <%= @colocataires[1].nom %> : oui </br>
+        <% else %>
+                <%= @colocataires[1].nom %> : non </br>
+        <% end %>
+        
+        <% if @nbrcoloc > 2 %>
+                <% if @depense.destinataire_part3 == 1 %>
+                        <%= @colocataires[2].nom %> : oui </br>
+                <% else %>
+                        <%= @colocataires[2].nom %> : non </br>
+                <% end %>
+                 <% if @nbrcoloc > 3 %>
+                        <% if @depense.destinataire_part4 == 1 %>
+                                <%= @colocataires[3].nom %> : oui </br>
+                        <% else %>
+                                <%= @colocataires[3].nom %> : non </br>
+                        <% end %>
+                <% end %>
+        <% end %>
+
     </p>
     <p>Merci de nous faire confiance et bonne journée !</p>
   </body>

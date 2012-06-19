@@ -7,6 +7,7 @@ class DepenseMailer < ActionMailer::Base
 		@user_source = User.find(depense.user_id)
 		@coloc = Coloc.find(@user_source.coloc_id)
                 @colocataires = @coloc.users.all
+                @nbrcoloc = @colocataires.size
 		mail(:to => @coloc.users.all.map(&:email), :subject => "MyColoc, nouvelle dépense.")
 	end
 
