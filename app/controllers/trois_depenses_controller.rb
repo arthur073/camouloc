@@ -9,6 +9,11 @@ class TroisDepensesController < ApplicationController
         def create
                 @troisdepense = TroisDepense.new(params[:trois_depense])
                 @troisdepense.user_id = current_user.id
+                # ajoute la somme dépensée au Chiffre d'Affaires
+                @colocation = Coloc.find(current_user.coloc_id)
+                @colocation.ca = @colocation.ca + @troisdepense.montant
+                @colocation.save
+
                 @troisdepense.nbr_users = @troisdepense.destinataire_part + @troisdepense.destinataire_part2 + @troisdepense.destinataire_part3
                 if @troisdepense.save
                         #Traite un succès d'enregistrement.

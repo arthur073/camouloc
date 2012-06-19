@@ -10,6 +10,11 @@ class QuatreDepensesController < ApplicationController
                 @quatredepense = QuatreDepense.new(params[:quatre_depense])
                 @quatredepense.user_id = current_user.id
                 @quatredepense.nbr_users = @quatredepense.destinataire_part + @quatredepense.destinataire_part2 + @quatredepense.destinataire_part3+ @quatredepense.destinataire_part4
+                # ajoute la somme dépensée au Chiffre d'Affaires
+                @colocation = Coloc.find(current_user.coloc_id)
+                @colocation.ca = @colocation.ca + @quatredepense.montant
+                @colocation.save
+
                 if @quatredepense.save
                         #Traite un succès d'enregistrement.
                         #envoie le mail de confirmation de la dépense

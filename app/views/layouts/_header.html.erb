@@ -1,14 +1,13 @@
 <header>
 <%= image_tag("mc-logo.jpg", :alt => "Application Arthur", :class => "round") %>
 <div class="titre">
-	<font size="15", color=#5DA7CF>MyColoc</font> <br /> <font size="5", color=white>Application de gestion de Colocation.</font>
+	<font size="15", color=#5DA7CF>MyColoc</font> <br /> <font size="4", color=white>Application de gestion de Colocation.</font>
 </div>
 <nav class="round">
 
 <ul>
 	<li><%= link_to "Accueil", root_path %></li>
         <li><%= link_to "Colocations", colocs_path %></li>
-        <li><%= link_to "Utilisateurs", users_path %></li>
 	<% if signed_in? %>
 		<li><%= link_to "Déconnexion ("+current_user.nom + ")", signout_path, :method => :delete %></li>
         <% else %>

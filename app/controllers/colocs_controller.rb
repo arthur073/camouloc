@@ -13,7 +13,6 @@ class ColocsController < ApplicationController
                 @titre = "Palmarès des colocs"
                 @colocs = Coloc.order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 10)
 
-
         end
 
         def new
@@ -23,6 +22,7 @@ class ColocsController < ApplicationController
 
         def create
                 @coloc = Coloc.new(params[:coloc])
+                @coloc.ca = 0
                 if @coloc.save
                         # Traite un succès d'enregistrement.
                         redirect_to @coloc
@@ -268,10 +268,10 @@ class ColocsController < ApplicationController
         private
 
         def sort_column
-                Coloc.column_names.include?(params[:sort]) ? params[:sort] : "nom"
+                Coloc.column_names.include?(params[:sort]) ? params[:sort] : "ca"
         end
 
         def sort_direction
-                %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+                %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
         end
 end

@@ -10,6 +10,10 @@ class DepensesController < ApplicationController
         def create
                 @depense = Depense.new(params[:depense])
                 @depense.user_id = current_user.id
+                # ajoute la somme dépensée au Chiffre d'Affaires
+                @colocation = Coloc.find(current_user.coloc_id)
+                @colocation.ca = @colocation.ca + @depense.montant
+                @colocation.save
                 @depense.nbr_users = @depense.destinataire_part + @depense.destinataire_part2
                 if @depense.save
                         #Traite un succès d'enregistrement.
