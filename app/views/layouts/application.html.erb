@@ -14,8 +14,8 @@
                                 <div class="flash <%= key %>"><%= value %></div>
                         <% end %>
                         <aside>
-                        <h1>Liens</h1>
                         <% if signed_in? %>
+                                <h1>Liens</h1>
                                 <%= link_to "Mon Profil", current_user %></br>
                                 <%= link_to "Ma Colocation", Coloc.find(current_user.coloc_id) %></br>
                                 <%= link_to "Mon Tableau de bord", tableau_bord_path(Coloc.find(current_user.coloc_id).id) %> </strong> </br>
@@ -26,9 +26,9 @@
                         <% elsif Coloc.find(current_user.coloc_id).users.size == 4 %>
                                 <%= link_to "Nouvelle dépense", new_quatre_depense_path(@depense) %> </br>
                         <% end %>
-
-                <% end %> </br> </br>
-                <h1> Palmarès </h1>
+                        </br> </br>
+                <% end %> 
+                <h1> Top 5 </h1>
                 <% @liste_coloc = Coloc.order(:nom).all %>
                 <% @liste_coloc.each do |colocs|%>
                         <% if colocs.users.size > 1 %>
