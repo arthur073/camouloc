@@ -30,6 +30,9 @@ class QuatreDepensesController < ApplicationController
         def destroy
                 @quatredepense = QuatreDepense.find(params[:id])
                 @quatredepense.destroy
+                @colocation = Coloc.find(current_user.coloc_id)
+                @colocation.ca = @colocation.ca - @quatredepense.montant
+                @colocation.save
                 flash[:success] = "Dépense supprimée."
                 redirect_to(:back)
         end

@@ -26,7 +26,7 @@ class ColocsController < ApplicationController
                 if @coloc.save
                         # Traite un succès d'enregistrement.
                         redirect_to @coloc
-                        flash[:success] = "Votre colocation a bien été enregistrée !"
+                        flash[:success] = "Votre colocation a bien été enregistrée ! Inscrivez maintenant vos colocataires."
                 else
                         flash[:error] = "Votre colocation n'a pas été enregistrée ! Le nom utilisé n'est pas disponible."
                         @titre = "Inscription de la Colocation"

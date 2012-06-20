@@ -46,7 +46,17 @@ $(function () {
                                 <%= colocs.ca %>,
                       <% end %> ],
                         showInLegend: false,
-                        color: '#980000'
+                        color: '#980000',
+                        dataLabels: {
+                            enabled: true,
+                            color: 'white',
+                            align: 'center',
+                            x: -3,
+                            y: 12,
+                            formatter: function() {
+                                return Math.round(this.y) + ' €';
+                            }
+                        }
             }]
         });
     });

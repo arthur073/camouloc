@@ -34,7 +34,7 @@
                         color: '#000000',
                         connectorColor: '#000000',
                         formatter: function() {
-                            return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                            return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage) +' %';
                         }
                     }
                 }
@@ -43,19 +43,19 @@
                 type: 'pie',
                 data: [
                         <% if @nbrcoloc == 2 %>
-                                ['<%= @colocataires[0].nom %>',   <%= "%0.2f" % (@sumdep1 / @coloc.ca * 100) %>],
-                                ['<%= @colocataires[1].nom %>',   <%= "%0.2f" % (@sumdep2 / @coloc.ca * 100) %>]
+                                ['<%= @colocataires[0].nom %>',  <%= (@sumdep1 / @coloc.ca * 100) %>],
+                                ['<%= @colocataires[1].nom %>',   <%= (@sumdep2 / @coloc.ca * 100) %>]
                         <% elsif @nbrcoloc == 3 %>
-                                ['<%= @colocataires[0].nom %>',   <%= "%0.2f" % (@sumdep1 / @coloc.ca * 100) %>],
-                                ['<%= @colocataires[1].nom %>',   <%= "%0.2f" % (@sumdep2 / @coloc.ca * 100) %>],
-                                ['<%= @colocataires[2].nom %>',   <%= "%0.2f" % (@sumdep3 / @coloc.ca * 100) %>]
+                                ['<%= @colocataires[0].nom %>',   <%=  (@sumdep1 / @coloc.ca * 100) %>],
+                                ['<%= @colocataires[1].nom %>',   <%=  (@sumdep2 / @coloc.ca * 100) %>],
+                                ['<%= @colocataires[2].nom %>',   <%=  (@sumdep3 / @coloc.ca * 100) %>]
                         <% elsif @nbrcoloc == 4 %>
-                                ['<%= @colocataires[0].nom %>',   <%= "%0.2f" % (@sumdep1 / @coloc.ca * 100) %>],
-                                ['<%= @colocataires[1].nom %>',   <%= "%0.2f" % (@sumdep2 / @coloc.ca * 100) %>],
-                                ['<%= @colocataires[2].nom %>',   <%= "%0.2f" % (@sumdep3 / @coloc.ca * 100) %>],
-                                ['<%= @colocataires[3].nom %>',   <%= "%0.2f" % (@sumdep4 / @coloc.ca * 100) %>]
+                                ['<%= @colocataires[0].nom %>',   <%= (@sumdep1 / @coloc.ca * 100) %>],
+                                ['<%= @colocataires[1].nom %>',   <%= (@sumdep2 / @coloc.ca * 100) %>],
+                                ['<%= @colocataires[2].nom %>',   <%= (@sumdep3 / @coloc.ca * 100) %>],
+                                ['<%= @colocataires[3].nom %>',   <%= (@sumdep4 / @coloc.ca * 100) %>]
                         <% end %>
-                ]
+                ],
             }]
         });
     });
