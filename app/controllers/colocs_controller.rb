@@ -69,8 +69,8 @@ class ColocsController < ApplicationController
                         end
                         #calcul du total
                         @colocataires[1].tot = @sesdep1 + @mesdep2/2  - @dep1inv - @dep2inv/2 
-
-
+                        @sumdep1 = @colocataires[0].depenses.sum(:montant)
+                        @sumdep2 = @colocataires[1].depenses.sum(:montant)
 
                 elsif @nbrcoloc == 3
                         #pour le coloc 1 :
@@ -130,6 +130,9 @@ class ColocsController < ApplicationController
                         #calcul du total
                         @colocataires[2].tot = @sesdep1 + @mesdep2/2 + @sesdep2 + @mesdep3*2/3 - @dep1inv - @dep2inv/2 - @dep3inv/3 
 
+                        @sumdep1 = @colocataires[0].trois_depenses.sum(:montant)
+                        @sumdep2 = @colocataires[1].trois_depenses.sum(:montant)
+                        @sumdep3 = @colocataires[2].trois_depenses.sum(:montant)
 
 
                 elsif @nbrcoloc == 4
@@ -226,6 +229,10 @@ class ColocsController < ApplicationController
                         #calcul du total
                         @colocataires[3].tot = @sesdep1 + @mesdep2/2 + @sesdep2 + @mesdep3*2/3 + @sesdep3 + @mesdep4*3/4 - @dep1inv - @dep2inv/2 - @dep4inv/4 - @dep3inv/3
 
+                        @sumdep1 = @colocataires[0].quatre_depenses.sum(:montant)
+                        @sumdep2 = @colocataires[1].quatre_depenses.sum(:montant)
+                        @sumdep3 = @colocataires[2].quatre_depenses.sum(:montant)
+                        @sumdep4 = @colocataires[3].quatre_depenses.sum(:montant)
                 end
         end
 

@@ -4,7 +4,8 @@
                 <title> MyColoc </title>
                 <%= csrf_meta_tag %>
                 <%= render 'layouts/stylesheets' %>
-                <%= javascript_include_tag :defaults %>
+
+                <%= javascript_include_tag "jquery-1.7.1.min.js", "highcharts", "exporting.js" %>
         </head>
         <body>
                 <div class="container">
@@ -28,7 +29,7 @@
                         <% end %>
                         </br> </br>
                 <% end %> 
-                <h1> <%= link_to "Top 3", colocs_path %> </h1>
+                <h1> <%= link_to "Top Colocs", colocs_path %> </h1>
                 <% @liste_coloc = Coloc.order(:ca).limit(3).reverse %>
                 <% @liste_coloc.each do |colocs|%>
                         <% if colocs.users.size > 1 %>

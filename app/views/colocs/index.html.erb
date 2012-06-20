@@ -12,7 +12,7 @@
 
         <% @colocs.each do |colocs| %>
         <tr style="background-color:white;">
-                <td> <font color=black> <%= colocs.nom %></font>
+                <td> <font color=black> <%= link_to colocs.nom, colocs %></font>
                                 <% if signed_in? and current_user.admin? %>
                                         <%= button_to "supprimer", colocs, :method => :delete, :confirm => "Etes-vous certain&nbsp;?",:title => "Supprimer #{colocs.nom}" %>
                                 <% end %> </td>

@@ -1,6 +1,74 @@
 <h1> <%= @titre %> de <%= @coloc.nom %> </h1>
 
 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+        $(function () {
+    var chart;
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false
+            },
+            title: {
+                text: 'Répartition du chiffre d\'affaires de la colocation'
+            },
+            subtitle: {
+                text: '<%= @coloc.nom %>',
+                x: -20
+            },
+            tooltip: {
+                formatter: function() {
+                    return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        color: '#000000',
+                        connectorColor: '#000000',
+                        formatter: function() {
+                            return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                        }
+                    }
+                }
+            },
+            series: [{
+                type: 'pie',
+                name: 'Browser share',
+                data: [
+                        <% if @nbrcoloc == 2 %>
+                                ['<%= @colocataires[0].nom %>',   <%="%0.2f" % ( @sumdep1 / @coloc.ca * 100) %>],
+                                ['<%= @colocataires[1].nom %>',   <%="%0.2f" % (@sumdep2 / @coloc.ca * 100) %>]
+                        <% elsif @nbrcoloc == 3 %>
+                                ['<%= @colocataires[0].nom %>',   <%="%0.2f" % ( @sumdep1 / @coloc.ca * 100) %>],
+                                ['<%= @colocataires[1].nom %>',   <%="%0.2f" % ( @sumdep2 / @coloc.ca * 100) %>],
+                                ['<%= @colocataires[2].nom %>',   <%="%0.2f" % ( @sumdep3 / @coloc.ca * 100) %>]
+                        <% elsif @nbrcoloc == 4 %>
+                                ['<%= @colocataires[0].nom %>',   <%= "%0.2f" % (@sumdep1 / @coloc.ca * 100) %>],
+                                ['<%= @colocataires[1].nom %>',   <%= "%0.2f" % (@sumdep2 / @coloc.ca * 100) %>],
+                                ['<%= @colocataires[2].nom %>',   <%= "%0.2f" % (@sumdep3 / @coloc.ca * 100) %>],
+                                ['<%= @colocataires[3].nom %>',   <%= "%0.2f" % (@sumdep4 / @coloc.ca * 100) %>]
+                        <% end %>
+                ]
+            }]
+        });
+    });
+    
+});
+</script>
+
+<script src="highcharts.js"></script>
+<script src="exporting.js"></script>
+<div id="container" style="min-width: 400px; height: 300px; margin: 0 auto"></div>
+<div style="height: 15px;"></div>
+
 
 <table class="tabbord">
         <tr> 
@@ -62,5 +130,5 @@
                 <% end %>
         <% end %>
 </table>
-</span> </br> </br>
-&larr; <%= link_to "Retour à la colocation", @coloc%>
+        </span> </br> </br>
+        &larr; <%= link_to "Retour à la colocation", @coloc%>
