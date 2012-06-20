@@ -3,21 +3,22 @@
 <%= form_for(@troisdepense) do |f| %>
         <%= render 'shared/error_messages', :object => f.object %>
         <div class="field">
-                <strong> Pour qui payez-vous ? </strong></br>
+                <strong> Pour qui payez-vous ? </strong><br>
                 <%=f.check_box :destinataire_part %>  		
-                <%= f.label @colocataires[0].nom %></br>
+                <%= f.label @colocataires[0].nom %><br>
                 <%=f.check_box :destinataire_part2 %> 
-                <%= f.label @colocataires[1].nom %></br>
+                <%= f.label @colocataires[1].nom %><br>
                 <%=f.check_box :destinataire_part3 %> 
-                <%= f.label @colocataires[2].nom %></br>
+                <%= f.label @colocataires[2].nom %><br>
         </div>
 
         <div class="field">
-                <%= f.label "Quel est le montant de la dépense ?" %><br />
+                <%= f.label "Quel est le montant de la dépense ?" %><br>
+                <i> Pour les nombres décimaux, utiliser "." et non "," </i> <br>
                 <%= f.text_field :montant %>
         </div>
         <div class="field">
-                <%= f.label "Quelle est la raison de la dépense ?" %><br />
+                <%= f.label "Quelle est la raison de la dépense ?" %><br>
                 <%= f.text_field :raison %>
                 </div><div class="actions">
                 <%= f.submit "Enregistrer" %>
