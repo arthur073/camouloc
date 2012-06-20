@@ -13,7 +13,7 @@
 	</div>
 	<div class="field">
 		<%= f.label :coloc_id %><br />
-		<%= f.text_field :coloc_id %> ( <%= Coloc.find(params[:coloc_id]).nom %> )
+                <%= f.select :coloc_id, options_for_select([[ @coloc.nom ,  @coloc.id ]]) %>
 	</div>
 
 	<div class="field">

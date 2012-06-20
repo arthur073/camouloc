@@ -41,7 +41,6 @@
             },
             series: [{
                 type: 'pie',
-                name: 'Browser share',
                 data: [
                         <% if @nbrcoloc == 2 %>
                                 ['<%= @colocataires[0].nom %>',   <%= "%0.2f" % (@sumdep1 / @coloc.ca * 100) %>],

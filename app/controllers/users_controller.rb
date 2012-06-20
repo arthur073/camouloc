@@ -32,8 +32,9 @@ class UsersController < ApplicationController
 	def new
 		@user = User.new
 		@titre = "Inscription"
-		@user.coloc_id = Coloc.find(params[:coloc_id]).id
-	end
+                @coloc = Coloc.find(params[:coloc_id])
+		@user.coloc_id = @coloc.id
+        end
 
 	def create
 		@user = User.new(params[:user])
