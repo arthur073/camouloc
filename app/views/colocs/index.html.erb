@@ -16,7 +16,7 @@
                                 <% if signed_in? and current_user.admin? %>
                                         <%= button_to "supprimer", colocs, :method => :delete, :confirm => "Etes-vous certain&nbsp;?",:title => "Supprimer #{colocs.nom}" %>
                                 <% end %> </td>
-                        <td> <font color=black> <%= "%0.2f" % colocs.ca %> </font> </td>
+                        <td> <font color=black> <%= "%0.2f" % colocs.ca %> € </font> </td>
                         <td> <font color=black> <%= colocs.created_at.strftime("%d %b, %Y") %> </font> </td>
                 </tr>
         <% end %>
