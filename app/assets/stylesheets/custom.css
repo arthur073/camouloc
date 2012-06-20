@@ -268,4 +268,10 @@ strong.changelog {
 }
 
 
-
+/* graphiques */
+.container2 {
+        width: 620px; 
+        height: 300px; 
+        margin: 0 auto;
+	box-shadow: 0px 2px 5px #1c1a19;
+}

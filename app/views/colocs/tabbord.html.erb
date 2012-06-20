@@ -22,7 +22,7 @@
             },
             tooltip: {
                 formatter: function() {
-                    return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                    return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage) +' %';
                 }
             },
             plotOptions: {
@@ -65,7 +65,7 @@
 
 <script src="highcharts.js"></script>
 <script src="exporting.js"></script>
-<div id="container" style="min-width: 400px; height: 300px; margin: 0 auto"></div>
+<div id="container" class="container2"></div>
 <div style="height: 15px;"></div>
 
 
