@@ -5,4 +5,9 @@ module UsersHelper
 					 :class => 'gravatar',
 					 :gravatar => options)
 	end
+
+        def delete_user?
+                button_to "delete", @user, :method=>:delete, :class=>:destroy
+        end
+
 end

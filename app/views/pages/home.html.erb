@@ -22,8 +22,8 @@
         <p> <i> Pas encore convaincu(e) ? Regardez <strong> <%= link_to "les colocations déjà inscrites !", colocs_path %></strong> </i> </p>
 <% else %>
         <p>
-        <font size="3" color=white>
-                Rendez vous tout de suite sur le profil de votre colocation. <br>
+        <font color=white>
+                <i>   Rendez vous tout de suite sur le profil de votre colocation.</i> <br>
         </font> </p>
         <%= link_to "Voir ma colocation", Coloc.find(current_user.coloc_id), :class => "signup_button round" %> <br>
 <% end %>
