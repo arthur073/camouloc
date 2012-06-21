@@ -1,23 +1,107 @@
 <h1> <%= @titre %> </h1>
+<script>
+        $(document).ready(function(){
+                var more_visibility = false;
+                var more2_visibility = false;
+                var more3_visibility = false;
+                var more4_visibility = false;
+                $("p.more_details1").hide();
+                $("p.more_details2").hide();
+                $("p.more_details3").hide();
+                $("p.more_details4").hide();
+                $("a.more_details_button1").click(function(event){
+                        $("p.more_details1").slideToggle('fast');
+                        if(!more_visibility) {
+                                $("a.more_details_button1").html("[Moins]");
+                                more_visibility = true;
+                                }else{
+                                $("a.more_details_button1").html("[Plus]");
+                                more_visibility = false;
+                        }
+                        event.preventDefault();
+                });
+                $("a.more_details_button2").click(function(event){
+                        $("p.more_details2").slideToggle('fast');
+                        if(!more2_visibility) {
+                                $("a.more_details_button2").html("[Moins]");
+                                more2_visibility = true;
+                                }else{
+                                $("a.more_details_button2").html("[Plus]");
+                                more2_visibility = false;
+                        }
+                        event.preventDefault();
+                });
+
+                $("a.more_details_button3").click(function(event){
+                        $("p.more_details3").slideToggle('fast');
+                        if(!more3_visibility) {
+                                $("a.more_details_button3").html("[Moins]");
+                                more3_visibility = true;
+                                }else{
+                                $("a.more_details_button3").html("[Plus]");
+                                more3_visibility = false;
+                        }
+                        event.preventDefault();
+                });
+                 $("a.more_details_button4").click(function(event){
+                        $("p.more_details4").slideToggle('fast');
+                        if(!more4_visibility) {
+                                $("a.more_details_button4").html("[Moins]");
+                                more4_visibility = true;
+                                }else{
+                                $("a.more_details_button4").html("[Plus]");
+                                more4_visibility = false;
+                        }
+                        event.preventDefault();
+                });
+
+        });
+
+</script>
 
 <% unless signed_in? %>
-        <p>
-        <font color=white>
-                <i>MyColoc est un logiciel gratuit permettant de gérer les dépenses au sein d'une colocation. <br>
+        <span color=white>
+                <i>MyColoc est un logiciel <strong> gratuit </strong> permettant de gérer les dépenses au sein d'une colocation. <br>
                         La marche à suivre est <strong> très simple : <br> </strong> </i> 
-        </font> 
-                <font size="8" color=#5DA7CF> 1 _ </font>
-                <font size="5" color=white> Créer sa colocation. </font> 
-                <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="link">[Plus]</a><span id="spoiler_id" style="display: none"><a onclick="document.getElementById('spoiler_id').style.display='none'; document.getElementById('show_id').style.display='';" class="link">[Moins de détails]</a><i><br>Ajoutez simplement le nom de votre colocation, elle sera automatiquement entrée dans la base de données. <br> Vous pourrez à tout moment modifier le nom de votre colocation ou même la supprimer.</i></span> <br>
-                <font size="8" color=#5DA7CF> 2 _ </font>
-                <font size="5" color=white> Inscrire ses colocataires. </font> 
-                <a id="show_id2" onclick="document.getElementById('spoiler_id2').style.display=''; document.getElementById('show_id2').style.display='none';" class="link">[Plus]</a><span id="spoiler_id2" style="display: none"><a onclick="document.getElementById('spoiler_id2').style.display='none'; document.getElementById('show_id2').style.display='';" class="link">[Moins de détails]</a><i><br>Vous pouvez inscrire vos colocataires dès que la colocation est créée, l'application supporte jusqu'à 4 colocataires par colocation. </i></span> <br>
-                <font size="8" color=#5DA7CF> 3 _ </font>
-                <font size="5" color=white> Ajouter ses dépenses </font>
-                <a id="show_id3" onclick="document.getElementById('spoiler_id3').style.display=''; document.getElementById('show_id3').style.display='none';" class="link">[Plus]</a><span id="spoiler_id3" style="display: none"><a onclick="document.getElementById('spoiler_id3').style.display='none'; document.getElementById('show_id3').style.display='';" class="link">[Moins de détails]</a><i><br> Dès que votre colocation est complète vous pouvez ajouter des dépenses. L'application se charge elle même de faire vos comptes, et les résume dans la page "tableau de bord". </i></span> <br>
+        </span> 
+        <br>
 
 
+        <font size="8" color=#5DA7CF> 1 _ </font>
+        <font size="5" color=white> Inscrire ses colocataires. </font> 
+        <a href="#" class="more_details_button1">[Plus]</a>
+        <p class="more_details1">
+        <i>Ajoutez simplement le nom de votre colocation, elle sera automatiquement entrée dans la base de données. 
+Vous pourrez à tout moment modifier le nom de votre colocation ou même la supprimer.  </i>
         </p>
+        <br>
+
+
+        <font size="8" color=#5DA7CF> 2 _ </font>
+        <font size="5" color=white> Inscrire ses colocataires. </font> 
+        <a href="#" class="more_details_button2">[Plus]</a>
+        <p class="more_details2">
+        <i> Vous pouvez inscrire vos colocataires dès que la colocation est créée, l'application supporte jusqu'à 4 colocataires par colocation. </i>        </p>
+        <br>
+
+
+        <font size="8" color=#5DA7CF> 3 _ </font>
+        <font size="5" color=white> Ajouter ses dépenses </font>
+         <a href="#" class="more_details_button3">[Plus]</a>
+        <p class="more_details3">
+        <i> Dès que votre colocation est complète vous pouvez ajouter des dépenses. L'application se charge elle même de faire vos comptes, et les résume dans la page "tableau de bord". </i>
+        </p>
+        <br>
+
+        <font size="8" color=#5DA7CF> 4 _ </font>
+        <font size="5" color=white> Figurer dans le Palmarès</font>
+         <a href="#" class="more_details_button4">[Plus]</a>
+        <p class="more_details4">
+        <i> Dès votre première dépense, vous allez figurer dans le palmarès des colocations, quel rang pourrez-vous atteindre ? </i>
+        </p>
+        <br>
+
+
         <%= link_to "C'est parti !", signup_path, :class => "signup_button round" %> <br>
         <p> <i> Pas encore convaincu(e) ? Regardez <strong> <%= link_to "les colocations déjà inscrites !", colocs_path %></strong> </i> </p>
 <% else %>
