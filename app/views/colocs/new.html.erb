@@ -1,13 +1,39 @@
 <h1> <%= @titre %> </h1>
+<script>
+        $(document).ready(function(){
+                var more_visibility = false;
+                $("p.more_details1").hide();
+                $("a.more_details_button1").click(function(event){
+                        $("p.more_details1").slideToggle('fast');
+                        if(!more_visibility) {
+                                $("a.more_details_button1").html("Moins");
+                                more_visibility = true;
+                                }else{
+                                $("a.more_details_button1").html("?");
+                                more_visibility = false;
+                        }
+                        event.preventDefault();
+                });
+        });
+</script>
 
 <%= form_for(@coloc) do |f| %>
         <i> Inscrivez d'abord votre colocation, vous créerez votre profil par la suite puis celui de votre colocataire.</i>
-	<div class="field">
-		<%= f.label :nom %><br />
-		<%= f.text_field :nom %>
-	</div>
-	<div class="actions">
-		<%= f.submit "Inscription" %>
-	</div>
+        <div class="field">
+                <%= f.label :nom %><br>
+                <%= f.text_field :nom %>
+        </div>
+        <div class="field">
+                <%= f.check_box :palm %>
+                <%= f.label "Apparaître dans le palmarès" %>
+        <a href="#" class="more_details_button1">?</a>
+        <p class="more_details1">
+        <i> En apparaîssant dans le Palmarès, le chiffre d'affaire de votre colocation sera public. Vous pourrez ainsi vous comparer aux autres colocations déjà créées.  </i>
+        </p>
+        </div>
+
+        <div class="actions">
+                <%= f.submit "Inscription" %>
+        </div>
 <% end %>
 

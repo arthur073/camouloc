@@ -17,6 +17,7 @@ class ColocsController < ApplicationController
 
         def new
                 @coloc = Coloc.new
+                @coloc.palm = 1
                 @titre = "Inscription de la Colocation"
         end
 
