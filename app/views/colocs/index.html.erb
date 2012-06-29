@@ -18,7 +18,9 @@ $(function () {
             xAxis: {
                 categories: [
                 <% @colocs2.reverse.each do |colocs| %>
-                        '<%= link_to colocs.nom, colocs %>',
+                        <% if colocs.palm == 1 %>
+                                '<%= link_to colocs.nom, colocs %>',
+                        <% end %>
                 <% end %>
                 ]
             },
@@ -43,8 +45,10 @@ $(function () {
                 series: [{
                         name: 'Colocations',
                         data: [ <% @colocs2.reverse.each do |colocs| %>
-                                <%= colocs.ca %>,
-                      <% end %> ],
+                                        <% if colocs.palm == 1 %>
+                                                <%= colocs.ca %>,
+                                        <% end %>
+                              <% end %> ],
                         showInLegend: false,
                         color: '#980000',
                         dataLabels: {
@@ -86,7 +90,11 @@ $(function () {
                                 <% if signed_in? and current_user.admin? %>
                                         <%= button_to "supprimer", colocs, :method => :delete, :confirm => "Etes-vous certain&nbsp;?",:title => "Supprimer #{colocs.nom}" %>
                                 <% end %> </td>
-                        <td> <font color=black> <%= "%0.2f" % colocs.ca %> € </font> </td>
+                        <td> <font color=black> <% if colocs.palm == 1 %>
+                                                        <%= "%0.2f" % colocs.ca %> € 
+                                                <% else %>
+                                                        non accessible
+                                                <% end %>   </font> </td>
                         <td> <font color=black> <%= colocs.created_at.strftime("%d %b, %Y") %> </font> </td>
                 </tr>
         <% end %>
