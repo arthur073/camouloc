@@ -12,7 +12,7 @@ MyColoc::Application.routes.draw do
 	match '/contact', :to => 'pages#contact'
 	match '/signup', :to => 'colocs#new'
 	match '/colocs/:id/edit', :to => 'colocs#edit'
-	match '/signin',  :to => 'sessions#new'
+	match '/signin',  :to => 'sessions#new', :as => 'login'
 	match '/signout', :to => 'sessions#destroy'
 	match '/about',   :to => 'pages#about'
 	match '/changelog',    :to => 'pages#changelog'

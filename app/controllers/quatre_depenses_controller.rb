@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class QuatreDepensesController < ApplicationController
+        before_filter :require_login
+
         def new
                 @quatredepense = QuatreDepense.new
                 @titre = "Nouvelle dépense pour " + current_user.nom
@@ -37,5 +39,12 @@ class QuatreDepensesController < ApplicationController
                 redirect_to(:back)
         end
 
+        private
+        def require_login
+                unless current_user
+                        flash[:notice] = "Vous devez vous identifier pour accéder à cette page. "
+                        redirect_to login_path
+                end
+        end
 
 end

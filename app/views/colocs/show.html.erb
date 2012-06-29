@@ -8,7 +8,7 @@
                 <td class="sidebar round">
                         <strong>Nom</strong> <%= @coloc.nom %><br>
                         <strong>Colocataires</strong> <%= @coloc.users.count %>/4<br>
-                        <strong>Chiffre d'Affaires</strong> <%= @coloc.ca %> € <br>
+                        <strong>Chiffre d'Affaires</strong> <%= "%0.2f" % @coloc.ca %> € <br>
                         <strong>Palmarès</strong> 
                                 <% if @coloc.palm == 1 %> 
                                         oui 

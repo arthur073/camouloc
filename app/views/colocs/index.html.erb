@@ -93,7 +93,7 @@ $(function () {
                         <td> <font color=black> <% if colocs.palm == 1 %>
                                                         <%= "%0.2f" % colocs.ca %> € 
                                                 <% else %>
-                                                        non accessible
+                                                        <i> non accessible </i>
                                                 <% end %>   </font> </td>
                         <td> <font color=black> <%= colocs.created_at.strftime("%d %b, %Y") %> </font> </td>
                 </tr>

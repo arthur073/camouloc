@@ -1,6 +1,8 @@
 # -*- encoding : utf-8 -*-
 class DepensesController < ApplicationController
         before_filter :require_login
+
+
         def new
                 @depense = Depense.new
                 @titre = "Nouvelle dépense pour " + current_user.nom

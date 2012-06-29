@@ -75,7 +75,7 @@
         </tr>
         <% @colocataires.each do |colocataires| %>
                 <tr>
-                        <td>  <%= colocataires.nom %> </td>
+                        <td>  <%= link_to colocataires.nom, colocataires %> </td>
                         <% if colocataires.tot < 0 %>
                                 <td> <font color=red> <strong> <%= "%0.2f" % colocataires.tot %> </strong> </font> </td>
                         <% else %>

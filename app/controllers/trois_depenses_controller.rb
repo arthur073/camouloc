@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class TroisDepensesController < ApplicationController
+        before_filter :require_login
+
         def new
                 @troisdepense = TroisDepense.new
                 @titre = "Nouvelle dépense pour " + current_user.nom
@@ -35,6 +37,13 @@ class TroisDepensesController < ApplicationController
                 @colocation.save
                 flash[:success] = "Dépense supprimée."
                 redirect_to(:back)
+        end
+        private
+        def require_login
+                unless current_user
+                        flash[:notice] = "Vous devez vous identifier pour accéder à cette page. "
+                        redirect_to login_path
+                end
         end
 
 end
