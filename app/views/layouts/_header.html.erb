@@ -11,7 +11,7 @@
 	<% if signed_in? %>
 		<li><%= link_to "Déconnexion ("+current_user.nom + ")", signout_path, :method => :delete %></li>
         <% else %>
-                <li><%= link_to "S'identifier", signin_path %></li>
+                <li><%= link_to "S'identifier", login_path %></li>
 	<% end %>
 </ul>
 </nav>
