@@ -21,7 +21,7 @@ module SessionsHelper
 
 	def deny_access
 		store_location
-		redirect_to signin_path, :notice => "Merci de vous identifier pour rejoindre cette page."
+		redirect_to login_path, :notice => "Merci de vous identifier pour rejoindre cette page."
 	end
 
 	def redirect_back_or(default)
