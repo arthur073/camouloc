@@ -265,7 +265,7 @@ class ColocsController < ApplicationController
                 @coloc = Coloc.find(params[:id])
                 if @coloc.update_attributes(params[:coloc])
                         redirect_to @coloc
-                        flash[:success] = "Nom actualisé"
+                        flash[:success] = "Colocation actualisée"
                 else
                         @titre = "Edition Colocation"
                         render 'edit'

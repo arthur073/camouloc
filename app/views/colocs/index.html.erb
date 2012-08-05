@@ -4,67 +4,67 @@
 <script type="text/javascript">
 
 
-$(function () {
-    var chart;
-    $(document).ready(function() {
-        chart = new Highcharts.Chart({
-            chart: {
-                renderTo: 'container',
-                type: 'column'
-            },
-            title: {
-                text: 'Meilleures colocations'
-            },
-            xAxis: {
-                categories: [
-                <% @colocs2.reverse.each do |colocs| %>
-                        <% if colocs.palm == 1 %>
-                                '<%= link_to colocs.nom, colocs %>',
-                        <% end %>
-                <% end %>
-                ]
-            },
-            yAxis: {
-                min: 0,
-                title: {
-                    text: 'Chiffre d\'affaires (€)'
-                }
-            },
-            tooltip: {
-                formatter: function() {
-                    return ''+
-                        this.x +': '+ this.y +' €';
-                }
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                    borderWidth: 0
-                }
-            },
-                series: [{
-                        name: 'Colocations',
-                        data: [ <% @colocs2.reverse.each do |colocs| %>
-                                        <% if colocs.palm == 1 %>
-                                                <%= colocs.ca %>,
+        $(function () {
+                        var chart;
+                        $(document).ready(function() {
+                                chart = new Highcharts.Chart({
+chart: {
+renderTo: 'container',
+type: 'column'
+},
+title: {
+text: 'Meilleures colocations'
+},
+xAxis: {
+categories: [
+<% @colocs2.reverse.each do |colocs| %>
+        <% if colocs.palm == 1 %>
+                '<%= link_to colocs.nom, colocs %>',
+        <% end %>
+<% end %>
+]
+},
+yAxis: {
+min: 0,
+title: {
+text: 'Chiffre d\'affaires (€)'
+}
+},
+tooltip: {
+formatter: function() {
+                   return ''+
+                           this.x +': '+ this.y +' €';
+           }
+         },
+plotOptions: {
+column: {
+pointPadding: 0.2,
+              borderWidth: 0
+        }
+             },
+series: [{
+name: 'Colocations',
+      data: [ <% @colocs2.reverse.each do |colocs| %>
+                      <% if colocs.palm == 1 %>
+                              <%= colocs.ca %>,
                                         <% end %>
-                              <% end %> ],
-                        showInLegend: false,
-                        color: '#980000',
-                        dataLabels: {
-                            enabled: true,
-                            color: 'white',
-                            align: 'center',
-                            x: -3,
-                            y: 12,
-                            formatter: function() {
-                                return Math.round(this.y) + ' €';
-                            }
-                        }
-            }]
-        });
-    });
-    
+                                        <% end %> ],
+                                        showInLegend: false,
+                                        color: '#980000',
+                                        dataLabels: {
+enabled: true,
+         color: 'white',
+         align: 'center',
+         x: -3,
+         y: 12,
+         formatter: function() {
+                 return Math.round(this.y) + ' €';
+         }
+                                        }
+        }]
+});
+});
+
 });
 
 </script>
@@ -85,18 +85,17 @@ $(function () {
 
 
         <% @colocs.each do |colocs| %>
-        <tr style="background-color:white;">
-                <td> <font color=black> <%= link_to colocs.nom, colocs %></font>
-                                <% if signed_in? and current_user.admin? %>
-                                        <%= button_to "supprimer", colocs, :method => :delete, :confirm => "Etes-vous certain&nbsp;?",:title => "Supprimer #{colocs.nom}" %>
-                                <% end %> </td>
-                        <td> <font color=black> <% if colocs.palm == 1 %>
-                                                        <%= "%0.2f" % colocs.ca %> € 
-                                                <% else %>
-                                                        <i> non accessible </i>
-                                                <% end %>   </font> </td>
-                        <td> <font color=black> <%= colocs.created_at.strftime("%d %b, %Y") %> </font> </td>
-                </tr>
+                                        <% if colocs.palm == 1 %>
+                <tr style="background-color:white;">
+                        <td> <font color=black> 
+                                                <%= link_to colocs.nom, colocs %></font>
+                                        <% if signed_in? and current_user.admin? %>
+                                                <%= button_to "supprimer", colocs, :method => :delete, :confirm => "Etes-vous certain&nbsp;?",:title => "Supprimer #{colocs.nom}" %>
+                                        <% end %> </td>
+                                <td> <font color=black> <%= "%0.2f" % colocs.ca %> € </font> </td>
+                                <td> <font color=black> <%= colocs.created_at.strftime("%d %b, %Y") %> </font> </td>
+                        </tr>
+                <% end %>
         <% end %>
 </table>
 
