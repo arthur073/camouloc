@@ -48,9 +48,10 @@ class UsersController < ApplicationController
 			redirect_to Coloc.find(@user.coloc_id)
 			flash[:success] = "Utilisateur enregistré !"
 		else
-			flash[:error] = "Cet email existe déjà"
 			@titre = "Inscription"
-			render 'new'
+                        #la colocation est la dernière colocation créée
+                        @coloc = Coloc.first(:order => 'created_at DESC')	
+                        render 'new'
 		end
 	end
 

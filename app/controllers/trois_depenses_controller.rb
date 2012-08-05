@@ -4,13 +4,12 @@ class TroisDepensesController < ApplicationController
 
         def new
                 @troisdepense = TroisDepense.new
-                @titre = "Nouvelle dépense pour " + current_user.nom
+                @titre = "Nouvelle dépense"
                 @colocataires = User.where(:coloc_id => current_user.coloc_id).all
         end
 
         def create
                 @troisdepense = TroisDepense.new(params[:trois_depense])
-                @troisdepense.user_id = current_user.id
                 # ajoute la somme dépensée au Chiffre d'Affaires
                 @colocation = Coloc.find(current_user.coloc_id)
                 @colocation.ca = @colocation.ca + @troisdepense.montant
@@ -22,9 +21,9 @@ class TroisDepensesController < ApplicationController
                         #envoie le mail de confirmation de la dépense
                         DepenseMailer.new_depense_email(@troisdepense).deliver
                         flash[:success] = "Dépense enregistrée!"
-                        redirect_to current_user
+                        redirect_to User.find(@troisdepense.user_id)
                 else
-                        @titre = "Nouvelle dépense pour " + current_user.nom
+                        @titre = "Nouvelle dépense"
                         render 'new'
                 end
         end

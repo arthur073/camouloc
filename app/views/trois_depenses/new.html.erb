@@ -3,6 +3,13 @@
 <%= form_for(@troisdepense) do |f| %>
         <%= render 'shared/error_messages', :object => f.object %>
         <div class="field">
+                <strong>  Qui a payé ? </strong><br>
+                <%= f.select :user_id, options_for_select([[ @colocataires[0].nom ,  @colocataires[0].id ], [ @colocataires[1].nom ,  @colocataires[1].id ], [ @colocataires[2].nom ,  @colocataires[2].id ]], [current_user.nom, current_user.id])%>
+        </div>
+
+
+
+        <div class="field">
                 <strong> Pour qui payez-vous ? </strong><br>
                 <%=f.check_box :destinataire_part %>  		
                 <%= f.label @colocataires[0].nom %><br>
