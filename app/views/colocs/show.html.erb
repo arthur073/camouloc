@@ -26,8 +26,8 @@
         <table class="tabbord">
                 <tr> <strong> Liste des membres de la colocation : </strong> <br>
                         <% @liste.each do |users| %>
-                                <tr>   <%= gravatar_for users, :size => 60 %> 
-                                        <font size ="4"> <%= liste_users(users) %> </font></tr> <br>
+                                <tr>  <td valign="middle"> <%= gravatar_for users, :size => 60 %> 
+                                                <font size ="4"> <%= liste_users(users) %> </font></tr> </td>
                         <% end %>
                 </tr>
         </table>
