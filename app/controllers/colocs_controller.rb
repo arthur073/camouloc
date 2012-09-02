@@ -12,7 +12,7 @@ class ColocsController < ApplicationController
         def index
                 @titre = "Palmarès des colocs"
                 @colocs = Coloc.order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 10)
-                @colocs2 = Coloc.order(:ca).limit(5)
+                @colocs2 = Coloc.order(:ca)
         end
 
         def new

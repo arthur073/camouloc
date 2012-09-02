@@ -17,7 +17,8 @@ text: 'Meilleures colocations'
 },
 xAxis: {
 categories: [
-<% @colocs2.reverse.each do |colocs| %>
+<% @colocs2.reverse.each do |colocs, i| %>
+         <% break if i == 5 %>
         <% if colocs.palm == 1 %>
                 '<%= link_to colocs.nom, colocs %>',
         <% end %>
@@ -44,7 +45,8 @@ pointPadding: 0.2,
              },
 series: [{
 name: 'Colocations',
-      data: [ <% @colocs2.reverse.each do |colocs| %>
+      data: [ <% @colocs2.reverse.each do |colocs, i| %>
+                         <% break if i == 5 %>
                       <% if colocs.palm == 1 %>
                               <%= colocs.ca %>,
                                         <% end %>
