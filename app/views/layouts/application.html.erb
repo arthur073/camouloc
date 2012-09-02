@@ -48,7 +48,7 @@
                  <% end %> 
                  <h1> <%= link_to "Top Colocs", colocs_path %> </h1>
                  <% @liste_coloc = Coloc.where(:palm => 1).order(:ca).reverse %>
-                 <% @liste_coloc.each do |colocs, i|%>
+                 <% @liste_coloc.first(3).each do |colocs, i|%>
                          <% break if i == 3 %>
                          <% if colocs.users.size > 1 %>
                                  <div align="left"> <%= link_to colocs.nom, colocs %>            
