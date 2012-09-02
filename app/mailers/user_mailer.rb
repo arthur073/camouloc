@@ -4,8 +4,8 @@ class UserMailer < ActionMailer::Base
 
 	def welcome_email(user)
 		@user = user
-		@url  = "mycoloc.herokuapp.com"
-		mail(:to => user.email, :subject => "Bienvenue sur MyColoc.")
+		@url  = "camouloc.herokuapp.com"
+		mail(:to => user.email, :subject => "Bienvenue sur Camouloc.")
 	end
 
 end
