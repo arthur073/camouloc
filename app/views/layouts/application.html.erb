@@ -22,7 +22,7 @@
                          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
                          })();
 
-                </script>
+</script>
          </head>
          <body>
                  <div class="container">
@@ -54,15 +54,16 @@
                                          (<%="%0.2f" % colocs.ca %> €) </div>
                          <% end %>
                  <% end %> 
-                 <p>
-                 </p>
-                 <a href="https://www.facebook.com/Camouloc" >
-                         <%= image_tag("facebook-logo.png", :alt => "Application Arthur", :class => "round", :size => "150x75") %>
-                 </a>
-                 </aside>
+
+                 <p> </p>
+                    </aside>
                  <article>
+                        
+            
                  <%= yield %>
                  </article>
+
+
                  </section>
                  <%= render 'layouts/footer' %>
          </div>
