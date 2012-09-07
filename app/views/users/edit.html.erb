@@ -1,4 +1,18 @@
 <h1> <%= @titre %> </h1>
+
+<script>
+	$("f").validate({
+		errorClass: "my-error-class",
+		validClass: "my-valid-class",
+		rules: {
+			password: {
+				required: true,
+				minlength: 6
+			}
+		}
+	});
+</script>
+
 <div>
 	<%= gravatar_for @user %>
 	<a href="http://gravatar.com/emails">changer</a>
@@ -12,19 +26,21 @@
 	</div>
 	<div class="field">
 		<%= f.label :email, "eMail" %><br />
-                <%= f.email_field :email %>
+		<%= f.email_field :email %>
 	</div>
-	<div class="field">
+
+	<div class="field" name="password">
 		<%= f.label :password, "Mot de passe" %><br />
-		<%= f.password_field :password %>
+		<%= f.password_field :password %> <i> (Obligatoire)  </i> 
 	</div>
 	<div class="field">
 		<%= f.label :password_confirmation, "Confirmation mot de passe" %><br />
-		<%= f.password_field :password_confirmation %>
+		<%= f.password_field :password_confirmation %><i> (Obligatoire)  </i>
 	</div>
 	<div class="actions">
 		<%= f.submit "Actualiser" %>
 	</div>
+
 
 <% end %>
 
