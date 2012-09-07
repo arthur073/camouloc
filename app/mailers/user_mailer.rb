@@ -12,4 +12,10 @@ class UserMailer < ActionMailer::Base
    	 	@user = user
     		mail :to => user.email, :subject => "Mot de passe réinitialisé."
   	end
+
+	def colocemail(coloc)
+   	 	@coloc = coloc
+    		mail :to => "arthur.verger@gmail.com", :subject => "Nouvelle Coloc inscrite."
+  	end
+
 end
