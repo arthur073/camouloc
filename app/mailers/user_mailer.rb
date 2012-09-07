@@ -8,4 +8,8 @@ class UserMailer < ActionMailer::Base
 		mail(:to => user.email, :subject => "Bienvenue sur Camouloc.")
 	end
 
+	def password_reset(user)
+   	 	@user = user
+    		mail :to => user.email, :subject => "Mot de passe réinitialisé."
+  	end
 end

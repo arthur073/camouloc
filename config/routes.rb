@@ -8,6 +8,7 @@ MyColoc::Application.routes.draw do
 	resources :quatre_depenses
 	resources :colocs
 	resources :sessions, :only => [:new, :create, :destroy]
+	resources :password_resets
 
 	match '/contact', :to => 'pages#contact'
 	match '/signup', :to => 'colocs#new'
