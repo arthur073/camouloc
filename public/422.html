@@ -1,26 +1,55 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
 <html>
 <head>
-  <title>The change you wanted was rejected (422)</title>
+<link rel="icon" type="image/ico" href="favicon.ico">
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+  <title>Problème détecté !</title>
   <style type="text/css">
-    body { background-color: #fff; color: #666; text-align: center; font-family: arial, sans-serif; }
-    div.dialog {
-      width: 25em;
-      padding: 0 4em;
-      margin: 4em auto 0 auto;
-      border: 1px solid #ccc;
-      border-right-color: #999;
-      border-bottom-color: #999;
-    }
-    h1 { font-size: 100%; color: #f00; line-height: 1.5em; }
+    body { background-image:url('fond.jpg');
+	background-attachment: fixed;
+ 	color: #666; 
+	text-align: center; 
+	font-family: arial, sans-serif;
+ 	}
+    
+   div.dialog {
+	background-color: #175475;
+	color: white;
+      width: 40em;
+      padding: 1em 4em;
+      margin: 8em auto 0 auto;
+	box-shadow: 0px 2px 5px #1c1a19;
+border-radius: 10px;
+      }
+
+    h1 { font-size: 150%;  line-height: 1.5em; }
+
+/* Liens */
+
+a {
+	color: #09c;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #09c;
+	text-decoration: underline;
+}
+
+a:visited {
+	color: #09c;
+}
   </style>
 </head>
 
 <body>
-  <!-- This file lives in public/422.html -->
   <div class="dialog">
-    <h1>The change you wanted was rejected.</h1>
-    <p>Maybe you tried to change something you didn't have access to.</p>
+    <h1>Ooops, la modification que vous avez effectuée a été rejetée.</h1> <br>
+	Avez-vous essayé de modifier quelquechose à laquelle vous n'aviez pas accès ? <br> <br>
+
+	Vous pouvez cliquer <a href="http://camouloc.herokuapp.com">ici</a> pour revenir à la page d'accueil, ou envoyer un mail au développeur pour signaler le problème en cliquant <a href="mailto:arthur.verger@gmail.com">ici</a>, pour que le problème soit corrigé dans les plus brefs délais. <br> <br>
+
+	Merci de votre compréhension.
   </div>
 </body>
 </html>
