@@ -3,63 +3,63 @@
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script type="text/javascript">
-        $(function () {
-    var chart;
-    $(document).ready(function() {
-        chart = new Highcharts.Chart({
-            chart: {
-                renderTo: 'container',
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false
-            },
-            title: {
-                text: 'Répartition du chiffre d\'affaires de la colocation'
-            },
-            subtitle: {
-                text: '<%= @coloc.nom %>',
-                x: -20
-            },
-            tooltip: {
-                formatter: function() {
-                    return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage) +' %';
-                }
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        color: '#000000',
-                        connectorColor: '#000000',
-                        formatter: function() {
-                            return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage) +' %';
-                        }
-                    }
-                }
-            },
-            series: [{
-                type: 'pie',
-                data: [
-                        <% if @nbrcoloc == 2 %>
-                                ['<%= @colocataires[0].nom %>',  <%= (@sumdep1 / @coloc.ca * 100) %>],
-                                ['<%= @colocataires[1].nom %>',   <%= (@sumdep2 / @coloc.ca * 100) %>]
-                        <% elsif @nbrcoloc == 3 %>
-                                ['<%= @colocataires[0].nom %>',   <%=  (@sumdep1 / @coloc.ca * 100) %>],
-                                ['<%= @colocataires[1].nom %>',   <%=  (@sumdep2 / @coloc.ca * 100) %>],
-                                ['<%= @colocataires[2].nom %>',   <%=  (@sumdep3 / @coloc.ca * 100) %>]
-                        <% elsif @nbrcoloc == 4 %>
-                                ['<%= @colocataires[0].nom %>',   <%= (@sumdep1 / @coloc.ca * 100) %>],
-                                ['<%= @colocataires[1].nom %>',   <%= (@sumdep2 / @coloc.ca * 100) %>],
-                                ['<%= @colocataires[2].nom %>',   <%= (@sumdep3 / @coloc.ca * 100) %>],
-                                ['<%= @colocataires[3].nom %>',   <%= (@sumdep4 / @coloc.ca * 100) %>]
-                        <% end %>
-                ],
-            }]
-        });
-    });
-    
+	$(function () {
+			var chart;
+			$(document).ready(function() {
+				chart = new Highcharts.Chart({
+chart: {
+renderTo: 'container',
+plotBackgroundColor: null,
+plotBorderWidth: null,
+plotShadow: false
+},
+title: {
+text: 'Répartition du chiffre d\'affaires de la colocation'
+},
+subtitle: {
+text: '<%= @coloc.nom %>',
+x: -20
+},
+tooltip: {
+formatter: function() {
+return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage) +' %';
+}
+},
+plotOptions: {
+pie: {
+allowPointSelect: true,
+			cursor: 'pointer',
+			dataLabels: {
+enabled: true,
+	   color: '#000000',
+	   connectorColor: '#000000',
+	   formatter: function() {
+		   return '<b>'+ this.point.name +'</b>: '+ Math.round(this.percentage) +' %';
+	   }
+			}
+     }
+		 },
+series: [{
+type: 'pie',
+	data: [
+		<% if @nbrcoloc == 2 %>
+			['<%= @colocataires[0].nom %>',  <%= (@sumdep1 / @coloc.ca * 100) %>],
+	['<%= @colocataires[1].nom %>',   <%= (@sumdep2 / @coloc.ca * 100) %>]
+	<% elsif @nbrcoloc == 3 %>
+		['<%= @colocataires[0].nom %>',   <%=  (@sumdep1 / @coloc.ca * 100) %>],
+	['<%= @colocataires[1].nom %>',   <%=  (@sumdep2 / @coloc.ca * 100) %>],
+	['<%= @colocataires[2].nom %>',   <%=  (@sumdep3 / @coloc.ca * 100) %>]
+	<% elsif @nbrcoloc == 4 %>
+		['<%= @colocataires[0].nom %>',   <%= (@sumdep1 / @coloc.ca * 100) %>],
+	['<%= @colocataires[1].nom %>',   <%= (@sumdep2 / @coloc.ca * 100) %>],
+	['<%= @colocataires[2].nom %>',   <%= (@sumdep3 / @coloc.ca * 100) %>],
+	['<%= @colocataires[3].nom %>',   <%= (@sumdep4 / @coloc.ca * 100) %>]
+	<% end %>
+	],
+	  }]
+});
+});
+
 });
 </script>
 
@@ -69,64 +69,154 @@
 <div style="height: 15px;"></div>
 
 <table class="tabbord">
-        <tr> 
-                <td> <strong> Résumé personnel :</strong> </td>
-        </tr>
-        <% @colocataires.each do |colocataires| %>
-                <tr>
-                        <td>  <%= link_to colocataires.nom, colocataires %> </td>
-                        <% if colocataires.tot < 0 %>
-                                <td> <font color=red> <strong> <%= "%0.2f" % colocataires.tot %> </strong> </font> </td>
-                        <% else %>
-                                <td> <strong> <%= "%0.2f" % colocataires.tot %> </strong> </td>
-                        <% end %>
-                </tr>
-        <% end %>
-
+	<tr> 
+		<td> <strong> Résumé personnel :</strong> </td>
+	</tr>
+	<% @colocataires.each do |colocataires| %>
+		<tr>
+			<td>  <%= link_to colocataires.nom, colocataires %> </td>
+			<% if colocataires.tot < 0 %>
+				<td> <font color=red> <strong> <%= "%0.2f" % colocataires.tot %> </strong> </font> </td>
+			<% else %>
+				<td> <strong> <%= "%0.2f" % colocataires.tot %> </strong> </td>
+			<% end %>
+		</tr>
+	<% end %>
 </table>
 
+<table class="tabbord">
+	<tr> 
+		<td> <strong> Mettre les comptes à jour :</strong> </td>
+	</tr>
+	<% if current_user.admin? %>
+	<tr>
+		<% @colocatairestries = @colocataires.sort { |a,b| a.tot <=> b.tot } %>
+		<% if @nbrcoloc == 2 %>
+			<td> 
+				<%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries.last.tot %> à <%= @colocatairestries.last.nom %>. 
+			</td> 
+		</tr>
+	<% end %>
+
+
+	<% if @nbrcoloc == 3 %>
+
+		<td> 
+			<%= @colocatairestries.first.nom %> doit
+
+			<% if @colocatairestries.last.tot.abs < @colocatairestries.first.tot.abs %>
+				<! le remboursement de first suffit pour last, first rembourse un autre>
+				<%= "%0.2f" % @colocatairestries.last.tot %> à <%= @colocatairestries.last.nom %>. 
+			</td> 
+		</tr>
+		<tr> 
+			<td> 
+				<%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %> à <%= @colocatairestries[1].nom %>. 
+			</td> 
+		</tr>
+
+	<% else %>
+		<! le remboursement de first ne suffit pas pour last, un autre doit participer>
+		<%= "%0.2f" % @colocatairestries.first.tot.abs  %> à <%= @colocatairestries.last.nom %>. 
+	</td> 
+</tr>
+<tr> 
+	<td> 
+		<%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %> à <%= @colocatairestries.last.nom %>. 
+	</td> 
+</tr>
+			<% end %>	
+
+		<% end %>
+
+
+		<% if @nbrcoloc == 4 %>
+			<td> 
+				
+
+				<% if @colocatairestries.last.tot.abs < @colocatairestries.first.tot.abs %>
+					<! le remboursement de first suffit pour last, first rembourse un autre>
+					<%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries.last.tot %> à <%= @colocatairestries.last.nom %>. </td></tr>
+					<tr> <td><%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %> à <%= @colocatairestries[2].nom %>. </td></tr>
+			
+					<% if @colocatairestries[2].tot.abs < @colocatairestries.first.tot.abs %>
+						<! Le remboursement de first suffit pour 2, first rembourse le dernier >
+						<tr><td><%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %> à <%= @colocatairestries[1].nom %>. </tr></td>
+
+					<% else %>
+						<! Le remboursement de first suffit pas pour 2, 1 rembourse 2 > 
+						<tr><td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %> à <%= @colocatairestries[2].nom %>. </td></tr>
+					<% end %>
+
+
+
+
+				<% else %>
+					<! le remboursement de first ne suffit pas pour last, 1 doit participer>
+					<%= @colocatairestries.first.nom %> doit	<%= "%0.2f" % @colocatairestries.first.tot.abs  %> à <%= @colocatairestries.last.nom %>. </td></tr>
+
+
+					<% if @colocatairestries.last.tot.abs - @colocatairestries.first.tot.abs < @colocatairestries[1].tot.abs %>
+						<! le remboursement de 1 suffit pour last, 1 rembourse 2>
+					<tr> <td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % (@colocatairestries.last.tot.abs - @colocatairestries.first.tot.abs) %> à <%= @colocatairestries.last.nom %>. </td></tr>
+						ha
+						<tr> <td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %> à <%= @colocatairestries[2].nom %>. </td></tr>
+
+					<%else%>
+						<! le remboursement de 1 suffit pas pour last, 2 rembourse last>
+						<tr> <td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %> à <%= @colocatairestries.last.nom %>. </td></tr>
+						ho
+						<tr> <td><%= @colocatairestries[2].nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %> à <%= @colocatairestries.last.nom %>. </td></tr>
+					<% end %>
+				<% end %>	
+
+			<% end %>
+		<% else %>
+			<tr> <td> En cours de test. </td> </tr>
+		<%end %>
+</table>
 
 <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="link">[Plus de détails]</a><span id="spoiler_id" style="display: none"><a onclick="document.getElementById('spoiler_id').style.display='none'; document.getElementById('show_id').style.display='';" class="link">[Moins de détails]</a><br>
 
 
-        <table class="tabbord">
+	<table class="tabbord">
 
-                <tr>
-                        <td><strong> Source </strong> </td>
-                        <% @colocataires.each do |colocataires| %>
-                                <td><strong> <%= colocataires.nom %></strong> </td>
-                        <% end %>
-                        <td><strong> Montant </strong></td>
-                        <td><strong> Raison </strong></td>
-                        <td><strong> Date </strong></td>
-                </strong>
-        </tr>
+		<tr>
+			<td><strong> Source </strong> </td>
+			<% @colocataires.each do |colocataires| %>
+				<td><strong> <%= colocataires.nom %></strong> </td>
+			<% end %>
+			<td><strong> Montant </strong></td>
+			<td><strong> Raison </strong></td>
+			<td><strong> Date </strong></td>
+		</strong>
+	</tr>
 
-        <% @colocataires.each do |colocataires| %>
-                <% if @nbrcoloc == 2 %>
-                        <% @dep = colocataires.depenses %>
-                <% elsif @nbrcoloc == 3 %>
-                        <% @dep = colocataires.trois_depenses %>
-                <% elsif @nbrcoloc == 4 %>
-                        <% @dep = colocataires.quatre_depenses %>
-                <% end %>
-                <% @dep.reverse.each do |depenses| %>
-                        <tr>
-                                <td>	<%= User.find(depenses.user_id).nom %> </td>
-                                <td>	<%= depenses.destinataire_part %>  </td>
-                                <td>	<%= depenses.destinataire_part2 %>  </td>
-                                <% if @nbrcoloc > 2 %>
-                                        <td>	<%= depenses.destinataire_part3 %>  </td>
-                                <% end %>
-                                <% if @nbrcoloc > 3 %>
-                                        <td>	<%= depenses.destinataire_part4 %>  </td>
-                                <% end %>
-                                <td>	<%= depenses.montant %> € </td>
-                                <td>	<%= depenses.raison %> </td>
-                                <td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
-                        </tr>
-                <% end %>
-        <% end %>
+	<% @colocataires.each do |colocataires| %>
+		<% if @nbrcoloc == 2 %>
+			<% @dep = colocataires.depenses %>
+		<% elsif @nbrcoloc == 3 %>
+			<% @dep = colocataires.trois_depenses %>
+		<% elsif @nbrcoloc == 4 %>
+			<% @dep = colocataires.quatre_depenses %>
+		<% end %>
+		<% @dep.reverse.each do |depenses| %>
+			<tr>
+				<td>	<%= User.find(depenses.user_id).nom %> </td>
+				<td>	<%= depenses.destinataire_part %>  </td>
+				<td>	<%= depenses.destinataire_part2 %>  </td>
+				<% if @nbrcoloc > 2 %>
+					<td>	<%= depenses.destinataire_part3 %>  </td>
+				<% end %>
+				<% if @nbrcoloc > 3 %>
+					<td>	<%= depenses.destinataire_part4 %>  </td>
+				<% end %>
+				<td>	<%= depenses.montant %> € </td>
+				<td>	<%= depenses.raison %> </td>
+				<td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
+			</tr>
+		<% end %>
+	<% end %>
 </table>
-        </span> </br> </br>
-        &larr; <%= link_to "Retour à la colocation", @coloc%>
+	  </span> </br> </br>
+	  &larr; <%= link_to "Retour à la colocation", @coloc%>
