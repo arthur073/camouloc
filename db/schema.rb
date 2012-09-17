@@ -11,63 +11,64 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120628135033) do
+ActiveRecord::Schema.define(:version => 20120917132455) do
 
-	create_table "colocs", :force => true do |t|
-		t.string   "nom"
-		t.datetime "created_at",         :null => false
-		t.datetime "updated_at",         :null => false
-		t.float    "ca"
-		t.integer  "palm"
-	end
+# Could not dump table "colocs" because of following StandardError
+#   Unknown type 'bool' for column 'palm'
 
+  create_table "depenses", :force => true do |t|
+    t.integer  "user_id"
+    t.float    "montant"
+    t.string   "raison"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "destinataire_part2"
+    t.integer  "destinataire_part"
+    t.integer  "nbr_users"
+  end
 
-	create_table "depenses", :force => true do |t|
-		t.integer  "user_id"
-		t.float    "montant"
-		t.string   "raison"
-		t.datetime "created_at",         :null => false
-		t.datetime "updated_at",         :null => false
-		t.integer  "destinataire_part2"
-		t.integer  "destinataire_part"
-		t.integer  "nbr_users"
-	end
+  create_table "messages", :force => true do |t|
+    t.string   "content"
+    t.integer  "coloc_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
-	create_table "quatre_depenses", :force => true do |t|
-		t.float    "montant"
-		t.string   "raison"
-		t.integer  "user_id"
-		t.datetime "created_at",         :null => false
-		t.datetime "updated_at",         :null => false
-		t.integer  "destinataire_part"
-		t.integer  "destinataire_part2"
-		t.integer  "destinataire_part3"
-		t.integer  "destinataire_part4"
-		t.integer  "nbr_users"
-	end
+  create_table "quatre_depenses", :force => true do |t|
+    t.float    "montant"
+    t.string   "raison"
+    t.integer  "user_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "destinataire_part"
+    t.integer  "destinataire_part2"
+    t.integer  "destinataire_part3"
+    t.integer  "destinataire_part4"
+    t.integer  "nbr_users"
+  end
 
-	create_table "trois_depenses", :force => true do |t|
-		t.float    "montant"
-		t.string   "raison"
-		t.integer  "user_id"
-		t.datetime "created_at",         :null => false
-		t.datetime "updated_at",         :null => false
-		t.integer  "destinataire_part"
-		t.integer  "destinataire_part2"
-		t.integer  "destinataire_part3"
-		t.integer  "nbr_users"
-	end
+  create_table "trois_depenses", :force => true do |t|
+    t.float    "montant"
+    t.string   "raison"
+    t.integer  "user_id"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "destinataire_part"
+    t.integer  "destinataire_part2"
+    t.integer  "destinataire_part3"
+    t.integer  "nbr_users"
+  end
 
-	create_table "users", :force => true do |t|
-		t.string   "nom"
-		t.string   "email"
-		t.datetime "created_at",                            :null => false
-		t.datetime "updated_at",                            :null => false
-		t.string   "encrypted_password"
-		t.string   "salt"
-		t.boolean  "admin",              :default => false
-		t.integer  "coloc_id"
-		t.float    "tot"
-	end
+  create_table "users", :force => true do |t|
+    t.string   "nom"
+    t.string   "email"
+    t.datetime "created_at",                            :null => false
+    t.datetime "updated_at",                            :null => false
+    t.string   "encrypted_password"
+    t.string   "salt"
+    t.boolean  "admin",              :default => false
+    t.integer  "coloc_id"
+    t.float    "tot"
+  end
 
 end
