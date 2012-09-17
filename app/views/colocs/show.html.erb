@@ -20,19 +20,35 @@
                 </td>
         </tr>
 </table>
+
+                <strong> Liste des membres de la colocation </strong> 
+                <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="link" style="display: none">[Voir]<br></a>
+                <span id="spoiler_id" style="display: ">
+                <a onclick="document.getElementById('spoiler_id').style.display='none'; document.getElementById('show_id').style.display='';" class="link">[Cacher]</a><br>
 <% if @coloc.users.size == 0 %>
         Pas de colocataire inscrit.
 <% else %>
         <table class="tabbord">
-                <tr> <strong> Liste des membres de la colocation : </strong> <br>
+                        <tr>
+                                <td> <strong> Avatar </strong> </td>
+                                <td> <strong> Nom </strong></td>
+                                <td> <strong> Email </strong></td>
+                        </tr>
                         <% @liste.each do |users| %>
-                                <tr>  <td valign="middle"> <%= gravatar_for users, :size => 60 %> 
-                                                <font size ="4"> <%= liste_users(users) %> </font></tr> </td>
+                                <tr>  <td> <%= gravatar_for users, :size => 60 %> </td>
+                                        <td>     <font size ="4" align="top"> <%= liste_users(users) %> </font></td> <td> <%= mail_to users.email %> </td></tr>
                         <% end %>
                 </tr>
         </table>
 <% end %>
+</span>
 <br>
+
+<div class="mur"> </div>
+
+
+
+
 <% if @coloc.users.size < 4 %>
         <% unless (@coloc.users.size == 2 and (@coloc.users[0].depenses.size != 0 or @coloc.users[1].depenses.size != 0)) or  
         (@coloc.users.size == 3 and (@coloc.users[0].trois_depenses.size != 0 or @coloc.users[1].trois_depenses.size != 0 or @coloc.users[2].trois_depenses.size != 0)) or
