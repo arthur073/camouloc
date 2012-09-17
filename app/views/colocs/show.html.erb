@@ -21,13 +21,14 @@
         </tr>
 </table>
 
-                <strong> Liste des membres de la colocation </strong> 
+               <% if @coloc.users.size == 0 %>
+        Pas de colocataire inscrit.
+<% else %> 
+        <strong> Liste des membres de la colocation </strong> 
                 <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="link" style="display: none">[Voir]<br></a>
                 <span id="spoiler_id" style="display: ">
                 <a onclick="document.getElementById('spoiler_id').style.display='none'; document.getElementById('show_id').style.display='';" class="link">[Cacher]</a><br>
-<% if @coloc.users.size == 0 %>
-        Pas de colocataire inscrit.
-<% else %>
+
         <table class="tabbord">
                         <tr>
                                 <td> <strong> Avatar </strong> </td>
@@ -55,9 +56,6 @@
         (@coloc.users.size == 4 and (@coloc.users[0].quatre_depenses.size != 0 or @coloc.users[1].quatre_depenses.size != 0 or @coloc.users[2].quatre_depenses.size != 0 or @coloc.users[3].quatre_depenses.size != 0)) %>
                 <%= nouveau_coloc? %>  <br>
         <% end %>
-<% else %>
-        Nombre maximum de colocataires atteint.<br>
-
 <% end %>
 
 
