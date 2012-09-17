@@ -86,9 +86,8 @@ type: 'pie',
 
 <table class="tabbord">
 	<tr> 
-		<td> <strong> Mettre les comptes à jour :</strong> </td>
+                <td> <strong> Mettre les comptes à jour </strong><i> (Version Beta) </i> </td> 
 	</tr>
-	<% if current_user.admin? %>
 	<tr>
 		<% @colocatairestries = @colocataires.sort { |a,b| a.tot <=> b.tot } %>
 		<% if @nbrcoloc == 2 %>
@@ -159,21 +158,15 @@ type: 'pie',
 					<% if @colocatairestries.last.tot.abs - @colocatairestries.first.tot.abs < @colocatairestries[1].tot.abs %>
 						<! le remboursement de 1 suffit pour last, 1 rembourse 2>
 					<tr> <td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % (@colocatairestries.last.tot.abs - @colocatairestries.first.tot.abs) %> à <%= @colocatairestries.last.nom %>. </td></tr>
-						ha
 						<tr> <td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %> à <%= @colocatairestries[2].nom %>. </td></tr>
 
 					<%else%>
 						<! le remboursement de 1 suffit pas pour last, 2 rembourse last>
 						<tr> <td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %> à <%= @colocatairestries.last.nom %>. </td></tr>
-						ho
 						<tr> <td><%= @colocatairestries[2].nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %> à <%= @colocatairestries.last.nom %>. </td></tr>
 					<% end %>
 				<% end %>	
-
 			<% end %>
-		<% else %>
-			<tr> <td> En cours de test. </td> </tr>
-		<%end %>
 </table>
 
 <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="link">[Plus de détails]</a><span id="spoiler_id" style="display: none"><a onclick="document.getElementById('spoiler_id').style.display='none'; document.getElementById('show_id').style.display='';" class="link">[Moins de détails]</a><br>
