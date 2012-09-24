@@ -18,4 +18,12 @@ class UserMailer < ActionMailer::Base
     		mail :to => "arthur.verger@gmail.com", :subject => "Nouvelle Coloc inscrite."
   	end
 
+        def messagemail(message,coloc)
+                @coloc = coloc
+		@url  = "camouloc.herokuapp.com"
+                @message = message
+                @dest = coloc.users
+                emails = @dest.collect(&:email).join(",")
+                mail(:to => emails,:subject => "Une colocation vous a contacté !")
+        end
 end

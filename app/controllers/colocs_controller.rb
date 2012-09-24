@@ -44,6 +44,14 @@ class ColocsController < ApplicationController
                 @colocataires = @coloc.users
                 @titre = "Tableau de bord"
 
+                if not signed_in?
+                        flash[:notice] = "Vous devez vous identifier pour accéder à cette page. "
+                        redirect_to login_path
+                else if  signed_in? and (current_user.coloc_id != @coloc.id or not current_user.admin?)
+                        flash[:notice] = "Cette page est confidentielle."
+                        redirect_to @coloc
+                end
+                end
                 #calcul des dettes :
                 if @nbrcoloc == 2
                         #pour le coloc 1 :

@@ -12,9 +12,11 @@ class MessagesController < ApplicationController
         def create
                 @message = Message.new(params[:message])
                 @message.source_id = current_user.id
+                @coloc = Coloc.find(@message.coloc_id)
                 if @message.save
                         #utiliser un mailer pour tous les colocs
-                        redirect_to Coloc.find(@message.coloc_id)
+                        UserMailer.messagemail(@message,@coloc).deliver
+                        redirect_to @coloc
                 else 
                         @coloc = Coloc.find(@message.coloc_id)
                         render 'new'

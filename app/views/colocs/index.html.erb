@@ -92,7 +92,7 @@ enabled: true,
                         <td> <font color=black> 
                                                 <%= link_to colocs.nom, colocs %></font>
                                         <% if signed_in? and current_user.admin? %>
-                                                <%= button_to "supprimer", colocs, :method => :delete, :confirm => "Etes-vous certain&nbsp;?",:title => "Supprimer #{colocs.nom}" %>
+                                                <span onclick="return confirm('Etes-vous sûr de vouloir supprimer la colocation ?')"> <%= button_to "supprimer", colocs, :method => :delete, :confirm => "Etes-vous certain&nbsp;?",:title => "Supprimer #{colocs.nom}" %> </span>
                                         <% end %> </td>
                                 <td> <font color=black> <%= "%0.2f" % colocs.ca %> € </font> </td>
                                 <td> <font color=black> <%= colocs.created_at.strftime("%d %b, %Y") %> </font> </td>
