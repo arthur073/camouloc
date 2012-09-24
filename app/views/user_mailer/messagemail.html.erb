@@ -6,7 +6,7 @@
         <body>
                 <h1>Nouveau message de <%= User.find(@message.source_id).nom%>, </h1>
                 <p>
-                L'utilisateur <%= User.find(@message.source_id).nom%> membre de <%= Coloc.find(User.find(@message.source_id).coloc_id).nom %> vous a laissé un message. Voici son contenu : 
+                L'utilisateur <strong> <%= User.find(@message.source_id).nom%> </strong> membre de <strong> <%= Coloc.find(User.find(@message.source_id).coloc_id).nom %> </strong> vous a laissé un message. Voici son contenu : 
                 </p>
                 <p> <i>"<%= @message.content %>"</i> </p>
                 <p> Vous pouvez lui répondre en vous connectant sur Camouloc :  <%= @url %>.
