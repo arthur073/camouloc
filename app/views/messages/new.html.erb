@@ -1,0 +1,17 @@
+<%= form_for(@message) do |f| %>
+	<%= render 'shared/error_messages', :object => f.object %>
+         <div class="field">
+                <%= f.label "Colocation" %><br>
+                <%= f.select :coloc_id, options_for_select([[@coloc.nom, @coloc.id]]) %>
+        </div>
+
+        <div class="field">
+                <%= f.label "Quoi de neuf ?" %><br>
+                <%= f.text_area(:content, :class => 'textarea') %>
+        </div>
+        
+        <div class="actions">
+                <%= f.submit "Enregistrer" %>
+        </div>
+
+<% end %>
