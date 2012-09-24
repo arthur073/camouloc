@@ -92,7 +92,7 @@ type: 'pie',
 		<% @colocatairestries = @colocataires.sort { |a,b| a.tot <=> b.tot } %>
 		<% if @nbrcoloc == 2 %>
 			<td> 
-				<%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries.last.tot %> à <%= @colocatairestries.last.nom %>. 
+				<%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries.last.tot %>€ à <%= @colocatairestries.last.nom %>. 
 			</td> 
 		</tr>
 	<% end %>
@@ -105,23 +105,23 @@ type: 'pie',
 
 			<% if @colocatairestries.last.tot.abs < @colocatairestries.first.tot.abs %>
 				<! le remboursement de first suffit pour last, first rembourse un autre>
-				<%= "%0.2f" % @colocatairestries.last.tot %> à <%= @colocatairestries.last.nom %>. 
+				<%= "%0.2f" % @colocatairestries.last.tot %>€ à <%= @colocatairestries.last.nom %>. 
 			</td> 
 		</tr>
 		<tr> 
 			<td> 
-				<%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %> à <%= @colocatairestries[1].nom %>. 
+				<%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %>€ à <%= @colocatairestries[1].nom %>. 
 			</td> 
 		</tr>
 
 	<% else %>
 		<! le remboursement de first ne suffit pas pour last, un autre doit participer>
-		<%= "%0.2f" % @colocatairestries.first.tot.abs  %> à <%= @colocatairestries.last.nom %>. 
+		<%= "%0.2f" % @colocatairestries.first.tot.abs  %>€ à <%= @colocatairestries.last.nom %>. 
 	</td> 
 </tr>
 <tr> 
 	<td> 
-		<%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %> à <%= @colocatairestries.last.nom %>. 
+		<%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %>€ à <%= @colocatairestries.last.nom %>. 
 	</td> 
 </tr>
 			<% end %>	
@@ -135,16 +135,16 @@ type: 'pie',
 
 				<% if @colocatairestries.last.tot.abs < @colocatairestries.first.tot.abs %>
 					<! le remboursement de first suffit pour last, first rembourse un autre>
-					<%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries.last.tot %> à <%= @colocatairestries.last.nom %>. </td></tr>
-					<tr> <td><%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %> à <%= @colocatairestries[2].nom %>. </td></tr>
+					<%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries.last.tot %>€ à <%= @colocatairestries.last.nom %>. </td></tr>
+					<tr> <td><%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %>€ à <%= @colocatairestries[2].nom %>. </td></tr>
 			
 					<% if @colocatairestries[2].tot.abs < @colocatairestries.first.tot.abs %>
 						<! Le remboursement de first suffit pour 2, first rembourse le dernier >
-						<tr><td><%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %> à <%= @colocatairestries[1].nom %>. </tr></td>
+						<tr><td><%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %>€ à <%= @colocatairestries[1].nom %>. </tr></td>
 
 					<% else %>
 						<! Le remboursement de first suffit pas pour 2, 1 rembourse 2 > 
-						<tr><td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %> à <%= @colocatairestries[2].nom %>. </td></tr>
+						<tr><td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %>€ à <%= @colocatairestries[2].nom %>. </td></tr>
 					<% end %>
 
 
@@ -152,18 +152,18 @@ type: 'pie',
 
 				<% else %>
 					<! le remboursement de first ne suffit pas pour last, 1 doit participer>
-					<%= @colocatairestries.first.nom %> doit	<%= "%0.2f" % @colocatairestries.first.tot.abs  %> à <%= @colocatairestries.last.nom %>. </td></tr>
+					<%= @colocatairestries.first.nom %> doit	<%= "%0.2f" % @colocatairestries.first.tot.abs  %>€ à <%= @colocatairestries.last.nom %>. </td></tr>
 
 
 					<% if @colocatairestries.last.tot.abs - @colocatairestries.first.tot.abs < @colocatairestries[1].tot.abs %>
 						<! le remboursement de 1 suffit pour last, 1 rembourse 2>
-					<tr> <td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % (@colocatairestries.last.tot.abs - @colocatairestries.first.tot.abs) %> à <%= @colocatairestries.last.nom %>. </td></tr>
-						<tr> <td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %> à <%= @colocatairestries[2].nom %>. </td></tr>
+					<tr> <td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % (@colocatairestries.last.tot.abs - @colocatairestries.first.tot.abs) %>€ à <%= @colocatairestries.last.nom %>. </td></tr>
+						<tr> <td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %>€ à <%= @colocatairestries[2].nom %>. </td></tr>
 
 					<%else%>
 						<! le remboursement de 1 suffit pas pour last, 2 rembourse last>
-						<tr> <td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %> à <%= @colocatairestries.last.nom %>. </td></tr>
-						<tr> <td><%= @colocatairestries[2].nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %> à <%= @colocatairestries.last.nom %>. </td></tr>
+						<tr> <td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %>€ à <%= @colocatairestries.last.nom %>. </td></tr>
+						<tr> <td><%= @colocatairestries[2].nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %>€ à <%= @colocatairestries.last.nom %>. </td></tr>
 					<% end %>
 				<% end %>	
 			<% end %>
