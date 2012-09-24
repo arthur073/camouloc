@@ -7,6 +7,8 @@ class ColocsController < ApplicationController
                 @coloc = Coloc.find(params[:id])
                 @titre = @coloc.nom
                 @liste = @coloc.users.order(:nom) 
+                @messages = @coloc.messages.order(:created_at).paginate(:page => params[:page], :per_page => 6)
+                @param1 = params[:param1] # "value1"
         end
 
         def index

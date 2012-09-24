@@ -1,12 +1,12 @@
 # -*- encoding : utf-8 -*-
 MyColoc::Application.routes.draw do
 
-
 	resources :users
 	resources :depenses
 	resources :trois_depenses
 	resources :quatre_depenses
 	resources :colocs
+	resources :messages
 	resources :sessions, :only => [:new, :create, :destroy]
 	resources :password_resets
 

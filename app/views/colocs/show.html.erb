@@ -10,26 +10,26 @@
                         <strong>Colocataires</strong> <%= @coloc.users.count %>/4<br>
                         <strong>Chiffre d'Affaires</strong> <%= "%0.2f" % @coloc.ca %> € <br>
                         <strong>Visible ?</strong> 
-                                <% if @coloc.palm == 1 %> 
-                                        oui 
-                                <% else %>
-                                        non
-                                <% end %>
-                                <br>
+                        <% if @coloc.palm == 1 %> 
+                                oui 
+                        <% else %>
+                                non
+                        <% end %>
+                        <br>
                         <strong>Coloc créée le </strong>  <%= @coloc.created_at.strftime("%d %b. %Y") %> <br>
                 </td>
         </tr>
 </table>
 
-               <% if @coloc.users.size == 0 %>
+<% if @coloc.users.size == 0 %>
         Pas de colocataire inscrit.
 <% else %> 
         <strong> Liste des membres de la colocation </strong> 
-                <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="link" style="display: none">[Voir]<br></a>
-                <span id="spoiler_id" style="display: ">
+        <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="link">[Voir]<br></a>
+        <span id="spoiler_id" style="display: none">
                 <a onclick="document.getElementById('spoiler_id').style.display='none'; document.getElementById('show_id').style.display='';" class="link">[Cacher]</a><br>
 
-        <table class="tabbord">
+                <table class="tabbord">
                         <tr>
                                 <td> <strong> Avatar </strong> </td>
                                 <td> <strong> Nom </strong></td>
@@ -44,18 +44,34 @@
 <% end %>
 </span>
 <br>
+<table class="microposts">
 
-<div class="mur"> </div>
+        <% @messages.each do |message| %>
+                <tr>
+                        <td class="micropost">
+                                <span class="content"><strong> <%= message.content %></strong></span>
+                                <span class="timestamp">
+                                        Posté il y a <%= time_ago_in_words(message.created_at) %> par <%= link_to User.find(message.source_id).nom,  User.find(message.source_id)%> membre de <%= link_to Coloc.find(User.find(message.source_id).coloc_id).nom,  Coloc.find(User.find(message.source_id).coloc_id)%>. 
+        <% if signed_in? and (current_user.admin? or current_user.id == message.source_id or current_user.coloc_id == @coloc.id) %>
+                                <span onclick="return confirm('Etes-vous sûr de vouloir supprimer le message ?')"> <%= button_to "Suppr", message, :method => :delete  %> </span>
+                        <% end  %>
 
+                                </span>
+                        </td> 
+                                        </tr>
+        <% end %>
 
+</table>
+        <%= will_paginate @messages %>
+        <%= link_to "Poster un message", new_message_path(:coloc_id => @coloc.id), :class => "signup_button3 round" %> <br>
 
 
 <% if @coloc.users.size < 4 %>
         <% unless (@coloc.users.size == 2 and (@coloc.users[0].depenses.size != 0 or @coloc.users[1].depenses.size != 0)) or  
         (@coloc.users.size == 3 and (@coloc.users[0].trois_depenses.size != 0 or @coloc.users[1].trois_depenses.size != 0 or @coloc.users[2].trois_depenses.size != 0)) or
         (@coloc.users.size == 4 and (@coloc.users[0].quatre_depenses.size != 0 or @coloc.users[1].quatre_depenses.size != 0 or @coloc.users[2].quatre_depenses.size != 0 or @coloc.users[3].quatre_depenses.size != 0)) %>
-                <%= nouveau_coloc? %>  <br>
-        <% end %>
+        <%= nouveau_coloc? %>  <br>
+<% end %>
 <% end %>
 
 

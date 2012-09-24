@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120917132455) do
+ActiveRecord::Schema.define(:version => 20120924134114) do
 
 # Could not dump table "colocs" because of following StandardError
 #   Unknown type 'bool' for column 'palm'
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20120917132455) do
     t.integer  "coloc_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.integer  "source_id"
   end
 
   create_table "quatre_depenses", :force => true do |t|
