@@ -58,7 +58,7 @@
 
                          </br> </br>
                 <h1> Les Chiffres </h1>
-                Somme gérée : <strong><%= "%0.0f" % Coloc.where(:palm => 1).sum(:ca) %> €. </strong> <br>
+                Somme gérée : <strong><%= "%0.0f" % Coloc.sum(:ca) %> €. </strong> <br>
                 <strong> <%= User.count %> </strong> utilisateurs, <strong> <%= Coloc.count %> </strong> colocations. <br>
 
                 </aside>
