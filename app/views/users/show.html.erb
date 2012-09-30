@@ -42,7 +42,7 @@
                                                         <td>	<%= depenses.montant %> € </td>
                                                         <td>	<%= depenses.raison %> </td>
                                                         <td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
-                                                        <% if signed_in? and current_user.id == @user.id %>
+                                                        <% if signed_in? and (current_user.id == @user.id or current_user.admin?) %>
                                                                 <td onclick="return confirm('Etes-vous sûr de vouloir supprimer la dépense ?')"> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
                                                         <% end %>
                                                 </tr>
