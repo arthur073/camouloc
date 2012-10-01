@@ -16,4 +16,8 @@ class PagesController < ApplicationController
 		@titre = "Changelog"
 	end
 
+	def plandusite
+		@titre = "Plan du Site"
+	end
+
 end

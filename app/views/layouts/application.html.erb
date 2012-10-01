@@ -22,9 +22,17 @@
                          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
                          })();
 
-                 </script>
+</script>
          </head>
          <body>
+                 <div id="fb-root"></div>
+                 <script>(function(d, s, id) {
+                         var js, fjs = d.getElementsByTagName(s)[0];
+                         if (d.getElementById(id)) return;
+                         js = d.createElement(s); js.id = id;
+                         js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+                         fjs.parentNode.insertBefore(js, fjs);
+                         }(document, 'script', 'facebook-jssdk'));</script>
                  <div class="container">
                          <%= render 'layouts/header' %>
                          <section class="round">
@@ -60,7 +68,12 @@
                  <h1> Les Chiffres </h1>
                  Somme gérée : <strong><%= "%0.0f" % Coloc.sum(:ca) %> €. </strong> <br>
                  <strong> <%= User.count %> </strong> utilisateurs, <strong> <%= Coloc.count %> </strong> colocations. <br>
+                 <br>
 
+                 <h1> Réseaux </h1>
+                 <div class="fb-like" data-href="https://www.facebook.com/Camouloc" data-send="false" data-layout="button_count" data-width="600" data-show-faces="true" data-font="arial"></div> <br>
+      <a href="https://twitter.com/Camouloc" class="twitter-follow-button" data-show-count="true">Follow @Camouloc</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
                  </aside>
                  <article>
 

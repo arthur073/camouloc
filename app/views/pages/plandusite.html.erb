@@ -1,0 +1,14 @@
+<h1> <%= @titre %> </h1>
+
+Les pages principales du site sont listées ici : <br>
+
+<br>
+<ul>
+        <li><%= link_to "Accueil", root_path %> </li>
+        <li><%= link_to "Colocations", colocs_path %></li>
+        <li><%= link_to "Utilisateurs", users_path %></li>
+        <li><%= link_to "S'identifier", login_path %></li>
+        <li><%= link_to "Changelog", changelog_path %></li>
+        <li><%= link_to "Contact", contact_path %></li>
+</ul>
+
