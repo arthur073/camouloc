@@ -457,6 +457,22 @@ body {
 	border-top:1px solid #000;
 	text-shadow:none;
 }
+.caption_big {
+	z-index:500;
+	position:absolute;
+	bottom:-35px;
+	left:0;
+	height:40px;
+	padding:5px 20px 0 20px;
+	background:#000;
+	background:rgba(0,0,0,.5);
+	width:540px;
+	font-size:1.3em;
+	line-height:1.33;
+	color:#fff;
+	border-top:1px solid #000;
+	text-shadow:none;
+}
 
 /*
 	Footer
@@ -487,8 +503,27 @@ body {
 
 }
 
+.slide_mod_black {
+	background-color:black;
+	color:black;
+	font-size:160%;
+	text-align:center;
+	font:Helvetica, Arial, sans-serif;
+	text-shadow:0 1px 0 rgba(255,255,255,.8);
+	-webkit-font-smoothing: subpixel-antialiased;
 
-.slide, .slide_mod {
+}
+.slide_mod_black_right {
+	background-color:black;
+	color:black;
+	font-size:160%;
+	text-align:right;
+	font:Helvetica, Arial, sans-serif;
+	text-shadow:0 1px 0 rgba(255,255,255,.8);
+	-webkit-font-smoothing: subpixel-antialiased;
+
+}
+.slide, .slide_mod, .slide_mod_black {
 	vertical-align: top;
 }
 
