@@ -3,7 +3,7 @@ module ColocHelper
 
         def nouveau_coloc?
                 if signed_in? and  (current_user.coloc_id == @coloc.id or current_user.admin?) or @coloc.users.size == 0
-                        link_to "Inscrire un nouveau colocataire ?", new_user_path(:coloc_id => @coloc[:id]) 
+                        link_to "Inscrire un nouveau colocataire ?", new_user_path(:coloc_id => @coloc.id) 
                 end
         end
 

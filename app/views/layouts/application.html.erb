@@ -22,7 +22,7 @@
                          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
                          })();
 
-</script>
+                 </script>
          </head>
          <body>
                  <div class="container">
@@ -56,15 +56,15 @@
                          <% end %>
                  <% end %> 
 
-                         </br> </br>
-                <h1> Les Chiffres </h1>
-                Somme gérée : <strong><%= "%0.0f" % Coloc.sum(:ca) %> €. </strong> <br>
-                <strong> <%= User.count %> </strong> utilisateurs, <strong> <%= Coloc.count %> </strong> colocations. <br>
+                 </br> </br>
+                 <h1> Les Chiffres </h1>
+                 Somme gérée : <strong><%= "%0.0f" % Coloc.sum(:ca) %> €. </strong> <br>
+                 <strong> <%= User.count %> </strong> utilisateurs, <strong> <%= Coloc.count %> </strong> colocations. <br>
 
-                </aside>
+                 </aside>
                  <article>
-                        
-            
+
+
                  <%= yield %>
                  </article>
 
