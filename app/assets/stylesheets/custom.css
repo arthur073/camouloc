@@ -96,6 +96,7 @@ section h1 {
 a {
 	color: #09c;
 	text-decoration: none;
+        cursor:pointer;
 }
 
 a:hover {
