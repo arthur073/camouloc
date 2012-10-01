@@ -11,11 +11,11 @@
                         <strong>Chiffre d'Affaires</strong> <%= "%0.2f" % @coloc.ca %> € <br>
                         <strong>Visible ?</strong> 
                         <% if @coloc.palm == 1 %> 
-                                oui 
+                                oui <br> 
+                                <strong>Classement</strong> <%= @colocs.reverse.index(@coloc) + 1 %> <br>
                         <% else %>
-                                non
+                                non <br>
                         <% end %>
-                        <br>
                         <strong>Coloc créée le </strong>  <%= @coloc.created_at.strftime("%d %b. %Y") %> <br>
                 </td>
         </tr>

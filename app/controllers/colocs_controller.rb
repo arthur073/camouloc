@@ -9,6 +9,7 @@ class ColocsController < ApplicationController
                 @liste = @coloc.users.order(:nom) 
                 @messages = @coloc.messages.order(:created_at).paginate(:page => params[:page], :per_page => 6)
                 @param1 = params[:param1] # "value1"
+                @colocs = Coloc.where(:palm=>1).order(:ca)
         end
 
         def index
