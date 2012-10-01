@@ -86,10 +86,10 @@ enabled: true,
         </tr>
 
 
-        <% @colocs.each do |colocs| %>
+        <% @colocs.each_with_index do |colocs, index| %>
                                         <% if colocs.palm == 1 %>
                 <tr style="background-color:white;">
-                        <td> <font color=black> 
+                        <td> <font color=black> <%= index %>
                                                 <%= link_to colocs.nom, colocs %></font>
                                         <% if signed_in? and current_user.admin? %>
                                                 <span onclick="return confirm('Etes-vous sûr de vouloir supprimer la colocation ?')"> <%= button_to "supprimer", colocs, :method => :delete, :confirm => "Etes-vous certain&nbsp;?",:title => "Supprimer #{colocs.nom}" %> </span>
