@@ -585,8 +585,9 @@ div.user_info span.microposts {
   font-size: 80%;
 }
 
-/* bulles */
-#bubulle {
-	background-color: #fafaff;
-	border: 1px solid #aaf;
+/* ul colocs */
+
+ul.colocs {
+        font-size:110%;
+        padding-left:3em;
 }

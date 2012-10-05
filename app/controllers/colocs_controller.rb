@@ -299,6 +299,10 @@ class ColocsController < ApplicationController
                 end
         end
 
+        def list
+                @titre = "Toutes les Colocations"
+                @colocs = Coloc.paginate(:page => params[:page], :per_page => 9)
+        end
 
         private
 

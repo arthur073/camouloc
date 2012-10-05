@@ -1,0 +1,14 @@
+<h1> <%= @titre %> <%= link_to "=> Utilisateurs", users_path %> </h1>
+
+
+<%= will_paginate %>
+<ul class="colocs">
+        <% @colocs.each do |coloc| %>
+                <li>  <%= link_to coloc.nom, coloc %> <i> (<%= coloc.users.count %> coloc(s)) </i></li>
+                <% if signed_in? and (current_user.id == @user.id or current_user.admin?) %>
+                        <li onclick="return confirm('Etes-vous sûr de vouloir supprimer la colocation ?')"> <%= button_to "Suppr", coloc, :method => :delete  %> </li>
+                <% end %>
+        <% end %>
+</ul>
+
+<%= will_paginate %>

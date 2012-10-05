@@ -71,13 +71,17 @@
                  <br>
 
                  <h1> Réseaux </h1>
-                 <div class="fb-like" data-href="https://www.facebook.com/Camouloc" data-send="false" data-layout="button_count" data-width="600" data-show-faces="true" data-font="arial"></div> <br>
+                 <div class="fb-like" data-href="https://www.facebook.com/Camouloc" data-send="true" data-layout="button_count" data-width="600" data-show-faces="true" data-font="arial"></div> <br>
       <a href="https://twitter.com/Camouloc" class="twitter-follow-button" data-show-count="false">Follow @Camouloc</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+                 <% if signed_in? and current_user.admin? %>
+                         <h1> Admin </h1>
+                         <%= mail_to User.all.map(&:email), "Mail Général", :subject => "[CAMOULOC] ??" %>
+                 <% end %>
+
                  </aside>
                  <article>
-
-
                  <%= yield %>
                  </article>
 
