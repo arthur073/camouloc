@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120924134114) do
+ActiveRecord::Schema.define(:version => 20121003153742) do
 
 # Could not dump table "colocs" because of following StandardError
 #   Unknown type 'bool' for column 'palm'
@@ -20,11 +20,12 @@ ActiveRecord::Schema.define(:version => 20120924134114) do
     t.integer  "user_id"
     t.float    "montant"
     t.string   "raison"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "destinataire_part2"
     t.integer  "destinataire_part"
     t.integer  "nbr_users"
+    t.integer  "auto",               :default => 0
   end
 
   create_table "messages", :force => true do |t|
@@ -39,25 +40,27 @@ ActiveRecord::Schema.define(:version => 20120924134114) do
     t.float    "montant"
     t.string   "raison"
     t.integer  "user_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "destinataire_part"
     t.integer  "destinataire_part2"
     t.integer  "destinataire_part3"
     t.integer  "destinataire_part4"
     t.integer  "nbr_users"
+    t.integer  "auto",               :default => 0
   end
 
   create_table "trois_depenses", :force => true do |t|
     t.float    "montant"
     t.string   "raison"
     t.integer  "user_id"
-    t.datetime "created_at",         :null => false
-    t.datetime "updated_at",         :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "destinataire_part"
     t.integer  "destinataire_part2"
     t.integer  "destinataire_part3"
     t.integer  "nbr_users"
+    t.integer  "auto",               :default => 0
   end
 
   create_table "users", :force => true do |t|

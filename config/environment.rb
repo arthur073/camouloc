@@ -8,3 +8,4 @@ MyColoc::Application.initialize!
 
 #enlever depreciation warnings
 ActiveSupport::Deprecation.silenced = true
+

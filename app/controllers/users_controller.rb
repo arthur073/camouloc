@@ -16,13 +16,13 @@ class UsersController < ApplicationController
                 @coloc = Coloc.find(@user.coloc_id)
                 @colocataires = @coloc.users.all
                 if @colocataires.size == 2 
-                        @liste1 = @user.depenses.all
+                        @liste1 = @user.depenses.where(:auto => 0).all
                         @nbrdep = @liste1.size
                 elsif  @colocataires.size == 3 
-                        @liste2 = @user.trois_depenses.all
+                        @liste2 = @user.trois_depenses.where(:auto => 0).all
                         @nbrdep = @liste2.size
                 elsif  @colocataires.size == 4
-                        @liste3 = @user.quatre_depenses.all
+                        @liste3 = @user.quatre_depenses.where(:auto => 0).all
                         @nbrdep = @liste3.size
                 else
                         @nbrdep = 0

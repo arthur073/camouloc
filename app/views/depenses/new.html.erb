@@ -1,30 +1,43 @@
 <h1> <%= @titre %> (II/II)</h1>
 
 <%= form_for(@depense) do |f| %>
-	<%= render 'shared/error_messages', :object => f.object %>
+        <%= render 'shared/error_messages', :object => f.object %>
+
+        <% if signed_in? and current_user.admin? %>
+                <div class="field">
+                        <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="link">Cliquez ici pour créer une dépense mensuelle. </a>       
+                        <span id="spoiler_id" style="display: none">
+                                <strong>  La dépense est  </strong>
+                                <%= f.select :auto, options_for_select([[ "Simple" ,  0 ], ["Mensuelle", 1 ]]) %>
+                                <i>(Les dépenses mensuelles sont ajoutées tous les 1er du mois.)</i>
+                        </span>
+                </div>
+        <% end %>
+
+
         <div class="field">
                 <strong>  Qui a payé ? </strong><br>
                 <%= f.select :user_id, options_for_select([[ @colocataires[0].nom ,  @colocataires[0].id ], [ @colocataires[1].nom ,  @colocataires[1].id ]], [current_user.nom, current_user.id]) %>
-	</div>
+        </div>
 
-	<div class="field">
+        <div class="field">
                 <strong> Pour qui payez-vous ? </strong><br>
                 <%=f.check_box :destinataire_part %>  		
                 <%= f.label @colocataires[0].nom %><br>
                 <%=f.check_box :destinataire_part2 %> 
                 <%= f.label @colocataires[1].nom %><br>
-	</div>
+        </div>
 
-	<div class="field">
-		<%= f.label "Quel est le montant de la dépense ?" %><br>
+        <div class="field">
+                <%= f.label "Quel est le montant de la dépense ?" %><br>
                 <i> Pour les nombres décimaux, utiliser "." et non "," </i> <br>
-		<%= f.text_field :montant %>
-	</div>
-	<div class="field">
-		<%= f.label "Quelle est la raison de la dépense ?" %><br>
-		<%= f.text_field :raison %>
-	</div><div class="actions">
-		<%= f.submit "Enregistrer" %>
-	</div>
+                <%= f.text_field :montant %>
+        </div>
+        <div class="field">
+                <%= f.label "Quelle est la raison de la dépense ?" %><br>
+                <%= f.text_field :raison %>
+                </div><div class="actions">
+                <%= f.submit "Enregistrer" %>
+        </div>
 <% end %>
 

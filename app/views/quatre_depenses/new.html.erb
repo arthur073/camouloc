@@ -3,6 +3,19 @@
 
 <%= form_for(@quatredepense) do |f| %>
         <%= render 'shared/error_messages', :object => f.object %>
+
+        <! à enlever ! >
+        <% if signed_in? and current_user.admin? %>
+                <div class="field">
+                        <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="link">Cliquez ici pour créer une dépense mensuelle. </a>       
+                        <span id="spoiler_id" style="display: none">
+                                <strong>  La dépense est  </strong>
+                                <%= f.select :auto, options_for_select([[ "Simple" ,  0 ], ["Mensuelle", 1 ]]) %>
+                                <i>(Les dépenses mensuelles sont ajoutées tous les 1er du mois.)</i>
+                        </span>
+                </div>
+        <% end %>
+
         <div class="field">
                 <strong>  Qui a payé ? </strong><br>
                 <%= f.select :user_id, options_for_select([[ @colocataires[0].nom ,  @colocataires[0].id ], [ @colocataires[1].nom ,  @colocataires[1].id ], [ @colocataires[2].nom ,  @colocataires[2].id ], [ @colocataires[3].nom ,  @colocataires[3].id ]], [current_user.nom, current_user.id])%>

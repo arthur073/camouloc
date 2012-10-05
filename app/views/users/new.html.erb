@@ -11,9 +11,13 @@
 		<%= f.label :email %><br />
                 <%= f.email_field :email %>
 	</div>
-	<div class="field">
+	<div class="field" style="display:none">
 		<%= f.label :coloc_id %><br />
                 <%= f.select :coloc_id, options_for_select([[ @coloc.nom ,  @coloc.id ]]) %>
+	</div>
+
+	<div class="field">
+                <strong>Colocation : </strong><%= @coloc.nom %> 
 	</div>
 
 	<div class="field">
