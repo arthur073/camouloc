@@ -12,25 +12,18 @@ end
 
 
 
-task :assign_auto => :environment do
-        desc "Initialise le champ auto des depenses a 0"
-        @depenses = Depense.all
-        @depenses2 = TroisDepense.all
-        @depenses3 = QuatreDepense.all
+task :unused_colocs => :environment do
+        desc "Donne le nombre de colocs non utilisees"
+        @colocs = Coloc.all
+        @nbrcolocs = 0
+        @colocs.each do |col|
+                if (col.users.count == 0)
+                        @nbrcolocs = @nbrcolocs + 1
+                end
+        end
 
-        @depenses.each do |dep|
-                dep.auto = 0
-                dep.save
-        end
-        @depenses2.each do |dep|
-                dep.auto = 0
-                dep.save
-        end
-        @depenses3.each do |dep|
-                dep.auto = 0
-                dep.save
-        end
-        puts "Depenses auto mises a zero" 
+        puts @nbrcolocs  
+        puts "Colocations vides" 
 end
 
 
