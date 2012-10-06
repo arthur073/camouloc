@@ -1,13 +1,16 @@
 task :delete_unused_colocs => :environment do
-        desc "Detruit les colocations sans utilisateurs"
-        @colocs = Coloc.all
-        @colocs.each do |col|
-                if (col.users.count == 0)
-                        col.destroy
-                end
-        end
+        if Date.today.day == 1
 
-        puts "Coloc destroyed" 
+                desc "Detruit les colocations sans utilisateurs"
+                @colocs = Coloc.all
+                @colocs.each do |col|
+                        if (col.users.count == 0)
+                                col.destroy
+                        end
+                end
+
+                puts "Coloc destroyed" 
+        end
 end
 
 
