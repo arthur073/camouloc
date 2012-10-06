@@ -1,6 +1,5 @@
 task :delete_unused_colocs => :environment do
-        if Date.today.day == 1
-
+        if Date.today.day == 1 or Date.today.day == 7 or Date.today.day == 14 or Date.today.day == 21 or Date.today.day == 28
                 desc "Detruit les colocations sans utilisateurs"
                 @colocs = Coloc.all
                 @colocs.each do |col|
