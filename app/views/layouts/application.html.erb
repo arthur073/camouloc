@@ -68,6 +68,7 @@
                  <h1> Les Chiffres </h1>
                  Somme gérée : <strong><%= "%0.0f" % Coloc.sum(:ca) %> €. </strong> <br>
                  <strong> <%= User.count %> </strong> utilisateurs, <strong> <%= Coloc.count %> </strong> colocations. <br>
+                 <strong> <%= Depense.count + TroisDepense.count + QuatreDepense.count %> </strong> dépenses. <br>
                  <br>
 
                  <h1> Réseaux </h1>
