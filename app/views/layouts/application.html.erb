@@ -78,7 +78,8 @@
 
                  <% if signed_in? and current_user.admin? %>
                          <h1> Admin </h1>
-                         <%= mail_to User.where(:mail => 1).map(&:email), "Mail Général", :subject => "[CAMOULOC] ??" %>
+                         <%= mail_to User.where(:mail => 1).map(&:email), "Mail Général", :subject => "[CAMOULOC] ??" %> <br>
+                         <%= Message.count %> messages.
                  <% end %>
 
                  </aside>
