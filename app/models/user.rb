@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
 	has_many :trois_depenses, :dependent => :destroy
 	has_many :quatre_depenses, :dependent => :destroy
 	attr_accessor :password
-	attr_accessible :nom, :email, :password, :password_confirmation, :coloc_id
+	attr_accessible :nom, :email, :password, :password_confirmation, :coloc_id, :mail
 
 
 	validates_uniqueness_of :email

@@ -1,35 +1,62 @@
 <h1> <%= @titre %> </h1>
+<script>
+        $(document).ready(function(){
+                var more_visibility = false;
+                $("p.more_details1").hide();
+                $("a.more_details_button1").click(function(event){
+                        $("p.more_details1").slideToggle('fast');
+                        if(!more_visibility) {
+                                $("a.more_details_button1").html("Moins");
+                                more_visibility = true;
+                                }else{
+                                $("a.more_details_button1").html("?");
+                                more_visibility = false;
+                        }
+                        event.preventDefault();
+                });
+        });
+</script>
+
 <p>Remplissez le formulaire suivant pour ajouter l'utilisateur.  </p>
 
 <%= form_for(@user) do |f| %>
-	<%= render 'shared/error_messages', :object => f.object %>
-	<div class="field">
-		<%= f.label :nom %><br />
-		<%= f.text_field :nom %>
-	</div>
-	<div class="field">
-		<%= f.label :email %><br />
+        <%= render 'shared/error_messages', :object => f.object %>
+        <div class="field">
+                <%= f.label :nom %><br />
+                <%= f.text_field :nom %>
+        </div>
+        <div class="field">
+                <%= f.label :email %><br />
                 <%= f.email_field :email %>
-	</div>
-	<div class="field" style="display:none">
-		<%= f.label :coloc_id %><br />
+        </div>
+        <div class="field" style="display:none">
+                <%= f.label :coloc_id %><br />
                 <%= f.select :coloc_id, options_for_select([[ @coloc.nom ,  @coloc.id ]]) %>
-	</div>
+        </div>
 
-	<div class="field">
+        <div class="field">
                 <strong>Colocation : </strong><%= @coloc.nom %> 
-	</div>
+        </div>
 
-	<div class="field">
-		<%= f.label :password %><br />
-		<%= f.password_field :password %>
-	</div>
-	<div class="field">
-		<%= f.label :password_confirmation, "Confirmation" %><br />
-		<%= f.password_field :password_confirmation %>
-	</div>
-	<div class="actions">
-		<%= f.submit "Inscription" %>
-	</div>
+        <div class="field">
+                <%= f.label :password %><br />
+                <%= f.password_field :password %>
+        </div>
+        <div class="field">
+                <%= f.label :password_confirmation, "Confirmation" %><br />
+                <%= f.password_field :password_confirmation %>
+        </div>
+        <div class="field">
+                <%= f.check_box :mail %>
+                <%= f.label "Recevoir les notifications de Camouloc" %>
+                <a href="#" class="more_details_button1">(*)</a>
+                <p class="more_details1">
+                <i> Vous recevrez une notification par mail chaque fois qu'un de vos colocataires ajoute une dépense, ou chaque fois qu'on poste sur le mur de votre colocation.  </i>
+                </p>
+        </div>
+
+        <div class="actions">
+                <%= f.submit "Inscription" %>
+        </div>
 <% end %>
 

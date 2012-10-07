@@ -7,7 +7,7 @@ class ColocsController < ApplicationController
                 @coloc = Coloc.find(params[:id])
                 @titre = @coloc.nom
                 @liste = @coloc.users.order(:nom) 
-                @messages = @coloc.messages.order(:created_at).paginate(:page => params[:page], :per_page => 6)
+                @messages = @coloc.messages.order(":created_at DESC").reverse.paginate(:page => params[:page], :per_page => 6)
                 @param1 = params[:param1] # "value1"
                 @colocs = Coloc.where(:palm=>1).order(:ca)
         end
@@ -301,7 +301,7 @@ class ColocsController < ApplicationController
 
         def list
                 @titre = "Toutes les Colocations"
-                @colocs = Coloc.paginate(:page => params[:page], :per_page => 9)
+                @colocs = Coloc.order(:created_at).paginate(:page => params[:page], :per_page => 9)
         end
 
         private

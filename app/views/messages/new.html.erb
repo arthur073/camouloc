@@ -1,9 +1,13 @@
 <%= form_for(@message) do |f| %>
 
 	<%= render 'shared/error_messages', :object => f.object %>
-         <div class="field">
+         <div class="field" style="display:none">
                 <%= f.label "Colocation" %><br>
                 <%= f.select :coloc_id, options_for_select([[@coloc.nom, @coloc.id]]) %>
+        </div>
+
+        <div class="field">
+                 Nouveau message pour <strong><%= @coloc.nom %> </strong>.
         </div>
 
         <div class="field">

@@ -9,7 +9,7 @@ class DepenseMailer < ActionMailer::Base
                 @colocataires = @coloc.users.all
                 @nbrcoloc = @colocataires.size
 		@url  = "camouloc.herokuapp.com"
-		mail(:to => @coloc.users.all.map(&:email), :subject => "Camouloc, nouvelle dépense.")
+		mail(:to => @coloc.users.where(:mail => 1).map(&:email), :subject => "[CAMOULOC] Nouvelle dépense")
 	end
 
 end

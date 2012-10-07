@@ -3,16 +3,14 @@
 <%= form_for(@depense) do |f| %>
         <%= render 'shared/error_messages', :object => f.object %>
 
-        <% if signed_in? and current_user.admin? %>
                 <div class="field">
                         <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="link">Cliquez ici pour créer une dépense mensuelle. </a>       
                         <span id="spoiler_id" style="display: none">
                                 <strong>  La dépense est  </strong>
-                                <%= f.select :auto, options_for_select([[ "Simple" ,  0 ], ["Mensuelle", 1 ]]) %>
+                                <%= f.select :auto, options_for_select([[ "Occasionnelle" ,  0 ], ["Mensuelle", 1 ]]) %>
                                 <i>(Les dépenses mensuelles sont ajoutées tous les 1er du mois.)</i>
                         </span>
                 </div>
-        <% end %>
 
 
         <div class="field">

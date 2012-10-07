@@ -37,6 +37,12 @@
 		<%= f.label :password_confirmation, "Confirmation mot de passe" %><br />
 		<%= f.password_field :password_confirmation %><i> (Obligatoire)  </i>
 	</div>
+
+	<div class="field">
+		<%= f.check_box :mail %>
+		<%= f.label "Recevoir les notifications ?" %><br />
+	</div>
+
 	<div class="actions">
 		<%= f.submit "Actualiser" %>
 	</div>
