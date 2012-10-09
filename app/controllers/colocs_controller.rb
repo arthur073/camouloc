@@ -46,6 +46,17 @@ class ColocsController < ApplicationController
                 @colocataires = @coloc.users
                 @titre = "Tableau de bord"
 
+                if (signed_in? and current_user.coloc_id != @coloc.id and not current_user.admin?)
+                        # si l'utilisateur n'est pas dans la coloc  et qu'il n'est pas admin, il est redirigé
+                        flash[:error] = "Vous n'avez pas accès au tableau de bord de cette colocation."
+                        redirect_to Coloc.find(current_user.coloc_id)
+                end
+
+                if @coloc.users.count < 2
+                        # si la coloc n'a qu'un user, son tableau de bord n'existe pas
+                        flash[:error] = "Inscrivez tous les colocataires avant d'accéder au tableau de bord."
+                        redirect_to @coloc
+                end
 
                 #calcul des dettes :
                 if @nbrcoloc == 2
