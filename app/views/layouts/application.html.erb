@@ -83,7 +83,9 @@
                  <% if signed_in? and current_user.admin? %>
                          <h1> Admin </h1>
                          <%= mail_to User.where(:mail => 1).map(&:email), "Mail Général", :subject => "[CAMOULOC] ??" %> <br>
-                         <%= Message.count %> messages.
+                         <%= Message.count %> messages. <br>
+                         <%= Depense.where(:auto => 1).count + TroisDepense.where(:auto =>1).count + QuatreDepense.where(:auto =>1).count %> dep automatiques. <br>
+                         <%= Coloc.count - Coloc.where(:ca => 0).count %> colocs fonctionnelles.
                  <% end %>
 
                  </aside>
