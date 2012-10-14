@@ -204,7 +204,13 @@
 
 
 			<%= link_to "Je m'inscris", signup_path, :class => "signup_button round" %> <br>
-			<p> <i> Pas encore convaincu(e) ? Regardez <strong> <%= link_to "les colocations déjà inscrites !", colocs_path %></strong> </i> </p>
+                        <table>
+                                <tr>
+                                        <td class="sidebar2">
+                                                <strong> <i> Pas encore convaincu(e) ? Regardez <strong> <%= link_to "les colocations déjà inscrites !", colocs_path %></strong> </i></strong>
+                                </td>
+                        </tr>
+                        </table>
 		<% else %>
 			<p>
 			<font color=white>

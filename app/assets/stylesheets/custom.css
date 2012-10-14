@@ -244,6 +244,14 @@ td.sidebar {
 	background-color: black;
 	color: white;
 }
+td.sidebar2 {
+	width: 43%;
+	padding: 1em;
+	vertical-align: top;
+	background-color: white;
+	color: black;
+	box-shadow: 0px 2px 5px #1c1a19;
+}
 
 .profile img.gravatar {
 	border: 1px solid #999;

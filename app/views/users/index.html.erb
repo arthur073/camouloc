@@ -1,4 +1,12 @@
-<h1> <%= @titre %> <%= link_to "=> Colocations", list_path %> </h1>
+<h1> <%= @titre %>  </h1>
+
+<table>
+        <tr>
+                <td class="sidebar2">
+                        <strong> Il y a actuellement <%= User.count %> utilisateurs inscrits sur Camouloc. <%= link_to "Voir les colocations !", list_path %></strong>
+        </td>
+</tr>
+</table>
 
 <%= will_paginate %>
 

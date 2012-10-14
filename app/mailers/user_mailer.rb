@@ -26,4 +26,8 @@ class UserMailer < ActionMailer::Base
                 emails = @dest.collect(&:email).join(",")
                 mail(:to => emails,:subject => "[CAMOULOC] Une colocation vous a contacté !")
         end
+
+        def deleteunusedcolocsmail(nbrcoloc)
+                mail(:to => "arthur.verger@gmail.com", :subject => "[CAMOULOC] Destruction des colocations inutilisées")
+        end
 end

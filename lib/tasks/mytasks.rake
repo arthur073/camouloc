@@ -2,13 +2,17 @@ task :delete_unused_colocs => :environment do
         if Date.today.day == 1 or Date.today.day == 7 or Date.today.day == 14 or Date.today.day == 21 or Date.today.day == 28
                 desc "Detruit les colocations sans utilisateurs"
                 @colocs = Coloc.all
+                @nbrcoloc = 0
                 @colocs.each do |col|
                         if (col.users.count == 0)
                                 col.destroy
+                                @nbrcoloc = @nbrcoloc + 1
                         end
                 end
 
                 puts "Coloc destroyed" 
+                puts @nbrcoloc
+                UserMailer.deleteunusedcolocsmail(@nbrcoloc).deliver
         end
 end
 

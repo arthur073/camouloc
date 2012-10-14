@@ -1,10 +1,17 @@
 
 <h1> <%= @titre %> </h1>
 
-
-Voici la liste des partenaires de Camouloc, des sites qui, comme nous, proposent des services aux étudiants. <br>
-N'hésitez pas à aller les consulter ! <br>
-<br>
+Voici la liste des partenaires de Camouloc, des sites qui, comme nous, proposent des services aux étudiants. N'hésitez pas à aller les consulter ! <br><br>
 1. <%= link_to "Exemple de partenaire", "#" %> <br> <dd> <i> avec la description du site web. </i> </dd> <br>
 2. <%= link_to "Exemple de partenaire 2", "#" %> <br> <dd> <i> avec la description du site web. </i> </dd> <br>
 3. <%= link_to "Exemple de partenaire 3", "#" %> <br> <dd> <i> avec la description du site web. </i> </dd> <br>
+
+<br>
+<table>
+        <tr>
+                <td class="sidebar2">
+                <strong> Vous souhaitez apparaître dans cette rubrique ? <%= mail_to  "arthur.verger@gmail.com", "Contactez-nous !", :subject =>"[CAMOULOC] Demande de partenariat" %> </strong>
+        </td>
+</tr>
+</table>
+
