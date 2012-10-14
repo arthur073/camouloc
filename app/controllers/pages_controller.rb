@@ -20,4 +20,7 @@ class PagesController < ApplicationController
 		@titre = "Plan du Site"
 	end
 
+	def partenaires
+		@titre = "Les sites qui valent le détour"
+	end
 end

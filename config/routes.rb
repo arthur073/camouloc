@@ -17,6 +17,7 @@ MyColoc::Application.routes.draw do
 	match '/signout', :to => 'sessions#destroy'
 	match '/about',   :to => 'pages#about'
 	match '/changelog',    :to => 'pages#changelog'
+	match '/partenaires',    :to => 'pages#partenaires'
 	match '/plan-du-site',    :to => 'pages#plandusite', :as => 'plan'
 	match '/tabbord/:id', :controller => 'colocs', :action => 'tabbord', :as => 'tableau_bord'
 	match '/list', :controller => 'colocs', :action => 'list'
