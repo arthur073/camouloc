@@ -6,7 +6,7 @@
 	<% @users.each do |user| %>
 		<li>
 		<%= gravatar_for user, :size => 30 %>
-		<%= link_to user.nom, user %>
+                <%= link_to user.nom, user %>, membre de <%= link_to Coloc.find(user.coloc_id).nom, Coloc.find(user.coloc_id) %>.
 		<% if signed_in? and current_user.admin? %>
                         <li onclick="return confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ?')"> <%= button_to "Suppr", user, :method => :delete  %> </li>
 		<% end %> 

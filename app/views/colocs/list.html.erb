@@ -4,7 +4,13 @@
 <%= will_paginate %>
 <ul class="colocs">
         <% @colocs.each do |coloc| %>
-                <li>  <%= link_to coloc.nom, coloc %> <i> (<%= coloc.users.count %> coloc(s)) </i></li>
+                <li>  <%= link_to coloc.nom, coloc %> <i> (
+                <% if coloc.users.count < 2 %>
+                        <%= coloc.users.count %> coloc) 
+                <% else %>
+                        <%= coloc.users.count %> colocs)
+                <% end %> 
+                </i></li>
                 <% if signed_in? and current_user.admin? %>
                         <li onclick="return confirm('Etes-vous sûr de vouloir supprimer la colocation ?')"> <%= button_to "Suppr", coloc, :method => :delete  %> </li>
                 <% end %>
