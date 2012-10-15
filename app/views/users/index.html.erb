@@ -1,13 +1,6 @@
 <h1> <%= @titre %>  </h1>
 
-<table>
-        <tr>
-                <td class="sidebar2">
-                        <strong> Il y a actuellement <%= User.count %> utilisateurs inscrits sur Camouloc. <%= link_to "Voir les colocations !", list_path %></strong>
-        </td>
-</tr>
-</table>
-
+<%= link_to "Voir les colocations !", list_path, :class=>"signup_button5" %>
 <%= will_paginate %>
 
 <ul class="users">

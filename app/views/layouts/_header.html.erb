@@ -1,14 +1,16 @@
 <header>
-<a href="<%= root_path %>" >
-        <%= image_tag("logo.png", :alt => "Application Arthur", :class => "round") %> </a>
 <div class="titre">
-	<div class="mycoloc">Camouloc</div>  <div class="subtitle">Application de gestion de Colocation.</div>
+        <div class="mycoloc">
+                <span class="cam1">C</span><span class="cam2">a</span><span class="cam3">m</span><span class="cam2">ou</span><span class="cam4">loc.</span>
+        </div>  
+        <div class="subtitle">Application de gestion de Colocation. </div>
 </div>
-<nav class="round">
 
+<nav class="round">
 <ul>
 	<li><%= link_to "Accueil", root_path %></li>
         <li><%= link_to "Utilisateurs", users_path %></li>
+        <li><%= link_to "Colocations", list_path %></li>
         <li><%= link_to "Partenaires", partenaires_path %></li>
 	<% if signed_in? %>
 		<li><%= link_to "Déconnexion ("+current_user.nom + ")", signout_path, :method => :delete %></li>
@@ -17,6 +19,5 @@
 	<% end %>
 
    </ul>
-
 </nav>
 </header>

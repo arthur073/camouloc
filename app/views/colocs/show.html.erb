@@ -62,15 +62,14 @@
         <% end %>
 
 </table>
-        <%= will_paginate @messages %>
-        <%= link_to "Poster un message", new_message_path(:coloc_id => @coloc.id), :class => "signup_button3 round" %> <br>
-
-
+       
+<%= will_paginate @messages %>
+<%= link_to "Poster un message", new_message_path(:coloc_id => @coloc.id), :class => "signup_button4" %> 
 <% if @coloc.users.size < 4 %>
         <% unless (@coloc.users.size == 2 and (@coloc.users[0].depenses.size != 0 or @coloc.users[1].depenses.size != 0)) or  
         (@coloc.users.size == 3 and (@coloc.users[0].trois_depenses.size != 0 or @coloc.users[1].trois_depenses.size != 0 or @coloc.users[2].trois_depenses.size != 0)) or
         (@coloc.users.size == 4 and (@coloc.users[0].quatre_depenses.size != 0 or @coloc.users[1].quatre_depenses.size != 0 or @coloc.users[2].quatre_depenses.size != 0 or @coloc.users[3].quatre_depenses.size != 0)) %>
-        <strong><%= nouveau_coloc? %>  </strong><br>
+         <%= link_to "Inscrire mes colocs", new_user_path(:coloc_id => @coloc.id) , :class => "signup_button4" %>
 <% end %>
 <% end %>
 

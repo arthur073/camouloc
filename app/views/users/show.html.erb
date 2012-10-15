@@ -86,7 +86,7 @@
         <% end %>
         <br>	
         <% if signed_in? and (@user.id == current_user.id or current_user.admin?) %>
-                <%= link_to "Editer le profil", edit_user_path(@user) %> </br>
+                <%= link_to "Editer le profil", edit_user_path(@user), :class=>"signup_button5" %> </br>
         <% end %>
 
         </p>

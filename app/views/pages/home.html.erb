@@ -161,14 +161,14 @@
 
 			<span color=white>
 				<i>Camouloc est un logiciel <strong> gratuit </strong> permettant de gérer les dépenses au sein d'une colocation. </i><br>
-				<%= link_to "Inscription", signup_path, :class => "signup_button2 round" %> <br>
+				<%= link_to "Inscription", signup_path, :class => "signup_button2" %> <br>
 				<i>
 					La marche à suivre est <strong> très simple : <br> </strong> </i> 
 			</span> 
 			<br>
 
 
-			<font size="8" color=#5DA7CF> 1 _ </font>
+			<font size="8" color=#09C> 1 _ </font>
 			<font size="5" color=white> Inscrire sa colocation.</font>
 			<a href="#" class="more_details_button1">[Plus]</a>
 
@@ -178,7 +178,7 @@
 			</p><br>
 
 
-			<font size="8" color=#5DA7CF> 2 _ </font>
+			<font size="8" color=#09C> 2 _ </font>
 			<font size="5" color=white> Inscrire ses colocataires. </font> 
 			<a href="#" class="more_details_button2">[Plus]</a>
 			<p class="more_details2">
@@ -186,7 +186,7 @@
 			<br>
 
 
-			<font size="8" color=#5DA7CF> 3 _ </font>
+			<font size="8" color=#09C> 3 _ </font>
 			<font size="5" color=white> Ajouter ses dépenses </font>
 			<a href="#" class="more_details_button3">[Plus]</a>
 			<p class="more_details3">
@@ -194,16 +194,17 @@
 			</p>
 			<br>
 
-			<font size="8" color=#5DA7CF> 4 _ </font>
+			<font size="8" color=#09c> 4 _ </font>
 			<font size="5" color=white> Figurer dans le Palmarès</font>
 			<a href="#" class="more_details_button4">[Plus]</a>
 			<p class="more_details4">
 			<i> Dès votre première dépense, vous allez figurer dans le palmarès des colocations, quel rang pourrez-vous atteindre ? </i>
 			</p>
 			<br>
+			<br>
 
 
-			<%= link_to "Je m'inscris", signup_path, :class => "signup_button round" %> <br>
+			<%= link_to "Inscription", signup_path, :class => "signup_button" %> <br>
                         <table>
                                 <tr>
                                         <td class="sidebar2">
@@ -212,10 +213,10 @@
                         </tr>
                         </table>
 		<% else %>
-			<p>
+			
 			<font color=white>
                                 <br> <br>
                                 <i>   Rendez vous tout de suite sur le profil de votre colocation.</i> <br> 
-			</font> </p>
-                        <%= link_to "Ma colocation", Coloc.find(current_user.coloc_id), :class => "signup_button round" %> <br> <br> <br>
+			</font> 
+                        <%= link_to "Ma colocation", Coloc.find(current_user.coloc_id), :class => "signup_button4" %> <br> <br> <br>
 		<% end %>

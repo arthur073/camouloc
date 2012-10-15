@@ -4,7 +4,7 @@
         <%= render 'shared/error_messages', :object => f.object %>
 
                 <div class="field">
-                        <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="link">Cliquez ici pour créer une dépense mensuelle. </a>       
+                        <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="signup_button4">Dépense mensuelle ? </a>       
                         <span id="spoiler_id" style="display: none">
                                 <strong>  La dépense est  </strong>
                                 <%= f.select :auto, options_for_select([[ "Occasionnelle" ,  0 ], ["Mensuelle", 1 ]]) %>

@@ -3,27 +3,48 @@
 }
 
 body { 
-	background-image:url('fond.jpg');
+	background-image:url('fond2.jpg');
 	background-attachment: fixed;
 	/*background-color: #fff;*/
 }
 
 
 header {
-	background-color: #175475;
+	background-color:#16344C;
 	box-shadow: 0px 2px 5px #1c1a19;
 	padding-top: 20px;
 	padding-left: 10px;
 	padding-right: 10px;
-	border-radius: 10px;
-	height:10em;
+	/*border-radius: 10px;*/
+	height:11em;
 	margin-top: 1em;
 	margin-bottom: 3em;
 }
 
+span.cam1 {
+        color:#09c;
+	font-weight: bold;
+
+}
+
+span.cam2 {
+        color:#09c;
+}
+
+span.cam3 {
+        color:#09c;
+	font-weight: bold;
+	font-size: 110%;
+}
+span.cam4 {
+        color:#09c;
+	font-weight: bold;
+	font-size: 120%;
+}
+
 .mycoloc {
         font-size:180%;
-        color:#5DA7CF;
+        margin-left:0.6em;
 }
 
 
@@ -31,6 +52,8 @@ header {
         font-size:70%;
         color:white;
 }
+
+
 header img {
 	/*background-color: #00CC33;*/
 	width: 10em;
@@ -44,7 +67,7 @@ nav, .titre {
 }
 
 .titre {
-	font-size: 220%;
+	font-size: 240%;
 	width: 41%;
 	font-family: 'RieslingRegular', Arial, sans-serif;
 	margin-left: 10px;
@@ -55,7 +78,8 @@ nav, .titre {
 article, aside {
 	display: inline-block;
 	vertical-align: top;
-	background-color: #175475;
+	/*background-color: #175475;*/
+	background-color:#16344C;
 	color: white;
 }
 
@@ -71,7 +95,7 @@ aside
 	position: relative;
 	width: 200px;
 	box-shadow: 0px 2px 5px #1c1a19;
-	border-radius: 10px;
+	/*border-radius: 10px;*/
 	padding: 10px;
 	color: white;
 }
@@ -80,7 +104,7 @@ article
 {
 	padding: 10px;
 	margin-left: 2em;
-	border-radius: 10px;
+	/*border-radius: 10px;*/
 	width: 620px;
 	box-shadow: 0px 2px 5px #1c1a19;
 }
@@ -88,7 +112,12 @@ article
 
 section h1 {
 	font-size: 250%;
-	color: #5DA7CF;
+	/* color: #5DA7CF;*/
+        color:white;
+        border-style:solid;
+        border-bottom:thin solid white;
+        padding-bottom:0.2em;
+
 }
 
 /* Liens */
@@ -157,24 +186,24 @@ a.signup_button {
 	width: 170px;
 	color: #fff;
 	/*background: #006400;*/
-	background: #5DA7CF;
+	background:#282828;
 	font-size: 150%;
 	font-weight: bold;
-	padding: 15px;
+	padding: 5px;
 	box-shadow: 0px 2px 5px #1c1a19;
 }
 a.signup_button2 {
-	margin-left: 80%;
+	margin-left: 70%;
 	margin-right: auto;
-	display: block;
 	text-align: center;
-	width: 80px;
-	color: #fff;
-	background: #5DA7CF;
+	display: block;
+	width: 170px;
+	color: white;
+	background: #282828 ;
 	font-size: 100%;
 	font-weight: bold;
-	padding: 10px;
-	box-shadow: 0px 2px 5px #1c1a19;
+	padding: 4px;
+	box-shadow: 0px 2px 2px #1c1a19;
 }
 a.signup_button3 {
 	margin-right: auto;
@@ -187,6 +216,45 @@ a.signup_button3 {
 	font-weight: bold;
 	padding: 10px;
 	box-shadow: 0px 2px 5px #1c1a19;
+}
+a.signup_button4 {
+	margin-right: auto;
+	display: block;
+	text-align: center;
+	width: 170px;
+	color: white;
+	background: #09c;
+	font-size: 100%;
+	font-weight: bold;
+	padding: 4px;
+	margin-top: 0.6em;
+	box-shadow: 0px 2px 5px #1c1a19;
+}
+a.signup_button5 {
+	margin-right: auto;
+	margin-top: 0.6em;
+	text-align: center;
+	display: block;
+	width: 170px;
+	color: white;
+	background: #282828 ;
+	font-size: 100%;
+	font-weight: bold;
+	padding: 4px;
+	box-shadow: 0px 2px 2px #1c1a19;
+}
+
+a.onglets, h1.onglets {
+        color:white;
+        border-left:thin solid white;
+        border-style:solid;
+        border-bottom:thin solid white;
+        padding-bottom:0.2em;
+        padding-left:0.2em;
+}
+
+a.palma {
+        text-transform: uppercase;
 }
 
 	/* Coins arrondis */
@@ -252,6 +320,15 @@ td.sidebar2 {
 	color: black;
 	box-shadow: 0px 2px 5px #1c1a19;
 }
+
+td.sidebar3 {
+	vertical-align: top;
+	background-color: #09c;
+	color: white;
+	box-shadow: 0px 2px 5px #1c1a19;
+	margin-top: 2em;
+}
+
 
 .profile img.gravatar {
 	border: 1px solid #999;
@@ -381,6 +458,7 @@ body {
 	width:570px;
 	overflow:hidden;
 	position:relative;
+	box-shadow: 0px 2px 5px #1c1a19;
 	display:none;
 }
 

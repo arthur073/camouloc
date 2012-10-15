@@ -199,7 +199,7 @@ type: 'pie',
                         <% end %>
                 </table>
 
-                <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="link">[Plus de détails]</a><span id="spoiler_id" style="display: none"><a onclick="document.getElementById('spoiler_id').style.display='none'; document.getElementById('show_id').style.display='';" class="link">[Moins de détails]</a><br>
+                <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="signup_button4">Toutes les dépenses</a><span id="spoiler_id" style="display: none"><a onclick="document.getElementById('spoiler_id').style.display='none'; document.getElementById('show_id').style.display='';" class="signup_button4">Moins de détails</a><br>
 
 
                         <table class="tabbord">
@@ -241,5 +241,5 @@ type: 'pie',
                                 <% end %>
                         <% end %>
                 </table>
-        </span> </br> </br>
-        &larr; <%= link_to "Retour à la colocation", @coloc%>
+        </span> <br>
+        <%= link_to "Retour à la colocation", @coloc, :class=>"signup_button5"%>

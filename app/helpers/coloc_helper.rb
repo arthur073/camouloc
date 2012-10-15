@@ -9,7 +9,7 @@ module ColocHelper
 
         def edit_coloc?
                 if signed_in? and (current_user.coloc_id == @coloc.id or current_user.admin?) 
-                        link_to "Editer la colocation", edit_coloc_path 
+                        link_to "Editer la colocation", edit_coloc_path , :class=>"signup_button5"
                 end 
         end 
 
