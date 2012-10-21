@@ -39,7 +39,7 @@ end
 task :month_auto_depenses => :environment do
         desc "Clone toutes les depenses automatiques"
 
-        if Date.today.day == 1
+        if Date.today.day == 21
 
                 @autodep2 = Depense.where(:auto => 1)
                 @autodep3 = TroisDepense.where(:auto => 1)
@@ -55,6 +55,7 @@ task :month_auto_depenses => :environment do
                         @autoclone.destinataire_part = auto2.destinataire_part
                         @autoclone.nbr_users = auto2.nbr_users
                         @autoclone.save
+                        DepenseMailer.new_depense_auto_email(@autoclone).deliver
                 end
 
                 @autodep3.each do |auto3|
@@ -67,6 +68,7 @@ task :month_auto_depenses => :environment do
                         @autoclone.destinataire_part = auto3.destinataire_part
                         @autoclone.nbr_users = auto3.nbr_users
                         @autoclone.save
+                        DepenseMailer.new_depense_auto_email(@autoclone).deliver
                 end
 
                 @autodep4.each do |auto4|
@@ -80,9 +82,11 @@ task :month_auto_depenses => :environment do
                         @autoclone.destinataire_part = auto4.destinataire_part
                         @autoclone.nbr_users = auto4.nbr_users
                         @autoclone.save
+                        DepenseMailer.new_depense_auto_email(@autoclone).deliver
                 end
                 puts "Depenses mensuelles ajoutees" 
         end 
+        puts "Mauvais jour" 
 
 end
 
