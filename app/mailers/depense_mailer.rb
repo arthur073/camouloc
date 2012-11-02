@@ -14,7 +14,7 @@ class DepenseMailer < ActionMailer::Base
 
 	def new_depense_auto_email(depense)
 		@depense = depense
-		@user_source = User.find(depense.user_id)
+		@user_source = User.find(@depense.user_id)
 		@coloc = Coloc.find(@user_source.coloc_id)
                 @colocataires = @coloc.users.all
                 @nbrcoloc = @colocataires.size

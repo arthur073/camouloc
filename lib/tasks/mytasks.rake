@@ -55,7 +55,12 @@ task :month_auto_depenses => :environment do
                         @autoclone.destinataire_part = auto2.destinataire_part
                         @autoclone.nbr_users = auto2.nbr_users
                         @autoclone.save
-                        #DepenseMailer.new_depense_auto_email(@autoclone).deliver
+                        # recherche de tous les utilisateurs
+                        @user_source = User.find(@autoclone.user_id)
+                        @coloc = Coloc.find(@user_source.coloc_id)
+                        if (@coloc.users.where(:mail => 1).size != 0 )
+                                DepenseMailer.new_depense_auto_email(@autoclone).deliver
+                        end 
                 end
 
                 @autodep3.each do |auto3|
@@ -68,7 +73,12 @@ task :month_auto_depenses => :environment do
                         @autoclone.destinataire_part = auto3.destinataire_part
                         @autoclone.nbr_users = auto3.nbr_users
                         @autoclone.save
-                        #DepenseMailer.new_depense_auto_email(@autoclone).deliver
+                        # recherche de tous les utilisateurs
+                        @user_source = User.find(@autoclone.user_id)
+                        @coloc = Coloc.find(@user_source.coloc_id)
+                        if (@coloc.users.where(:mail => 1).size != 0 )
+                                DepenseMailer.new_depense_auto_email(@autoclone).deliver
+                        end 
                 end
 
                 @autodep4.each do |auto4|
@@ -82,11 +92,17 @@ task :month_auto_depenses => :environment do
                         @autoclone.destinataire_part = auto4.destinataire_part
                         @autoclone.nbr_users = auto4.nbr_users
                         @autoclone.save
-                        #DepenseMailer.new_depense_auto_email(@autoclone).deliver
+                        # recherche de tous les utilisateurs
+                        @user_source = User.find(@autoclone.user_id)
+                        @coloc = Coloc.find(@user_source.coloc_id)
+                        if (@coloc.users.where(:mail => 1).size != 0 )
+                                DepenseMailer.new_depense_auto_email(@autoclone).deliver
+                        end 
+
                 end
                 puts "Depenses mensuelles ajoutees" 
+        else 
+                puts "Mauvais jour" 
         end 
-        puts "Mauvais jour" 
-
 end
 
