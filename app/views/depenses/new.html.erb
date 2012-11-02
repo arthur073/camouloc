@@ -3,14 +3,14 @@
 <%= form_for(@depense) do |f| %>
         <%= render 'shared/error_messages', :object => f.object %>
 
-                <div class="field">
-                        <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="signup_button4">Dépense mensuelle ? </a>       
-                        <span id="spoiler_id" style="display: none">
-                                <strong>  La dépense est  </strong>
-                                <%= f.select :auto, options_for_select([[ "Occasionnelle" ,  0 ], ["Mensuelle", 1 ]]) %>
-                                <i>(Les dépenses mensuelles sont ajoutées tous les 1er du mois.)</i>
-                        </span>
-                </div>
+        <div class="field">
+                <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="signup_button4">Dépense mensuelle ? </a>       
+                <span id="spoiler_id" style="display: none">
+                        <strong>  La dépense est  </strong>
+                        <%= f.select :auto, options_for_select([[ "Occasionnelle" ,  0 ], ["Mensuelle", 1 ]]) %>
+                        <i>(Les dépenses mensuelles sont ajoutées tous les 1er du mois.)</i>
+                </span>
+        </div>
 
 
         <div class="field">
@@ -35,6 +35,7 @@
                 <%= f.label "Quelle est la raison de la dépense ?" %><br>
                 <%= f.text_field :raison %>
                 </div><div class="actions">
+
                 <%= f.submit "Enregistrer" %>
         </div>
 <% end %>
