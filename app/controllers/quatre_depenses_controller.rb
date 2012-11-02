@@ -19,7 +19,10 @@ class QuatreDepensesController < ApplicationController
                 if @quatredepense.save
                         #Traite un succès d'enregistrement.
                         #envoie le mail de confirmation de la dépense
-                        DepenseMailer.new_depense_email(@quatredepense).deliver
+                        # recherche de tous les utilisateurs
+                        if (@colocation.users.where(:mail => 1).size != 0 )
+                                DepenseMailer.new_depense_email(@quatredepense).deliver
+                        end 
                         flash[:success] = "Dépense enregistrée!"
                         redirect_to User.find(@quatredepense.user_id)
                 else
