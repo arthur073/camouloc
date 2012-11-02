@@ -14,6 +14,7 @@ gem 'rspec-rails',      ">= 2.0.0.beta"
 gem 'faker', '0.3.1'
 #captcha pub
 #gem 'solvemedia'
+#gem 'phuby'
 
 # utilisation de pg pour mysql sur heroku
 group :production do
