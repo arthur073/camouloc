@@ -333,7 +333,8 @@ function captchme_verify($privateKey, $challengeKey, $response, $userIp, $authen
                                          'response' => $response,
                                          'user_ip' => $userIp
                                     ));
-    $result = explode("\n", $response[1]);
+
+    $result = explode("\n", $response [1]);
     $captchmeResponse = new CaptchmeResponse();
     if ($authenticationKey != '') {
         # validate message signature

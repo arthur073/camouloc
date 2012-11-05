@@ -7,6 +7,12 @@ class MessagesController < ApplicationController
                 @message = Message.new
                 #doit être la colocation ayant le message
                 @message.coloc_id = @coloc.id
+                @message.private = params[:priv]
+		if params[:priv] == 1 
+			@titre = "Nouveau message privé"
+		else 
+			@titre = "Nouveau message public"
+		end
         end
 
         def create
@@ -16,9 +22,11 @@ class MessagesController < ApplicationController
                 if @message.save
                         #utiliser un mailer pour tous les colocs
                         UserMailer.messagemail(@message,@coloc).deliver
+			flash[:success] = "Message envoyé."
                         redirect_to @coloc
                 else 
                         @coloc = Coloc.find(@message.coloc_id)
+			flash[:error] = "Votre message n'a pas été enregistré, merci de rééssayer."
                         render 'new'
                 end
 

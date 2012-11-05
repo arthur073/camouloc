@@ -11,15 +11,15 @@ class DepensesController < ApplicationController
 
         def create
                 @depense = Depense.new(params[:depense])
-                # ajoute la somme dépensée au Chiffre d'Affaires
-                @colocation = Coloc.find(current_user.coloc_id)
-                @colocation.ca = @colocation.ca + @depense.montant
-                @colocation.save
                 @depense.nbr_users = @depense.destinataire_part + @depense.destinataire_part2
+                @colocataires = User.where(:coloc_id => current_user.coloc_id).all
                 if @depense.save
                         #Traite un succès d'enregistrement.
+			# ajoute la somme dépensée au Chiffre d'Affaires
+			@colocation = Coloc.find(current_user.coloc_id)
+			@colocation.ca = @colocation.ca + @depense.montant
+			@colocation.save
                         #envoie le mail de confirmation de la dépense
-                        # recherche de tous les utilisateurs
                         if (@colocation.users.where(:mail => 1).size != 0 )
                                 DepenseMailer.new_depense_email(@depense).deliver
                         end 

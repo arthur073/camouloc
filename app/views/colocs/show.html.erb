@@ -45,8 +45,11 @@
 </span>
 <br>
 <table class="microposts">
-
-        <% @messages.each do |message| %>
+	<strong> Nos messages publics :</strong>
+	<% if @messagespubl.size == 0 %>
+		<br>Aucun message public à afficher.
+	<% else %>
+        <% @messagespubl.each do |message| %>
                 <tr>
                         <td class="micropost">
                                 <span class="content"><strong> <%= message.content %></strong></span>
@@ -60,11 +63,59 @@
                         </td> 
                                         </tr>
         <% end %>
+        <% end %>
+
 
 </table>
        
-<%= will_paginate @messages %>
-<%= link_to "Poster un message", new_message_path(:coloc_id => @coloc.id), :class => "signup_button4" %> 
+<%= will_paginate @messagespubl %>
+
+<% if signed_in? and current_user.coloc_id == @coloc.id %>
+<table class="microposts">
+	<strong> Nos messages privés : </strong> <i> (seuls les membres de la colocation peuvent les voir) </i>
+	<% if @messagespriv.size == 0 %>
+		<br>Aucun message privé à afficher.
+	<% else %>
+        <% @messagespriv.each do |message| %>
+                <tr>
+                        <td class="micropost">
+                                <span class="content"><strong> <%= message.content %></strong></span>
+                                <span class="timestamp">
+                                        Posté il y a <%= time_ago_in_words(message.created_at) %> par <%= link_to User.find(message.source_id).nom,  User.find(message.source_id)%> membre de <%= link_to Coloc.find(User.find(message.source_id).coloc_id).nom,  Coloc.find(User.find(message.source_id).coloc_id)%>. 
+        <% if signed_in? and (current_user.admin? or current_user.id == message.source_id or current_user.coloc_id == @coloc.id) %>
+                                <span onclick="return confirm('Etes-vous sûr de vouloir supprimer le message ?')"> <%= button_to "Suppr", message, :method => :delete  %> </span>
+                        <% end  %>
+
+                                </span>
+                        </td> 
+                                        </tr>
+        <% end %>
+        <% end %>
+
+
+</table>
+<% end %>
+
+
+<script>
+	function show() {
+		document.getElementById("messages").style.display="";
+		document.getElementById("postmess").style.display="none";
+	}
+</script>
+
+<div id="postmess" style="display:''" >
+	<a class="signup_button4" onclick="show()"> Poster un Message </a>
+</div>
+
+
+<div id="messages" style="display:none" >
+	<%= link_to "Message privé", new_message_path(:coloc_id => @coloc.id, :priv =>1), :class => "signup_button4" %> 
+	<%= link_to "Message public", new_message_path(:coloc_id => @coloc.id, :priv =>0), :class => "signup_button4" %> 
+</div>
+
+
+
 <% if @coloc.users.size < 4 %>
         <% unless (@coloc.users.size == 2 and (@coloc.users[0].depenses.size != 0 or @coloc.users[1].depenses.size != 0)) or  
         (@coloc.users.size == 3 and (@coloc.users[0].trois_depenses.size != 0 or @coloc.users[1].trois_depenses.size != 0 or @coloc.users[2].trois_depenses.size != 0)) or

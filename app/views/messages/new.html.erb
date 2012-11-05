@@ -1,13 +1,27 @@
+<h1> <%= @titre %> </h1>
+
 <%= form_for(@message) do |f| %>
 
 	<%= render 'shared/error_messages', :object => f.object %>
+
          <div class="field" style="display:none">
                 <%= f.label "Colocation" %><br>
                 <%= f.select :coloc_id, options_for_select([[@coloc.nom, @coloc.id]]) %>
         </div>
 
+	 <div class="field" style="display:none">
+                <%= f.label "Privé ?" %><br>
+                <%= f.check_box :private %>
+        </div>
+
+
         <div class="field">
-                 Nouveau message pour <strong><%= @coloc.nom %> </strong>.
+		<% if @message.private == 0 %>                 
+			<span> Nouveau message pour </span>
+		<% else %>
+			<span> Nouveau message <strong> privé </strong> pour </span>
+		<% end %>
+		la colocation <strong><%= @coloc.nom %></strong>.
         </div>
 
         <div class="field">

@@ -10,14 +10,14 @@ class TroisDepensesController < ApplicationController
 
         def create
                 @troisdepense = TroisDepense.new(params[:trois_depense])
-                # ajoute la somme dépensée au Chiffre d'Affaires
-                @colocation = Coloc.find(current_user.coloc_id)
-                @colocation.ca = @colocation.ca + @troisdepense.montant
-                @colocation.save
-
                 @troisdepense.nbr_users = @troisdepense.destinataire_part + @troisdepense.destinataire_part2 + @troisdepense.destinataire_part3
+                @colocataires = User.where(:coloc_id => current_user.coloc_id).all
                 if @troisdepense.save
                         #Traite un succès d'enregistrement.
+			# ajoute la somme dépensée au Chiffre d'Affaires
+			@colocation = Coloc.find(current_user.coloc_id)
+			@colocation.ca = @colocation.ca + @troisdepense.montant
+			@colocation.save
                         #envoie le mail de confirmation de la dépense
                         # recherche de tous les utilisateurs
                         if (@colocation.users.where(:mail => 1).size != 0 )

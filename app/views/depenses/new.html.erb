@@ -1,42 +1,85 @@
-<h1> <%= @titre %> (II/II)</h1>
+<h1> <%= @titre %> </h1>
 
 <%= form_for(@depense) do |f| %>
-        <%= render 'shared/error_messages', :object => f.object %>
+<%= render 'shared/error_messages', :object => f.object %>
 
-        <div class="field">
-                <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="signup_button4">Dépense mensuelle ? </a>       
-                <span id="spoiler_id" style="display: none">
-                        <strong>  La dépense est  </strong>
-                        <%= f.select :auto, options_for_select([[ "Occasionnelle" ,  0 ], ["Mensuelle", 1 ]]) %>
-                        <i>(Les dépenses mensuelles sont ajoutées tous les 1er du mois.)</i>
-                </span>
-        </div>
+<div class="field">
+<a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="signup_button4">Dépense mensuelle ? </a>       
+<span id="spoiler_id" style="display: none">
+<strong>  La dépense est  </strong>
+<%= f.select :auto, options_for_select([[ "Occasionnelle" ,  0 ], ["Mensuelle", 1 ]]) %>
+<i>(Les dépenses mensuelles sont ajoutées tous les 1er du mois.)</i>
+</span>
+</div>
 
 
-        <div class="field">
-                <strong>  Qui a payé ? </strong><br>
-                <%= f.select :user_id, options_for_select([[ @colocataires[0].nom ,  @colocataires[0].id ], [ @colocataires[1].nom ,  @colocataires[1].id ]], [current_user.nom, current_user.id]) %>
-        </div>
+<div class="field">
+<strong>  Qui a payé ? </strong><br>
+<%= f.select :user_id, options_for_select([[ @colocataires[0].nom ,  @colocataires[0].id ], [ @colocataires[1].nom ,  @colocataires[1].id ]], [current_user.nom, current_user.id]) %>
+</div>
 
-        <div class="field">
-                <strong> Pour qui payez-vous ? </strong><br>
-                <%=f.check_box :destinataire_part %>  		
-                <%= f.label @colocataires[0].nom %><br>
-                <%=f.check_box :destinataire_part2 %> 
-                <%= f.label @colocataires[1].nom %><br>
-        </div>
+<div class="field">
+<strong> Pour qui payez-vous ? </strong><br>
+<%=f.check_box :destinataire_part %>  		
+<%= f.label @colocataires[0].nom %><br>
+<%=f.check_box :destinataire_part2 %> 
+<%= f.label @colocataires[1].nom %><br>
+</div>
 
-        <div class="field">
-                <%= f.label "Quel est le montant de la dépense ?" %><br>
-                <i> Pour les nombres décimaux, utiliser "." et non "," </i> <br>
-                <%= f.text_field :montant %>
-        </div>
-        <div class="field">
-                <%= f.label "Quelle est la raison de la dépense ?" %><br>
-                <%= f.text_field :raison %>
-                </div><div class="actions">
+<div class="field">
+<%= f.label "Quel est le montant de la dépense ?" %><br>
+<i> Pour les nombres décimaux, utiliser "." et non "," </i> <br>
+<%= f.text_field :montant %>
+</div>
 
-                <%= f.submit "Enregistrer" %>
-        </div>
+<! début captcha !>
+<! TODO : 
+	- link de captchme dans un nouvel onglet
+	- test des erreurs de dépenses (laisser champs nuls)
+	- voir intégration complète du captcha (popup si possibilité de skin) + validation du formulaire en cours si captcha rempli
+	- inscrire mes colocs sur la page coloc visible ?
+		!>
+
+<div class="field" onclick="timeout()">
+<%= f.label "Quelle est la raison de la dépense ?" %><br>
+<%= f.text_field :raison %>
+</div>
+
+<iframe id="captcha" width="600"  height="335" src="http://captcha.olympe.in"></iframe>
+
+
+<script>
+	function timeout() { 
+		//var popup = window.open ('http://captcha.olympe.in', 'Captcha', config='height=335, width=400, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');
+		//popup.moveTo(screen.width/2-300,screen.height/2+150)
+		//setTimeout("demask () ",8000);
+		setTimeout("demask () ",800);
+	}
+
+	function demask() {
+		document.getElementById("valider").style.display="inline";
+	}
+
+</script>
+
+<a id="show_id2" onclick="document.getElementById('spoiler_id2').style.display='';" class="signup_button5">Pourquoi ce captcha ? </a><br>
+<span id="spoiler_id2" style="display: none">
+L'équipe Camouloc met l'accent sur deux volontés : <br>
+<br>
+1. garantir <strong> l'accès gratuit à Camouloc </strong> pour tous les utilisateurs <br>
+2. rendre l'application la plus <strong> stable </strong> possible face aux attaques du web. <br>
+<br>
+Pour cela, nous utilisons une solution innovante créée par <%= link_to "une start-up française en plein essor", partenaires_path %> : <strong> le publiCaptcha </strong>. Cette solution permet à la fois de se protéger contre les robots du web et de monétiser le site, sans pour autant être aussi dérangeant qu'une popup ou autre publicité.
+<br>
+<br>
+<a id="hide_id2" onclick="document.getElementById('spoiler_id2').style.display='none';" class="signup_button5">Merci, j'ai compris</a><br>
+</span>
+
+
+<div id="valider" style="display:none;">
+<i> Avant de cliquer, assurez vous d'avoir validé le captcha. </i> <br>
+<%= f.submit "Enregistrer" %>
+</div>
+
 <% end %>
 

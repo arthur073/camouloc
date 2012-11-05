@@ -11,14 +11,15 @@ class QuatreDepensesController < ApplicationController
         def create
                 @quatredepense = QuatreDepense.new(params[:quatre_depense])
                 @quatredepense.nbr_users = @quatredepense.destinataire_part + @quatredepense.destinataire_part2 + @quatredepense.destinataire_part3+ @quatredepense.destinataire_part4
-                # ajoute la somme dépensée au Chiffre d'Affaires
-                @colocation = Coloc.find(current_user.coloc_id)
-                @colocation.ca = @colocation.ca + @quatredepense.montant
-                @colocation.save
+                @colocataires = User.where(:coloc_id => current_user.coloc_id).all
 
                 if @quatredepense.save
                         #Traite un succès d'enregistrement.
                         #envoie le mail de confirmation de la dépense
+			# ajoute la somme dépensée au Chiffre d'Affaires
+			@colocation = Coloc.find(current_user.coloc_id)
+			@colocation.ca = @colocation.ca + @quatredepense.montant
+			@colocation.save
                         # recherche de tous les utilisateurs
                         if (@colocation.users.where(:mail => 1).size != 0 )
                                 DepenseMailer.new_depense_email(@quatredepense).deliver

@@ -11,10 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121007121322) do
+ActiveRecord::Schema.define(:version => 20121105143936) do
 
-# Could not dump table "colocs" because of following StandardError
-#   Unknown type 'bool' for column 'palm'
+  create_table "colocs", :force => true do |t|
+    t.float    "ca"
+    t.integer  "palm"
+    t.string   "nom"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "depenses", :force => true do |t|
     t.integer  "user_id"
@@ -31,9 +36,10 @@ ActiveRecord::Schema.define(:version => 20121007121322) do
   create_table "messages", :force => true do |t|
     t.string   "content"
     t.integer  "coloc_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
     t.integer  "source_id"
+    t.integer  "private",    :default => 0
   end
 
   create_table "quatre_depenses", :force => true do |t|

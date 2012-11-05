@@ -7,7 +7,8 @@ class ColocsController < ApplicationController
                 @coloc = Coloc.find(params[:id])
                 @titre = @coloc.nom
                 @liste = @coloc.users.order(:nom) 
-                @messages = @coloc.messages.order(:created_at).reverse.paginate(:page => params[:page], :per_page => 6)
+                @messagespubl = @coloc.messages.where(:private=>0).order(:created_at).reverse.paginate(:page => params[:page], :per_page => 6)
+                @messagespriv = @coloc.messages.where(:private=>1).order(:created_at).reverse.paginate(:page => params[:page], :per_page => 6)
                 @param1 = params[:param1] # "value1"
                 @colocs = Coloc.where(:palm=>1).order(:ca)
         end
