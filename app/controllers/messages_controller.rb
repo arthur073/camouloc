@@ -8,7 +8,7 @@ class MessagesController < ApplicationController
                 #doit être la colocation ayant le message
                 @message.coloc_id = @coloc.id
                 @message.private = params[:priv]
-		if params[:priv] == 1 
+		if @message.private == 1 
 			@titre = "Nouveau message privé"
 		else 
 			@titre = "Nouveau message public"

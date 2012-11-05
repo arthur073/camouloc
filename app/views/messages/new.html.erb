@@ -18,10 +18,12 @@
         <div class="field">
 		<% if @message.private == 0 %>                 
 			<span> Nouveau message pour </span>
+			la colocation <strong><%= @coloc.nom %></strong>.
 		<% else %>
 			<span> Nouveau message <strong> privé </strong> pour </span>
+			la colocation <strong><%= @coloc.nom %></strong>.
+			<br> <i> Attention, seuls les membres de <%= @coloc.nom %> pourront voir le message. </i>
 		<% end %>
-		la colocation <strong><%= @coloc.nom %></strong>.
         </div>
 
         <div class="field">
