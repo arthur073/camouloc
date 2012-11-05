@@ -34,10 +34,7 @@
 
 <! début captcha !>
 <! TODO : 
-	- link de captchme dans un nouvel onglet
-	- test des erreurs de dépenses (laisser champs nuls)
 	- voir intégration complète du captcha (popup si possibilité de skin) + validation du formulaire en cours si captcha rempli
-	- inscrire mes colocs sur la page coloc visible ?
 		!>
 
 <div class="field" onclick="timeout()">
@@ -45,15 +42,15 @@
 <%= f.text_field :raison %>
 </div>
 
-<iframe id="captcha" width="600"  height="335" src="http://captcha.olympe.in"></iframe>
+<iframe id="captcha" width="600"  height="600" src="http://captcha.olympe.in"></iframe>
 
 
 <script>
 	function timeout() { 
 		//var popup = window.open ('http://captcha.olympe.in', 'Captcha', config='height=335, width=400, toolbar=no, menubar=no, scrollbars=no, resizable=no, location=no, directories=no, status=no');
 		//popup.moveTo(screen.width/2-300,screen.height/2+150)
-		//setTimeout("demask () ",8000);
-		setTimeout("demask () ",800);
+		setTimeout("demask () ",8000);
+		//setTimeout("demask () ",800);
 	}
 
 	function demask() {

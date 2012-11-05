@@ -18,6 +18,8 @@
 </script>
 <br>
 <br>
+<br>
+<br>
 <form method='post'>
 <?php
 require_once('captchme-lib.php');
@@ -68,7 +70,7 @@ echo"<span style=\"color:white;font-family: 'RieslingRegular', Arial, sans-serif
 }
 else {
 	//Implémentation alternative propre à votre site et vos besoins
-	echo "<span style=\"color:white;font-family: 'RieslingRegular', Arial, sans-serif;font-size:90%\"><b> Aucun captcha publicitaire généré. </b> </span>";
+	echo "<span style=\"color:white;font-family: 'RieslingRegular', Arial, sans-serif;font-size:90%\"><b> Aucun captcha publicitaire généré. Vous pouvez quand même valider le formulaire.</b> </span>";
 }
 ?>
 <div><input type="submit" value="Valider"/></div>
