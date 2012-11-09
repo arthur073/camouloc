@@ -3,22 +3,26 @@
 <head>
 <title>Captcha</title>
 
+<style type="text/css">
+  	body {
+    		background-color: #16344C 
+	}
+  </style>
 </head>
 <body>
 <script type="text/javascript">
     function captchaValid() {
-		setTimeout("fermer () ",1000);
+		setTimeout("fermer () ",2000);
     };
 
     function fermer() {
 	    window.opener = self;
 	    window.close();
     }
-	
+	function scrollTo(hash) {
+	    location.hash = "#" + hash;
+	}	
 </script>
-<br>
-<br>
-<br>
 <br>
 <form method='post'>
 <?php
@@ -43,7 +47,8 @@ if (isset($_POST["captchme_response_field"])) {
 			$authenKey);
 
 	if ($response->is_valid) {
-		echo "<span style=\"color:white;font-family: 'RieslingRegular', Arial, sans-serif;font-size:90%\"><b> Captcha valide ! Merci, vous pouvez valider le formulaire. </b> </span>";
+		echo "<img src=\"validated.png\" alt=\"Validated\"><br>";
+		echo "<span style=\"color:white;font-family: 'RieslingRegular', Arial, sans-serif;font-size:90%\"><b> Captcha valide ! Merci, vous povez valider le formulaire. </b> </span>";
 		echo "<script language=javascript>captchaValid();</script>";
 		exit();
 	} else {
@@ -59,9 +64,7 @@ $captcha = captchme_load_captcha($publicKey, $_SERVER['REMOTE_ADDR'], "fr", "cla
 // Contrôle s’il s’agit d’un captcha publicitaire
 if($captcha->isAd() ) {
 	// Affichage du captcha dans la page
-echo"<span style=\"color:white;font-family: 'RieslingRegular', Arial, sans-serif;font-size:90%\"><b> Veuillez valider le captcha suivant pour valider le formulaire : </b> </span> 
-<br>
-<br>";
+//echo"<span style=\"color:white;font-family: 'RieslingRegular', Arial, sans-serif;font-size:90%\"><b> Veuillez valider le captcha suivant pour valider le formulaire : </b> </span> ";
 	$customAttributes = array ('theme' => "white");
 	echo captchme_generate_html($publicKey, $error, false, $customAttributes, $captcha);
 	if ($error != null) { echo "<script>document.getElementById('captchmeerreur').style.display
@@ -71,9 +74,10 @@ echo"<span style=\"color:white;font-family: 'RieslingRegular', Arial, sans-serif
 else {
 	//Implémentation alternative propre à votre site et vos besoins
 	echo "<span style=\"color:white;font-family: 'RieslingRegular', Arial, sans-serif;font-size:90%\"><b> Aucun captcha publicitaire généré. Vous pouvez quand même valider le formulaire.</b> </span>";
+	echo "<script language=javascript>captchaValid();</script>";
 }
 ?>
-<div><input type="submit" value="Valider"/></div>
+<div><input type="submit" value="Valider le Captcha"/></div>
 </form>
 
 
