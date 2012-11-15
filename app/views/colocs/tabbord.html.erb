@@ -138,11 +138,11 @@ type: 'pie',
 
                         <% if @colocatairestries[2].tot.abs < @colocatairestries.first.tot.abs - @colocatairestries.last.tot.abs %>
                                 <!-- Le remboursement de first suffit pour 2, first rembourse le dernier -->
-                                <tr><td><%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %>€ à <%= @colocatairestries[1].nom %>. </tr></td>
+                                <tr><td><%= @colocatairestries.first.nom %> doit  <%= "%0.2f" % @colocatairestries[1].tot.abs %>€ à <%= @colocatairestries[1].nom %>. </tr></td>
 
                         <% else %>
                                 <!-- Le remboursement de first suffit pas pour 2, 1 rembourse 2 --> 
-                                <tr><td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %>€ à <%= @colocatairestries[2].nom %>. </td></tr>
+                                <tr><td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % [@colocatairestries[2].tot.abs, @colocatairestries[1].tot.abs].min %>€ à <%= @colocatairestries[2].nom %>. </td></tr>
                         <% end %>
 
 
