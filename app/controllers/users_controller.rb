@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
 	def show
 		@user = User.find(params[:id])
+		@faceb_url = "http://localhost:3000/auth/facebook"
 		@titre = @user.nom
                 @coloc = Coloc.find(@user.coloc_id)
                 @colocataires = @coloc.users.all

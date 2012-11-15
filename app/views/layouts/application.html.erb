@@ -58,8 +58,16 @@
                          <% elsif Coloc.find(current_user.coloc_id).users.size == 4 %>
                                  <%= link_to "Nouvelle dépense", new_quatre_depense_path(@depense) , :class => "signup_button4"%> </br>
                          <% end %>
-                         </br> </br>
                  <% end %> 
+		 <% if signed_in? and current_user.authentifications.empty? %>
+			<div class="signup_button5">
+			 <%= link_to "Lier mon compte", authentifications_url, :style => "color:white"%>
+			<img src="http://camouloc.herokuapp.com/facebook_64.png" width="19" height="20" alt="facebook">
+			</div>
+		<% end %>
+
+	                         </br> </br>
+
                  <h1 class="onglets">Top Colocs</h1>
                  <% @liste_coloc = Coloc.where(:palm => 1).order(:ca).reverse %>
                  <% @liste_coloc.first(3).each do |colocs, i|%>

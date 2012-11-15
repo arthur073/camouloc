@@ -1,5 +1,10 @@
 <h1>Identification</h1>
+<div class="signup_button4 authfaceb">
+<a href="/auth/facebook" style="color:white">
+ <strong> Login with Facebook </strong>
+</a>
 
+</div>
 <%= form_for(:session, :url => sessions_path) do |f| %>
   <div class="field">
     <%= f.label :email, "eMail" %><br />
@@ -16,3 +21,6 @@
 
 <p>Pas encore inscrit ? <%= link_to "S'inscrire !", new_coloc_path %> <br>
 <%= link_to "Mot de passe oublié ?", new_password_reset_path %></p>
+
+
+

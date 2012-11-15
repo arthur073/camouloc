@@ -131,19 +131,17 @@ type: 'pie',
 
                 <% if @nbrcoloc == 4 %>
                         <td> 
-
-
                                 <% if @colocatairestries.last.tot.abs < @colocatairestries.first.tot.abs %>
-                                        <! le remboursement de first suffit pour last, first rembourse un autre>
+                                        <!-- le remboursement de first suffit pour last, first rembourse un autre-->
                                         <%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries.last.tot %>€ à <%= @colocatairestries.last.nom %>. </td></tr>
-                        <tr> <td><%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %>€ à <%= @colocatairestries[2].nom %>. </td></tr>
+					<tr> <td><%= @colocatairestries.first.nom %> doit <%= "%0.2f" % [@colocatairestries[2].tot.abs, @colocatairestries.first.tot.abs - @colocatairestries.last.tot.abs].min %>€ à <%= @colocatairestries[2].nom %>. </td></tr>
 
-                        <% if @colocatairestries[2].tot.abs < @colocatairestries.first.tot.abs %>
-                                <! Le remboursement de first suffit pour 2, first rembourse le dernier >
+                        <% if @colocatairestries[2].tot.abs < @colocatairestries.first.tot.abs - @colocatairestries.last.tot.abs %>
+                                <!-- Le remboursement de first suffit pour 2, first rembourse le dernier -->
                                 <tr><td><%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %>€ à <%= @colocatairestries[1].nom %>. </tr></td>
 
                         <% else %>
-                                <! Le remboursement de first suffit pas pour 2, 1 rembourse 2 > 
+                                <!-- Le remboursement de first suffit pas pour 2, 1 rembourse 2 --> 
                                 <tr><td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %>€ à <%= @colocatairestries[2].nom %>. </td></tr>
                         <% end %>
 
@@ -151,7 +149,7 @@ type: 'pie',
 
 
                 <% else %>
-                        <! le remboursement de first ne suffit pas pour last, 1 doit participer>
+                        <!-- le remboursement de first ne suffit pas pour last, 1 doit participer-->
                         <%= @colocatairestries.first.nom %> doit	<%= "%0.2f" % @colocatairestries.first.tot.abs  %>€ à <%= @colocatairestries.last.nom %>. </td></tr>
 
 

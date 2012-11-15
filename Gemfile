@@ -12,9 +12,10 @@ gem 'jquery-rails'
 gem "mail"
 gem 'rspec-rails',      ">= 2.0.0.beta"
 gem 'faker', '0.3.1'
-#captcha pub
-#gem 'solvemedia'
-#gem 'phuby'
+
+# authentification avec facebook,...
+gem 'omniauth'
+gem 'omniauth-facebook'
 
 # utilisation de pg pour mysql sur heroku
 group :production do

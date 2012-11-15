@@ -217,7 +217,7 @@ a.signup_button3 {
 	padding: 10px;
 	box-shadow: 0px 2px 5px #1c1a19;
 }
-a.signup_button4 {
+a.signup_button4, div.signup_button4 {
 	margin-right: auto;
 	display: block;
 	text-align: center;
@@ -230,7 +230,7 @@ a.signup_button4 {
 	margin-top: 0.6em;
 	box-shadow: 0px 2px 5px #1c1a19;
 }
-a.signup_button5 {
+a.signup_button5, div.signup_button5 {
 	margin-right: auto;
 	margin-top: 0.6em;
 	text-align: center;
@@ -711,3 +711,107 @@ a.popuplink:link, a.popuplink:visited {color:#fff; text-decoration:none; font-si
 -moz-border-radius:8px}
 a.popuplink:hover,a.popuplink:active {color:#fff; text-decoration:none; font-size:15px; background:#333333; padding:5px; -webkit-border-radius:8px;
 -moz-border-radius:8px}
+
+
+
+.authentifications {
+  margin-bottom: 30px;
+}
+
+.authentification {
+  width: 200px;
+  float: left;
+  background-color: white;
+  border: solid 1px #999;
+  padding: 5px 10px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  position: relative;
+  margin-right: 10px;
+}
+
+.authentification .remove {
+  text-decoration: none;
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  color: #333;
+  padding: 2px 4px;
+  font-size: 10px;
+}
+
+.authentification .remove:hover {
+  color: #CCC;
+  background-color: #777;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+}
+
+.authentification img {
+  float: left;
+  margin-right: 10px;
+}
+
+.authentification .provider {
+  font-weight: bold;
+  font-size: 110%;
+  color: black;
+  margin-top: 8px;
+}
+
+.authentification .uid {
+  color: #666;
+  font-size: 11px;
+}
+
+.auth_provider img {
+  display: block;
+}
+
+.auth_provider {
+  float: left;
+  text-decoration: none;
+  margin-right: 20px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+
+.fieldWithErrors {
+  display: inline;
+}
+
+.error_messages {
+  width: 400px;
+  border: 2px solid #CF0000;
+  padding: 0px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  font-size: 12px;
+}
+
+.error_messages h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 10px;
+  font-size: 12px;
+  margin: 0;
+  background-color: #c00;
+  color: #fff;
+}
+
+.error_messages p {
+  margin: 8px 10px;
+}
+
+.error_messages ul {
+  margin: 0;
+}
+
+
+.authfaceb {
+	position : relative;
+	left: 30em;
+	bottom : 4em;
+}

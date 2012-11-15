@@ -1,7 +1,9 @@
 # -*- encoding : utf-8 -*-
 MyColoc::Application.routes.draw do
 
+
 	resources :users
+	resources :authentifications
 	resources :depenses
 	resources :trois_depenses
 	resources :quatre_depenses
@@ -10,6 +12,7 @@ MyColoc::Application.routes.draw do
 	resources :sessions, :only => [:new, :create, :destroy]
 	resources :password_resets
 
+	match '/auth/:provider/callback' => 'authentifications#create'
 	match '/contact', :to => 'pages#contact'
 	match '/signup', :to => 'colocs#new'
 	match '/colocs/:id/edit', :to => 'colocs#edit'

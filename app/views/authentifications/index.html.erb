@@ -1,0 +1,27 @@
+<h1> Liaisons du compte  </h1>
+
+<% if @authentifications %>
+  <% unless @authentifications.empty? %>
+    <p><strong>Votre compte Camouloc est lié avec : </strong></p>
+    <div class="authentifications">
+      <% for authentification in @authentifications %>
+        <div class="authentification">
+		<img src="facebook_64.png" width="32" height="32" alt="facebook">
+          <div class="provider"><%= authentification.provider.titleize %></div>
+          <div class="uid">Code auth : <%= authentification.uid %></div>
+	<a onclick="return confirm('Etes-vous sûr de vouloir supprimer cette authentification ?')"> <%= button_to "Supprimer la liaison", authentification, :method => :delete  %> </a>
+        </div>
+      <% end %>
+      <div class="clear"></div>
+    </div>
+  <% end %>
+  <p><strong>Ajoutez un service d'authentification :</strong></p>
+<% else %>
+  <p><strong>Connectez-vous :</strong></p>
+<% end %>
+
+<a href="/auth/facebook" class="auth_provider" style="color:white">
+	<img src="facebook_64.png" width="64" height="64" alt="facebook">
+  Facebook
+</a>
+<div class="clear"></div>
