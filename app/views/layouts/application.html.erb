@@ -59,7 +59,7 @@
                                  <%= link_to "Nouvelle dépense", new_quatre_depense_path(@depense) , :class => "signup_button4"%> </br>
                          <% end %>
                  <% end %> 
-		 <% if signed_in? and current_user.authentifications.empty? %>
+		 <% if signed_in? and current_user.authentifications.empty? and current_user.admin? %>
 			<div class="signup_button5">
 			 <%= link_to "Lier mon compte", authentifications_url, :style => "color:white"%>
 			<img src="http://camouloc.herokuapp.com/facebook_64.png" width="19" height="20" alt="facebook">
