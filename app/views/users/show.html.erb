@@ -3,7 +3,11 @@
                 <tr>
                         <td class="main">
                                 <h1>
-                                        <%= gravatar_for @user %> 
+					<% if @user.has_image %>
+						<%= image_tag (@user.image) , :size => "85x85", :style => "box-shadow: 0px 2px 5px #1c1a19;" %>
+					<% else %>
+						<%= gravatar_for @user %>
+					<% end %> 
                                         <%= @user.nom %>
                                 </h1>
                         </td>
@@ -89,13 +93,14 @@
                 <%= link_to "Editer le profil", edit_user_path(@user), :class=>"signup_button5" %> 
         <% end %>
 
+	<% if signed_in? and current_user.admin? %>
 	<% if signed_in? and current_user.authentifications.empty? %>
-			<div class="signup_button5">
-				<img src="http://camouloc.herokuapp.com/facebook_64.png" width="20" height="20" alt="facebook">
+			<div class="signup_button4">
 				<%= link_to "Lier mon Facebook", @faceb_url , :style=>"color:white"%>
 			</div>
 	<% else %>
 			<%= link_to "Liaisons du compte", authentifications_url, :class=>"signup_button5"%>
+	<% end %>
 	<% end %>
 	<br>
         </p>

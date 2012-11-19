@@ -16,6 +16,8 @@ gem 'faker', '0.3.1'
 # authentification avec facebook,...
 gem 'omniauth'
 gem 'omniauth-facebook'
+gem 'fb_graph', '1.5.4'
+
 
 # utilisation de pg pour mysql sur heroku
 group :production do

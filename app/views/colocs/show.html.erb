@@ -36,7 +36,13 @@
                                 <td> <strong> Email </strong></td>
                         </tr>
                         <% @liste.each do |users| %>
-                                <tr>  <td> <%= gravatar_for users, :size => 60 %> </td>
+                                <tr>  <td> 
+					<% if users.has_image %>
+						<%= image_tag (users.image) , :size => "60x60", :style => "box-shadow: 0px 2px 5px #1c1a19;" %>
+					<% else %>
+						<%= gravatar_for users, :size => 60 %> 
+					<% end %> 
+					</td>
                                         <td>     <font size ="4" align="top"> <%= liste_users(users) %> </font></td> <td> <%= mail_to users.email %> </td></tr>
                         <% end %>
                 </tr>

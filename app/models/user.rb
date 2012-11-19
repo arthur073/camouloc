@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 	has_many :quatre_depenses, :dependent => :destroy
 	has_many :authentifications, :dependent => :destroy
 	attr_accessor :password
-	attr_accessible :nom, :email, :password, :password_confirmation, :coloc_id, :mail
+	attr_accessible :nom, :email, :password, :password_confirmation, :coloc_id, :mail, :image
 
 
 	validates_uniqueness_of :email
@@ -17,6 +17,14 @@ class User < ActiveRecord::Base
 
 	before_save :encrypt_password
 
+	def has_image
+		if self.image != "no" 
+			return true
+		else 
+			return false
+		end
+	end
+	
 	# Retour true (vrai) si le mot de passe correspond.
 	def has_password?(password_soumis)
 		# Compare encrypted_password avec la version cryptée de
@@ -35,6 +43,7 @@ class User < ActiveRecord::Base
 		(user && user.salt == cookie_salt) ? user : nil
 	end
 
+	
 	private
 
 	def encrypt_password

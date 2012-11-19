@@ -9,7 +9,6 @@
                 <%= csrf_meta_tag %>
                 <%= render 'layouts/stylesheets' %>
                 <%= javascript_include_tag "jquery-1.7.1.min.js", "highcharts", "exporting.js" %>
-		<%= javascript_include_tag "css-pop.js" %>
                 <%= favicon_link_tag "/favicon.ico" %>
 
                 <script type="text/javascript">
@@ -60,9 +59,9 @@
                          <% end %>
                  <% end %> 
 		 <% if signed_in? and current_user.authentifications.empty? and current_user.admin? %>
-			<div class="signup_button5">
-			 <%= link_to "Lier mon compte", authentifications_url, :style => "color:white"%>
-			<img src="http://camouloc.herokuapp.com/facebook_64.png" width="19" height="20" alt="facebook">
+			<img src="http://camouloc.herokuapp.com/new-ribbon.png" width="50" height="50" alt="new-facebook" class="new_facebook">
+			<div class="signup_button6">
+				<%= link_to "Lier mon Facebook", @faceb_url , :style=>"color:white; padding-right:0.5em;"%>
 			</div>
 		<% end %>
 
@@ -92,7 +91,6 @@
                  <br>
                 <br> <br>
                  <h1 class="onglets"> Réseaux </h1>
-                <div class="fb-subscribe" data-href="https://www.facebook.com/Ca.MouLoc.1" data-show-faces="false" data-colorscheme="dark" data-font="verdana" data-width="30"></div><br>
       <a href="https://twitter.com/Camouloc" class="twitter-follow-button" data-show-count="false">Follow @Camouloc</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 

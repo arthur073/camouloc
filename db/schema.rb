@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121112150921) do
+ActiveRecord::Schema.define(:version => 20121119161722) do
 
   create_table "authentifications", :force => true do |t|
     t.integer  "user_id"
@@ -88,6 +88,7 @@ ActiveRecord::Schema.define(:version => 20121112150921) do
     t.integer  "coloc_id"
     t.float    "tot"
     t.integer  "mail",               :default => 1
+    t.string   "image",              :default => "no"
   end
 
 end
