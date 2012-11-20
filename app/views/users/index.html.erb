@@ -5,7 +5,7 @@
 
 <br>
 <ul class="users">
-	<% @users.each do |user| %>
+	<% @users.reverse.each do |user| %>
 		<li>
 		<% if user.has_image %>
 			<%= image_tag (user.image) , :size => "40x40", :style => "box-shadow: 0px 2px 5px #1c1a19;" %>
