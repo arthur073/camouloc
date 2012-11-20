@@ -8,11 +8,10 @@ class AuthentificationsController < ApplicationController
     auth = request.env["omniauth.auth"] 
 	if signed_in? 
 		current_user.authentifications.find_or_create_by_provider_and_uid(auth['provider'], auth['uid'])
-		redirect_to authentifications_url
 		# on pose un message sur facebook
 		@authent = Authentification.where(:user_id => current_user.id, :provider => auth['provider'], :uid => auth['uid'])
 		@token = auth['credentials']['token']
-		@authent.publish('Pour ma Coloc, j\'utilise Camouloc ! Une application gratuite créee par des étudiants pour les étudiants. Venez jeter un coup d\'oeil !', @token)
+		@authent.publish('Pour ta Coloc, quoi de mieux que Camouloc ?! Gratuite, pratique et rapide, cette application gère mes comptes à merveille, alors pourquoi pas les tiens ? Viens plutôt jeter un coup d\'oeil !', @token)
 		# on met à jour le nom et le prénom et la photo de profil
 		@newFirstName = auth['info']['first_name']
 		@newLastName = auth['info']['last_name']
@@ -21,8 +20,8 @@ class AuthentificationsController < ApplicationController
 		@user = User.find(current_user.id)
 		@user.update_attribute( :nom, "#{@newFirstName.titleize} #{@newLastName[0].titleize}")
 		@user.update_attribute( :image, @image_url)
-		flash[:notice] = "Nous avons correctement lié votre profil #{auth['provider']}. Vos informations ont été mises à jour."
-		flash[:notice] = "#{@image_url}"
+		flash[:success] = "Nous avons correctement lié votre profil #{auth['provider']}. Vos informations ont été mises à jour."
+		redirect_to @user
 	else 
 		# l'utilisateur n'est pas connecté, on essaie de le logger
 		@authent = Authentification.where(:uid=>auth['uid'], :provider=>auth['provider'])
@@ -39,10 +38,34 @@ class AuthentificationsController < ApplicationController
 			sign_in @user
 			redirect_to @user
 		else 
-			# l'utilisateur n'est pas connecté,
-			# l'utilisateur n'a jamais paramétré de compte Facebook
-			flash[:error] = "Aucun partenariat trouvé, vous devez d'abord configurer le partenariat depuis votre profil."
-			redirect_to login_path
+			# l'utilisateur n'est pas connecté et n'a jamais paramétré de compte Facebook
+			@inscr = env["omniauth.params"]['inscr']
+			@colocId = env["omniauth.params"]['colocId']
+			if @inscr == '1' 
+				# soit c'est une demande d'inscription : 
+				@user = User.new
+				@user.save(:validates => false)
+				@newFirstName = auth['info']['first_name']
+				@newLastName = auth['info']['last_name']
+				@image_url = auth['info']['image']
+				@email = auth['info']['email']
+				@user.update_attribute(:nom, "#{@newFirstName.titleize} #{@newLastName[0].titleize}")
+				@user.update_attribute( :image, @image_url)
+				@user.update_attribute( :email, @email)
+				@user.update_attribute( :coloc_id, @colocId)
+				@user.authentifications.find_or_create_by_provider_and_uid(auth['provider'], auth['uid'])
+				# une fois l'utilisateur créé, on poste un message sur Facebook
+				@authent = Authentification.where(:user_id => @user.id, :provider => auth['provider'], :uid => auth['uid'])
+				@token = auth['credentials']['token']
+				@authent.publish('Pour ta Coloc, quoi de mieux que Camouloc ?! Gratuite, pratique et rapide, cette application gère mes comptes à merveille, alors pourquoi pas les tiens ? Viens plutôt jeter un coup d\'oeil !', @token)
+				flash[:success] = "Nous avons correctement créé votre compte. Inscrivez maintenant vos colocataires."
+				sign_in @user
+				redirect_to Coloc.find(@colocId)
+			else
+				# soit c'est une erreur 
+				flash[:error] = "Aucun partenariat trouvé, vous devez d'abord configurer le partenariat depuis votre profil."
+				redirect_to login_path
+			end 
 		end
 	end
   end

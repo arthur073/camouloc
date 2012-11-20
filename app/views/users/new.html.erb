@@ -6,10 +6,10 @@
                 $("a.more_details_button1").click(function(event){
                         $("p.more_details1").slideToggle('fast');
                         if(!more_visibility) {
-                                $("a.more_details_button1").html("Moins");
+                                $("a.more_details_button1").html("(Moins)");
                                 more_visibility = true;
                                 }else{
-                                $("a.more_details_button1").html("?");
+                                $("a.more_details_button1").html("(*)");
                                 more_visibility = false;
                         }
                         event.preventDefault();
@@ -18,6 +18,17 @@
 </script>
 
 <p>Remplissez le formulaire suivant pour ajouter l'utilisateur.  </p>
+
+<!-- facebook login --!>
+<% if @coloc.users.count ==0 %>
+	<div class="signup_button4 authfacebinscr">
+		<a href="/auth/facebook?inscr=1&colocId=<%=@coloc.id%>" style="color:white">
+			 <strong> Utiliser mon Facebook </strong>
+		</a>
+	</div>
+<% end %>
+
+
 
 <%= form_for(@user) do |f| %>
         <%= render 'shared/error_messages', :object => f.object %>

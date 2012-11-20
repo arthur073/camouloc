@@ -14,8 +14,12 @@
 </script>
 
 <div>
-	<%= gravatar_for @user %>
-	<a href="http://gravatar.com/emails">changer</a>
+	<% if @user.has_image %>
+		<%= image_tag (@user.image) , :size => "85x85", :style => "box-shadow: 0px 2px 5px #1c1a19;" %>
+	<% else %>
+		<%= gravatar_for @user %>
+		<a href="http://gravatar.com/emails">changer</a>
+	<% end %> 
 </div>
 
 <%= form_for(@user) do |f| %>

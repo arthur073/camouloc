@@ -1,12 +1,10 @@
 <h1>Identification</h1>
-<!--
 <div class="signup_button4 authfaceb">
-<a href="/auth/facebook" style="color:white">
+<a href="/auth/facebook?inscr=0" style="color:white">
  <strong> Login with Facebook </strong>
 </a>
 </div>
-<img src="http://camouloc.herokuapp.com/connect_facebook.png" width="100" height="50" alt="connect-facebook" class="connect_facebook">
---!>
+
 <%= form_for(:session, :url => sessions_path) do |f| %>
   <div class="field">
     <%= f.label :email, "eMail" %><br />
