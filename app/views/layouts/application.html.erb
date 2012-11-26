@@ -58,7 +58,7 @@
                                  <%= link_to "Nouvelle dépense", new_quatre_depense_path(@depense) , :class => "signup_button4"%> </br>
                          <% end %>
                  <% end %> 
-		 <% if signed_in? and current_user.authentifications.empty? %>
+		 <% if signed_in? and current_user.authentifications.empty? and current_user.admin?%>
 			<img src="http://camouloc.herokuapp.com/new-ribbon.png" width="50" height="50" alt="new-facebook" class="new_facebook">
 			<div class="signup_button6">
 				<% @faceb_url = "http://camouloc.herokuapp.com/auth/facebook" %>
