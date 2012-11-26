@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 		@faceb_url = "http://camouloc.herokuapp.com/auth/facebook"
 		@titre = @user.nom
                 @coloc = Coloc.find(@user.coloc_id)
-                @colocataires = @coloc.users.order(:name)
+                @colocataires = @coloc.users.order(:nom)
                 if @colocataires.size == 2 
                         @liste1 = @user.depenses.where(:auto => 0).all
                         @nbrdep = @liste1.size
