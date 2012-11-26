@@ -44,7 +44,7 @@ class ColocsController < ApplicationController
         def tabbord 
                 @coloc = Coloc.find(params[:id])
                 @nbrcoloc = @coloc.users.size
-                @colocataires = @coloc.users
+                @colocataires = @coloc.users.order(:nom)
                 @titre = "Tableau de bord"
 
                 if (signed_in? and current_user.coloc_id != @coloc.id and not current_user.admin?)
