@@ -2,6 +2,7 @@
 class AuthentificationsController < ApplicationController
   def index
     @authentifications = current_user.authentifications if current_user
+    @faceb_url = "http://camouloc.herokuapp.com/auth/facebook"
   end
   
   def create

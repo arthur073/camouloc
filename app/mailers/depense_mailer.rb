@@ -6,7 +6,7 @@ class DepenseMailer < ActionMailer::Base
 		@depense = depense
 		@user_source = User.find(depense.user_id)
 		@coloc = Coloc.find(@user_source.coloc_id)
-                @colocataires = @coloc.users.all
+                @colocataires = @coloc.users.order(:created_at)
                 @nbrcoloc = @colocataires.size
 		@url  = "camouloc.herokuapp.com"
 		mail(:to => @coloc.users.where(:mail => 1).map(&:email), :subject => "[CAMOULOC] Nouvelle dépense")
@@ -16,7 +16,7 @@ class DepenseMailer < ActionMailer::Base
 		@depense = depense
 		@user_source = User.find(@depense.user_id)
 		@coloc = Coloc.find(@user_source.coloc_id)
-                @colocataires = @coloc.users.all
+                @colocataires = @coloc.users.order(:created_at)
                 @nbrcoloc = @colocataires.size
 		@url  = "camouloc.herokuapp.com"
 		mail(:to => @coloc.users.where(:mail => 1).map(&:email), :subject => "[CAMOULOC] Nouvelle dépense")

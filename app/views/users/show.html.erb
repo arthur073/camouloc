@@ -93,14 +93,12 @@
                 <%= link_to "Editer le profil", edit_user_path(@user), :class=>"signup_button5" %> 
         <% end %>
 
-	<% if current_user.admin? %>
 	<% if signed_in? and current_user.authentifications.empty? %>
 			<div class="signup_button4">
 				<%= link_to "Lier mon Facebook", @faceb_url , :style=>"color:white"%>
 			</div>
 	<% else %>
 		<%= link_to "Liaisons du compte", authentifications_url, :class=>"signup_button5"%>
-	<% end %>
 	<% end %>
 	<br>
         </p>

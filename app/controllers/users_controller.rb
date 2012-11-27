@@ -7,8 +7,8 @@ class UsersController < ApplicationController
 
 	def index
 		@titre = "Tous les utilisateurs"
-		@users = User.paginate(:page => params[:page], :per_page => 10)
-		@users2 = @users.reverse
+		@users = User.all(:order => "created_at ASC").paginate(:page => params[:page], :per_page => 10)
+		#@users2 = @users.reverse
 	end
 
 	def show
@@ -18,13 +18,13 @@ class UsersController < ApplicationController
                 @coloc = Coloc.find(@user.coloc_id)
                 @colocataires = @coloc.users.order(:created_at)
                 if @colocataires.size == 2 
-                        @liste1 = @user.depenses.where(:auto => 0).all
+                        @liste1 = @user.depenses.where(:auto => 0).order(:created_at)
                         @nbrdep = @liste1.size
                 elsif  @colocataires.size == 3 
-                        @liste2 = @user.trois_depenses.where(:auto => 0).all
+                        @liste2 = @user.trois_depenses.where(:auto => 0).order(:created_at)
                         @nbrdep = @liste2.size
                 elsif  @colocataires.size == 4
-                        @liste3 = @user.quatre_depenses.where(:auto => 0).all
+                        @liste3 = @user.quatre_depenses.where(:auto => 0).order(:created_at)
                         @nbrdep = @liste3.size
                 else
                         @nbrdep = 0
