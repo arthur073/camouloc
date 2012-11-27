@@ -6,7 +6,7 @@ class ColocsController < ApplicationController
         def show
                 @coloc = Coloc.find(params[:id])
                 @titre = @coloc.nom
-                @liste = @coloc.users.order(:nom) 
+                @liste = @coloc.users.order(:created_at) 
                 @messagespubl = @coloc.messages.where(:private=>0).order(:created_at).reverse.paginate(:page => params[:page], :per_page => 6)
                 @messagespriv = @coloc.messages.where(:private=>1).order(:created_at).reverse.paginate(:page => params[:page], :per_page => 6)
                 @param1 = params[:param1] # "value1"
@@ -44,7 +44,7 @@ class ColocsController < ApplicationController
         def tabbord 
                 @coloc = Coloc.find(params[:id])
                 @nbrcoloc = @coloc.users.size
-                @colocataires = @coloc.users.order(:nom)
+                @colocataires = @coloc.users.order(:created_at)
                 @titre = "Tableau de bord"
 
                 if (signed_in? and current_user.coloc_id != @coloc.id and not current_user.admin?)
