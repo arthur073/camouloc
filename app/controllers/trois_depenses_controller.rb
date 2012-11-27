@@ -5,13 +5,13 @@ class TroisDepensesController < ApplicationController
         def new
                 @troisdepense = TroisDepense.new
                 @titre = "Nouvelle dépense"
-                @colocataires = User.where(:coloc_id => current_user.coloc_id).all
+                @colocataires = User.where(:coloc_id => current_user.coloc_id).order(:created_at)
         end
 
         def create
                 @troisdepense = TroisDepense.new(params[:trois_depense])
                 @troisdepense.nbr_users = @troisdepense.destinataire_part + @troisdepense.destinataire_part2 + @troisdepense.destinataire_part3
-                @colocataires = User.where(:coloc_id => current_user.coloc_id).all
+                @colocataires = User.where(:coloc_id => current_user.coloc_id).order(:created_at)
                 if @troisdepense.save
                         #Traite un succès d'enregistrement.
 			# ajoute la somme dépensée au Chiffre d'Affaires

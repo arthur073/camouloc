@@ -5,13 +5,13 @@ class QuatreDepensesController < ApplicationController
         def new
                 @quatredepense = QuatreDepense.new
                 @titre = "Nouvelle dépense"
-                @colocataires = User.where(:coloc_id => current_user.coloc_id).all
+                @colocataires = User.where(:coloc_id => current_user.coloc_id).order(:created_at)
         end
 
         def create
                 @quatredepense = QuatreDepense.new(params[:quatre_depense])
                 @quatredepense.nbr_users = @quatredepense.destinataire_part + @quatredepense.destinataire_part2 + @quatredepense.destinataire_part3+ @quatredepense.destinataire_part4
-                @colocataires = User.where(:coloc_id => current_user.coloc_id).all
+                @colocataires = User.where(:coloc_id => current_user.coloc_id).order(:created_at)
 
                 if @quatredepense.save
                         #Traite un succès d'enregistrement.
