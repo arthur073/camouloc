@@ -47,6 +47,15 @@ class ColocsController < ApplicationController
                 @colocataires = @coloc.users.order(:created_at)
                 @titre = "Tableau de bord"
 
+		# affichage de toutes les dépenses de la colocation
+		if @nbrcoloc == 2 
+			@dep = Depense.all(:conditions => {:user_id => [@colocataires[0].id, @colocataires[1].id]}, :order => "created_at ASC")
+		elsif @nbrcoloc == 3
+			@dep = TroisDepense.all(:conditions => {:user_id => [@colocataires[0].id, @colocataires[1].id, @colocataires[2].id]}, :order => "created_at ASC")
+		elsif @nbrcoloc == 4 
+			@dep = QuatreDepense.all(:conditions => {:user_id => [@colocataires[0].id, @colocataires[1].id, @colocataires[2].id, @colocataires[3].id]}, :order => "created_at ASC")
+		end
+
                 if (signed_in? and current_user.coloc_id != @coloc.id and not current_user.admin?)
                         # si l'utilisateur n'est pas dans la coloc  et qu'il n'est pas admin, il est redirigé
                         flash[:error] = "Vous n'avez pas accès au tableau de bord de cette colocation."
