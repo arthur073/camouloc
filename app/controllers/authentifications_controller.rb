@@ -28,8 +28,8 @@ class AuthentificationsController < ApplicationController
 		@authent = Authentification.where(:uid=>auth['uid'], :provider=>auth['provider'])
 		User.all.each do |users|
 			@auth = users.authentifications
-			@auth.each do |auth| 
-				if auth.uid == auth['uid'] && auth.provider == auth['provider'] 
+			@auth.each do |authe| 
+				if authe.uid == auth['uid'] && authe.provider == auth['provider'] 
 					@user = users
 				end
 			end
