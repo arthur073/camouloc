@@ -66,12 +66,12 @@
                         }
 
 </script>
-<a href="#" class="signup_button4" id="captchavalider" onclick="open_infos();demask();" style="display:">Valider le formulaire</a>
+<a href="#" class="signup_button4" id="captchavalider" onclick="open_infos();demask();" style="display:none">Valider le formulaire</a>
 <!-- / POPUP-->   
 
 
 <!--POPUP INFOS-->    
-<a id="show_id2" onclick="document.getElementById('spoiler_id2').style.display='';" style="display:" class="signup_button5">Pourquoi ce captcha ? </a><br>
+<a id="show_id2" onclick="document.getElementById('spoiler_id2').style.display='';" style="display:none" class="signup_button5">Pourquoi ce captcha ? </a><br>
 <span id="spoiler_id2" style="display: none">
 L'équipe Camouloc met l'accent sur deux volontés : <br>
 <br>
@@ -86,7 +86,7 @@ Pour cela, nous utilisons une solution innovante créée par <%= link_to "une st
 <!-- / POPUP INFOS-->    
 
 
-<div id="valider" style="display:none;">
+<div id="valider" style="display:;">
 <i> Vous pouvez maintenant enregistrer la dépense. </i> <br>
 <%= f.submit "Enregistrer" %>
 </div>
