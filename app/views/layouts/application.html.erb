@@ -95,7 +95,10 @@
 
                  <% if signed_in? and current_user.admin? %>
                          <h1 class="onglets"> Admin </h1>
-                         <%= mail_to User.where(:mail => 1).map(&:email), "Mail Général", :subject => "[CAMOULOC] ??" %> <br>
+                         <%= mail_to User.where(:mail => 1).map(&:email).first(100), "Mail Général", :subject => "[CAMOULOC] ??" %> <br>
+                         <% if User.count > 100 %>
+                            <%= mail_to User.where(:mail => 1).map(&:email).last(User.all.count - 100), "Mail Général", :subject => "[CAMOULOC] ??" %> <br>
+                         <% end %>
                          <%= Message.count %> messages. <br>
                          <%= Depense.where(:auto => 1).count + TroisDepense.where(:auto =>1).count + QuatreDepense.where(:auto =>1).count %> dep automatiques. <br>
                          <%= TroisDepense.where("created_at > :date OR updated_at > :date", date: "2012-11-06").count + QuatreDepense.where("created_at > :date OR updated_at > :date", date: "2012-11-06").count + Depense.where("created_at > :date OR updated_at > :date", date: "2012-11-06").count %> dep payées. <br>
