@@ -17,7 +17,7 @@ title: {
 text: 'Répartition du chiffre d\'affaires de la colocation'
 },
 subtitle: {
-text: '<%= @coloc.nom %>',
+text: '<%= @coloc.nom.gsub('\'', ' ') %>',
 x: -20
 },
 tooltip: {
