@@ -52,8 +52,6 @@ class UsersController < ApplicationController
 			flash[:success] = "Utilisateur enregistré !"
 		else
 			@titre = "Inscription"
-         # TODO la colocation est la dernière colocation créée
-         #@coloc = Coloc.first(:order => 'created_at DESC')	
          @coloc = Coloc.find(@coloc_id)
          render 'new'
 		end
