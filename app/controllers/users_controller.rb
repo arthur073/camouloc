@@ -40,6 +40,7 @@ class UsersController < ApplicationController
 
 	def create
 		@user = User.new(params[:user])
+      @coloc_id = @user.coloc_id
 		if @user.save
 			# Traite un succès d'enregistrement.
 			# Envoie un email de bienvenue
@@ -51,9 +52,10 @@ class UsersController < ApplicationController
 			flash[:success] = "Utilisateur enregistré !"
 		else
 			@titre = "Inscription"
-                        #la colocation est la dernière colocation créée
-                        @coloc = Coloc.first(:order => 'created_at DESC')	
-                        render 'new'
+         # TODO la colocation est la dernière colocation créée
+         #@coloc = Coloc.first(:order => 'created_at DESC')	
+         @coloc = Coloc.find(@coloc_id)
+         render 'new'
 		end
 	end
 
