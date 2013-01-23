@@ -24,6 +24,16 @@ class ColocsController < ApplicationController
                 @coloc = Coloc.new
                 @coloc.palm = 1
                 @titre = "Inscription de la Colocation"
+                @nb_colocs = Coloc
+               
+                @colocs = Coloc.all
+                @nbrcolocs_vides = 0
+                @colocs.each do |col|
+                  if (col.users.size == 0)
+                        @nbrcolocs_vides = @nbrcolocs_vides + 1
+                  end
+                end
+
         end
 
         def create

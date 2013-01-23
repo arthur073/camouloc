@@ -35,5 +35,17 @@
         <div class="actions">
                 <%= f.submit "Inscription" %>
         </div>
+
+        <% if @nbrcoloc != 0 %>
+           <br/>
+           <strong> Vous avez déjà commencé à vous inscrire ? </strong> <br/>
+           <i> Reprenez là où vous en étiez !</i>
+           <br/>
+           <% @colocs.each do |col| %>
+              <% if col.users.size == 0 %>
+                 <%= link_to col.nom, col %>,
+              <% end %>
+           <% end %>
+        <% end %>
 <% end %>
 

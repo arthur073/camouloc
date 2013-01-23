@@ -23,7 +23,7 @@ task :unused_colocs => :environment do
         @colocs = Coloc.all
         @nbrcolocs = 0
         @colocs.each do |col|
-                if (col.users.count == 0)
+                if (col.users.size == 0)
                         @nbrcolocs = @nbrcolocs + 1
                 end
         end
