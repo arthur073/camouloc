@@ -66,12 +66,18 @@
                         }
 
 </script>
-<a href="#" class="signup_button4" id="captchavalider" onclick="open_infos();demask();" style="display:none">Valider le formulaire</a>
+<% if mobile_device? %>
+   <a href="#" class="signup_button4" id="captchavalider" onclick="open_infos();demask();" style="display:none">Valider le formulaire</a>
+<% else %>
+   <a href="#" class="signup_button4" id="captchavalider" onclick="open_infos();demask();" style="display:">Valider le formulaire</a>
+<% end %>
+
 <!-- / POPUP-->   
 
 
 <!--POPUP INFOS-->    
-<a id="show_id2" onclick="document.getElementById('spoiler_id2').style.display='';" style="display:none" class="signup_button5">Pourquoi ce captcha ? </a><br>
+<% if !mobile_device? %>
+<a id="show_id2" onclick="document.getElementById('spoiler_id2').style.display='';" style="display:" class="signup_button5">Pourquoi ce captcha ? </a><br>
 <span id="spoiler_id2" style="display: none">
 L'équipe Camouloc met l'accent sur deux volontés : <br>
 <br>
@@ -83,10 +89,16 @@ Pour cela, nous utilisons une solution innovante créée par <%= link_to "une st
 <br>
 <a id="hide_id2" onclick="document.getElementById('spoiler_id2').style.display='none';" class="signup_button5">Merci, j'ai compris</a><br>
 </span>
+<% end %>
 <!-- / POPUP INFOS-->    
 
 
-<div id="valider" style="display:;">
+<% if mobile_device? %>
+   <div id="valider" style="display:;">
+<% else %>
+   <div id="valider" style="display:none;">
+<% end %>
+
 <i> Vous pouvez maintenant enregistrer la dépense. </i> <br>
 <%= f.submit "Enregistrer" %>
 </div>
