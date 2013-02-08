@@ -32,7 +32,6 @@
 <%= f.text_field :montant %>
 </div>
 
-<!--début captcha ! -->
 
 <div class="field">
 <%= f.label "Quelle est la raison de la dépense ?" %><br>
@@ -41,66 +40,35 @@
 
 <!--POPUP-->    
 <script>
-	function demask() {
-		document.getElementById("valider").style.display="inline";
-		document.getElementById("captchavalider").style.display="none";
-		document.getElementById("show_id2").style.display="none";
-	}
-	
-       function open_infos()
-                        {
-                                width = 350;
-                                height = 360;
-                                if(window.innerWidth)
-                                {
-                                        var left = (window.innerWidth-width)/2;
-                                        var top = (window.innerHeight-height)/2;
-                                }
-                                else
-                                {
-                                        var left = (document.body.clientWidth-width)/2;
-                                        var top = (document.body.clientHeight-height)/2;
-                                }
-                                window.open('http://captcha.olympe.in','nom_de_ma_popup','menubar=no, scrollbars=no, top='+top+', left='+left+', width='+width+', height='+height+'');
-                        }
-
+   function reload() {
+      var iframe = document.getElementById("icaptcha");
+      iframe.src = iframe.src;
+   }
 </script>
-<% if mobile_device? %>
-   <a href="#" class="signup_button4" id="captchavalider" onclick="open_infos();demask();" style="display:none">Valider le formulaire</a>
-<% else %>
-   <a href="#" class="signup_button4" id="captchavalider" onclick="open_infos();demask();" style="display:">Valider le formulaire</a>
-<% end %>
-
-<!-- / POPUP-->   
-
-
-<!--POPUP INFOS-->    
-<% if !mobile_device? %>
-<a id="show_id2" onclick="document.getElementById('spoiler_id2').style.display='';" style="display:" class="signup_button5">Pourquoi ce captcha ? </a><br>
-<span id="spoiler_id2" style="display: none">
-L'équipe Camouloc met l'accent sur deux volontés : <br>
-<br>
-1. garantir <strong> l'accès gratuit à Camouloc </strong> pour tous les utilisateurs <br>
-2. rendre l'application la plus <strong> stable </strong> possible face aux attaques du web. <br>
-<br>
-Pour cela, nous utilisons une solution innovante créée par <%= link_to "une start-up française en plein essor", partenaires_path %> : <strong> le publiCaptcha </strong>. Cette solution permet à la fois de se protéger contre les robots du web et de monétiser le site, sans pour autant être aussi dérangeant qu'une popup ou autre publicité.
-<br>
-<br>
-<a id="hide_id2" onclick="document.getElementById('spoiler_id2').style.display='none';" class="signup_button5">Merci, j'ai compris</a><br>
-</span>
-<% end %>
-<!-- / POPUP INFOS-->    
-
 
 <% if mobile_device? %>
    <div id="valider" style="display:;">
+   <i> Vous pouvez maintenant enregistrer la dépense. </i> <br>
+   <%= f.submit "Enregistrer" %>
+   </div>
 <% else %>
+   <input type='button' name='osx' value='Valider le formulaire' class='osx demo signup_button4' id="captchavalider" onclick="reload()"/>
    <div id="valider" style="display:none;">
+   <i> Vous pouvez maintenant enregistrer la dépense. </i> <br>
+   <%= f.submit "Enregistrer" %>
+   </div>
 <% end %>
 
-<i> Vous pouvez maintenant enregistrer la dépense. </i> <br>
-<%= f.submit "Enregistrer" %>
+<% end %>
+
+
+<!-- modal content -->
+<div id="osx-modal-content">
+<div id="osx-modal-title">Veuillez valider le captcha ci-dessous</div>
+<div id="osx-modal-data">
+<iframe src="http://captcha.olympe.in" scrolling="yes" class="icaptcha" id="icaptcha"></iframe>
+</div>
 </div>
 
-<% end %>
+
 

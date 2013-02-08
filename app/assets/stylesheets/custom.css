@@ -217,7 +217,7 @@ a.signup_button3 {
 	padding: 10px;
 	box-shadow: 0px 2px 5px #1c1a19;
 }
-a.signup_button4, div.signup_button4 {
+a.signup_button4, div.signup_button4{
 	margin-right: auto;
 	display: block;
 	text-align: center;
@@ -229,6 +229,26 @@ a.signup_button4, div.signup_button4 {
 	padding: 4px;
 	margin-top: 0.6em;
 	box-shadow: 0px 2px 5px #1c1a19;
+}
+
+input.signup_button4 {
+   border:none;
+	margin-right: auto;
+	display: block;
+	text-align: center;
+	width: 180px;
+   height : 30px;
+	color: white;
+	background: #09c;
+	font-size: 100%;
+	font-weight: bold;
+	padding: 8px;
+	margin-top: 1em;
+	box-shadow: 0px 2px 5px #1c1a19;
+}
+
+input.signup_button4:hover {
+   text-decoration : underline;
 }
 a.signup_button5, div.signup_button5 {
 	margin-right: auto;
@@ -243,6 +263,7 @@ a.signup_button5, div.signup_button5 {
 	padding: 4px;
 	box-shadow: 0px 2px 2px #1c1a19;
 }
+
 a.signup_button6, div.signup_button6 {
 	margin-right: auto;
 	display: block;
@@ -846,4 +867,34 @@ a.popuplink:hover,a.popuplink:active {color:#fff; text-decoration:none; font-siz
 	position : relative;
 	left: 30em;
 	bottom : 4em;
+}
+
+
+/*
+ * SimpleModal OSX Style Modal Dialog
+ * http://simplemodal.com
+ *
+ * Copyright (c) 2013 Eric Martin - http://ericmmartin.com
+ *
+ * Licensed under the MIT license:
+ *   http://www.opensource.org/licenses/mit-license.php
+ */
+
+#osx-modal-content, #osx-modal-data {display:none;}
+
+/* Overlay */
+#osx-overlay {background-color:#000;}
+
+/* Container */
+#osx-container {background-color:#16344C; color:#000; font: 16px/24px "Lucida Grande",Arial,sans-serif; padding-bottom:0px; width:600px; -moz-border-radius-bottomleft:6px; -webkit-border-bottom-left-radius:6px; -moz-border-radius-bottomright:6px; -webkit-border-bottom-right-radius:6px; border-radius:0 0 6px 6px; -moz-box-shadow:0 0 64px #000; -webkit-box-shadow:0 0 64px #000; box-shadow:0 0 64px #000;}
+#osx-container a {color:#ddd;}
+#osx-container #osx-modal-title {color:#fff; background-color:#09c; border-bottom:1px solid #ccc; font-weight:bold; padding:6px 8px;} /*text-shadow:0 1px 0 #f4f4f4;}*/
+#osx-container #osx-modal-data {font-size:12px; padding:6px 12px;}
+#osx-container h2 {margin:10px 0 6px;}
+#osx-container p {margin-bottom:10px; font-size:120%; color:white}
+#osx-container span {color:#777;}
+
+.icaptcha {
+   height : 360px;
+   width  : 550px;
 }
