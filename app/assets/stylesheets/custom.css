@@ -233,14 +233,13 @@ a.signup_button4, div.signup_button4{
 
 input.signup_button4 {
    border:none;
-	margin-right: auto;
-	display: block;
-	text-align: center;
+	display: inline;
 	width: 180px;
    height : 30px;
 	color: white;
 	background: #09c;
 	font-size: 100%;
+   line-height: 10px;
 	font-weight: bold;
 	padding: 8px;
 	margin-top: 1em;
@@ -722,7 +721,7 @@ ul.colocs {
 #blanket {
    background-color:#111;
    opacity: 0.65;
-   *background:none;
+   background:none;
    position:absolute;
    z-index: 9001;
    top:0px;
