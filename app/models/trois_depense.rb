@@ -4,4 +4,6 @@ class TroisDepense < ActiveRecord::Base
 
   # on définit les paramètres du modèle
   validates :montant, :presence     => true
+  validates :raison, :presence     => true
+  validates :montant, :numericality => {:less_than => 3000}
 end

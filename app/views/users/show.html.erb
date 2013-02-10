@@ -27,7 +27,7 @@
         <% else %>
                 <% if signed_in? and (current_user.coloc_id == @user.coloc_id or current_user.admin?)%>
                         <strong>  Liste des dépenses de l'utilisateur : </strong>
-                        <table>
+                        <table class="depenses">
                                 <tr>
                                         <td> Source </td>
                                         <% @colocataires.each do |colocataires| %>

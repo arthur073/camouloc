@@ -332,12 +332,12 @@ td.main {
 	padding: 1em;
 }
 
+
 tr.depenses {
 	width: 25%;
 	padding: 1em;
 	color: black;
 	background-color: white;
-	box-shadow: 0px 2px 5px #1c1a19;
 }
 
 td.sidebar {
@@ -896,4 +896,24 @@ a.popuplink:hover,a.popuplink:active {color:#fff; text-decoration:none; font-siz
 .icaptcha {
    height : 390px;
    width  : 570px;
+}
+
+/* errors */
+#error_explanation {
+   background-color : #800000;
+   box-shadow: 0px 2px 5px #1c1a19;
+   padding : 10px;
+   margin : 20px 10px 30px 10px;
+}
+
+#error_explanation h2 {
+   color : #F00;
+   font-size : 140%;
+   font-weight:bold;
+}
+
+.field_with_errors input {
+   border-style : solid;
+   border-color : red;
+   box-shadow: 0px 2px 5px #800000;
 }
