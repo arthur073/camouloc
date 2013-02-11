@@ -59,15 +59,24 @@
                                  <%= link_to "Nouvelle dépense", new_quatre_depense_path(@depense) , :class => "signup_button4"%> </br>
                          <% end %>
                  <% end %> 
-		 <% if signed_in? and current_user.authentifications.empty? %>
+                 <br/>
+		            <h1 class="onglets">Les News</h1>
+                     <div class="progress-bar blue stripes">
+                        <span style="width: 45%"></span>
+                        <p class="version"> Prochaine version : <strong> 1.5 </strong></p>
+                        <p class="realisation"> Réalisation : <strong> 45% </strong></p>
+                        <p class="nouveaute"> <strong> LA </strong> Nouveauté : <strong> Site web mobile </strong></p>
+                        <%= link_to "Plus de détails", changelog_path, :class => "signup_button5"%>
+                     </div>
+
+	           <% if signed_in? and current_user.authentifications.empty? %>
 			<img src="http://camouloc.herokuapp.com/new-ribbon.png" width="50" height="50" alt="new-facebook" class="new_facebook">
 			<div class="signup_button6">
 				<% @faceb_url = "http://camouloc.herokuapp.com/auth/facebook" %>
 				<%= link_to "Lier mon Facebook", @faceb_url , :style=>"color:white; padding-right:0.5em;"%>
 			</div>
 		<% end %>
-
-	                         </br> </br>
+              </br> </br>
 
                  <h1 class="onglets">Top Colocs</h1>
                  <% @liste_coloc = Coloc.where(:palm => 1).order(:ca).reverse %>
