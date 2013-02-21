@@ -1,0 +1,61 @@
+
+
+<ul>
+<li class="rounded shadow">
+<% if signed_in? %>
+   Salut <%= current_user.nom %> ! <br>
+<span class="description">
+Bienvenue sur la version mobile de Camouloc, une version allégée et adaptée 
+aux smartphones.
+</span>
+
+<% else %>
+Camouloc c'est quoi ? <br/>
+<span class="description">
+Une manière intuitive de gérer votre coloc ! <br>
+Rejoignez des centaines d'utilisateurs inscrits
+sur Camouloc et dîtes adieu aux problèmes de comptes ! <br>
+</li>
+<li class="rounded shadow">
+Vous voici sur la version mobile de Camouloc. <br>
+<span class="description">Veuillez vous connecter pour commencer. </span>
+</span>
+</li>
+</ul>
+
+<ul>
+<li class="rounded shadow arrow">
+<%= link_to "Connectez-vous", login_path %>
+<% end %>
+</li>
+</ul>
+
+<% if signed_in? %>
+   <br>
+<ul>
+   <li class="arrow shadow_top">
+       <% if Coloc.find(current_user.coloc_id).users.size == 2 %>
+            <%= link_to "Nouvelle dépense", new_depense_path(@depense) , :class => "signup_button4"%> 
+       <% elsif Coloc.find(current_user.coloc_id).users.size == 3 %>
+            <%= link_to "Nouvelle dépense", new_trois_depense_path(@depense) , :class => "signup_button4"%>
+       <% elsif Coloc.find(current_user.coloc_id).users.size == 4 %>
+            <%= link_to "Nouvelle dépense", new_quatre_depense_path(@depense) , :class => "signup_button4"%>
+       <% end %>
+    </li>
+
+    <li class="arrow shadow_top">
+       <%= link_to "Mon tableau de bord", tableau_bord_path(Coloc.find(current_user.coloc_id).id)  %>
+    </li>
+    <li class="arrow shadow_top">
+    <%= link_to "Mon profil", current_user %>
+    </li>
+    <li class="arrow shadow_top">
+       <%= link_to "Ma colocation", Coloc.find(current_user.coloc_id)  %>
+    </li>
+    </ul>
+<% end %>
+
+
+
+
+

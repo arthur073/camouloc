@@ -1,0 +1,63 @@
+
+<ul>
+<li class="arrow">
+Colocation : <%= link_to @coloc.nom, @coloc, :class => "memeLigne" %>
+</li>
+<li class="">
+Mail : <%= mail_to @user.email, @user.email, :class => "memeLigne" %>
+</li>
+<li class="">
+Dépenses : <span class="enValeur"> <%= @nbrdep %> </span>
+</li>
+<li class="">
+Compte crée le <span class="enValeur"> <%= @user.created_at.strftime("%d %b. %Y") %> </span>
+</li>
+</ul>
+</ul>
+
+
+
+<ul> <li class="rounded"> Liste des dépenses </li>
+   <% @liste1.reverse.each do |depenses|%>
+      <li class="selectable"> 	
+      Le <span class="enValeur"> 
+      <%= depenses.created_at.strftime("%d %b. %Y") %> </span> <br>
+      De : 
+      <span class="enValeur"> 
+      <%= User.find(depenses.user_id).nom %> <br>
+      </span>
+      Pour <%= @colocataires[0].nom %> : 
+      <span class="enValeur"> 
+      <%= "oui" if depenses.destinataire_part == 1 %> 
+      <%= "non" if depenses.destinataire_part == 0 %> <br> 
+      </span>
+      Pour <%= @colocataires[1].nom %> : 
+      <span class="enValeur"> 
+      <%= "oui" if depenses.destinataire_part2 == 1 %> 
+      <%= "non" if depenses.destinataire_part2 == 0 %> <br> 
+      </span>
+      <% if @colocataires.size > 2 %>
+      Pour <%= @colocataires[2].nom %> : 
+      <span class="enValeur"> 
+      <%= "oui" if depenses.destinataire_part3 == 1 %> 
+      <%= "non" if depenses.destinataire_part3 == 0 %> <br> 
+      </span>
+      <% if @colocataires.size > 3 %>
+      Pour <%= @colocataires[3].nom %> : 
+      <span class="enValeur"> 
+      <%= "oui" if depenses.destinataire_part4 == 1 %> 
+      <%= "non" if depenses.destinataire_part4 == 0 %> <br> 
+      </span>
+      <% end%>
+      <% end%>
+      Combien :	
+      <span class="enValeur"> 
+      <%= depenses.montant %> € 
+      </span> <br>
+      Raison : 
+      <span class="enValeur"> 
+      <%= depenses.raison %> 
+      </span> 
+      </li>
+<% end %>
+   </ul>

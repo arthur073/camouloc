@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class ColocsController < ApplicationController
-        rescue_from ActiveRecord::RecordNotFound, :with => :coloc_manquante
+        #rescue_from ActiveRecord::RecordNotFound, :with => :coloc_manquante
         helper_method :sort_column, :sort_direction
 
         def show
@@ -55,7 +55,8 @@ class ColocsController < ApplicationController
                 @coloc = Coloc.find(params[:id])
                 @nbrcoloc = @coloc.users.size
                 @colocataires = @coloc.users.order(:created_at)
-                @titre = "Tableau de bord"
+                @titre = "Tableau de bord" unless mobile_device?
+                @titre = "Résumé" if mobile_device?
 
 		# affichage de toutes les dépenses de la colocation
 		if @nbrcoloc == 2 

@@ -1,0 +1,14 @@
+<ul>
+   <li class="arrow"> 
+   <a href="/auth/facebook?inscr=0" style="color:white"> Login with Facebook</a>
+   </li>
+</ul>
+
+
+<%= form_for(:session, :url => sessions_path) do |f| %>
+  <ul class="rounded">
+   <li class="rounded">Email<%= f.text_field :email, :style => "background-color : white; color : black;" %></li>
+   <li class="rounded">Mot de passe<%= f.password_field :password, :style => "background-color : white; color : black;"%></li>
+  </ul>
+  <%= f.submit "S'identifier", :class=> "whiteButton"%>
+<% end %>

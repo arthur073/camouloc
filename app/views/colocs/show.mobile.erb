@@ -1,0 +1,29 @@
+<ul>
+<li class="">
+Colocation : <%= link_to @coloc.nom, @coloc, :class => "memeLigne" %>
+</li>
+<li class="">
+Colocataires : <span class="enValeur"> <%= @coloc.users.size %>/4 </span>
+</li>
+<li class="">
+Chiffre d'affaires : <span class="enValeur"> <%= @coloc.ca %> €</span>
+</li>
+<li class="">
+Visible ? <span class="enValeur"> 
+<%= "oui" if @coloc.palm == 1%> 
+<%= "non" unless @coloc.palm == 1%> 
+</span>
+</li>
+<li class="">
+Coloc créée le <span class="enValeur"> <%= @coloc.created_at.strftime("%d %b. %y") %> </span>
+</li>
+
+</ul>
+
+<ul>
+<li class="rounded"> Liste des membres </li>
+<% @liste.each do |user|%>
+   <li class="arrow"> <%= link_to user.nom, user %> </li>
+<% end %>
+</ul>
+

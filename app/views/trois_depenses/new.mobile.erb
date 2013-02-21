@@ -1,0 +1,20 @@
+<% @titre = "Dépense" %>
+<%= form_for(@troisdepense) do |f| %>
+   <%= render 'shared/error_messages', :object => f.object %>
+  <ul class="rounded">
+    <li class="rounded">Qui a payé ? <%= f.select :user_id, options_for_select([[ @colocataires[0].nom ,  @colocataires[0].id ], [ @colocataires[1].nom ,  @colocataires[1].id ], [ @colocataires[2].nom ,  @colocataires[2].id ]], [current_user.nom, current_user.id])%> </li>
+    <li class="rounded">Pour qui payez-vous ?<br>
+         <%=f.check_box :destinataire_part %>  		
+         <%= f.label @colocataires[0].nom %><br>
+         <%=f.check_box :destinataire_part2 %> 
+         <%= f.label @colocataires[1].nom %><br>
+          <%=f.check_box :destinataire_part3 %> 
+          <%= f.label @colocataires[2].nom %><br>
+
+   </li>
+   <li class="rounded">Quel est le montant de la dépense ?<%= f.text_field :montant, :style => "background-color : white; color : black;" %></li>
+    <li class="rounded">Pour quelle raison ?<%= f.text_field :raison, :style => "background-color : white; color : black;"%></li>
+
+  </ul>
+  <%= f.submit "Enregistrer", :class=> "whiteButton"%>
+<% end %>
