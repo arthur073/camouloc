@@ -1,3 +1,7 @@
+body {
+   width : 320px;
+}
+
 .shadow {
 	box-shadow: 0px 2px 5px #1c1a19;
    padding-top : 10px;
