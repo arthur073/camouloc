@@ -7,7 +7,7 @@
                 </td>
                 <td class="sidebar round">
                         <strong>nom</strong> <%= @coloc.nom %><br>
-                        <strong>colocataires</strong> <%= @coloc.users.count %>/4<br>
+                        <strong>colocataires</strong> <%= @coloc.users.count %><br>
                         <strong>chiffre d'affaires</strong> <%= "%0.2f" % @coloc.ca %> € <br>
                         <strong>visible ?</strong> 
                         <% if @coloc.palm == 1 %> 
@@ -122,12 +122,11 @@
 
 
 
-<% if @coloc.users.size < 4 %>
         <% unless (@coloc.users.size == 2 and (@coloc.users[0].depenses.size != 0 or @coloc.users[1].depenses.size != 0)) or  
         (@coloc.users.size == 3 and (@coloc.users[0].trois_depenses.size != 0 or @coloc.users[1].trois_depenses.size != 0 or @coloc.users[2].trois_depenses.size != 0)) or
-        (@coloc.users.size == 4 and (@coloc.users[0].quatre_depenses.size != 0 or @coloc.users[1].quatre_depenses.size != 0 or @coloc.users[2].quatre_depenses.size != 0 or @coloc.users[3].quatre_depenses.size != 0)) %>
+        (@coloc.users.size == 4 and (@coloc.users[0].quatre_depenses.size != 0 or @coloc.users[1].quatre_depenses.size != 0 or @coloc.users[2].quatre_depenses.size != 0 or @coloc.users[3].quatre_depenses.size != 0)) 
+     %>
          <%= link_to "Inscrire mes colocs", new_user_path(:coloc_id => @coloc.id) , :class => "signup_button4" %>
-<% end %>
 <% end %>
 
 

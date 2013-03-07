@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+   </head>
+   <body>
+      <h3>Rapport de nouvelle dépense, colocation <%= @coloc.nom %></h3>
+      <p> L'utilisateur <%= @user_source.nom %> a rajouté une nouvelle dépense 
+      <% if @depense.auto == 1 %>
+         <strong> mensuelle</strong>, elle sera ajoutée tous les 1er de chaque mois
+      <% end %>
+      .   
+      </br>
+      <li> Montant : <%= @depense.montant %> </li>
+      <li> Raison : <%= @depense.raison %> </li>
+      <li> Source : <%= @user_source.nom %> </li>
+      <li> Répartition des parts : </li>
+      <% @depense.parties.each do |part| %>
+         <% if part.last == "1" %>
+            <dd> <%= @colocatairesTmp.pop.nom %> : oui </br>
+         <% else %>
+            <dd><%= @colocatairesTmp.pop.nom %> : non </br>
+         <% end %>
+      <% end %>
+
+      </p>
+
+      <p> Rendez vous sur <%= link_to "Camouloc", "http://camouloc.herokuapp.com" %> pour vérifier les comptes de la colocation. </p>
+      <p> Merci de nous faire confiance et bonne journée !</p>
+   </body>
+   <

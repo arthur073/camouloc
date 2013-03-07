@@ -1,0 +1,9 @@
+<% @expenses.reverse.each do |e| %>
+   source : <%= User.find(e.user_id).nom %> <br>
+   parties : <%= e.parties %> <br>
+   montant : <%= e.montant %> <br>
+   raison : <%= e.raison %> <br>
+   auto : <%= e.auto %> <br> 
+   nbr_users : <%= e.nbr_users %> <br> <br>
+<% end %>
+

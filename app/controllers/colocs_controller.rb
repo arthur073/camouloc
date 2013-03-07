@@ -33,7 +33,6 @@ class ColocsController < ApplicationController
                         @nbrcolocs_vides = @nbrcolocs_vides + 1
                   end
                 end
-
         end
 
         def create
@@ -59,12 +58,32 @@ class ColocsController < ApplicationController
                 @titre = "Résumé" if mobile_device?
 
 		# affichage de toutes les dépenses de la colocation
+      @expenses = Array.new 
 		if @nbrcoloc == 2 
 			@dep = Depense.all(:conditions => {:user_id => [@colocataires[0].id, @colocataires[1].id]}, :order => "created_at ASC")
 		elsif @nbrcoloc == 3
 			@dep = TroisDepense.all(:conditions => {:user_id => [@colocataires[0].id, @colocataires[1].id, @colocataires[2].id]}, :order => "created_at ASC")
 		elsif @nbrcoloc == 4 
 			@dep = QuatreDepense.all(:conditions => {:user_id => [@colocataires[0].id, @colocataires[1].id, @colocataires[2].id, @colocataires[3].id]}, :order => "created_at ASC")
+      elsif @nbrcoloc > 4
+         @dep = Array.new 
+         @expenses = Expense.find(:all, :conditions => ["user_id IN (?) AND auto = 0", @colocataires.map { |c| c.id }] )
+         @expenses.delete_if {|item| item == [] or item.auto == 1 } 
+
+         @expensesSource = Array.new
+         @colocataires.each do |coloc, i|
+            @tmp = Expense.find(:all, :conditions => ["user_id IN (?) AND auto = 0", coloc.id ])
+            if @tmp == [] 
+               @expensesSource.push(0)
+            else
+               @sum = 0
+               @tmp.each do |t|
+                 @sum += t.montant
+               end 
+               @expensesSource.push(@sum)
+            end
+         end
+         @expensesSource.reverse!
 		end
 
                 if (signed_in? and current_user.coloc_id != @coloc.id and not current_user.admin?)
@@ -272,6 +291,23 @@ class ColocsController < ApplicationController
                         @sumdep2 = @colocataires[1].quatre_depenses.where(:auto =>0).sum(:montant)
                         @sumdep3 = @colocataires[2].quatre_depenses.where(:auto =>0).sum(:montant)
                         @sumdep4 = @colocataires[3].quatre_depenses.where(:auto =>0).sum(:montant)
+                elsif @nbrcoloc > 4
+                  @arrayTot = Array.new(@colocataires.size, 0)
+                  @indFirst = @colocataires.first.id
+                  @expenses.each do |e|
+                     # on ajoute pour la source
+                     @arrayTot[e.user_id - @indFirst] += e.montant
+                     # on retire pour les parties
+                     e.parties.each do |p|
+                        @arrayTot[p.first.to_i - @indFirst] -= e.montant / e.nbr_users if p.last == "1"
+                     end
+                  end
+
+                  # on redistribue les tot selon les colocs
+                  @colocataires.reverse.each do |coloc, i|
+                     coloc.tot = @arrayTot.pop
+                  end 
+
                 end
 
 
@@ -293,6 +329,13 @@ class ColocsController < ApplicationController
                         @autodep3 = @colocataires[2].quatre_depenses.where(:auto => 1)
                         @autodep4 = @colocataires[3].quatre_depenses.where(:auto => 1)
                         @autodep = @autodep1 + @autodep2 + @autodep3 + @autodep4
+                end
+                if @nbrcoloc > 4
+                   @autodepArray = Array.new
+                   @colocataires.each do |c, i|
+                     @autodepArray.push(c.expenses.where(:auto => 1))
+                   end
+                   @autodep = @autodepArray.inject(:+)
                 end
         end 
 

@@ -54,6 +54,10 @@ type: 'pie',
       ['<%= @colocataires[1].nom.gsub('\'', ' ') %>',   <%= (@sumdep2 / @coloc.ca * 100) %>],
       ['<%= @colocataires[2].nom.gsub('\'', ' ') %>',   <%= (@sumdep3 / @coloc.ca * 100) %>],
       ['<%= @colocataires[3].nom.gsub('\'', ' ') %>',   <%= (@sumdep4 / @coloc.ca * 100) %>]
+      <% elsif @nbrcoloc > 4 %>
+         <% @colocataires.each do |coloc, i| %>
+         ['<%= coloc.nom.gsub('\'', ' ') %>', <%= @expensesSource.pop / @coloc.ca * 100 %> ], 
+         <% end %>
       <% end %>
       ],
 	}]
@@ -164,7 +168,10 @@ type: 'pie',
 		<tr> <td><%= @colocatairestries[2].nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %>€ à <%= @colocatairestries.last.nom %>. </td></tr>
 	<% end %>
 <% end %>	
-			<% end %>
+<% end %>
+<% if @nbrcoloc > 4 %>
+   <tr> <td> <i> Fonctionnalité en cours d'implémentation </i> </td> </tr>
+<% end %>
 		</table>
 
 		<table class="tabbord">
@@ -201,7 +208,6 @@ type: 'pie',
 
 
 			<table class="tabbord">
-
 				<tr>
 					<td><strong> Source </strong> </td>
 					<% @colocataires.each do |colocataires| %>
@@ -229,6 +235,22 @@ type: 'pie',
 					<td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
 				</tr>
 			<% end %>
+
+         <% @expenses.reverse.each do |exp| %>
+            <tr>
+					<td>	<%= User.find(exp.user_id).nom %> </td>
+               <% exp.parties.each do |p| %> 
+                  <% if p.last == "0"%>
+                     <td> non </td>
+                  <% else %>
+                     <td> oui </td>
+                  <% end %>
+               <% end %>
+               <td>	<%= exp.montant %> € </td>
+					<td>	<%= exp.raison %> </td>
+					<td>	<%= exp.created_at.strftime("%d %b. %Y") %> </td>
+            </tr>
+         <% end %>
 		</table>
 	</span> <br>
 	<%= link_to "Retour à la colocation", @coloc, :class=>"signup_button5"%>

@@ -2,11 +2,13 @@
 MyColoc::Application.routes.draw do
 
 
+
 	resources :users
 	resources :authentifications
 	resources :depenses
 	resources :trois_depenses
 	resources :quatre_depenses
+	resources :expenses
 	resources :colocs
 	resources :messages
 	resources :sessions, :only => [:new, :create, :destroy]

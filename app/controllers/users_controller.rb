@@ -28,6 +28,9 @@ class UsersController < ApplicationController
          @liste3 = @user.quatre_depenses.where(:auto => 0).order(:created_at)
          @liste1 = @liste3 if mobile_device?
          @nbrdep = @liste3.size
+      elsif @colocataires.size > 4
+         @expenses = Expense.where(:user_id => @user.id, :auto => 0)
+         @nbrdep = @expenses.size
       else
          @nbrdep = 0
       end

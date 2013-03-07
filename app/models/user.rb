@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
 	belongs_to :coloc
+	has_many :expenses, :dependent => :destroy
 	has_many :depenses, :dependent => :destroy
 	has_many :trois_depenses, :dependent => :destroy
 	has_many :quatre_depenses, :dependent => :destroy
