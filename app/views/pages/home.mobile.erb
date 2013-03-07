@@ -40,6 +40,8 @@ Vous voici sur la version mobile de Camouloc. <br>
             <%= link_to "Nouvelle dépense", new_trois_depense_path(@depense) , :class => "signup_button4"%>
        <% elsif Coloc.find(current_user.coloc_id).users.size == 4 %>
             <%= link_to "Nouvelle dépense", new_quatre_depense_path(@depense) , :class => "signup_button4"%>
+         <% elsif Coloc.find(current_user.coloc_id).users.size > 4 %>
+            <%= link_to "Nouvelle dépense", new_expense_path(@expense) , :class => "signup_button4"%>
        <% end %>
     </li>
 

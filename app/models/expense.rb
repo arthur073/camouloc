@@ -18,4 +18,5 @@ class Expense < ActiveRecord::Base
       end
       return @nbr
    end
+
 end

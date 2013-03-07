@@ -232,6 +232,20 @@ a.signup_button4, div.signup_button4{
 	box-shadow: 0px 2px 5px #1c1a19;
 }
 
+a.signup_button4Head {
+	margin-right: auto;
+	display: block;
+	text-align: center;
+	width: 170px;
+	color: white;
+	background: #09c;
+	font-weight: bold;
+	padding: 4px;
+	margin-top: 0.6em;
+	box-shadow: 0px 2px 5px #1c1a19;
+
+}
+
 input.signup_button4 {
    border:none;
 	display: inline;
@@ -1032,3 +1046,12 @@ span.type2 {
    position : relative;
    float : right;
 }
+
+.headerInscr {
+   position : relative;
+   top : -3em;
+   left : 46em;
+   height : 22px;
+   font-size : 130%;
+}
+

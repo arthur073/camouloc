@@ -90,13 +90,9 @@
                          <% end %>
                  <% end %> 
                  <%= link_to "Et les autres...", colocs_path, :class=>"signup_button5" %>
-                 <% unless signed_in?  %>
-                         <br>
-                         <%= link_to "Inscription", signup_path, :class=>"signup_button4"%> <br>
-                         <br>
-                 <% else %>
-                         <br> <br> <br>
-                 <% end %>
+                 <br>
+                 <br>
+                 <br>
                  <h1 class="onglets"> Les Chiffres </h1>
                  Somme gérée : <strong><%= "%0.0f" % Coloc.sum(:ca) %> €. </strong> <br>
                  <strong> <%= User.count %> </strong> utilisateurs, <strong> <%= Coloc.count %> </strong> colocations. <br>

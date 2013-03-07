@@ -124,12 +124,11 @@
 
         <% unless (@coloc.users.size == 2 and (@coloc.users[0].depenses.size != 0 or @coloc.users[1].depenses.size != 0)) or  
         (@coloc.users.size == 3 and (@coloc.users[0].trois_depenses.size != 0 or @coloc.users[1].trois_depenses.size != 0 or @coloc.users[2].trois_depenses.size != 0)) or
-        (@coloc.users.size == 4 and (@coloc.users[0].quatre_depenses.size != 0 or @coloc.users[1].quatre_depenses.size != 0 or @coloc.users[2].quatre_depenses.size != 0 or @coloc.users[3].quatre_depenses.size != 0)) 
+        (@coloc.users.size == 4 and (@coloc.users[0].quatre_depenses.size != 0 or @coloc.users[1].quatre_depenses.size != 0 or @coloc.users[2].quatre_depenses.size != 0 or @coloc.users[3].quatre_depenses.size != 0)) or
+        (@coloc.users.size > 4 and @pleine == true)
      %>
          <%= link_to "Inscrire mes colocs", new_user_path(:coloc_id => @coloc.id) , :class => "signup_button4" %>
 <% end %>
-
-
 
 
 <%= edit_coloc? %>

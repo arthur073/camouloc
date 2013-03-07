@@ -11,6 +11,12 @@ class ColocsController < ApplicationController
                 @messagespriv = @coloc.messages.where(:private=>1).order(:created_at).reverse.paginate(:page => params[:page], :per_page => 6)
                 @param1 = params[:param1] # "value1"
                 @colocs = Coloc.where(:palm=>1).order(:ca)
+                @pleine = false
+                Expense.all.each do |e|
+                  if User.find(e.parties.first.first.to_i).coloc_id == @coloc.id
+                     @pleine = true
+                  end
+                end
         end
 
         def index

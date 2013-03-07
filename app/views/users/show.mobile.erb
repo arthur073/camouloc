@@ -18,7 +18,8 @@ Compte crée le <span class="enValeur"> <%= @user.created_at.strftime("%d %b. %Y
 
 
 <ul> <li class="rounded"> Liste des dépenses </li>
-   <% @liste1.reverse.each do |depenses|%>
+   <% if @liste1 != nil %>
+   <% @liste1.reverse.each do |depenses| %>
       <li class="selectable"> 	
       Le <span class="enValeur"> 
       <%= depenses.created_at.strftime("%d %b. %Y") %> </span> <br>
@@ -60,4 +61,32 @@ Compte crée le <span class="enValeur"> <%= @user.created_at.strftime("%d %b. %Y
       </span> 
       </li>
 <% end %>
-   </ul>
+<% end %>
+<% if @expenses != nil %>
+<% @expenses.reverse.each do |e| %>
+<li class="selectable"> 	
+      Le <span class="enValeur"> 
+      <%= e.created_at.strftime("%d %b. %Y") %> </span> <br>
+      De : 
+      <span class="enValeur"> 
+      <%= User.find(e.user_id).nom %> <br>
+      </span>
+      <% e.parties.each do |p| %> 
+         Pour <%= User.find(p.first.to_i).nom %> :
+      <span class="enValeur"> 
+      <%= "oui" if p.last.to_i == 1 %> 
+      <%= "non" if p.last.to_i == 0 %> <br>
+      </span>
+   <% end %>
+       Combien :	
+      <span class="enValeur"> 
+      <%= e.montant %> € 
+      </span> <br>
+      Raison : 
+      <span class="enValeur"> 
+      <%= e.raison %> 
+      </span> 
+      </li>
+<% end %>
+<% end %>
+</ul>
