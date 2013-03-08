@@ -169,7 +169,11 @@ type: 'pie',
 <% end %>	
 <% end %>
 <% if @nbrcoloc > 4 %>
-   <tr> <td> <i> Fonctionnalité en cours d'implémentation </i> </td> </tr>
+   <% @hashRM.each do |h| %>
+      <% if h[2] > 0.01 %>
+         <tr> <td> <%= h[1] %> doit <strong><%= "%0.2f" % (h[2]) %>€</strong> à <%= h[3] %>. </td></tr>
+      <% end %>
+   <% end %>
 <% end %>
 		</table>
 

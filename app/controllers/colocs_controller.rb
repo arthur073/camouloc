@@ -299,7 +299,6 @@ class ColocsController < ApplicationController
                         @sumdep4 = @colocataires[3].quatre_depenses.where(:auto =>0).sum(:montant)
                 elsif @nbrcoloc > 4
                   @arrayTot = Hash.new
-
                   @colocataires.each do |c|
                      @arrayTot[c.id] = 0
                   end
@@ -317,6 +316,32 @@ class ColocsController < ApplicationController
                   @colocataires.reverse.each do |coloc, i|
                      coloc.tot = @arrayTot[coloc.id]
                   end 
+
+                  # utile pour la remise à niveau
+                  @arrayTotMod = @arrayTot
+                  @hashRM = Array.new(@colocataires.size - 1) {Array.new(3) }
+
+                  @i = 0
+                  if @expenses.size != 0   
+                  while @i < 4 # TODO à changer 
+                  @arrayTotRM = @arrayTotMod.sort_by {|hsh| hsh[1]}.delete_if {|x| x[1] == 0}
+                  @ColocCourMal = User.find(@arrayTotRM.first.first)
+                  @ColocCourMieux = User.find(@arrayTotRM.last.first)
+                  @hashRM[@i][1] = @ColocCourMal.nom
+                  @hashRM[@i][2] = [@arrayTotMod[@ColocCourMieux.id].abs, @arrayTotMod[@ColocCourMal.id].abs].min
+                  @hashRM[@i][3] = @ColocCourMieux.nom
+
+                  # on remet les champs à zéro
+                  @arrayTotMod[@ColocCourMieux.id] -= @hashRM[@i][2]
+                  @arrayTotMod[@ColocCourMal.id] += @hashRM[@i][2]
+
+                  @i+=1
+                  end
+                  end
+                   
+                  # On supprime les cases inutiles de hashRM
+                  @hashRM.delete_if {|x| x == [nil, nil, nil]}
+                  
 
                 end
 

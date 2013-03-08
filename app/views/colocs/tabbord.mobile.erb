@@ -51,6 +51,11 @@ type: 'pie',
       ['<%= @colocataires[1].nom.gsub('\'', ' ') %>',   <%= (@sumdep2 / @coloc.ca * 100) %>],
       ['<%= @colocataires[2].nom.gsub('\'', ' ') %>',   <%= (@sumdep3 / @coloc.ca * 100) %>],
       ['<%= @colocataires[3].nom.gsub('\'', ' ') %>',   <%= (@sumdep4 / @coloc.ca * 100) %>]
+   <% elsif @nbrcoloc > 4 %>
+      <% @colocataires.each do |coloc, i| %>
+         ['<%= coloc.nom.gsub('\'', ' ') %>', <%= @expensesSource.pop / @coloc.ca * 100 %> ], 
+         <% end %>
+
       <% end %>
       ],
 	}]
@@ -164,6 +169,18 @@ Résumé des comptes
          </li>
 	   <% end %>
    <% end %>	
+<% end %>
+
+
+<% if @nbrcoloc > 4 %>
+   <% @hashRM.each do |h| %>
+      <% if h[2] > 0.01 %>
+         <li class="rounded"> <%= h[1] %> doit <strong><%= "%0.2f" % (h[2]) %>€</strong> à <%= h[3] %>. </li>
+      <% end %>
+   <% end %>
+
+
+
 <% end %>
 </ul>
 
