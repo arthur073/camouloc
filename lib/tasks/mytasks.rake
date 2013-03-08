@@ -37,10 +37,9 @@ end
 
 
 task :month_auto_depenses => :environment do
-   # TODO à tester !!
    desc "Clone toutes les depenses automatiques"
 
-   #if Date.today.day == 1
+   if Date.today.day == 1
 
       @autodep2 = Depense.where(:auto => 1)
       @autodep3 = TroisDepense.where(:auto => 1)
@@ -120,8 +119,8 @@ task :month_auto_depenses => :environment do
       end
 
       puts "Depenses mensuelles ajoutees" 
-  # else 
-  #    puts "Mauvais jour" 
-  # end 
+   else 
+      puts "Mauvais jour" 
+   end 
 end
 
