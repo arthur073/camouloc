@@ -89,7 +89,7 @@ type: 'pie',
 
 <table class="tabbord">
 	<tr> 
-		<td> <strong> Mettre les comptes à jour </strong><i> <%= mail_to "arthur.verger@gmail.com", "(Signaler une erreur !)", :subject => "[CAMOULOC] Problème de remboursement"%> </i> </td> 
+		<td> <strong> Qui doit quoi ?</strong><i> <%= mail_to "arthur.verger@gmail.com", "(Signaler une erreur !)", :subject => "[CAMOULOC] Problème de remboursement"%> </i> </td> 
 	</tr>
 	<tr>
 		<% @colocatairestries = @colocataires.sort { |a,b| a.tot <=> b.tot } %>
