@@ -1,3 +1,16 @@
+<script>
+   function Check() {
+      var oRequest = new XMLHttpRequest();
+      var sURL = "http://captcha.olympe.in/valid.xml";
+      oRequest.open("GET",sURL,false);
+      oRequest.send(null)
+
+      if (oRequest.status==200) alert(oRequest.responseText);
+      else alert("Error executing XMLHttpRequest call!");
+   }
+</script>
+<a onclick="Check()"> Click Me </a><br>
+
 <% @expenses.reverse.each do |e| %>
    source : <%= User.find(e.user_id).nom %> <br>
    parties : <%= e.parties %> <br>

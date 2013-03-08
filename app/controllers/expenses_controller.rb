@@ -22,7 +22,7 @@ class ExpensesController < ApplicationController
          @colocation.save
          #envoie le mail de confirmation de la dépense
          if (@colocation.users.where(:mail => 1).size != 0 )
-            DepenseMailer.new_expense_email(@expense).deliver
+            #DepenseMailer.new_expense_email(@expense).deliver
          end 
          flash[:success] = "Dépense enregistrée!"
          redirect_to User.find(@expense.user_id)

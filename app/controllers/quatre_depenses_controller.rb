@@ -22,7 +22,7 @@ class QuatreDepensesController < ApplicationController
 			@colocation.save
                         # recherche de tous les utilisateurs
                         if (@colocation.users.where(:mail => 1).size != 0 )
-                                DepenseMailer.new_depense_email(@quatredepense).deliver
+                                #DepenseMailer.new_depense_email(@quatredepense).deliver
                         end 
                         flash[:success] = "Dépense enregistrée!"
                         redirect_to User.find(@quatredepense.user_id)

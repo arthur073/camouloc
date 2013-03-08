@@ -21,7 +21,7 @@ class TroisDepensesController < ApplicationController
                         #envoie le mail de confirmation de la dépense
                         # recherche de tous les utilisateurs
                         if (@colocation.users.where(:mail => 1).size != 0 )
-                                DepenseMailer.new_depense_email(@troisdepense).deliver
+                                #DepenseMailer.new_depense_email(@troisdepense).deliver
                         end 
                         flash[:success] = "Dépense enregistrée!"
                         redirect_to User.find(@troisdepense.user_id)
