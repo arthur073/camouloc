@@ -298,20 +298,24 @@ class ColocsController < ApplicationController
                         @sumdep3 = @colocataires[2].quatre_depenses.where(:auto =>0).sum(:montant)
                         @sumdep4 = @colocataires[3].quatre_depenses.where(:auto =>0).sum(:montant)
                 elsif @nbrcoloc > 4
-                  @arrayTot = Array.new(@colocataires.size, 0)
-                  @indFirst = @colocataires.first.id
+                  @arrayTot = Hash.new
+
+                  @colocataires.each do |c|
+                     @arrayTot[c.id] = 0
+                  end
+
                   @expenses.each do |e|
-              #       # on ajoute pour la source
-                     @arrayTot[e.user_id - @indFirst] += e.montant
-              #       # on retire pour les parties
-              #       e.parties.each do |p|
-              #          @arrayTot[p.first.to_i - @indFirst] -= e.montant / e.nbr_users if p.last == "1"
-              #       end
+                     # on ajoute pour la source
+                     @arrayTot[e.user_id] += e.montant 
+                     # on retire pour les parties
+                     e.parties.each do |p|
+                        @arrayTot[p.first.to_i] -= e.montant / e.nbr_users if p.last == "1"
+                     end
                   end
 
                   # on redistribue les tot selon les colocs
                   @colocataires.reverse.each do |coloc, i|
-                     coloc.tot = @arrayTot.pop
+                     coloc.tot = @arrayTot[coloc.id]
                   end 
 
                 end
