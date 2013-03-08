@@ -300,14 +300,14 @@ class ColocsController < ApplicationController
                 elsif @nbrcoloc > 4
                   @arrayTot = Array.new(@colocataires.size, 0)
                   @indFirst = @colocataires.first.id
-                  @expenses.each do |e|
-                     # on ajoute pour la source
-                     @arrayTot[e.user_id - @indFirst] += e.montant
-                     # on retire pour les parties
-                     e.parties.each do |p|
-                        @arrayTot[p.first.to_i - @indFirst] -= e.montant / e.nbr_users if p.last == "1"
-                     end
-                  end
+              #    @expenses.each do |e|
+              #       # on ajoute pour la source
+              #       @arrayTot[e.user_id - @indFirst] += e.montant
+              #       # on retire pour les parties
+              #       e.parties.each do |p|
+              #          @arrayTot[p.first.to_i - @indFirst] -= e.montant / e.nbr_users if p.last == "1"
+              #       end
+              #    end
 
                   # on redistribue les tot selon les colocs
                   @colocataires.reverse.each do |coloc, i|
