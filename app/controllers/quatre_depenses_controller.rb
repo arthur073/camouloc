@@ -22,9 +22,15 @@ class QuatreDepensesController < ApplicationController
 			@colocation.save
                         # recherche de tous les utilisateurs
                         if (@colocation.users.where(:mail => 1).size != 0 )
-                                #DepenseMailer.new_depense_email(@quatredepense).deliver
+                        begin
+                           DepenseMailer.new_depense_email(@quatredepense).deliver
+                        rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+                           flash[:info] = 'Votre dépense a été correctement soumise, cependant le mail n\'a pas été envoyé à cause d\'un problème sur
+                           le serveur de mails.' + "\n" + e.message
+                        else
+                           flash[:success] = "Dépense enregistrée!"
+                        end
                         end 
-                        flash[:success] = "Dépense enregistrée!"
                         redirect_to User.find(@quatredepense.user_id)
                 else
                         @titre = "Nouvelle dépense"

@@ -22,10 +22,16 @@ class ExpensesController < ApplicationController
          @colocation.save
          #envoie le mail de confirmation de la dépense
          if (@colocation.users.where(:mail => 1).size != 0 )
-            DepenseMailer.new_expense_email(@expense).deliver
+         begin
+            DepenseMailer.new_depense_email(@expense).deliver
+         rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+            flash[:info] = 'Votre dépense a été correctement soumise, cependant le mail n\'a pas été envoyé à cause d\'un problème sur
+            le serveur de mails.' + "\n" + e.message
+         else
+            flash[:success] = "Dépense enregistrée!"
+         end
          end 
-      flash[:success] = "Dépense enregistrée!"
-      redirect_to User.find(@expense.user_id)
+         redirect_to User.find(@expense.user_id)
    else
       @titre = "Nouvelle dépense"
       render 'new'
