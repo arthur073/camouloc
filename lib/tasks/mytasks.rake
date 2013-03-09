@@ -12,7 +12,11 @@ task :delete_unused_colocs => :environment do
 
       puts "Coloc destroyed" 
       puts @nbrcoloc
-      UserMailer.deleteunusedcolocsmail(@nbrcoloc).deliver
+      begin
+         UserMailer.deleteunusedcolocsmail(@nbrcoloc).deliver
+      rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e      
+          puts 'Your work submitted successfully however there was a problem with email notification. Cause : ' + e.message 
+      end
    end
 end
 
