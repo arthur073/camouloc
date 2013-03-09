@@ -22,33 +22,33 @@ class ExpensesController < ApplicationController
          @colocation.save
          #envoie le mail de confirmation de la dépense
          if (@colocation.users.where(:mail => 1).size != 0 )
-            #DepenseMailer.new_expense_email(@expense).deliver
+            DepenseMailer.new_expense_email(@expense).deliver
          end 
-         flash[:success] = "Dépense enregistrée!"
-         redirect_to User.find(@expense.user_id)
-      else
-         @titre = "Nouvelle dépense"
-         render 'new'
-      end
-
-   end
-   def index
-      @expenses = Expense.all
+      flash[:success] = "Dépense enregistrée!"
+      redirect_to User.find(@expense.user_id)
+   else
+      @titre = "Nouvelle dépense"
+      render 'new'
    end
 
-   def destroy
-       @expense = Expense.find(params[:id])
-       @expense.destroy
-       flash[:success] = "Dépense supprimée."
-       redirect_to(:back)
-   end
+end
+def index
+   @expenses = Expense.all
+end
 
-   private
-   def require_login
-      unless current_user
-         flash[:notice] = "Vous devez vous identifier pour accéder à cette page. "
-         redirect_to login_path
-      end
+def destroy
+   @expense = Expense.find(params[:id])
+   @expense.destroy
+   flash[:success] = "Dépense supprimée."
+   redirect_to(:back)
+end
+
+private
+def require_login
+   unless current_user
+      flash[:notice] = "Vous devez vous identifier pour accéder à cette page. "
+      redirect_to login_path
    end
+end
 
 end
