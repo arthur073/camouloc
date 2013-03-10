@@ -323,7 +323,7 @@ class ColocsController < ApplicationController
 
                   @i = 0
                   if @expenses.size != 0   
-                  while @i < 4 # TODO à changer 
+                  while @i < @colocataires.size - 1 
                   @arrayTotRM = @arrayTotMod.sort_by {|hsh| hsh[1]}.delete_if {|x| x[1] == 0}
                   @ColocCourMal = User.find(@arrayTotRM.first.first)
                   @ColocCourMieux = User.find(@arrayTotRM.last.first)
