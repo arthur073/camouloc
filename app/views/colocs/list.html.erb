@@ -1,8 +1,8 @@
 <h1> <%= @titre %>  </h1>
 
-<%= link_to "Voir les utilisateurs !", users_path, :class=>"signup_button5" %>
 <br>
 
+<div class="descriptionNormal">
 <%= will_paginate %>
 <ul class="colocs">
         <% @colocs.each do |coloc| %>
@@ -18,5 +18,6 @@
                 <% end %>
         <% end %>
 </ul>
+</div>
 
 <%= will_paginate %>

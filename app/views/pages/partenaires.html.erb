@@ -1,6 +1,7 @@
 
 <h1> <%= @titre %> </h1>
 
+<div class="descriptionNormal">
 Voici la liste des partenaires de Camouloc, des sites qui, comme nous, proposent des services aux étudiants. N'hésitez pas à aller les consulter ! <br><br>
 1. <strong><%= link_to "CaptchMe", "http://captchme.com", :target=>"_blank" %> </strong><br> <dd> <i> Une startup en plein essor qui développe une solution de monétisation des sites web innovante, le <strong> publiCaptcha</strong>. Nous conseillons vivement aux développeur de découvrir cette solution !</i> </dd> <br>
 2. <strong> <%= link_to "ENSIMAG", "http://ensimag.grenoble-inp.fr/", :target=>"_blank" %> </strong><br> <dd> <i> L'école d'ingénieur dont fait partie l'équipe Camouloc. </i> </dd> <br>
@@ -8,9 +9,9 @@ Voici la liste des partenaires de Camouloc, des sites qui, comme nous, proposent
 <br>
 <table>
         <tr>
-                <td class="sidebar2">
+                <td class="sidebarPartners">
                 <strong> Vous souhaitez apparaître dans cette rubrique ? <%= mail_to  "arthur.verger@gmail.com", "Contactez-nous !", :subject =>"[CAMOULOC] Demande de partenariat" %> </strong>
         </td>
 </tr>
 </table>
-
+</div>

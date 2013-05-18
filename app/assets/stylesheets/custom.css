@@ -14,16 +14,16 @@ body {
 header {
 	background-color:#000;
 	box-shadow: 0px 2px 5px #000;
-	padding-top: 2em;
+	padding-top: 3em;
 	padding-left: 10px;
 	padding-right: 10px;
 	/*border-radius: 10px;*/
-	margin-bottom: 3em;
    	color : white;
-	position : relative;
+	position : fixed;
 	top : -2em;
 	height:7em;
 	width : 98.5%;
+	z-index : 100;
 }
 
 span.cam1 {
@@ -63,6 +63,11 @@ header img {
 	width: 10em;
 }
 
+div.flash {
+	width : 80%;
+	margin : auto;
+}
+
 
 nav, .titre {
 	display: inline-block;
@@ -78,7 +83,7 @@ nav, .titre {
 
 /* paramètres du body */
 
-article, aside {
+article {
 	display: inline-block;
 	vertical-align: top;
 }
@@ -86,8 +91,9 @@ article, aside {
 
 
 section {
-	margin-top: 1em;
+	margin-top: 8em;
 	font-size: 120%;
+	width : 100%;
 }
 
 article
@@ -100,13 +106,19 @@ article
 
 div.description {
 	font-size : 300%;
-	margin : 3em 5em;
+	margin : auto 3em;
 }
+
+div.descriptionNormal {
+	font-size : 150%;
+	margin : auto 3em;
+}
+
 
 section h1 {
 	font-size: 250%;
 	/* color: #5DA7CF;*/
-        color:white;
+        color:black;
         border-style:solid;
         border-bottom:thin solid white;
         padding-bottom:0.2em;
@@ -370,7 +382,14 @@ td.sidebar2 {
 	color: black;
 	box-shadow: 0px 2px 5px #000;
 }
-
+td.sidebarPartners {
+	width: 43%;
+	padding: 1em;
+	vertical-align: top;
+	background-color: #000;
+	color: white;
+	box-shadow: 0px 2px 5px #000;
+}
 td.sidebar3 {
 	vertical-align: top;
 	background-color: #09c;
@@ -727,6 +746,7 @@ div.user_info span.microposts {
 ul.colocs {
         font-size:110%;
         padding-left:3em;
+	list-style-type : none;
 }
 
 
