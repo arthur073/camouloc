@@ -1,3 +1,14 @@
+<ol class="progtrckr" data-progtrckr-steps="3">
+    <li class="progtrckr-done">Inscrire ma coloc</li><!--
+ --><li class="progtrckr-done">Créer mon profil</li><!--
+ <% if @coloc.users.size == 0 %>
+ --><li class="progtrckr-todo">Inscire mes colocs</li>
+ <% else %>
+ --><li class="progtrckr-done">Inscire mes colocs</li>
+ <% end %>
+</ol>
+
+
 <h1> <%= @titre %> </h1>
 <script>
         $(document).ready(function(){
@@ -17,28 +28,27 @@
         });
 </script>
 
-<p>Remplissez le formulaire suivant pour ajouter l'utilisateur.  </p>
 
-<!-- facebook login --!>
-<% if @coloc.users.count ==0 %>
-	<div class="signup_button4 authfacebinscr">
-		<a href="/auth/facebook?inscr=1&colocId=<%=@coloc.id%>" style="color:white">
-			 <strong> Utiliser mon Facebook </strong>
-		</a>
-	</div>
-<% end %>
 
 
 
 <%= form_for(@user) do |f| %>
         <%= render 'shared/error_messages', :object => f.object %>
+	<div class="descriptionNormal">
+
+
+	Vous venez de créer la colocation <span class="cam1"> <%= @coloc.nom %>. </span> Nous avons besoin de quelques détails supplémentaires 
+	pour créer votre profil, et vous permettre d'utiliser <span class="cam1"> Camouloc. </span> Pour gagner du temps, vous pouvez vous 
+	connecter avec <a href="/auth/facebook?inscr=1&colocId=<%=@coloc.id%>" style="color:#09c"><strong> Facebook.</strong></a>
+
+<br/> <br/>
         <div class="field">
-                <%= f.label :nom %><br />
-                <%= f.text_field :nom %>
+		Quel est votre nom ? <br/>
+		<%= f.text_field :nom, :class => "colocCreate" %>
         </div>
         <div class="field">
-                <%= f.label :email %><br />
-                <%= f.email_field :email %>
+		Quel est votre email ? <br/>
+                <%= f.email_field :email, :class => "colocCreate"  %>
         </div>
         <div class="field" style="display:none">
                 <%= f.label :coloc_id %><br />
@@ -46,28 +56,27 @@
         </div>
 
         <div class="field">
-                <strong>Colocation : </strong><%= @coloc.nom %> 
-        </div>
-
-        <div class="field">
-                <%= f.label :password %><br />
-                <%= f.password_field :password %>
+		Veuillez saisir un mot de passe <br/>
+                <%= f.password_field :password, :class => "colocCreate"  %>
         </div>
         <div class="field">
-                <%= f.label :password_confirmation, "Confirmation" %><br />
-                <%= f.password_field :password_confirmation %>
+		 Confirmez votre mot de passe<br/>
+                <%= f.password_field :password_confirmation, :class => "colocCreate"  %>
         </div>
         <div class="field">
-                <%= f.check_box :mail %>
-                <%= f.label "Recevoir les notifications de Camouloc" %>
-                <a href="#" class="more_details_button1">(*)</a>
+		Acceptez-vous de recevoir des notifications de <span class="cam1"> Camouloc. </span> par email 
+		 <a href="#" class="more_details_button1">?</a>
                 <p class="more_details1">
                 <i> Vous recevrez une notification par mail chaque fois qu'un de vos colocataires ajoute une dépense, ou chaque fois qu'on poste sur le mur de votre colocation.  </i>
-                </p>
+		</p> <br/>
+                <%= f.check_box :mail %>
+                <%= f.label "Recevoir les notifications de Camouloc" %>
         </div>
 
         <div class="actions">
-                <%= f.submit "Inscription" %>
+		<%= f.submit "Continuer", :id => "btnColocCreate"%>
         </div>
 <% end %>
+</div>
+
 

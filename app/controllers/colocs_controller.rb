@@ -29,7 +29,7 @@ class ColocsController < ApplicationController
         def new
                 @coloc = Coloc.new
                 @coloc.palm = 1
-                @titre = "Inscription de la Colocation"
+                @titre = "Inscription"
                 @nb_colocs = Coloc
                
                 @colocs = Coloc.all
@@ -46,12 +46,12 @@ class ColocsController < ApplicationController
                 @coloc.ca = 0
                 if @coloc.save
                         # Traite un succès d'enregistrement.
-                        redirect_to @coloc
-                        flash[:success] = "Votre colocation a bien été enregistrée ! Inscrivez maintenant vos colocataires."
+                        redirect_to new_user_path(:coloc_id => @coloc.id)
+                        flash[:success] = "Votre colocation a bien été enregistrée !"
                         UserMailer.colocemail(@coloc).deliver
                 else
                         flash[:error] = "Votre colocation n'a pas été enregistrée ! Le nom utilisé n'est pas disponible."
-                        @titre = "Inscription de la Colocation"
+                        @titre = "Inscription"
                         render 'new'
                 end
         end

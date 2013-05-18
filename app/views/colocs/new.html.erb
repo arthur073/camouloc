@@ -1,51 +1,50 @@
-<h1> <%= @titre %> </h1>
 <script>
-        $(document).ready(function(){
-                var more_visibility = false;
-                $("p.more_details1").hide();
-                $("a.more_details_button1").click(function(event){
-                        $("p.more_details1").slideToggle('fast');
-                        if(!more_visibility) {
-                                $("a.more_details_button1").html("Moins");
-                                more_visibility = true;
-                                }else{
-                                $("a.more_details_button1").html("?");
-                                more_visibility = false;
-                        }
-                        event.preventDefault();
-                });
-        });
+	$(document).ready(function(){
+		var more_visibility = false;
+		$("p.more_details1").hide();
+		$("a.more_details_button1").click(function(event){
+			$("p.more_details1").slideToggle('fast');
+			if(!more_visibility) {
+				$("a.more_details_button1").html("Moins");
+				more_visibility = true;
+				}else{
+				$("a.more_details_button1").html("?");
+				more_visibility = false;
+			}
+			event.preventDefault();
+		});
+	});
 </script>
 
-<%= form_for(@coloc) do |f| %>
-        <i> Inscrivez d'abord votre colocation, vous créerez votre profil par la suite puis celui de votre colocataire.</i>
-        <div class="field">
-                <%= f.label :nom %><br>
-                <%= f.text_field :nom %>
-        </div>
-        <div class="field">
-                <%= f.check_box :palm %>
-                <%= f.label "Apparaître dans le palmarès" %>
-        <a href="#" class="more_details_button1">?</a>
-        <p class="more_details1">
-        <i> En apparaîssant dans le Palmarès, le chiffre d'affaire de votre colocation sera public. Vous pourrez ainsi vous comparer aux autres colocations déjà créées.  </i>
-        </p>
-        </div>
 
-        <div class="actions">
-                <%= f.submit "Inscription" %>
-        </div>
+<ol class="progtrckr" data-progtrckr-steps="3">
+	<li class="progtrckr-done">Inscrire ma coloc</li><!--
+	--><li class="progtrckr-todo">Créer mon profil</li><!--
+	--><li class="progtrckr-todo">Inscire mes colocs</li>
+</ol>
+<h1> <%= @titre %> </h1>
 
-        <% if @nbrcoloc != 0 %>
-           <br/>
-           <strong> Vous avez déjà commencé à vous inscrire ? </strong> <br/>
-           <i> Reprenez là où vous en étiez !</i>
-           <br/>
-           <% @colocs.each do |col| %>
-              <% if col.users.size == 0 %>
-                 <%= link_to col.nom, col %>,
-              <% end %>
-           <% end %>
-        <% end %>
-<% end %>
+<div class="descriptionNormal">
+	Bienvenue sur <span class="cam1"> Camouloc. </span> Comment s'appelle votre <span class="cam1"> coloc. </span> ? 
 
+	<%= form_for(@coloc) do |f| %>
+		<div class="field">
+			<%= f.text_field :nom, :class => "colocCreate" %>
+		</div>
+		Souhaitez-vous apparaître dans les palmares des meilleures <span class="cam1"> colocs. </span>  
+		<a href="#" class="more_details_button1">?</a>
+		<p class="more_details1">
+		<i> En apparaîssant dans le Palmarès, le chiffre d'affaire de votre colocation sera public. Vous pourrez ainsi vous comparer aux autres colocations déjà créées.  </i>
+
+		<div class="field">
+			<%= f.check_box :palm %>
+			<%= f.label "Apparaître dans le palmarès" %>
+			</p>
+		</div>
+
+		<div class="actions">
+			<%= f.submit "Continuer", :id => "btnColocCreate"%>
+		</div>
+
+	<% end %>
+</div>
