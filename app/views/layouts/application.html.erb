@@ -1,125 +1,128 @@
 <!DOCTYPE html>
 <html>
-        <head>
-                <!-- MOBIFY - DO NOT ALTER - PASTE IMMEDIATELY AFTER OPENING HEAD TAG -->
-                <script type="text/javascript">/*<![CDATA[*/(function(a){function b(a,b){if(+a)return~a||(d.cookie=h+"=; path=/");j=d.createElement(e),k=d.getElementsByTagName(e)[0],j.src=a,b&&(j.onload=j.onerror=b),k.parentNode.insertBefore(j,k)}function c(){n.api||b(l.shift()||-1,c)}if(this.Mobify)return;var d=document,e="script",f="mobify",g="."+f+".com/",h=f+"-path",i=g+"un"+f+".js",j,k,l=[!1,1],m,n=this.Mobify={points:[+(new Date)],tagVersion:[6,1]},o=/((; )|#|&|^)mobify-path=([^&;]*)/g.exec(location.hash+"; "+d.cookie);o?(m=o[3])&&!+(m=o[2]&&sessionStorage[h]||m)&&(l=[!0,"//preview"+g+escape(m)]):(l=a()||l,l[0]&&l.push("//cdn"+i,"//files01"+i)),l.shift()?(d.write('<plaintext style="display:none;">'),setTimeout(c)):b(l[0])})(function(){if(/ip(hone|od|ad)|android|blackberry.*applewebkit/i.test(navigator.userAgent)){return[1,"//cdn.mobify.com/sites/mycoloc/production/mobify.js"]}})/*]]>*/</script>
-                <!-- END MOBIFY -->
+	<head>
+		<!-- MOBIFY - DO NOT ALTER - PASTE IMMEDIATELY AFTER OPENING HEAD TAG -->
+		<script type="text/javascript">/*<![CDATA[*/(function(a){function b(a,b){if(+a)return~a||(d.cookie=h+"=; path=/");j=d.createElement(e),k=d.getElementsByTagName(e)[0],j.src=a,b&&(j.onload=j.onerror=b),k.parentNode.insertBefore(j,k)}function c(){n.api||b(l.shift()||-1,c)}if(this.Mobify)return;var d=document,e="script",f="mobify",g="."+f+".com/",h=f+"-path",i=g+"un"+f+".js",j,k,l=[!1,1],m,n=this.Mobify={points:[+(new Date)],tagVersion:[6,1]},o=/((; )|#|&|^)mobify-path=([^&;]*)/g.exec(location.hash+"; "+d.cookie);o?(m=o[3])&&!+(m=o[2]&&sessionStorage[h]||m)&&(l=[!0,"//preview"+g+escape(m)]):(l=a()||l,l[0]&&l.push("//cdn"+i,"//files01"+i)),l.shift()?(d.write('<plaintext style="display:none;">'),setTimeout(c)):b(l[0])})(function(){if(/ip(hone|od|ad)|android|blackberry.*applewebkit/i.test(navigator.userAgent)){return[1,"//cdn.mobify.com/sites/mycoloc/production/mobify.js"]}})/*]]>*/</script>
+		<!-- END MOBIFY -->
 
-                <title> Camouloc </title>
+		<title> Camouloc </title>
 		<meta name="description" content="Application gratuite de gestion de Colocations. Venez découvrir l'univers Camouloc !" /> 
 		<%= csrf_meta_tag %>
-                <%= stylesheet_link_tag 'screen'%>
-                <%= stylesheet_link_tag 'custom' %>
-                <%= javascript_include_tag "jquery-1.7.1.min.js", "highcharts", "exporting.js", "jquery.simplemodal.js", "osx.js" %>
-                <%= favicon_link_tag "/favicon.ico" %>
+		<%= stylesheet_link_tag 'screen'%>
+		<%= stylesheet_link_tag 'custom' %>
+		<%= javascript_include_tag "jquery-1.7.1.min.js", "highcharts", "exporting.js", "jquery.simplemodal.js", "osx.js", "jquery.eislideshow.js", 
+       				"jquery.easing.1.3.js"%>
+		<%= favicon_link_tag "/favicon.ico" %>
 
-                <script type="text/javascript">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300|Playfair+Display:400italic' rel='stylesheet' type='text/css' />
+		<script type="text/javascript">
 
-                        var _gaq = _gaq || [];
-                        _gaq.push(['_setAccount', 'UA-32790951-1']);
-                        _gaq.push(['_trackPageview']);
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-32790951-1']);
+			_gaq.push(['_trackPageview']);
 
-                        (function() {
-                         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-                         })();
+			(function() {
+			 var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+			 })();
 
-</script>
-         </head>
-         <body>
-                 <div id="fb-root"></div>
-                 <script>(function(d, s, id) {
-                         var js, fjs = d.getElementsByTagName(s)[0];
-                         if (d.getElementById(id)) return;
-                         js = d.createElement(s); js.id = id;
-                         js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-                         fjs.parentNode.insertBefore(js, fjs);
-                         }(document, 'script', 'facebook-jssdk'));</script>
-                 <div class="container">
-                         <%= render 'layouts/header' %>
-                         <section class="round">
-                         <% flash.each do |key, value| %>
-                                 <div class="flash <%= key %>"><%= value %></div>
-                         <% end %>
-                         <aside>
-                         <% if signed_in? %>
-                                 <h1 class="onglets">Menu</h1>
-                                 <% if Coloc.find(current_user.coloc_id).users.size > 1 %>
-                                         <%= link_to "Mon Tableau de bord", tableau_bord_path(Coloc.find(current_user.coloc_id).id) , :class => "signup_button5"%> </strong>
-                                 <% else %>
-                                         <%= link_to "Inscrire mes colocs", new_user_path(:coloc_id => Coloc.find(current_user.coloc_id).id) , :class => "signup_button4" %>
-                                 <% end %>
-                                 <%= link_to "Mon Profil", current_user, :class => "signup_button5" %>
-                                 <%= link_to "Ma Colocation", Coloc.find(current_user.coloc_id), :class => "signup_button5"%>
-                         <% if Coloc.find(current_user.coloc_id).users.size == 2 %>
-                                 <%= link_to "Nouvelle dépense", new_depense_path(@depense) , :class => "signup_button4"%> </br>
-                         <% elsif Coloc.find(current_user.coloc_id).users.size == 3 %>
-                                 <%= link_to "Nouvelle dépense", new_trois_depense_path(@depense) , :class => "signup_button4"%> </br>
-                         <% elsif Coloc.find(current_user.coloc_id).users.size == 4 %>
-                                 <%= link_to "Nouvelle dépense", new_quatre_depense_path(@depense) , :class => "signup_button4"%> </br>
-                              <% elsif Coloc.find(current_user.coloc_id).users.size > 4 %>
-                                 <%= link_to "Nouvelle dépense", new_expense_path(@depense) , :class => "signup_button4"%> </br>
-                         <% end %>
-                 <% end %> 
-                 <br/>
-		            <h1 class="onglets">Les News</h1>
-                     <div class="progress-bar blue stripes">
-                        <span style="width: 65%"></span>
-                        <p class="realisation"> Prochaine version : <strong> 65% </strong></p>
-                        <p class="nouveaute"> <strong> LA </strong> Nouveauté : <strong> Version anglaise</strong></p>
-                        <%= link_to "Plus de détails", changelog_path, :class => "signup_button5"%>
-                     </div>
+		 </script>
+	 </head>
+	 <body>
+		 <div id="fb-root"></div>
+		 <script>(function(d, s, id) {
+			 var js, fjs = d.getElementsByTagName(s)[0];
+			 if (d.getElementById(id)) return;
+			 js = d.createElement(s); js.id = id;
+			 js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+			 fjs.parentNode.insertBefore(js, fjs);
+			 }(document, 'script', 'facebook-jssdk'));
+		 </script>
+		<%= render 'layouts/header2' %>
+		 <div class="container">
+			 <section class="round">
+			 <% flash.each do |key, value| %>
+				 <div class="flash <%= key %>"><%= value %></div>
+			 <% end %>
+			 <aside style="display:none;">
+			 <% if signed_in? %>
+				 <h1 class="onglets">Menu</h1>
+				 <% if Coloc.find(current_user.coloc_id).users.size > 1 %>
+					 <%= link_to "Mon Tableau de bord", tableau_bord_path(Coloc.find(current_user.coloc_id).id) , :class => "signup_button5"%> </strong>
+			 <% else %>
+				 <%= link_to "Inscrire mes colocs", new_user_path(:coloc_id => Coloc.find(current_user.coloc_id).id) , :class => "signup_button4" %>
+			 <% end %>
+			 <%= link_to "Mon Profil", current_user, :class => "signup_button5" %>
+			 <%= link_to "Ma Colocation", Coloc.find(current_user.coloc_id), :class => "signup_button5"%>
+			 <% if Coloc.find(current_user.coloc_id).users.size == 2 %>
+				 <%= link_to "Nouvelle dépense", new_depense_path(@depense) , :class => "signup_button4"%> </br>
+			 <% elsif Coloc.find(current_user.coloc_id).users.size == 3 %>
+				 <%= link_to "Nouvelle dépense", new_trois_depense_path(@depense) , :class => "signup_button4"%> </br>
+			 <% elsif Coloc.find(current_user.coloc_id).users.size == 4 %>
+				 <%= link_to "Nouvelle dépense", new_quatre_depense_path(@depense) , :class => "signup_button4"%> </br>
+			 <% elsif Coloc.find(current_user.coloc_id).users.size > 4 %>
+				 <%= link_to "Nouvelle dépense", new_expense_path(@depense) , :class => "signup_button4"%> </br>
+			 <% end %>
+		 <% end %> 
+		 <br/>
+		 <h1 class="onglets">Les News</h1>
+		 <div class="progress-bar blue stripes">
+			 <span style="width: 65%"></span>
+			 <p class="realisation"> Prochaine version : <strong> 65% </strong></p>
+			 <p class="nouveaute"> <strong> LA </strong> Nouveauté : <strong> Version anglaise</strong></p>
+			 <%= link_to "Plus de détails", changelog_path, :class => "signup_button5"%>
+		 </div>
 
-	           <% if signed_in? and current_user.authentifications.empty? %>
-			<img src="http://camouloc.herokuapp.com/new-ribbon.png" width="50" height="50" alt="new-facebook" class="new_facebook">
-			<div class="signup_button6">
-				<% @faceb_url = "http://camouloc.herokuapp.com/auth/facebook" %>
-				<%= link_to "Lier mon Facebook", @faceb_url , :style=>"color:white; padding-right:0.5em;"%>
-			</div>
-		<% end %>
-              </br> </br>
+		 <% if signed_in? and current_user.authentifications.empty? %>
+			 <img src="http://camouloc.herokuapp.com/new-ribbon.png" width="50" height="50" alt="new-facebook" class="new_facebook">
+			 <div class="signup_button6">
+				 <% @faceb_url = "http://camouloc.herokuapp.com/auth/facebook" %>
+				 <%= link_to "Lier mon Facebook", @faceb_url , :style=>"color:white; padding-right:0.5em;"%>
+			 </div>
+		 <% end %>
+		 </br> </br>
 
-                 <h1 class="onglets">Top Colocs</h1>
-                 <% @liste_coloc = Coloc.where(:palm => 1).order(:ca).reverse %>
-                 <% @liste_coloc.first(3).each do |colocs, i|%>
-                         <% break if i == 3 %>
-                         <% if colocs.users.size > 1 %>
-                                 <div align="left"> <strong><%= @liste_coloc.index(colocs) + 1 %> - <%= link_to colocs.nom, colocs, :class=>"palma" %></strong>        
-                                         (<%="%0.2f" % colocs.ca %> €) </div>
-                         <% end %>
-                 <% end %> 
-                 <%= link_to "Et les autres...", colocs_path, :class=>"signup_button5" %>
-                 <br>
-                 <br>
-                 <br>
-                 <h1 class="onglets"> Les Chiffres </h1>
-                 Somme gérée : <strong><%= "%0.0f" % Coloc.sum(:ca) %> €. </strong> <br>
-                 <strong> <%= User.count %> </strong> utilisateurs, <strong> <%= Coloc.count %> </strong> colocations. <br>
-                 <strong> <%= Depense.count + TroisDepense.count + QuatreDepense.count %> </strong> dépenses. <br>
-                 <br>
-                <br> <br>
+		 <h1 class="onglets">Top Colocs</h1>
+		 <% @liste_coloc = Coloc.where(:palm => 1).order(:ca).reverse %>
+		 <% @liste_coloc.first(3).each do |colocs, i|%>
+			 <% break if i == 3 %>
+			 <% if colocs.users.size > 1 %>
+				 <div align="left"> <strong><%= @liste_coloc.index(colocs) + 1 %> - <%= link_to colocs.nom, colocs, :class=>"palma" %></strong>        
+					 (<%="%0.2f" % colocs.ca %> €) </div>
+			 <% end %>
+		 <% end %> 
+		 <%= link_to "Et les autres...", colocs_path, :class=>"signup_button5" %>
+		 <br>
+		 <br>
+		 <br>
+		 <h1 class="onglets"> Les Chiffres </h1>
+		 Somme gérée : <strong><%= "%0.0f" % Coloc.sum(:ca) %> €. </strong> <br>
+		 <strong> <%= User.count %> </strong> utilisateurs, <strong> <%= Coloc.count %> </strong> colocations. <br>
+		 <strong> <%= Depense.count + TroisDepense.count + QuatreDepense.count %> </strong> dépenses. <br>
+		 <br>
+		 <br> <br>
 
-                 <% if signed_in? and current_user.admin? %>
-                         <h1 class="onglets"> Admin </h1>
-                         <%= mail_to User.where(:mail => 1).map(&:email).first(100), "Mail Général", :subject => "[CAMOULOC] ??" %> <br>
-                         <% if User.count > 100 %>
-                            <%= mail_to User.where(:mail => 1).map(&:email).last(User.all.count - 100), "Mail Général", :subject => "[CAMOULOC] ??" %> <br>
-                         <% end %>
-                         <%= Message.count %> messages. <br>
-                         <%= Depense.where(:auto => 1).count + TroisDepense.where(:auto =>1).count + QuatreDepense.where(:auto =>1).count %> dep automatiques. <br>
-                         <%= TroisDepense.where("created_at > :date OR updated_at > :date", date: "2012-11-06").count + QuatreDepense.where("created_at > :date OR updated_at > :date", date: "2012-11-06").count + Depense.where("created_at > :date OR updated_at > :date", date: "2012-11-06").count %> dep payées. <br>
-                         <%= Coloc.count - Coloc.where(:ca => 0).count %> colocs fonctionnelles.
-                 <% end %>
+		 <% if signed_in? and current_user.admin? %>
+			 <h1 class="onglets"> Admin </h1>
+			 <%= mail_to User.where(:mail => 1).map(&:email).first(100), "Mail Général", :subject => "[CAMOULOC] ??" %> <br>
+			 <% if User.count > 100 %>
+				 <%= mail_to User.where(:mail => 1).map(&:email).last(User.all.count - 100), "Mail Général", :subject => "[CAMOULOC] ??" %> <br>
+			 <% end %>
+			 <%= Message.count %> messages. <br>
+			 <%= Depense.where(:auto => 1).count + TroisDepense.where(:auto =>1).count + QuatreDepense.where(:auto =>1).count %> dep automatiques. <br>
+			 <%= TroisDepense.where("created_at > :date OR updated_at > :date", date: "2012-11-06").count + QuatreDepense.where("created_at > :date OR updated_at > :date", date: "2012-11-06").count + Depense.where("created_at > :date OR updated_at > :date", date: "2012-11-06").count %> dep payées. <br>
+			 <%= Coloc.count - Coloc.where(:ca => 0).count %> colocs fonctionnelles.
+		 <% end %>
 
-                 </aside>
-                 <article>
-                 <%= yield %>
-                 </article>
+		 </aside>
+		 <article>
+		 <%= yield %>
+		 </article>
 
 
-                 </section>
-                 <%= render 'layouts/footer' %>
-         </div>
+		 </section>
+		 <%= render 'layouts/footer' %>
+	 </div>
  </body>
 </html>
