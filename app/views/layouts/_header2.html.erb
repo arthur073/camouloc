@@ -2,5 +2,19 @@
 <div class="mycoloc">
 	<span class="cam1">Camouloc.</span>
 	<span class="prettyFont"> L'élégante manière de gérer sa coloc. </span>
+	<nav class="round">
+	<ul>
+		<li><%= link_to "Accueil", root_path %></li>
+		<li><%= link_to "Utilisateurs", users_path %></li>
+		<li><%= link_to "Colocations", list_path %></li>
+		<li><%= link_to "Partenaires", partenaires_path %></li>
+		<% if signed_in? %>
+			<li><%= link_to "Déconnexion ("+current_user.nom + ")", signout_path, :method => :delete %></li>
+		<% else %>
+			<li><%= link_to "S'identifier", login_path %></li>
+		<% end %>
+	</ul>
+	</nav>
+
 </div>  
 </header>

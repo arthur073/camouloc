@@ -93,12 +93,15 @@ section {
 article
 {
 	padding: 1em;
-	/*border-radius: 10px;*/
-	width: 90%;
+	width: 80%;
 	display:block;
 	margin:auto;
 }
 
+div.description {
+	font-size : 300%;
+	margin : 3em 5em;
+}
 
 section h1 {
 	font-size: 250%;
@@ -132,12 +135,28 @@ a:visited {
 
 header nav {
 	float: right;
-	background-color:#fff ;
+	margin-top : 3em;
+	font-size : 40%;
 }
+
+footer {
+	text-align: center;
+	margin-top: 10px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+footer nav a {
+	float: none;
+	color : black !important;
+}
+
 
 nav {
 	padding: 0 0.7em;
+	font-family: 'Open Sans Condensed', sans-serif;	
 	white-space: nowrap;
+	text-transform : uppercase;
 }
 
 nav ul {
@@ -149,35 +168,35 @@ nav ul li {
 	list-style-type: none;
 	display: inline-block;
 	padding: 0.2em 0;
-	color: #09c;
+	color: white;
 }
 
 nav ul li a {
 	padding: 0 5px;
 	font-weight: bold;
-	color: #09c;
+	color: white;
 }
 
 nav ul li a:visited {
-	color: #09c;
+	color: white;
 }
 
 nav ul li a:hover {
-	text-decoration: underline;
+	text-decoration: none;
+	color : #aaa;
+
 }
 
 /* Bouton inscription */
 
 a.signup_button {
-	margin-left: auto;
-	margin-right: auto;
+	margin: auto;
+	width : 50%;
 	display: block;
 	text-align: center;
-	width: 170px;
 	color: #fff;
 	/*background: #006400;*/
 	background:#000;
-	font-size: 150%;
 	font-weight: bold;
 	padding: 5px;
 	box-shadow: 0px 2px 5px #000;
@@ -305,16 +324,7 @@ a.palma {
 }
 
 
-footer {
-	text-align: center;
-	margin-top: 10px;
-	margin-left: auto;
-	margin-right: auto;
-}
 
-footer nav {
-	float: none;
-}
 div.field, div.actions {
 	margin-bottom: 10px;
 }
@@ -1052,7 +1062,7 @@ span.type2 {
 	position : relative;
 	width : 100%;
 	font-family: 'Open Sans Condensed', sans-serif;	
-	margin-bottom : 10em;
+	margin-bottom : 4em;
 }
 
 .wrapper p {
