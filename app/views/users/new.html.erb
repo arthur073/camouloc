@@ -1,31 +1,36 @@
 <ol class="progtrckr" data-progtrckr-steps="3">
-    <li class="progtrckr-done">Inscrire ma coloc</li><!--
- --><li class="progtrckr-done">Créer mon profil</li><!--
- <% if @coloc.users.size == 0 %>
- --><li class="progtrckr-todo">Inscire mes colocs</li>
- <% else %>
- --><li class="progtrckr-done">Inscire mes colocs</li>
- <% end %>
+	<li class="progtrckr-done">Inscrire ma coloc</li><!--
+	--><li class="progtrckr-done">Créer mon profil</li><!--
+	<% if @coloc.users.size == 0 %>
+		--><li class="progtrckr-todo">Inscire mes colocs</li>
+	<% else %>
+		--><li class="progtrckr-done">Inscire mes colocs</li>
+	<% end %>
 </ol>
 
 
 <h1> <%= @titre %> </h1>
 <script>
-        $(document).ready(function(){
-                var more_visibility = false;
-                $("p.more_details1").hide();
-                $("a.more_details_button1").click(function(event){
-                        $("p.more_details1").slideToggle('fast');
-                        if(!more_visibility) {
-                                $("a.more_details_button1").html("(Moins)");
-                                more_visibility = true;
-                                }else{
-                                $("a.more_details_button1").html("(*)");
-                                more_visibility = false;
-                        }
-                        event.preventDefault();
-                });
-        });
+	$(document).ready(function(){
+		var more_visibility = false;
+		$("p.more_details1").hide();
+		$("a.more_details_button1").click(function(event){
+			$("p.more_details1").slideToggle('fast');
+			if(!more_visibility) {
+				$("a.more_details_button1").html("(Moins)");
+				more_visibility = true;
+				}else{
+				$("a.more_details_button1").html("(*)");
+				more_visibility = false;
+			}
+			event.preventDefault();
+		});
+
+		<% if @coloc.users.size > 0 %>
+		$("input#captchavalider").trigger('click');
+		<% end %>
+	});
+
 </script>
 
 
@@ -33,50 +38,78 @@
 
 
 <%= form_for(@user) do |f| %>
-        <%= render 'shared/error_messages', :object => f.object %>
+	<%= render 'shared/error_messages', :object => f.object %>
 	<div class="descriptionNormal">
 
 
-	Vous venez de créer la colocation <span class="cam1"> <%= @coloc.nom %>. </span> Nous avons besoin de quelques détails supplémentaires 
-	pour créer votre profil, et vous permettre d'utiliser <span class="cam1"> Camouloc. </span> Pour gagner du temps, vous pouvez vous 
-	connecter avec <a href="/auth/facebook?inscr=1&colocId=<%=@coloc.id%>" style="color:#09c"><strong> Facebook.</strong></a>
+		<% if @coloc.users.size == 0 %>
+			Vous venez de créer la colocation <span class="cam1"> <%= @coloc.nom %>. </span> Nous avons besoin de quelques détails supplémentaires 
+			pour créer votre profil, et vous permettre d'utiliser <span class="cam1"> Camouloc. </span> Pour gagner du temps, vous pouvez vous 
+			connecter avec <a href="/auth/facebook?inscr=1&colocId=<%=@coloc.id%>" style="color:#09c"><strong> Facebook.</strong></a>
+		<% else %>
+			Remplissez maintenant ce formulaire pour créer les profils de vos colocataires. Vous en avez terminé ? Vous pouvez commencer à utiliser 
+			<strong> <%= link_to "Camouloc.", @coloc %> </strong> ! 	
+		<% end %>
 
-<br/> <br/>
-        <div class="field">
-		Quel est votre nom ? <br/>
-		<%= f.text_field :nom, :class => "colocCreate" %>
-        </div>
-        <div class="field">
-		Quel est votre email ? <br/>
-                <%= f.email_field :email, :class => "colocCreate"  %>
-        </div>
-        <div class="field" style="display:none">
-                <%= f.label :coloc_id %><br />
-                <%= f.select :coloc_id, options_for_select([[ @coloc.nom ,  @coloc.id ]]) %>
-        </div>
 
-        <div class="field">
-		Veuillez saisir un mot de passe <br/>
-                <%= f.password_field :password, :class => "colocCreate"  %>
-        </div>
-        <div class="field">
-		 Confirmez votre mot de passe<br/>
-                <%= f.password_field :password_confirmation, :class => "colocCreate"  %>
-        </div>
-        <div class="field">
-		Acceptez-vous de recevoir des notifications de <span class="cam1"> Camouloc. </span> par email 
-		 <a href="#" class="more_details_button1">?</a>
-                <p class="more_details1">
-                <i> Vous recevrez une notification par mail chaque fois qu'un de vos colocataires ajoute une dépense, ou chaque fois qu'on poste sur le mur de votre colocation.  </i>
-		</p> <br/>
-                <%= f.check_box :mail %>
-                <%= f.label "Recevoir les notifications de Camouloc" %>
-        </div>
+		<br/> <br/>
+		<div class="field">
+			Quel est votre nom ? <br/>
+			<%= f.text_field :nom, :class => "colocCreate" %>
+		</div>
+		<div class="field">
+			Quel est votre email ? <br/>
+			<%= f.email_field :email, :class => "colocCreate"  %>
+		</div>
+		<div class="field" style="display:none">
+			<%= f.label :coloc_id %><br />
+			<%= f.select :coloc_id, options_for_select([[ @coloc.nom ,  @coloc.id ]]) %>
+		</div>
 
-        <div class="actions">
-		<%= f.submit "Continuer", :id => "btnColocCreate"%>
-        </div>
-<% end %>
+		<div class="field">
+			Veuillez saisir un mot de passe <br/>
+			<%= f.password_field :password, :class => "colocCreate"  %>
+		</div>
+		<div class="field">
+			Confirmez votre mot de passe<br/>
+			<%= f.password_field :password_confirmation, :class => "colocCreate"  %>
+		</div>
+		<div class="field">
+			Acceptez-vous de recevoir des notifications de <span class="cam1"> Camouloc. </span> par email 
+			<a href="#" class="more_details_button1">?</a>
+			<p class="more_details1">
+			<i> Vous recevrez une notification par mail chaque fois qu'un de vos colocataires ajoute une dépense, ou chaque fois qu'on poste sur le mur de votre colocation.  </i>
+			</p> <br/>
+			<%= f.check_box :mail %>
+			<%= f.label "Recevoir les notifications de Camouloc" %>
+		</div>
+
+		<div class="actions">
+			<%= f.submit "Continuer", :id => "btnColocCreate"%>
+			<% if @coloc.users.size > 0 %>
+				<input type='button' name='osx' value='V' class='osx demo signup_button4' id="captchavalider"/>
+			<% end %>
+		</div>
+	<% end %>
+</div>
+
+
+<!-- modal content -->
+<div id="osx-modal-content">
+	<div id="osx-modal-title">Inscription des colocataires</div>
+	<div id="osx-modal-data">
+		Votre inscription touche à sa fin. Vous pouvez maintenant continuer à inscrire vos colocataires, ou commencer
+		à utiliser <span class="cam1"> Camouloc. </span> 
+		<br/>
+		<br/>
+		<strong>
+			<%= link_to "Inscrire un coloc", "#", :id => "btnColocCreate", :class => "simplemodal-close"%>
+			<%= link_to "Utiliser Camouloc", @coloc, :id => "btnColocCreate" %>
+		</strong>
+		<br/>
+		<br/>
+		<br/>
+	</div>
 </div>
 
 

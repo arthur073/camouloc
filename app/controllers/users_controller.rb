@@ -53,7 +53,7 @@ class UsersController < ApplicationController
          unless signed_in?
             sign_in @user
          end
-         redirect_to Coloc.find(@user.coloc_id)
+	 redirect_to new_user_path(:coloc_id => @coloc_id)
          flash[:success] = "Utilisateur enregistré !"
       else
          @titre = "Inscription"
