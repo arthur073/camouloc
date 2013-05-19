@@ -1,19 +1,24 @@
 <h1> <%= @titre %> </h1>
 
 <%= form_for(@coloc) do |f| %>
+	<div class="descriptionNormal">
 	<div class="field">
-		<%= f.label :nom %><br />
-		<%= f.text_field :nom %>
+		Choisissez un nouveau nom pour votre <span class="cam1"> coloc. </span>  
+<br />
+		<%= f.text_field :nom, :class => "colocCreate" %>
 	</div>
 	<div class="field">
+		Souhaitez-vous apparaître dans les palmarès des meilleures <span class="cam1"> colocs. </span>  ? <br/>
 		<%= f.check_box :palm %>
-		<%= f.label "Apparaître dans le palmarès ?" %><br />
+		<%= f.label "Apparaître dans le palmarès" %><br />
 	</div>
 
+	<br/>
 	<div class="actions">
-		<%= f.submit "Actualiser" %>
+		<%= f.submit "Actualiser", :id => "btnColocCreate" %>
 	</div>
 
 <% end %>
 
-<a onclick="return confirm('Etes-vous sûr de vouloir supprimer la colocation ?')"> <%= delete_coloc? %> </a>
+<a onclick="return confirm('Etes-vous sûr de vouloir supprimer la colocation ?')" > <%= delete_coloc? %> </a>
+	</div>

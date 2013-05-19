@@ -208,6 +208,7 @@ a.connectFacebook {
 	padding : 0.2em 0.4em;
 }
 
+
 a.signup_button {
 	margin: auto;
 	width : 50%;
@@ -695,8 +696,11 @@ body {
 
 
 textarea {
-   width: 500px;
-   height:50px;
+   width: 30em;
+   height:5em;
+   font-size : 120%;
+  font-family: Arial, Helvetica, sans-serif;
+   
 }
 
 /* Mise en forme des messages */
@@ -1319,7 +1323,27 @@ table.black {
 	font-size : 120%;
 }
 
+table.black tr td {
+  border-top: 1px solid #ccc;
+}
+
+table.black tr:first-child td{
+  border-bottom: none ;
+}
 ul.profil {
 	position : relative;
 	top : -1em;
+}
+
+
+.imgframe {
+    background-color: white;
+    border: solid 1px #BBDDBB;
+    margin: 1ex;
+    padding: 1ex;
+    float : right;
+}
+
+.imgframeSmall {
+	margin-left : 3em;
 }

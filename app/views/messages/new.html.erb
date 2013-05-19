@@ -3,6 +3,7 @@
 <%= form_for(@message) do |f| %>
 
 	<%= render 'shared/error_messages', :object => f.object %>
+<div class="descriptionNormal">
 
          <div class="field" style="display:none">
                 <%= f.label "Colocation" %><br>
@@ -17,22 +18,24 @@
 
         <div class="field">
 		<% if @message.private == 0 %>                 
-			<span> Nouveau message pour </span>
-			la colocation <strong><%= @coloc.nom %></strong>.
+			<span> Vous êtes sur le point d'écrire un nouveau message pour </span>
+			la colocation <span class="cam1"><%= @coloc.nom %>.</span>
 		<% else %>
 			<span> Nouveau message <strong> privé </strong> pour </span>
-			la colocation <strong><%= @coloc.nom %></strong>.
-			<br> <i> Attention, seuls les membres de <%= @coloc.nom %> pourront voir le message. </i>
+			la colocation <span class="cam1"><%= @coloc.nom %>.</span>
+			<br> <i> Attention, seuls les membres de <span class="cam1"><%= @coloc.nom %>.</span> pourront voir le message. </i>
 		<% end %>
         </div>
 
+	Exprimez-vous ! <br/>
+
         <div class="field">
-                <%= f.label "Quoi de neuf ?" %><br>
                 <%= f.text_area(:content, :class => 'textarea') %>
         </div>
 
         <div class="actions">
-                <%= f.submit "Enregistrer" %>
+		<%= f.submit "Enregistrer" , :id => "btnColocCreate"%>
         </div>
 
 <% end %>
+</div>

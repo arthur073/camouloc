@@ -395,7 +395,7 @@ class ColocsController < ApplicationController
 
         def edit
                 @coloc = Coloc.find(params[:id])
-                @titre = "Edition Colocation"
+                @titre = "Editer ma Coloc"
         end
 
         def update

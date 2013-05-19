@@ -4,7 +4,6 @@
 	<span class="prettyFont"> La meilleure manière de gérer sa coloc. </span>
 	<nav class="round">
 	<ul>
-		<li><%= link_to "Accueil", root_path %></li>
 		<% if signed_in? %>
 			<li>
 			<% if Coloc.find(current_user.coloc_id).users.size == 2 %>
@@ -20,9 +19,11 @@
 
 
 			<li><%= link_to "Tableau de bord", tableau_bord_path(Coloc.find(current_user.coloc_id).id) %></li>
+			<li><%= link_to "Ma coloc", Coloc.find(current_user.coloc_id) %></li>
 			<li><%= link_to "Mon Profil", current_user %></li>
 			<li><%= link_to "Déconnexion ("+current_user.nom + ")", signout_path, :method => :delete %></li>
 		<% else %>
+			<li><%= link_to "Accueil", root_path %></li>
 			<li><%= link_to "Utilisateurs", users_path %></li>
 			<li><%= link_to "Colocations", list_path %></li>
 			<li><%= link_to "Partenaires", partenaires_path %></li>
