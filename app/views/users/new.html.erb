@@ -45,7 +45,7 @@
 		<% if @coloc.users.size == 0 %>
 			Vous venez de créer la colocation <span class="cam1"> <%= @coloc.nom %>. </span> Nous avons besoin de quelques détails supplémentaires 
 			pour créer votre profil, et vous permettre d'utiliser <span class="cam1"> Camouloc. </span> Pour gagner du temps, vous pouvez vous 
-			connecter avec <a href="/auth/facebook?inscr=1&colocId=<%=@coloc.id%>" style="color:#09c"><strong> Facebook.</strong></a>
+			connecter avec <a href="/auth/facebook?inscr=1&colocId=<%=@coloc.id%>" class="connectFacebook"><strong> Facebook.</strong></a>
 		<% else %>
 			Remplissez maintenant ce formulaire pour créer les profils de vos colocataires. Vous en avez terminé ? Vous pouvez commencer à utiliser 
 			<strong> <%= link_to "Camouloc.", @coloc %> </strong> ! 	

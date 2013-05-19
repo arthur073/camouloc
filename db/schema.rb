@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20130304145346) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.float    "ca"
-    t.boolean  "palm"
+    t.integer  "palm"
   end
 
   create_table "depenses", :force => true do |t|
