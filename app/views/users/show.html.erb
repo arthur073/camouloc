@@ -1,7 +1,7 @@
 
 <div class="descriptionNormal">
 	<% if @user.has_image %>
-		<%= image_tag (@user.image) , :size => "100x100", :class => "imgframe" %>
+		<%= image_tag (@user.image) , :size => "100x100", :class => "imgframeProfil" %>
 	<% else %>
 		<%= gravatar_for @user %>
 	<% end %> 

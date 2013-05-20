@@ -1348,6 +1348,12 @@ ul.profil {
 .imgframe {
     box-shadow: 0px 2px 5px #000;
 }
+.imgframeProfil {
+    box-shadow: 0px 2px 5px #000;
+    float : right;
+    margin : 1ex;
+    padding : 1ex;
+}
 
 .imgframeSmall {
 	margin-left : 3em;
