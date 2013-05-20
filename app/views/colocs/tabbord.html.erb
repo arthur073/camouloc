@@ -1,4 +1,13 @@
-<h1> <%= @titre %> de <%= @coloc.nom %> </h1>
+<h1> <%= @titre %> de <span class="cam1"> <%= @coloc.nom %>. </span> </h1>
+<br/>
+<br/>
+<div class="descriptionNormal">
+<p>
+Bienvenue sur la tableau de bord de votre <span class="cam1"> coloc. </span> Vous trouverez sur cette page de nombreux détails qui vous permettront de
+mieux gérer votre vie en colocation. <br/><br/>
+Ce premier graphique représente la répartition du chiffre d'affaires de <span class="cam1"> <%= @coloc.nom %>. </span> entre les différents 
+colocataires.
+</p>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -71,6 +80,12 @@ type: 'pie',
 <div id="container" class="container2"></div>
 <div style="height: 15px;"></div>
 
+<br/>
+<br/>
+<p>
+Ce tableau est le récapitulatif de toutes les dépenses enregistrées par <span class="cam1"><%=@coloc.nom%>.</span>
+Les colocataires ayant des dettes sont indiqués en <span style="color:red;font-weight:bold"> rouge. </span>
+</p>
 <table class="tabbord">
 	<tr> 
 		<td> <strong> Résumé personnel :</strong> </td>
@@ -79,14 +94,19 @@ type: 'pie',
 		<tr>
 			<td>  <%= link_to colocataires.nom, colocataires %> </td>
 			<% if colocataires.tot < 0 %>
-				<td> <font color=red> <strong> <%= "%0.2f" % colocataires.tot %> </strong> </font> </td>
+				<td> <font color=red> <strong> <%= "%0.2f" % colocataires.tot %> € </strong> </font> </td>
 			<% else %>
-				<td> <strong> <%= "%0.2f" % colocataires.tot %> </strong> </td>
+				<td> <strong> <%= "%0.2f" % colocataires.tot %> € </strong> </td>
 			<% end %>
 		</tr>
 	<% end %>
 </table>
 
+<br/>
+<br/>
+<p> 
+Dans ce tableau, il est écrit explicitement comment effectuer les remboursements entre les colocs de  <span class="cam1"><%=@coloc.nom%>.</span>
+</p>
 <table class="tabbord">
 	<tr> 
 		<td> <strong> Qui doit quoi ?</strong><i> <%= mail_to "arthur.verger@gmail.com", "(Signaler une erreur !)", :subject => "[CAMOULOC] Problème de remboursement"%> </i> </td> 
@@ -177,6 +197,13 @@ type: 'pie',
 <% end %>
 		</table>
 
+
+<br/>
+<br/>
+<p> 
+Toutes les dépenses <span class="cam1"> automatiques. </span> réalisées par votre colocation se trouvent ici.
+</p>
+
 		<table class="tabbord">
 			<tr>
 				<td><strong>  Dépenses mensuelles </strong> </td>
@@ -206,8 +233,12 @@ type: 'pie',
 				<% end %>
 			<% end %>
 		</table>
-
-		<a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="signup_button4">Toutes les dépenses</a><span id="spoiler_id" style="display: none"><a onclick="document.getElementById('spoiler_id').style.display='none'; document.getElementById('show_id').style.display='';" class="signup_button4">Moins de détails</a><br>
+<br/>
+<br/>
+ 
+Vous pouvez également choisir 
+<a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';document.getElementById('to_hide').style.display='none';" class="connectFacebook">d'afficher</a> <span id="to_hide"> toutes les dépenses de <span class="cam1"> <%= @coloc.nom %>. </span> </span>
+<span id="spoiler_id" style="display: none"><a onclick="document.getElementById('spoiler_id').style.display='none'; document.getElementById('show_id').style.display='';document.getElementById('to_hide').style.display=''" class="connectFacebook">de cacher</a> toutes les dépenses de <span class="cam1"> <%= @coloc.nom %>. </span><br/><br/>
 
 
 			<table class="tabbord">
@@ -256,4 +287,4 @@ type: 'pie',
          <% end %>
 		</table>
 	</span> <br>
-	<%= link_to "Retour à la colocation", @coloc, :class=>"signup_button5"%>
+</div>

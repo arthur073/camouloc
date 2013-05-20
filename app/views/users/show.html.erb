@@ -46,6 +46,7 @@
 
 		</ul>
 		</p>
+		<br/>
 
 
 		<p>
@@ -53,8 +54,8 @@
 			Aucune dépense à répertorier.
 		<% else %>
 			<% if signed_in? and (current_user.coloc_id == @user.coloc_id or current_user.admin?)%>
-				<strong>  Liste des dépenses de l'utilisateur : </strong>
-				<table class="depenses">
+				<h3>  Liste des dépenses de l'utilisateur : </h3>
+				<table class="depenses black">
 					<tr>
 						<td> Source </td>
 						<% @colocataires.each do |colocataires| %>
@@ -63,6 +64,9 @@
 						<td> Montant </td>
 						<td> Raison </td>
 						<td> Date </td>
+						<% if signed_in? and (current_user.id == @user.id or current_user.admin?) %>
+						<td> </td>
+						<% end %>
 					</tr>
 					<% if @colocataires.size == 2 %>
 						<% @liste1.reverse.each do |depenses|%>
