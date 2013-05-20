@@ -1346,11 +1346,8 @@ ul.profil {
 
 
 .imgframe {
-    background-color: white;
-    border: solid 1px #BBDDBB;
-    margin: 1ex;
-    padding: 1ex;
     float : right;
+    box-shadow: 0px 2px 5px #000;
 }
 
 .imgframeSmall {
