@@ -98,12 +98,19 @@
 <div id="osx-modal-content">
 	<div id="osx-modal-title">Inscription des colocataires</div>
 	<div id="osx-modal-data">
-		Votre inscription touche à sa fin. Vous pouvez maintenant continuer à inscrire vos colocataires, ou commencer
-		à utiliser <span class="cam1"> Camouloc. </span> 
+		L'utilisateur a bien été enregistré. Votre coloc <span class="cam1"> <%= @coloc.nom %> </span>
+		compte maintenant <span class="cam1"> <%= @coloc.users.size %> </span> colocataire(s) :
+		<ul>
+			<% @coloc.users.each do |user| %>
+				<li> <span class="cam1"> <%= user.nom %> </span></li>
+			<% end %>
+		</ul>	
+		Vous pouvez encore rajouter des colocs dans <span class="cam1"> <%= @coloc.nom %> </span> ou commencer à utiliser
+		<span class="cam1"> Camouloc. </span> !
 		<br/>
 		<br/>
 		<strong>
-			<%= link_to "Inscrire un coloc", "#", :id => "btnColocCreate", :class => "simplemodal-close"%>
+			<%= link_to "Ajouter un coloc", "#", :id => "btnColocCreate", :class => "simplemodal-close"%>
 			<%= link_to "Utiliser Camouloc", @coloc, :id => "btnColocCreate" %>
 		</strong>
 		<br/>
