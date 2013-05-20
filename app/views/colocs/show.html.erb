@@ -4,28 +4,29 @@
 	<h1> Colocation <span class="cam1"> <%= @coloc.nom %>. </span> </h1>
 
 	<p>
-	Bienvenue sur le profil de la coloc <span class="cam1"> <%= @coloc.nom %>. </span>
-	Cette colocation est composée de  <span class="cam1"><%= @coloc.users.count %> </span> colocataires. <br/>
-	<span class="cam1"> <%= @coloc.nom %>. </span> a rejoint notre réseau le  <%= @coloc.created_at.strftime("%d %b. %y") %>,
+	<%= t 'coloc.par1' %> <span class="cam1"> <%= @coloc.nom %>. </span>
+	 <%= t 'coloc.par2' %><span class="cam1"><%= @coloc.users.count %> </span> <%= t 'coloc.par3' %>. <br/>
+	 <span class="cam1"> <%= @coloc.nom %>. </span> <%= t 'coloc.par4' %>  <%= @coloc.created_at.strftime("%d %b. %y") %>,
 	<% if @coloc.palm == 1 %>
-		et est classée <span class="cam1"> #<%= @colocs.reverse.index(@coloc) + 1 %> </span>
-		au palmarès des colocations. Son chiffre d'affaires est estimé à <span class="cam1" ><%= "%0.2f" % @coloc.ca %> €. </span> 
+		<%= t 'coloc.par5' %><span class="cam1"> #<%= @colocs.reverse.index(@coloc) + 1 %> </span>
+		<%= t 'coloc.par6' %> <span class="cam1" ><%= "%0.2f" % @coloc.ca %> <%= t 'number.currency.format.unit' %>
+. </span> 
 	<% else %>
-		et n'a pas désirer apparaître au palmarès des colocations.
+		<%= t 'coloc.par7' %>
 	<% end %>
 	</p>
 	<p>
-	Votre profil vous permet de : 
+	<%= t 'coloc.par8' %>
 	<ul class="profil">
 		<li>
-		Poster un message <%= link_to "public", new_message_path(:coloc_id => @coloc.id, :priv =>0) %> 
-		ou
-		<%= link_to "privé", new_message_path(:coloc_id => @coloc.id, :priv =>1) %> 
-		sur le mur de <span class="cam1"> <%= @coloc.nom %>. </span>
+		<%= t 'coloc.par9' %><%= link_to "public", new_message_path(:coloc_id => @coloc.id, :priv =>0) %> 
+		<%= t 'gen.or' %>
+		<%= link_to t('coloc.priv'), new_message_path(:coloc_id => @coloc.id, :priv =>1) %> 
+		<%= t 'coloc.par10' %> <span class="cam1"> <%= @coloc.nom %>. </span>
 		</li>
 		<% if signed_in? and (current_user.coloc_id == @coloc.id or current_user.admin?) %> 
 			<li> 
-			<%= edit_coloc? %>, changer le nom, etc...
+			<%= edit_coloc? %> <%= t 'coloc.par11' %>
 			</li>
 		<% end %>
 		<% if signed_in? and (current_user.coloc_id == @coloc.id or current_user.admin?) %> 
@@ -35,13 +36,13 @@
 			(@coloc.users.size > 4 and @pleine == true)
 		%>
 		<li>
-		<%= link_to "Ajouter des colocs", new_user_path(:coloc_id => @coloc.id) %> dans cette colocation.
+		<%= link_to t('coloc.add'), new_user_path(:coloc_id => @coloc.id) %> <%= t 'coloc.par12' %>
 		</li>
 	<% end %>
 <% end %>
 <% if @coloc.users.size == 0 %>
 	<li>
-	<%= link_to "Continuer votre inscription", new_user_path(:coloc_id => @coloc.id) %> et créer votre compte dans cette colocation.
+	<%= link_to t('coloc.par13'), new_user_path(:coloc_id => @coloc.id) %> <%= t 'coloc.par14' %>
 	</li>
 <% end %>
 
@@ -51,15 +52,15 @@
 
 
 	<h3> 
-		Les membres de <span class="cam1"> <%= @coloc.nom %>. </span> sont : <br/>
+		<%= t 'coloc.par15' %><span class="cam1"> <%= @coloc.nom %>. </span> <%= t 'coloc.par16' %>: <br/>
 	</h3>
 	<% if @coloc.users.size == 0 %>
-		Pas de colocataire inscrit.
+		<%= t 'coloc.par16' %>
 	<% else %> 
 		<table class="tabbord black">
 			<tr>
 				<th> <strong> </strong> </th>
-				<th> <strong> Nom </strong></th>
+				<th> <strong> <%= t 'coloc.par18' %> </strong></th>
 				<th> <strong> Email </strong></th>
 			</tr>
 			<% @liste.each do |users| %>
@@ -81,18 +82,18 @@
 
 <br>
 <table class="microposts">
-	<h3> Les messages <span class="cam1">publics. </span></h3>
+	<h3> <%= t 'coloc.par18b' %>  <span class="cam1"> <%= t 'coloc.par18t' %>. </span></h3>
 	<% if @messagespubl.size == 0 %>
-		<br>Aucun message public à afficher.
+		<br><%= t 'coloc.par19' %>	
 	<% else %>
 		<% @messagespubl.each do |message| %>
 			<tr>
 				<td class="micropost">
 					<span class="content"><strong> <%= message.content %></strong></span>
 					<span class="timestamp">
-						Posté il y a <%= time_ago_in_words(message.created_at) %> par <%= link_to User.find(message.source_id).nom,  User.find(message.source_id)%> membre de <%= link_to Coloc.find(User.find(message.source_id).coloc_id).nom,  Coloc.find(User.find(message.source_id).coloc_id)%>. 
+						<%= t 'coloc.par20' %> <%= time_ago_in_words(message.created_at) %>, <%= link_to User.find(message.source_id).nom,  User.find(message.source_id)%> membre de <%= link_to Coloc.find(User.find(message.source_id).coloc_id).nom,  Coloc.find(User.find(message.source_id).coloc_id)%>. 
 						<% if signed_in? and (current_user.admin? or current_user.id == message.source_id or current_user.coloc_id == @coloc.id) %>
-							<span onclick="return confirm('Etes-vous sûr de vouloir supprimer le message ?')"> <%= button_to "Suppr", message, :method => :delete  %> </span>
+							<span onclick="return confirm(<%= t 'coloc.par21' %>)"> <%= button_to "Suppr", message, :method => :delete  %> </span>
 						<% end  %>
 
 					</span>
@@ -110,18 +111,19 @@
 <br/>
 <% if signed_in? and current_user.coloc_id == @coloc.id %>
 	<table class="microposts">
-		<h3> Les messages <span class="cam1">privés. </span></h3> 
+		<h3> <%= t 'coloc.par18b' %>  <span class="cam1"> <%= t 'coloc.par18q' %>. </span></h3>
 		<% if @messagespriv.size == 0 %>
-			<br>Aucun message privé à afficher.
+			<br>
+		<%= t 'coloc.par19' %>	
 		<% else %>
 			<% @messagespriv.each do |message| %>
 				<tr>
 					<td class="micropost">
 						<span class="content"><strong> <%= message.content %></strong></span>
 						<span class="timestamp">
-							Posté il y a <%= time_ago_in_words(message.created_at) %> par <%= link_to User.find(message.source_id).nom,  User.find(message.source_id)%> membre de <%= link_to Coloc.find(User.find(message.source_id).coloc_id).nom,  Coloc.find(User.find(message.source_id).coloc_id)%>. 
+							<%= t 'coloc.par20' %> <%= time_ago_in_words(message.created_at) %>, <%= link_to User.find(message.source_id).nom,  User.find(message.source_id)%> membre de <%= link_to Coloc.find(User.find(message.source_id).coloc_id).nom,  Coloc.find(User.find(message.source_id).coloc_id)%>. 
 							<% if signed_in? and (current_user.admin? or current_user.id == message.source_id or current_user.coloc_id == @coloc.id) %>
-								<span onclick="return confirm('Etes-vous sûr de vouloir supprimer le message ?')"> <%= button_to "Suppr", message, :method => :delete  %> </span>
+								<span onclick="return confirm(<%= t 'coloc.par21' %>)"> <%= button_to "Suppr", message, :method => :delete  %> </span>
 							<% end  %>
 
 						</span>

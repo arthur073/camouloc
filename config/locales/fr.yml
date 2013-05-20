@@ -226,6 +226,7 @@ fr:
         of: "de"
         owns: "doit"
         to: "à"
+        or: "ou"
   header:
         subtitle: "La meilleure manière de gérer sa coloc." 
         new_dep: "Nouvelle dépense"
@@ -305,6 +306,34 @@ fr:
         par13: "d'afficher"
         par14: "toutes les dépenses de"
         par15: "de cacher"
+  coloc:
+        par1: "Bienvenue sur le profil de la coloc "
+        par2: "Cette colocation est composée de "
+        par3: "colocataires"
+        par4: "a rejoint notre réseau le"
+        par5: "et est classée "
+        par6: "au palmarès des colocations. Son chiffre d'affaires est estimé à"
+        par7: "et n'a pas désirer apparaître au palmarès des colocations."
+        par8: "Votre profil vous permet de : "
+        par9: "Poster un message "
+        par10: "sur le mur de"
+        par11: ", changer le nom, etc..."
+        priv: "privé"
+        add: "Ajouter des colocs"
+        par12: "dans cette colocation."
+        par13: "Continuer votre inscription"
+        par14: "et créer votre compte dans cette colocation."
+        par15: "Les membres de "
+        par16: "sont "
+        par17: "Pas de colocataire inscrit."
+        par18: "Nom"
+        par18b: "Les messages"
+        par18t: "publics"
+        par18q: "privés"
+        par19: "Aucun message à afficher."
+        par20: "Posté il y a"
+        par21: "Etes-vous sûr de vouloir supprimer le message ?"
+
 
 
 
