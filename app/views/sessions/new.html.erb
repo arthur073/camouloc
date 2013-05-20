@@ -1,26 +1,28 @@
 <h1>Identification</h1>
-<div class="signup_button4 authfaceb">
-<a href="/auth/facebook?inscr=0" style="color:white">
- <strong> Login with Facebook </strong>
-</a>
+<div class="descriptionNormal">
+
+	Vous avez déjà créé votre compte sur <span class="cam1"> Camouloc. </span> ? Complétez ce formulaire pour accéder à l'application.
+	Vous avez lié votre profil à Facebook ? <a href="/auth/facebook?inscr=0" class="connectFacebook">Connectez-vous</a> en un clic à <span class="cam1"> Camouloc. </span> !
+	<br/>
+	<br/>
+	<%= form_for(:session, :url => sessions_path) do |f| %>
+		<div class="field">
+			Quel est votre email ? <br />
+			<%= f.email_field :email, :class => "colocCreate" %>
+		</div>
+		<div class="field">
+			Veuillez renseigner votre mot de passe. <br />
+			<%= f.password_field :password, :class => "colocCreate" %>
+		</div>
+		<br/>
+		<div class="actions">
+			<%= f.submit "S'identifier", :id => "btnColocCreate" %>
+		</div>
+	<% end %>
+
+	<p>Vous n'êtes pas encore inscrit ? <%= link_to "Inscrivez vous !", new_coloc_path %> <br>
+	<%= link_to "Mot de passe oublié ?", new_password_reset_path %></p>
+
+
+
 </div>
-
-<%= form_for(:session, :url => sessions_path) do |f| %>
-  <div class="field">
-    <%= f.label :email, "eMail" %><br />
-    <%= f.email_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :password, "Mot de passe" %><br />
-    <%= f.password_field :password %>
-  </div>
-  <div class="actions">
-    <%= f.submit "S'identifier" %>
-  </div>
-<% end %>
-
-<p>Pas encore inscrit ? <%= link_to "S'inscrire !", new_coloc_path %> <br>
-<%= link_to "Mot de passe oublié ?", new_password_reset_path %></p>
-
-
-

@@ -8,9 +8,17 @@ module UsersHelper
 		image_tag("../unknownInv.jpg", :alt => "unknown", :class => "imgframeSmall", :size => "80x80")
 	end
 
+	def aligned_gravatar_for(user)
+		if user.has_image 
+			image_tag (user.image) , :size => "90x90", :class => "imgframe" 
+		else 
+			image_tag("../unknownInv.jpg", :alt => "unknown", :class => "imgframeAligned", :size => "90x90")
+		end  
+	end
 
-        def delete_user?
-                button_to "delete", @user, :method=>:delete, :class=>:destroy
-        end
+
+	def delete_user?
+		button_to "delete", @user, :method=>:delete, :class=>:destroy
+	end
 
 end

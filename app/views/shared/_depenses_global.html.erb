@@ -1,0 +1,119 @@
+<p>
+Veuillez compléter les quelques champs suivants pour ajouter une nouvelle dépense dans la colocation 
+<span class ="cam1"> <%= Coloc.find(@colocataires.first.coloc_id).nom %>.</span>
+Votre dépense sera prise en compte et s'affichera dans votre <span class="cam1"> Tableau de bord. </span>
+</p>
+
+
+<div class="field colocCreate">
+	<strong>  Qui a payé ? </strong><br>
+	<%= object.select :user_id, options_for_select(@colocataires.map{ |c| [c.nom, c.id]}, [current_user.nom, current_user.id]) %>
+</div>
+<br/>
+
+<div class="field">
+	<strong> Pour qui payez-vous ? </strong><br>
+	<% if object.object.instance_of?(Depense) %>
+		<div class="userChoice">
+			<%= aligned_gravatar_for(@colocataires[0]) %>
+			<%= object.label @colocataires[0].nom, :class => "colocCreate" %>
+			<%= object.check_box :destinataire_part, :class => "colocCreate" %>  		
+		</div>
+		<div class="userChoice">
+			<%= aligned_gravatar_for(@colocataires[1]) %>
+			<%= object.label @colocataires[1].nom, :class => "colocCreate" %>
+			<%= object.check_box :destinataire_part2, :class => "colocCreate" %> 
+		</div>
+	<% end %>
+	<% if object.object.instance_of?(TroisDepense) %>
+		<div class="userChoice">
+			<%= aligned_gravatar_for(@colocataires[0]) %>
+			<%= object.label @colocataires[0].nom, :class => "colocCreate" %>
+			<%=object.check_box :destinataire_part, :class => "colocCreate" %>  		
+		</div>
+		<div class="userChoice">
+			<%= aligned_gravatar_for(@colocataires[1]) %>
+			<%= object.label @colocataires[1].nom, :class => "colocCreate" %>
+			<%=object.check_box :destinataire_part2, :class => "colocCreate" %> 
+		</div>
+		<div class="userChoice">
+			<%= aligned_gravatar_for(@colocataires[2]) %>
+			<%= object.label @colocataires[2].nom, :class => "colocCreate" %>
+			<%=object.check_box :destinataire_part3, :class => "colocCreate" %> 
+		</div>
+	<% end %>
+	<% if object.object.instance_of?(QuatreDepense) %>
+		<div class="userChoice">
+			<%= aligned_gravatar_for(@colocataires[0]) %>
+			<%= object.label @colocataires[0].nom, :class => "colocCreate" %>
+			<%= object.check_box :destinataire_part, :class => "colocCreate" %>  		
+		</div>
+		<div class="userChoice">
+			<%= aligned_gravatar_for(@colocataires[1]) %>
+			<%= object.label @colocataires[1].nom, :class => "colocCreate" %>
+			<%=object.check_box :destinataire_part2, :class => "colocCreate" %> 
+		</div>
+		<div class="userChoice">
+			<%= aligned_gravatar_for(@colocataires[2]) %>
+			<%= object.label @colocataires[2].nom, :class => "colocCreate" %>
+			<%=object.check_box :destinataire_part3, :class => "colocCreate" %> 
+		</div>
+		<div class="userChoice">
+			<%= aligned_gravatar_for(@colocataires[3]) %>
+			<%= object.label @colocataires[3].nom, :class => "colocCreate" %>
+			<%=object.check_box :destinataire_part4, :class => "colocCreate" %> 
+		</div>
+	<% end %>
+	<% if object.object.instance_of?(Expense) %>
+		<%= fields_for :parties do |p| %>
+			<% @colocataires.each do |c| %>      
+				<div class="userChoice">
+					<%= aligned_gravatar_for(c) %>
+					<%= object.label c.nom, :class => "colocCreate" %>
+					<%= p.check_box c.id, :class => "colocCreate" %> 
+				</div>
+			<% end %>
+		<% end %>
+	<% end %>
+</div>
+<br/>
+
+
+<div class="field">
+	<%= object.label "Quel est le montant de la dépense ?" %><br>
+	<i> Pour les nombres décimaux, utiliser "." et non "," </i> <br>
+	<%= object.text_field :montant, :class => "colocCreate" %> €
+</div>
+<br/>
+
+
+<div class="field">
+	<%= object.label "Quelle est la raison de la dépense ?" %><br>
+	<%= object.text_field :raison, :class => "colocCreate" %>
+</div>
+<br/>
+
+<!--POPUP-->    
+<script>
+	function reload() {
+		var iframe = document.getElementById("icaptcha");
+		iframe.src = iframe.src;
+	}
+</script>
+
+
+<div class="field">
+	<strong>  Votre dépense est   </strong>
+	<%= object.select :auto, options_for_select([[ "Occasionnelle" ,  0 ], ["Mensuelle", 1 ]]) %>
+	<i>(Les dépenses <span class="cam1"> mensuelles.</span> sont ajoutées les 1er du mois.)</i>
+</div>
+<br/>
+
+
+<input type='button' name='osx' value='Valider le formulaire' class='osx demo' id="captchavalider" onclick="reload()"/>
+<div id="valider" style="display:none;">
+	<i> Vous pouvez maintenant enregistrer la dépense. </i> <br>
+	<%= object.submit "Enregistrer", :id => "btnColocCreate" %>
+</div>
+
+

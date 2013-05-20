@@ -968,12 +968,12 @@ a.popuplink:hover,a.popuplink:active {color:#fff; text-decoration:none; font-siz
 }
 
 
-input.colocCreate {
+input.colocCreate, div.colocCreate select, .field select {
 	height : 1.5em;
 	font-size : 80%;
 }
 
-input#btnColocCreate, a#btnColocCreate, a#btnColocCreateOK{
+input#btnColocCreate, a#btnColocCreate, input#captchavalider{
   border: 1px solid #777777;
   background: black;
   color: white;
@@ -983,6 +983,10 @@ input#btnColocCreate, a#btnColocCreate, a#btnColocCreateOK{
   cursor: pointer;
   width : 25%;
   margin-right : 1em;
+}
+
+input#btnColocCreate:hover, input#captchavalider:hover {
+	text-decoration : underline;
 }
 
 /* barre de progression */
@@ -1346,4 +1350,26 @@ ul.profil {
 
 .imgframeSmall {
 	margin-left : 3em;
+}
+
+.imgframeAligned {
+}
+.field div.userChoice {
+	display : inline-block;
+	border: solid 1px #BBDDBB;
+	height : 7em;
+	width : 7em;
+	text-align : center;
+	padding : 0.2em;
+	padding-top : 1em;
+	margin-right : 2em;
+	margin-top : 2em;
+}	
+
+.field label.colocCreate {
+	display: block;
+}
+
+.field input.colocCreate[type="checkbox"] {
+	width : 2em;
 }

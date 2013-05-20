@@ -13,44 +13,46 @@
 	});
 </script>
 
-<div>
-	<% if @user.has_image %>
-		<%= image_tag (@user.image) , :size => "85x85", :style => "box-shadow: 0px 2px 5px #1c1a19;" %>
+<% if @user.has_image %>
+		<%= image_tag (@user.image) , :size => "100x100", :class => "imgframe" %>
 	<% else %>
 		<%= gravatar_for @user %>
-		<a href="http://gravatar.com/emails">changer</a>
 	<% end %> 
-</div>
 
 <%= form_for(@user) do |f| %>
 	<%= render 'shared/error_messages', :object => f.object %>
+	<div class="descriptionNormal">
 	<div class="field">
-		<%= f.label :nom, "Nom" %><br />
-		<%= f.text_field :nom %>
+		Entrez un nouveau nom. <br />
+		<%= f.text_field :nom, :class => "colocCreate" %>
 	</div>
+	<br/>
 	<div class="field">
-		<%= f.label :email, "eMail" %><br />
-		<%= f.email_field :email %>
+		Envie de changer votre adresse email ? <br />
+		<%= f.email_field :email , :class => "colocCreate"%>
 	</div>
+	<br/>
 
 	<div class="field" name="password">
-		<%= f.label :password, "Mot de passe" %><br />
-		<%= f.password_field :password %> <i> (Obligatoire)  </i> 
+		Vous pouvez également changer votre mot de passe.<br />
+		<%= f.password_field :password, :class => "colocCreate" %> <i> (Obligatoire)  </i> 
 	</div>
 	<div class="field">
-		<%= f.label :password_confirmation, "Confirmation mot de passe" %><br />
-		<%= f.password_field :password_confirmation %><i> (Obligatoire)  </i>
+		Veuillez confirmer votre mot de passe.<br />
+		<%= f.password_field :password_confirmation, :class => "colocCreate" %><i> (Obligatoire)  </i>
 	</div>
+	<br/>
 
 	<div class="field">
+		Acceptez-vous de recevoir des notifications de <span class="cam1"> Camouloc. </span> par email ?<br/>
 		<%= f.check_box :mail %>
 		<%= f.label "Recevoir les notifications ?" %><br />
 	</div>
+	<br/>
 
 	<div class="actions">
-		<%= f.submit "Actualiser" %>
+		<%= f.submit "Actualiser", :id =>"btnColocCreate"%>
 	</div>
 
-
 <% end %>
-
+</div>

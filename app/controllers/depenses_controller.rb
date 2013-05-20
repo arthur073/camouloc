@@ -7,7 +7,6 @@ class DepensesController < ApplicationController
       @depense = Depense.new
       @titre = "Nouvelle dépense"
       @colocataires = User.where(:coloc_id => current_user.coloc_id).order(:created_at)
-
    end
 
    def create
