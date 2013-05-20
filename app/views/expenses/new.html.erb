@@ -2,63 +2,9 @@
 
 <%= form_for(@expense) do |f| %>
    <%= render 'shared/error_messages', :object => f.object %>
+<div class="descriptionNormal">
 
-   <div class="field">
-      <a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';" class="signup_button4">Dépense mensuelle ? </a>       
-      <span id="spoiler_id" style="display: none">
-         <strong>  La dépense est  </strong>
-         <%= f.select :auto, options_for_select([[ "Occasionnelle" ,  0 ], ["Mensuelle", 1 ]]) %>
-         <i>(Les dépenses mensuelles sont ajoutées tous les 1er du mois.)</i>
-      </span>
-   </div>
-
-
-   <div class="field">
-      <strong>  Qui a payé ? </strong><br>
-      <%= f.select :user_id, options_for_select(@colocataires.map{ |c| [c.nom, c.id]}, [current_user.nom, current_user.id]) %>
-   </div>
-
-   <div class="field">
-      <strong> Pour qui payez-vous ? </strong><br>
-      <%= fields_for :parties do |p| %>
-         <% @colocataires.each do |c| %>      
-            <%= p.check_box c.id %> <%= c.nom %> <br>         
-          <% end %>
-       <% end %>
-   </div>
-
-   <div class="field">
-      <%= f.label "Quel est le montant de la dépense ?" %><br>
-      <i> Pour les nombres décimaux, utiliser "." et non "," </i> <br>
-      <%= f.text_field :montant %>
-   </div>
-
-
-   <div class="field">
-      <%= f.label "Quelle est la raison de la dépense ?" %><br>
-      <%= f.text_field :raison %>
-   </div>
-
-   <!--POPUP-->    
-   <script>
-      function reload() {
-         var iframe = document.getElementById("icaptcha");
-         iframe.src = iframe.src;
-      }
-   </script>
-
-   <% if mobile_device? %>
-      <div id="valider" style="display:;">
-         <i> Vous pouvez maintenant enregistrer la dépense. </i> <br>
-         <%= f.submit "Enregistrer" %>
-      </div>
-   <% else %>
-      <input type='button' name='osx' value='Valider le formulaire' class='osx demo signup_button4' id="captchavalider" onclick="reload()"/>
-      <div id="valider" style="display:none;">
-         <i> Vous pouvez maintenant enregistrer la dépense. </i> <br>
-         <%= f.submit "Enregistrer" %>
-      </div>
-   <% end %>
+<%= render 'shared/depenses_global', :object => f %>
 
 <% end %>
 
@@ -69,6 +15,7 @@
    <div id="osx-modal-data">
       <iframe src="http://captcha.olympe.in" scrolling="no" class="icaptcha" id="icaptcha"></iframe>
    </div>
+</div>
 </div>
 
 

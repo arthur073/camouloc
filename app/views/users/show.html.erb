@@ -25,7 +25,8 @@
 			<li>
 			Contacter <span class="cam1"> <%= @user.nom %>. </span> par <a href="mailto:<%= @user.email %>">email</a>.
 			</li>
-			<% if signed_in? and current_user.authentifications.empty? %>
+			<% if signed_in? and current_user == @user %>
+			<% if  current_user.authentifications.empty?  %>
 				<li>
 				Lier ce compte avec <%= link_to "Facebook", @faceb_url, :class => "connectFacebook"%> et gagner du temps à chaque connexion.
 				</li>
@@ -33,6 +34,7 @@
 				<li>
 				Consulter les <%= link_to "liaisons du compte", authentifications_url%>
 				</li>
+			<% end %>
 			<% end %>
 			<% if signed_in? and (@user.id == current_user.id or current_user.admin?) %>
 				<li>
