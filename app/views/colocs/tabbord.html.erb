@@ -1,13 +1,10 @@
-<h1> <%= @titre %> de <span class="cam1"> <%= @coloc.nom %>. </span> </h1>
+<h1> <%= t 'header.tabbord' %> <%= t 'gen.of' %> <span class="cam1"> <%= @coloc.nom %>. </span> </h1>
 <br/>
 <br/>
 <div class="descriptionNormal">
 <p>
-Bienvenue sur la tableau de bord de votre <span class="cam1"> coloc. </span> Vous trouverez sur cette page de nombreux détails qui vous permettront de
-mieux gérer votre vie en colocation. <br/><br/>
-Ce premier graphique représente la répartition du chiffre d'affaires de <span class="cam1"> <%= @coloc.nom %>. </span> entre les différents 
-colocataires.
-</p>
+<%= t 'tabbord.par1' %> <span class="cam1"> <%= t 'home.par2' %> </span> <%= t 'tabbord.par2' %> <br/><br/>
+<%= t 'tabbord.par3' %> <span class="cam1"> <%= @coloc.nom %>. </span> <%= t 'tabbord.par4' %> </p>
 
 <script type="text/javascript">
 	$(function () {
@@ -21,7 +18,7 @@ plotBorderWidth: null,
 plotShadow: false
 },
 title: {
-text: 'Répartition du chiffre d\'affaires de la colocation'
+text: '<%= t "tabbord.graphTitle" %>'
 },
 subtitle: {
 text: '<%= @coloc.nom.gsub('\'', ' ') %>',
@@ -80,20 +77,22 @@ type: 'pie',
 <br/>
 <br/>
 <p>
-Ce tableau est le récapitulatif de toutes les dépenses enregistrées par <span class="cam1"><%=@coloc.nom%>.</span>
-Les colocataires ayant des dettes sont indiqués en <span style="color:red;font-weight:bold"> rouge. </span>
+<%= t 'tabbord.par5' %> <span class="cam1"><%=@coloc.nom%>.</span><%= t 'tabbord.par6' %>
+<span style="color:red;font-weight:bold"> <%= t 'tabbord.par7' %> </span>
 </p>
 <table class="tabbord">
 	<tr> 
-		<td> <strong> Résumé personnel :</strong> </td>
+		<td> <strong> <%= t 'tabbord.persRes' %> :</strong> </td>
 	</tr>
 	<% @colocataires.each do |colocataires| %>
 		<tr>
 			<td>  <%= link_to colocataires.nom, colocataires %> </td>
 			<% if colocataires.tot < 0 %>
-				<td> <font color=red> <strong> <%= "%0.2f" % colocataires.tot %> € </strong> </font> </td>
+				<td> <font color=red> <strong> <%= "%0.2f" % colocataires.tot %> <%= t 'number.currency.format.unit' %>
+ </strong> </font> </td>
 			<% else %>
-				<td> <strong> <%= "%0.2f" % colocataires.tot %> € </strong> </td>
+				<td> <strong> <%= "%0.2f" % colocataires.tot %> <%= t 'number.currency.format.unit' %>
+ </strong> </td>
 			<% end %>
 		</tr>
 	<% end %>
@@ -102,17 +101,18 @@ Les colocataires ayant des dettes sont indiqués en <span style="color:red;font-
 <br/>
 <br/>
 <p> 
-Dans ce tableau, il est écrit explicitement comment effectuer les remboursements entre les colocs de  <span class="cam1"><%=@coloc.nom%>.</span>
+<%= t 'tabbord.par8' %><span class="cam1"><%=@coloc.nom%>.</span>
 </p>
 <table class="tabbord">
 	<tr> 
-		<td> <strong> Qui doit quoi ?</strong><i> <%= mail_to "arthur.verger@gmail.com", "(Signaler une erreur !)", :subject => "[CAMOULOC] Problème de remboursement"%> </i> </td> 
+		<td> <strong> <%= t 'tabbord.whoWho' %> </strong> </td> 
 	</tr>
 	<tr>
 		<% @colocatairestries = @colocataires.sort { |a,b| a.tot <=> b.tot } %>
 		<% if @nbrcoloc == 2 %>
 			<td> 
-				<%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries.last.tot %>€ à <%= @colocatairestries.last.nom %>. 
+				<%= @colocatairestries.first.nom %> <%= t 'gen.owns' %> <%= "%0.2f" % @colocatairestries.last.tot %><%= t 'number.currency.format.unit' %>
+ <%= t 'gen.to' %> <%= @colocatairestries.last.nom %>. 
 			</td> 
 		</tr>
 	<% end %>
@@ -121,27 +121,32 @@ Dans ce tableau, il est écrit explicitement comment effectuer les remboursement
 	<% if @nbrcoloc == 3 %>
 
 		<td> 
-			<%= @colocatairestries.first.nom %> doit
+			<%= @colocatairestries.first.nom %> <%= t 'gen.owns' %>
 
 			<% if @colocatairestries.last.tot.abs < @colocatairestries.first.tot.abs %>
 				<! le remboursement de first suffit pour last, first rembourse un autre>
-				<%= "%0.2f" % @colocatairestries.last.tot %>€ à <%= @colocatairestries.last.nom %>. 
+				<%= "%0.2f" % @colocatairestries.last.tot %><%= t 'number.currency.format.unit' %>
+ <%= t 'gen.to' %> <%= @colocatairestries.last.nom %>. 
 			</td> 
 		</tr>
 		<tr> 
 			<td> 
-				<%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %>€ à <%= @colocatairestries[1].nom %>. 
+				<%= @colocatairestries.first.nom %> <%= t 'gen.owns' %> <%= "%0.2f" % @colocatairestries[1].tot.abs %><%= t 'number.currency.format.unit' %>
+ <%= t 'gen.to' %> <%= @colocatairestries[1].nom %>. 
 			</td> 
 		</tr>
 
 	<% else %>
 		<! le remboursement de first ne suffit pas pour last, un autre doit participer>
-		<%= "%0.2f" % @colocatairestries.first.tot.abs  %>€ à <%= @colocatairestries.last.nom %>. 
+		<%= "%0.2f" % @colocatairestries.first.tot.abs  %><%= t 'number.currency.format.unit' %>
+ <%= t 'gen.to' %> <%= @colocatairestries.last.nom %>. 
 	</td> 
 </tr>
 <tr> 
 	<td> 
-		<%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %>€ à <%= @colocatairestries.last.nom %>. 
+		<%= @colocatairestries[1].nom %> <%= t 'gen.owns' %>
+ <%= "%0.2f" % @colocatairestries[1].tot.abs %><%= t 'number.currency.format.unit' %>
+ <%= t 'gen.to' %> <%= @colocatairestries.last.nom %>. 
 	</td> 
 </tr>
 			<% end %>	
@@ -153,16 +158,24 @@ Dans ce tableau, il est écrit explicitement comment effectuer les remboursement
 			<td> 
 				<% if @colocatairestries.last.tot.abs < @colocatairestries.first.tot.abs %>
 					<!-- le remboursement de first suffit pour last, first rembourse un autre-->
-					<%= @colocatairestries.first.nom %> doit <%= "%0.2f" % @colocatairestries.last.tot %>€ à <%= @colocatairestries.last.nom %>. </td></tr>
-			<tr> <td><%= @colocatairestries.first.nom %> doit <%= "%0.2f" % [@colocatairestries[2].tot.abs, @colocatairestries.first.tot.abs - @colocatairestries.last.tot.abs].min %>€ à <%= @colocatairestries[2].nom %>. </td></tr>
+					<%= @colocatairestries.first.nom %> <%= t 'gen.owns' %>
+ <%= "%0.2f" % @colocatairestries.last.tot %><%= t 'number.currency.format.unit' %>
+ <%= t 'gen.to' %> <%= @colocatairestries.last.nom %>. </td></tr>
+			<tr> <td><%= @colocatairestries.first.nom %><%= t 'gen.owns' %>
+ <%= "%0.2f" % [@colocatairestries[2].tot.abs, @colocatairestries.first.tot.abs - @colocatairestries.last.tot.abs].min %><%= t 'number.currency.format.unit' %>
+ <%= t 'gen.to' %> <%= @colocatairestries[2].nom %>. </td></tr>
 
 			<% if @colocatairestries[2].tot.abs < @colocatairestries.first.tot.abs - @colocatairestries.last.tot.abs %>
 				<!-- Le remboursement de first suffit pour 2, first rembourse le dernier -->
-				<tr><td><%= @colocatairestries.first.nom %> doit  <%= "%0.2f" % @colocatairestries[1].tot.abs %>€ à <%= @colocatairestries[1].nom %>. </tr></td>
+				<tr><td><%= @colocatairestries.first.nom %> <%= t 'gen.owns' %>
+  <%= "%0.2f" % @colocatairestries[1].tot.abs %><%= t 'number.currency.format.unit' %>
+ <%= t 'gen.to' %> <%= @colocatairestries[1].nom %>. </tr></td>
 
 			<% else %>
 				<!-- Le remboursement de first suffit pas pour 2, 1 rembourse 2 --> 
-				<tr><td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % [@colocatairestries[2].tot.abs, @colocatairestries[1].tot.abs].min %>€ à <%= @colocatairestries[2].nom %>. </td></tr>
+				<tr><td><%= @colocatairestries[1].nom %> <%= t 'gen.owns' %>
+ <%= "%0.2f" % [@colocatairestries[2].tot.abs, @colocatairestries[1].tot.abs].min %><%= t 'number.currency.format.unit' %>
+ <%= t 'gen.to' %> <%= @colocatairestries[2].nom %>. </td></tr>
 			<% end %>
 
 
@@ -170,25 +183,38 @@ Dans ce tableau, il est écrit explicitement comment effectuer les remboursement
 
 		<% else %>
 			<!-- le remboursement de first ne suffit pas pour last, 1 doit participer-->
-			<%= @colocatairestries.first.nom %> doit	<%= "%0.2f" % @colocatairestries.first.tot.abs  %>€ à <%= @colocatairestries.last.nom %>. </td></tr>
+			<%= @colocatairestries.first.nom %> <%= t 'gen.owns' %>
+	<%= "%0.2f" % @colocatairestries.first.tot.abs  %><%= t 'number.currency.format.unit' %>
+ <%= t 'gen.to' %>
+ <%= @colocatairestries.last.nom %>. </td></tr>
 
 
 	<% if @colocatairestries.last.tot.abs - @colocatairestries.first.tot.abs < @colocatairestries[1].tot.abs %>
 		<! le remboursement de 1 suffit pour last, 1 rembourse 2>
-		<tr> <td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % (@colocatairestries.last.tot.abs - @colocatairestries.first.tot.abs) %>€ à <%= @colocatairestries.last.nom %>. </td></tr>
-		<tr> <td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %>€ à <%= @colocatairestries[2].nom %>. </td></tr>
+		<tr> <td><%= @colocatairestries[1].nom %> <%= t 'gen.owns' %>
+ <%= "%0.2f" % (@colocatairestries.last.tot.abs - @colocatairestries.first.tot.abs) %><%= t 'number.currency.format.unit' %>
+ <%= t 'gen.to' %> <%= @colocatairestries.last.nom %>. </td></tr>
+		<tr> <td><%= @colocatairestries[1].nom %> <%= t 'gen.owns' %>
+ <%= "%0.2f" % @colocatairestries[2].tot.abs %><%= t 'number.currency.format.unit' %>
+ <%= t 'gen.to' %> <%= @colocatairestries[2].nom %>. </td></tr>
 
 	<%else%>
 		<! le remboursement de 1 suffit pas pour last, 2 rembourse last>
-		<tr> <td><%= @colocatairestries[1].nom %> doit <%= "%0.2f" % @colocatairestries[1].tot.abs %>€ à <%= @colocatairestries.last.nom %>. </td></tr>
-		<tr> <td><%= @colocatairestries[2].nom %> doit <%= "%0.2f" % @colocatairestries[2].tot.abs %>€ à <%= @colocatairestries.last.nom %>. </td></tr>
+		<tr> <td><%= @colocatairestries[1].nom %> <%= t 'gen.owns' %>
+ <%= "%0.2f" % @colocatairestries[1].tot.abs %><%= t 'number.currency.format.unit' %>
+ <%= t 'gen.to' %> <%= @colocatairestries.last.nom %>. </td></tr>
+		<tr> <td><%= @colocatairestries[2].nom %> <%= t 'gen.owns' %>
+ <%= "%0.2f" % @colocatairestries[2].tot.abs %><%= t 'number.currency.format.unit' %>
+ <%= t 'gen.to' %> <%= @colocatairestries.last.nom %>. </td></tr>
 	<% end %>
 <% end %>	
 <% end %>
 <% if @nbrcoloc > 4 %>
    <% @hashRM.each do |h| %>
       <% if h[2] > 0.01 %>
-         <tr> <td> <%= h[1] %> doit <strong><%= "%0.2f" % (h[2]) %>€</strong> à <%= h[3] %>. </td></tr>
+         <tr> <td> <%= h[1] %> <%= t 'gen.owns' %>
+ <strong><%= "%0.2f" % (h[2]) %><%= t 'number.currency.format.unit' %>
+</strong> <%= t 'gen.to' %> <%= h[3] %>. </td></tr>
       <% end %>
    <% end %>
 <% end %>
@@ -198,20 +224,19 @@ Dans ce tableau, il est écrit explicitement comment effectuer les remboursement
 <br/>
 <br/>
 <p> 
-Toutes les dépenses <span class="cam1"> automatiques. </span> réalisées par votre colocation se trouvent ici.
-</p>
+<%= t 'tabbord.par9' %> <span class="cam1"> <%= t 'tabbord.par10' %> </span> <%= t 'tabbord.par11' %> </p>
 
 		<table class="tabbord">
 			<tr>
-				<td><strong>  Dépenses mensuelles </strong> </td>
+				<td><strong> <%= t 'tabbord.monthExp' %>  </strong> </td>
 			</tr>
 			<% if @autodep.size == 0 %>
-				<td> Aucune dépense mensuelle à répertorier. </td>
+				<td>  <%= t 'tabbord.noMonth' %></td>
 			<% else %>
 				<tr>
 					<td><strong> Source </strong> </td>
-					<td><strong> Montant </strong></td>
-					<td><strong> Raison </strong></td>
+					<td><strong> <%= t 'tabbord.monthAmo' %> </strong></td>
+					<td><strong> <%= t 'tabbord.monthRea' %> </strong></td>
 					<td><strong> Date </strong></td>
 					<td></td>
 				</tr>
@@ -219,11 +244,12 @@ Toutes les dépenses <span class="cam1"> automatiques. </span> réalisées par v
 				<% @autodep.each do |depauto| %>
 					<tr>
 						<td><%= User.find(depauto.user_id).nom %> </td>
-						<td><%= depauto.montant %> €</td>
+						<td><%= depauto.montant %> <%= t 'number.currency.format.unit' %>
+</td>
 						<td><%= depauto.raison %> </td>
 						<td><%= depauto.created_at.strftime("%d %b. %Y")%> </td>
 						<% if signed_in? and (current_user.coloc_id == @coloc.id or current_user.admin?) %>
-							<td onclick="return confirm('Etes-vous sûr de vouloir supprimer la dépense ?')"> <%= button_to "Suppr", depauto, :method => :delete  %> </td>
+							<td onclick="return confirm(<%= t 'tabbord.confirm' %>)"> <%= button_to "Suppr", depauto, :method => :delete  %> </td>
 						<% end %>
 
 					</tr>
@@ -233,9 +259,9 @@ Toutes les dépenses <span class="cam1"> automatiques. </span> réalisées par v
 <br/>
 <br/>
  
-Vous pouvez également choisir 
-<a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';document.getElementById('to_hide').style.display='none';" class="connectFacebook">d'afficher</a> <span id="to_hide"> toutes les dépenses de <span class="cam1"> <%= @coloc.nom %>. </span> </span>
-<span id="spoiler_id" style="display: none"><a onclick="document.getElementById('spoiler_id').style.display='none'; document.getElementById('show_id').style.display='';document.getElementById('to_hide').style.display=''" class="connectFacebook">de cacher</a> toutes les dépenses de <span class="cam1"> <%= @coloc.nom %>. </span><br/><br/>
+<%= t 'tabbord.par12' %>
+<a id="show_id" onclick="document.getElementById('spoiler_id').style.display=''; document.getElementById('show_id').style.display='none';document.getElementById('to_hide').style.display='none';" class="connectFacebook"><%= t 'tabbord.par13' %></a> <span id="to_hide"> <%= t 'tabbord.par14' %><span class="cam1"> <%= @coloc.nom %>. </span> </span>
+<span id="spoiler_id" style="display: none"><a onclick="document.getElementById('spoiler_id').style.display='none'; document.getElementById('show_id').style.display='';document.getElementById('to_hide').style.display=''" class="connectFacebook"><%= t 'tabbord.par15' %></a> <%= t 'tabbord.par14' %><span class="cam1"> <%= @coloc.nom %>. </span><br/><br/>
 
 
 			<table class="tabbord">
@@ -244,8 +270,8 @@ Vous pouvez également choisir
 					<% @colocataires.each do |colocataires| %>
 						<td><strong> <%= colocataires.nom %></strong> </td>
 					<% end %>
-					<td><strong> Montant </strong></td>
-					<td><strong> Raison </strong></td>
+					<td><strong> <%= t 'tabbord.monthAmo' %> </strong></td>
+					<td><strong> <%= t 'tabbord.monthRea' %> </strong></td>
 					<td><strong> Date </strong></td>
 				</strong>
 			</tr>
@@ -261,7 +287,8 @@ Vous pouvez également choisir
 					<% if @nbrcoloc > 3 %>
 						<td>	<%= depenses.destinataire_part4 %>  </td>
 					<% end %>
-					<td>	<%= depenses.montant %> € </td>
+					<td>	<%= depenses.montant %> <%= t 'number.currency.format.unit' %>
+ </td>
 					<td>	<%= depenses.raison %> </td>
 					<td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
 				</tr>
@@ -277,7 +304,8 @@ Vous pouvez également choisir
                      <td> oui </td>
                   <% end %>
                <% end %>
-               <td>	<%= exp.montant %> € </td>
+               <td>	<%= exp.montant %> <%= t 'number.currency.format.unit' %>
+ </td>
 					<td>	<%= exp.raison %> </td>
 					<td>	<%= exp.created_at.strftime("%d %b. %Y") %> </td>
             </tr>

@@ -1,5 +1,291 @@
-# Sample localization file for English. Add more files in this directory for other locales.
-# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
-
 en:
-  hello: "Hello world"
+  date:
+    abbr_day_names:
+    - Sun
+    - Mon
+    - Tue
+    - Wed
+    - Thu
+    - Fri
+    - Sat
+    abbr_month_names:
+    - 
+    - Jan
+    - Feb
+    - Mar
+    - Apr
+    - May
+    - Jun
+    - Jul
+    - Aug
+    - Sep
+    - Oct
+    - Nov
+    - Dec
+    day_names:
+    - Sunday
+    - Monday
+    - Tuesday
+    - Wednesday
+    - Thursday
+    - Friday
+    - Saturday
+    formats:
+      default: ! '%Y-%m-%d'
+      long: ! '%B %d, %Y'
+      short: ! '%b %d'
+    month_names:
+    - 
+    - January
+    - February
+    - March
+    - April
+    - May
+    - June
+    - July
+    - August
+    - September
+    - October
+    - November
+    - December
+    order:
+    - :year
+    - :month
+    - :day
+  datetime:
+    distance_in_words:
+      about_x_hours:
+        one: about 1 hour
+        other: about %{count} hours
+      about_x_months:
+        one: about 1 month
+        other: about %{count} months
+      about_x_years:
+        one: about 1 year
+        other: about %{count} years
+      almost_x_years:
+        one: almost 1 year
+        other: almost %{count} years
+      half_a_minute: half a minute
+      less_than_x_minutes:
+        one: less than a minute
+        other: less than %{count} minutes
+      less_than_x_seconds:
+        one: less than 1 second
+        other: less than %{count} seconds
+      over_x_years:
+        one: over 1 year
+        other: over %{count} years
+      x_days:
+        one: 1 day
+        other: ! '%{count} days'
+      x_minutes:
+        one: 1 minute
+        other: ! '%{count} minutes'
+      x_months:
+        one: 1 month
+        other: ! '%{count} months'
+      x_seconds:
+        one: 1 second
+        other: ! '%{count} seconds'
+    prompts:
+      day: Day
+      hour: Hour
+      minute: Minute
+      month: Month
+      second: Seconds
+      year: Year
+  errors: &errors
+    format: ! '%{attribute} %{message}'
+    messages:
+      accepted: must be accepted
+      blank: can't be blank
+      confirmation: doesn't match confirmation
+      empty: can't be empty
+      equal_to: must be equal to %{count}
+      even: must be even
+      exclusion: is reserved
+      greater_than: must be greater than %{count}
+      greater_than_or_equal_to: must be greater than or equal to %{count}
+      inclusion: is not included in the list
+      invalid: is invalid
+      less_than: must be less than %{count}
+      less_than_or_equal_to: must be less than or equal to %{count}
+      not_a_number: is not a number
+      not_an_integer: must be an integer
+      odd: must be odd
+      record_invalid: ! 'Validation failed: %{errors}'
+      taken: has already been taken
+      too_long:
+        one: is too long (maximum is 1 character)
+        other: is too long (maximum is %{count} characters)
+      too_short:
+        one: is too short (minimum is 1 character)
+        other: is too short (minimum is %{count} characters)
+      wrong_length:
+        one: is the wrong length (should be 1 character)
+        other: is the wrong length (should be %{count} characters)
+    template:
+      body: ! 'There were problems with the following fields:'
+      header:
+        one: 1 error prohibited this %{model} from being saved
+        other: ! '%{count} errors prohibited this %{model} from being saved'
+  helpers:
+    select:
+      prompt: Please select
+    submit:
+      create: Create %{model}
+      submit: Save %{model}
+      update: Update %{model}
+  number:
+    currency:
+      format:
+        delimiter: ! ','
+        format: ! '%u%n'
+        precision: 2
+        separator: .
+        significant: false
+        strip_insignificant_zeros: false
+        unit: £
+    format:
+      delimiter: ! ','
+      precision: 3
+      separator: .
+      significant: false
+      strip_insignificant_zeros: false
+    human:
+      decimal_units:
+        format: ! '%n %u'
+        units:
+          billion: Billion
+          million: Million
+          quadrillion: Quadrillion
+          thousand: Thousand
+          trillion: Trillion
+          unit: ''
+      format:
+        delimiter: ''
+        precision: 3
+        significant: true
+        strip_insignificant_zeros: true
+      storage_units:
+        format: ! '%n %u'
+        units:
+          byte:
+            one: Byte
+            other: Bytes
+          gb: GB
+          kb: KB
+          mb: MB
+          tb: TB
+    percentage:
+      format:
+        delimiter: ''
+    precision:
+      format:
+        delimiter: ''
+  support:
+    array:
+      last_word_connector: ! ', and '
+      two_words_connector: ! ' and '
+      words_connector: ! ', '
+  time:
+    am: am
+    formats:
+      default: ! '%a, %d %b %Y %H:%M:%S %z'
+      long: ! '%B %d, %Y %H:%M'
+      short: ! '%d %b %H:%M'
+    pm: pm
+  # remove these aliases after 'activemodel' and 'activerecord' namespaces are removed from Rails repository
+  activemodel:
+    errors:
+      <<: *errors
+  activerecord:
+    errors:
+      <<: *errors
+
+# Mes modifs
+  gen:
+        of: "of"
+        owns: "owes"
+        to: "to"
+  header:
+        subtitle: "The best way to manage your flatshare." 
+        new_dep: "New Expense"
+        tabbord: "DashBoard"
+        coloc: "My flat"
+        profile: "My profile"
+        deco: "Logout"
+        accueil: "Home"
+        users: "Users"
+        colocs: "Flatshares"
+        part: "Partners"
+        login: "Login"
+  home:
+        par1: "The best way to manage your " 
+        par2: "flatshare." 
+        par3: "Expenses, messages, reminders, everything is embedded in an "
+        par4: "intuitive, elegant and free application."
+        par5: "Save your expenses, and"
+        par6: "shows in real time the count of your "
+        par7: "expenses. Throw away your notebooks, Excel spreadsheets, and meet the network"
+        signin: "Sign in for free !"
+  slider:
+        s11: "Incredibly"
+        s12: "Secure"
+        s21: "Completely"
+        s22: "Automatic"
+        s31: "Continuously"
+        s32: "Connected"
+        s41: "Ultra"
+        s42: "Reflective"
+        s51: "Entirely"
+        s52: "Free"
+  footer:
+        about: "About"
+        contact: "Contact"
+        sitemap: "Site map"
+  expense:
+        title: "New Expense"
+        par1: "Please fill the few following fields in order to add a new expense in the flatshare"
+        par2: "Your expense will be taken into account and be printed in your "
+        q1: "Who paid ?"
+        q2: "For whom ?"
+        q3: "What's the amount of money spent ?"
+        q4: "What's the reason of the expense ?"
+        q4bis: "For decimals, use '.' instead of ','"
+        q5: "Your expense is "
+        occ: "Occasional"
+        mens: "Monthly"
+        par3: "(The expenses which are"
+        par4: "monthly."
+        par5: "are added every first of the month.)" 
+        val: "Submit the form"
+        val2: "You can now save your expense."
+        save: "Save"
+        captcha: "Veuillez valider le captcha ci-dessous."
+  tabbord:
+        par1: "Welcome on the DashBoard of your"
+        par2: "You will find on this webpage a lot of details which will allow you to manage your life in a flatshare better."
+        par3: "This first chart represents the distribution of the expenses of "
+        par4: "whithin the differents flatmates."
+        graphTitle: "Distribution of the flatshare expenses"
+        par5: "This table is the summary of every expenses saved by"
+        par6: " Roomates that are in debt are indicated in"
+        par7: "red."
+        persRes: "Personal summary"
+        par8: "In this table, it is explicitely written of to reimburse the flatmates in "
+        whoWho: "Who owes who ?"
+        par9: "Every"
+        par10: "monthly."
+        par11: "expenses made by one of your flatmates are below."
+        monthExp: "Monthly expenses"
+        noMonth: "No monthly expense to display."
+        monthAmo: "Amount"
+        monthRea: "Reason"
+        confirm: "Are you sure you want to delete this expenses ?"
+        par12: "You can also choose to "
+        par13: "print"
+        par14: "every expenses of" 
+        par15: "to hide"
+

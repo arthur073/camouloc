@@ -1,18 +1,19 @@
 <p>
-Veuillez compléter les quelques champs suivants pour ajouter une nouvelle dépense dans la colocation 
+<%= t 'expense.par1' %>
 <span class ="cam1"> <%= Coloc.find(@colocataires.first.coloc_id).nom %>.</span>
-Votre dépense sera prise en compte et s'affichera dans votre <span class="cam1"> Tableau de bord. </span>
+<%= t 'expense.par2' %>
+<span class="cam1"> <%= t 'header.tabbord' %>. </span>
 </p>
 
 
 <div class="field colocCreate">
-	<strong>  Qui a payé ? </strong><br>
+	<strong> <%= t 'expense.q1' %>  </strong><br>
 	<%= object.select :user_id, options_for_select(@colocataires.map{ |c| [c.nom, c.id]}, [current_user.nom, current_user.id]) %>
 </div>
 <br/>
 
 <div class="field">
-	<strong> Pour qui payez-vous ? </strong><br>
+	<strong> <%= t 'expense.q2' %> </strong><br>
 	<% if object.object.instance_of?(Depense) %>
 		<div class="userChoice">
 			<%= aligned_gravatar_for(@colocataires[0]) %>
@@ -80,15 +81,15 @@ Votre dépense sera prise en compte et s'affichera dans votre <span class="cam1"
 
 
 <div class="field">
-	<%= object.label "Quel est le montant de la dépense ?" %><br>
-	<i> Pour les nombres décimaux, utiliser "." et non "," </i> <br>
-	<%= object.text_field :montant, :class => "colocCreate" %> €
+	<%= object.label t('expense.q3') %><br>
+	<i> <%= t 'expense.q4bis' %> </i> <br>
+	<%= object.text_field :montant, :class => "colocCreate" %> <%= t 'number.currency.format.unit' %>
 </div>
 <br/>
 
 
 <div class="field">
-	<%= object.label "Quelle est la raison de la dépense ?" %><br>
+	<%= object.label t('expense.q4')%><br>
 	<%= object.text_field :raison, :class => "colocCreate" %>
 </div>
 <br/>
@@ -103,17 +104,17 @@ Votre dépense sera prise en compte et s'affichera dans votre <span class="cam1"
 
 
 <div class="field">
-	<strong>  Votre dépense est   </strong>
-	<%= object.select :auto, options_for_select([[ "Occasionnelle" ,  0 ], ["Mensuelle", 1 ]]) %>
-	<i>(Les dépenses <span class="cam1"> mensuelles.</span> sont ajoutées les 1er du mois.)</i>
+	<strong> <%= t 'expense.q5' %>  </strong>
+	<%= object.select :auto, options_for_select([[ t('expense.occ'),  0 ], [t('expense.mens'), 1 ]]) %>
+	<i><%= t 'expense.par3' %> <span class="cam1"> <%= t 'expense.par4' %> </span> <%= t 'expense.par5' %></i>
 </div>
 <br/>
 
 
-<input type='button' name='osx' value='Valider le formulaire' class='osx demo' id="captchavalider" onclick="reload()"/>
+<input type='button' name='osx' value="<%= t 'expense.val' %>" class='osx demo' id="captchavalider" onclick="reload()"/>
 <div id="valider" style="display:none;">
-	<i> Vous pouvez maintenant enregistrer la dépense. </i> <br>
-	<%= object.submit "Enregistrer", :id => "btnColocCreate" %>
+	<i><%= t 'expense.val2' %>  </i> <br>
+	<%= object.submit t('expense.save'), :id => "btnColocCreate" %>
 </div>
 
 
