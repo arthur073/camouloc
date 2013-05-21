@@ -1,4 +1,4 @@
-<h1> <%= @titre %>  </h1>
+<h1> <%= t 'list.title' %>  </h1>
 
 <br>
 
@@ -8,13 +8,13 @@
         <% @colocs.each do |coloc| %>
                 <li>  <%= link_to coloc.nom, coloc %> <i> (
                 <% if coloc.users.count < 2 %>
-                        <%= coloc.users.count %> coloc) 
+                        <%= coloc.users.count %> <%= t 'list.par1' %> ) 
                 <% else %>
-                        <%= coloc.users.count %> colocs)
+                        <%= coloc.users.count %> <%= t 'list.par2' %> )
                 <% end %> 
                 </i></li>
                 <% if signed_in? and current_user.admin? %>
-                        <li onclick="return confirm('Etes-vous sûr de vouloir supprimer la colocation ?')"> <%= button_to "Suppr", coloc, :method => :delete  %> </li>
+			<li onclick="return confirm('<%= t "list.par3" %>')"> <%= button_to "Suppr", coloc, :method => :delete  %> </li>
                 <% end %>
         <% end %>
 </ul>

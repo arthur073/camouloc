@@ -79,7 +79,7 @@
 								<td>	<%= depenses.raison %> </td>
 								<td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
 								<% if signed_in? and (current_user.id == @user.id or current_user.admin?) %>
-									<td onclick="return confirm(<%= t 'tabbord.confirm' %> )"> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
+									<td onclick="return confirm('<%= t "tabbord.confirm" %>' )"> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
 								<% end %>
 							</tr>
 						<% end %>
@@ -95,7 +95,7 @@
 								<td>	<%= depenses.raison %> </td>
 								<td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
 								<% if signed_in? and current_user.id == @user.id %>
-									<td onclick="return confirm(<%= t 'tabbord.confirm' %>)"> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
+									<td onclick="return confirm('<%= t "tabbord.confirm" %>')"> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
 								<% end %>
 							</tr>
 						<% end %>
@@ -112,7 +112,7 @@
 								<td>	<%= depenses.raison %> </td>
 								<td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
 								<% if signed_in? and current_user.id == @user.id %>
-									<td onclick="return confirm(<%= t 'tabbord.confirm' %>)"> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
+									<td onclick="return confirm('<%= t "tabbord.confirm" %>')"> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
 								<% end %>
 							</tr>
 						<% end %>
@@ -132,7 +132,7 @@
 								<td>	<%= exp.raison %> </td>
 								<td>	<%= exp.created_at.strftime("%d %b. %Y") %> </td>
 								<% if signed_in? and current_user.id == @user.id %>
-									<td onclick="return confirm(<%= t 'tabbord.confirm' %>)"> <%= button_to "Suppr", exp, :method => :delete  %> </td>
+									<td onclick="return confirm('<%= t "tabbord.confirm" %>')"> <%= button_to "Suppr", exp, :method => :delete  %> </td>
 								<% end %>
 							</tr>
 						</tr>

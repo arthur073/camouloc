@@ -405,5 +405,52 @@ en:
         priv3: "for the flatshare "
         priv4: "Caution, only the members of "
         priv5: "will be able to see the message."
+  session: 
+        par1: "You have already created an account on "
+        par2: " Please fill this form up to access the application. You have linked your Facebook account ?"
+        par3: "Connect"
+        par4: "immediately to "
+        par5: "Please enter your password." 
+        logIn: "Log in"
+        par6: "No signed up yet ?" 
+        signIn: " Sign up for free !"
+        pass: "Forgotten password ?"
+  col:
+        title: "Edit my flat"
+        par1: "Choose a new name for your "
+        par2: "Update"
+        par3: "Are you sure you want to delete the flatshare ? "
+  usr: 
+        title: "Editing profile"
+        par1: "	Enter a new name."
+        par2: "Want to change your email address ?"
+        par3: "	You can also change your password."
+        par4: "Please confirm your password."
+        par5: "Do you agree to receive notifications from "
+        par6: "(Required)"
+  auth:
+        title: "Account partnerships"
+        par1: "Your account Camouloc is linked with :"
+        par2: "Are you sure you want to delete the partnership ?"
+        par3: "Delete the partnership"
+        par4: "Add an authentification service :"
+        par5: "Adding a service will modify your name and your profile picture."
+        par6: "Log in :"
+  part: 
+        title: "Websites that are worth seeing"
+        par1: "Here is the list of Camouloc's partners. Websites which, like us, propose services to students. Don't hesitate to see them !"
+        par2: "A startup which develops an innovative solution to monetize a website, the publiCaptcha. We highly recommend developpers to have a look at this solution."
+        par3: " The engineering school in which the Camouloc team studies."
+        par4: "You want your name in this list ?"
+        par5: "Contact us !"
+  list:
+        title: "Every flatshare"
+        par1: "roommate"
+        par2: "roommates"
+        par3: "Are you sure you want to delete this flatshare ?"
+        title2: "Every user"
+        par4: "member of "
+        par5: "Are you sure you want to delete this user ?" 
+
 
 

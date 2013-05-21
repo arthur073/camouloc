@@ -1,4 +1,4 @@
-<h1> <%= @titre %>  </h1>
+<h1> <%= t 'list.title2' %>  </h1>
 
 <%= will_paginate %>
 
@@ -12,11 +12,12 @@
 		<% else %>
 		<%= small_gravatar_for user, :size => 40 %> 
 		<% end %> 
-                <%= link_to user.nom, user %>, membre de <%= link_to Coloc.find(user.coloc_id).nom, Coloc.find(user.coloc_id) %>.
+		<%= link_to user.nom, user %>, <%= t 'list.par4' %><%= link_to Coloc.find(user.coloc_id).nom, Coloc.find(user.coloc_id) %>.
 		<% if signed_in? and current_user.admin? %>
-                        <li onclick="return confirm('Etes-vous sûr de vouloir supprimer cet utilisateur ?')"> <%= button_to "Suppr", user, :method => :delete  %> </li>
+			<li onclick="return confirm('<%= t "list.par5" %>')"> <%= button_to "Suppr", user, :method => :delete  %> </li>
 		<% end %> 
 		</li>
+		<br/>
 	<% end %>
 </ul>
 </div>

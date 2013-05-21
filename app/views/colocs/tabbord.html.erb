@@ -249,7 +249,7 @@ type: 'pie',
 						<td><%= depauto.raison %> </td>
 						<td><%= depauto.created_at.strftime("%d %b. %Y")%> </td>
 						<% if signed_in? and (current_user.coloc_id == @coloc.id or current_user.admin?) %>
-							<td onclick="return confirm(<%= t 'tabbord.confirm' %>)"> <%= button_to "Suppr", depauto, :method => :delete  %> </td>
+							<td onclick="return confirm('<%= t "tabbord.confirm" %>')"> <%= button_to "Suppr", depauto, :method => :delete  %> </td>
 						<% end %>
 
 					</tr>

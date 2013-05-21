@@ -1,24 +1,25 @@
-<h1> Liaisons du compte  </h1>
+<h1> <%= t 'auth.title' %> </h1>
 
+<div class="descriptionNormal">
 <% if @authentifications %>
   <% unless @authentifications.empty? %>
-    <p><strong>Votre compte Camouloc est lié avec : </strong></p>
+	  <p><strong><%= t 'auth.par1' %> </strong></p>
     <div class="authentifications">
       <% for authentification in @authentifications %>
         <div class="authentification">
 		<img src="facebook_64.png" width="32" height="32" alt="facebook">
           <div class="provider"><%= authentification.provider.titleize %></div>
           <div class="uid">Code auth : <%= authentification.uid %></div>
-	<a onclick="return confirm('Etes-vous sûr de vouloir supprimer cette authentification ?')"> <%= button_to "Supprimer la liaison", authentification, :method => :delete  %> </a>
+	  <a onclick="return confirm('<%= t "auth.par2" %>')"> <%= button_to t('auth.par3'), authentification, :method => :delete  %> </a>
         </div>
       <% end %>
       <div class="clear"></div>
     </div>
   <% end %>
-  <p><strong>Ajoutez un service d'authentification :</strong> <br>
-	<i> L'ajout d'un service modifiera le nom de votre compte et votre image de profil.</i></p>
+  <p><strong>	<%= t 'auth.par4' %></strong> <br>
+	<i>	<%= t 'auth.par5' %> </i></p>
 <% else %>
-  <p><strong>Connectez-vous :</strong></p>
+  <p><strong>	<%= t 'auth.par6' %></strong></p>
 <% end %>
 
 <a href=<%= @faceb_url%> class="auth_provider" style="color:white">
@@ -26,3 +27,4 @@
   Facebook
 </a>
 <div class="clear"></div>
+</div>

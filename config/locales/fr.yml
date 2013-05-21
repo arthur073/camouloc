@@ -422,6 +422,55 @@ fr:
         priv3: "pour la colocation"
         priv4: "Attention, seuls les membres de"
         priv5: "pourront voir le message."
+  session: 
+        par1: "Vous avez déjà créé votre compte sur "
+        par2: " Complétez ce formulaire pour accéder à l'application. Vous avez lié votre profil à Facebook ?"
+        par3: "Connectez-vous"
+        par4: "en un clic à"
+        par5: "Veuillez renseigner votre mot de passe."
+        logIn: "S'identifier"
+        par6: "Vous n'êtes pas encore inscrit ? "
+        signIn: "Inscrivez vous !"
+        pass: "Mot de passe oublié ?"
+  col:
+        title: "Editer ma coloc"
+        par1: "Choisissez un nouveau nom pour votre"
+        par2: "Actualiser"
+        par3: "Etes-vous sûr de vouloir supprimer la colocation ?"
+  usr: 
+        title: "Edition profil"
+        par1: "	Entrez un nouveau nom."
+        par2: "Envie de changer votre adresse email ?"
+        par3: "	Vous pouvez également changer votre mot de passe."
+        par4: "Veuillez confirmer votre mot de passe."
+        par5: "Acceptez-vous de recevoir des notifications de"
+        par6: "(Obligatoire)"
+  auth:
+        title: "Liaisons du compte"
+        par1: "Votre compte Camouloc est lié avec :"
+        par2: "Êtes-vous sûr de vouloir supprimer la liaison ?"
+        par3: "Supprimer la liaison"
+        par4: "Ajoutez un service d'authentification :"
+        par5: "L'ajout d'un service modifiera le nom de votre compte et votre image de profil."
+        par6: "Connectez-vous :"
+  part: 
+        title: "Les sites qui valent le détour"
+        par1: "Voici la liste des partenaires de Camouloc, des sites qui, comme nous, proposent des services aux étudiants. N'hésitez pas à aller les consulter !"
+        par2: "Une startup en plein essor qui développe une solution de monétisation des sites web innovante, le publiCaptcha. Nous conseillons vivement aux développeur de découvrir cette solution !"
+        par3: " L'école d'ingénieur dont fait partie l'équipe Camouloc."
+        par4: "Vous souhaitez apparaître dans cette rubrique ?"
+        par5: "Contactez-nous !"
+  list:
+        title: "Toutes les colocations"
+        par1: "coloc"
+        par2: "colocs"
+        par3: "Êtes-vous sûr de vouloir supprimer la colocation ?"
+        title2: "Tous les utilisateurs"
+        par4: "membre de "
+        par5: "Êtes-vous sûr de vouloir supprimer l utilisateur ?"
+
+
+        
 
 
 

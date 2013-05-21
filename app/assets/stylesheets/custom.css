@@ -1405,3 +1405,8 @@ img.flag {
 img.flag2 {
 	right : 1.4em;
 }
+
+img.flag:hover, img.flag2:hover {
+	height: 22px;
+	width : 22px;
+}

@@ -10,9 +10,9 @@ class SessionsController < ApplicationController
                 user = User.authenticate(params[:session][:email],
                                          params[:session][:password])
                 if user.nil?
-                        flash.now[:error] = t('flash.logKO')
                         @titre = "S'identifier"
-                        render 'new'
+                        flash[:error] = t('flash.logKO')
+			redirect_to login_path
                 else
                         flash[:notice] = t('flash.logOK')  + user.nom + ". "
                         sign_in user
