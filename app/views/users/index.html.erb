@@ -10,7 +10,7 @@
 		<% if user.has_image %>
 			<%= image_tag (user.image) , :size => "40x40", :style => "box-shadow: 0px 2px 5px #1c1a19;" %>
 		<% else %>
-		<%= gravatar_for user, :size => 40 %> 
+		<%= small_gravatar_for user, :size => 40 %> 
 		<% end %> 
                 <%= link_to user.nom, user %>, membre de <%= link_to Coloc.find(user.coloc_id).nom, Coloc.find(user.coloc_id) %>.
 		<% if signed_in? and current_user.admin? %>

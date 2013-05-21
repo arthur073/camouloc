@@ -411,6 +411,17 @@ fr:
         authCompte:  "Nous avons correctement créé votre compte. Inscrivez maintenant vos colocataires."
         authKO: "Aucun partenariat trouvé, vous devez d'abord configurer le partenariat depuis votre profil."
         authDestroy:  "La liaison du compte a bien été supprimée."
+  mess:
+        titlePri:  "Nouveau message privé" 
+        titlePu:  "Nouveau message public"
+        par1: "Colocation"
+        par2: "Vous êtes sur le point d'écrire un nouveau message pour la colocation" 
+        par3: "Exprimez-vous !"
+        priv1: "Nouveau message"
+        priv2: "privé"
+        priv3: "pour la colocation"
+        priv4: "Attention, seuls les membres de"
+        priv5: "pourront voir le message."
 
 
 

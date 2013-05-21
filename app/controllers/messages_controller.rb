@@ -9,9 +9,9 @@ class MessagesController < ApplicationController
                 @message.coloc_id = @coloc.id
                 @message.private = params[:priv]
 		if @message.private == 1 
-			@titre = "Nouveau message privé"
+			@titre = t('mess.titlePri')
 		else 
-			@titre = "Nouveau message public"
+			@titre = t('mess.titlePu')
 		end
         end
 
@@ -42,7 +42,7 @@ class MessagesController < ApplicationController
         private
         def require_login
                 unless current_user
-                        flash[:notice] = t('flash.reqLogin)
+                        flash[:notice] = t('flash.reqLogin')
                         redirect_to login_path
                 end
         end

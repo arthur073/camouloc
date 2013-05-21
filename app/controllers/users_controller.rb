@@ -7,7 +7,7 @@ class UsersController < ApplicationController
 
    def index
       @titre = "Tous les utilisateurs"
-      @users = User.all(:order => "created_at ASC").paginate(:page => params[:page], :per_page => 10)
+      @users = User.all(:order => "created_at ASC").paginate(:page => params[:page], :per_page => 30)
       #@users2 = @users.reverse
    end
 

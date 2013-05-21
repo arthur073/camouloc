@@ -3,8 +3,8 @@
 	<%= link_to "Camouloc.", root_path, :class =>"cam1" %>
 	<span class="prettyFont">  <%= t 'header.subtitle' %></span>
 
-	<%= link_to image_tag("../en_flag.png", :class => "flag"), :locale=>'en'%>
-	<%= link_to image_tag("../french_flag.png", :class => "flag2"), :locale=>'fr'%>
+	<%= link_to image_tag("../en_flag.png", :class => "flag"),params.merge({:locale => 'en'})%>
+	<%= link_to image_tag("../french_flag.png", :class => "flag2"), params.merge({:locale => 'fr'})%>
 	<nav class="round">
 	<ul>
 		<% if signed_in? %>
