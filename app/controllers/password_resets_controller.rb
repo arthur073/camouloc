@@ -10,7 +10,7 @@ class PasswordResetsController < ApplicationController
 		@user.save if @user
 		UserMailer.password_reset(@user).deliver if @user
 		redirect_to root_url
-		flash[:success] = "Un email contenant votre nouveau mot de passe vient d'être envoyé."
+		flash[:success] = t('flash.passRes')
 	end
 
 end

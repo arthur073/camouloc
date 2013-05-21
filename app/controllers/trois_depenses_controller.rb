@@ -24,10 +24,9 @@ class TroisDepensesController < ApplicationController
             begin
                DepenseMailer.new_depense_email(@troisdepense).deliver
             rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
-               flash[:info] = 'Votre dépense a été correctement soumise, cependant le mail n\'a pas été envoyé à cause d\'un problème sur
-                           le serveur de mails.' + "\n" + e.message
+               flash[:info] = t('flash.depCreateKO') + "\n" + e.message
             else
-               flash[:success] = "Dépense enregistrée!"
+               flash[:success] = t('flash.depCreateOK')
             end
          end 
          redirect_to User.find(@troisdepense.user_id)
@@ -43,13 +42,13 @@ class TroisDepensesController < ApplicationController
       @colocation = Coloc.find(current_user.coloc_id)
       @colocation.ca = @colocation.ca - @troisdepense.montant
       @colocation.save
-      flash[:success] = "Dépense supprimée."
+      flash[:success] = t('flash.depDestroy') 
       redirect_to(:back)
    end
    private
    def require_login
       unless current_user
-         flash[:notice] = "Vous devez vous identifier pour accéder à cette page. "
+         flash[:notice] = t('flash.reqLogin')
          redirect_to login_path
       end
    end

@@ -47,10 +47,10 @@ class ColocsController < ApplicationController
                 if @coloc.save
                         # Traite un succès d'enregistrement.
                         redirect_to new_user_path(:coloc_id => @coloc.id)
-                        flash[:success] = "Votre colocation a bien été enregistrée !"
+                        flash[:success] = t('flash.colocCreate') 
                         UserMailer.colocemail(@coloc).deliver
                 else
-                        flash[:error] = "Votre colocation n'a pas été enregistrée ! Le nom utilisé n'est pas disponible."
+                        flash[:error] = t('flash.colocCreErr') 
                         @titre = "Inscription"
                         render 'new'
                 end
@@ -94,13 +94,13 @@ class ColocsController < ApplicationController
 
                 if (signed_in? and current_user.coloc_id != @coloc.id and not current_user.admin?)
                         # si l'utilisateur n'est pas dans la coloc  et qu'il n'est pas admin, il est redirigé
-                        flash[:error] = "Vous n'avez pas accès au tableau de bord de cette colocation."
+                        flash[:error] = t('flash.tabbord') 
                         redirect_to Coloc.find(current_user.coloc_id)
                 end
 
                 if @coloc.users.count < 2
                         # si la coloc n'a qu'un user, son tableau de bord n'existe pas
-                        flash[:error] = "Inscrivez tous les colocataires avant d'accéder au tableau de bord."
+                        flash[:error] = t('flash.tabbord2') 
                         redirect_to @coloc
                 end
 
@@ -384,12 +384,12 @@ class ColocsController < ApplicationController
         def destroy
                 @coloc = Coloc.find(params[:id])
                 @coloc.destroy
-                flash[:success] = "Colocation supprimée."
+                flash[:success] = t('flash.colocDestr') 
                 redirect_to colocs_path
         end
 
         def coloc_manquante
-                flash[:error] = "Cette colocation n'existe pas."
+                flash[:error] = t('flash.colocManq')
                 redirect_to colocs_path	     
         end
 
@@ -402,7 +402,7 @@ class ColocsController < ApplicationController
                 @coloc = Coloc.find(params[:id])
                 if @coloc.update_attributes(params[:coloc])
                         redirect_to @coloc
-                        flash[:success] = "Colocation actualisée"
+                        flash[:success] = t('flash.colocUp') 
                 else
                         @titre = "Edition Colocation"
                         render 'edit'

@@ -22,11 +22,11 @@ class MessagesController < ApplicationController
                 if @message.save
                         #utiliser un mailer pour tous les colocs
                         UserMailer.messagemail(@message,@coloc).deliver
-			flash[:success] = "Message envoyé."
+			flash[:success] = t('flash.mesSent')
                         redirect_to @coloc
                 else 
                         @coloc = Coloc.find(@message.coloc_id)
-			flash[:error] = "Votre message n'a pas été enregistré, merci de rééssayer."
+			flash[:error] = t('flash.mesKO')
                         render 'new'
                 end
 
@@ -35,14 +35,14 @@ class MessagesController < ApplicationController
         def destroy
                 @message = Message.find(params[:id])
                 @message.destroy
-                flash[:success] = "Message supprimé."
+                flash[:success] = t('flash.mesDestr')
                 redirect_to(:back)
         end
 
         private
         def require_login
                 unless current_user
-                        flash[:notice] = "Vous devez vous identifier pour accéder à cette page. "
+                        flash[:notice] = t('flash.reqLogin)
                         redirect_to login_path
                 end
         end

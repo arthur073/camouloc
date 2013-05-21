@@ -21,7 +21,7 @@ class AuthentificationsController < ApplicationController
 		@user = User.find(current_user.id)
 		@user.update_attribute( :nom, "#{@newFirstName.titleize} #{@newLastName[0].titleize}")
 		@user.update_attribute( :image, @image_url)
-		flash[:success] = "Nous avons correctement lié votre profil #{auth['provider']}. Vos informations ont été mises à jour."
+		flash[:success] = t('flash.authCreate1') +   "#{auth['provider']}. "+ t('flash.authCreate2')
 		redirect_to @user
 	else 
 		# l'utilisateur n'est pas connecté, on essaie de le logger
@@ -59,12 +59,12 @@ class AuthentificationsController < ApplicationController
 				@authent = Authentification.where(:user_id => @user.id, :provider => auth['provider'], :uid => auth['uid'])
 				@token = auth['credentials']['token']
 				@authent.publish('Pour ta Coloc, quoi de mieux que Camouloc ?! Gratuite, pratique et rapide, cette application gère mes comptes à merveille, alors pourquoi pas les tiens ? Viens plutôt jeter un coup d\'oeil !', @token)
-				flash[:success] = "Nous avons correctement créé votre compte. Inscrivez maintenant vos colocataires."
+				flash[:success] = t('flash.authCompte')
 				sign_in @user
 				redirect_to Coloc.find(@colocId)
 			else
 				# soit c'est une erreur 
-				flash[:error] = "Aucun partenariat trouvé, vous devez d'abord configurer le partenariat depuis votre profil."
+				flash[:error] = t('flash.authKO') 
 				redirect_to login_path
 			end 
 		end
@@ -74,7 +74,7 @@ class AuthentificationsController < ApplicationController
   def destroy
     @authentification = current_user.authentifications.find(params[:id])
     @authentification.destroy
-    flash[:notice] = "La liaison du compte a bien été supprimée."
+    flash[:notice] = t('flash.authDestroy')
     redirect_to authentifications_url
   end
 end

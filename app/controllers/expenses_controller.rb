@@ -25,10 +25,9 @@ class ExpensesController < ApplicationController
          begin
             DepenseMailer.new_expense_email(@expense).deliver
          rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
-            flash[:info] = 'Votre dépense a été correctement soumise, cependant le mail n\'a pas été envoyé à cause d\'un problème sur
-            le serveur de mails.' + "\n" + e.message
+            flash[:info] = t('flash.depCreateKO')  + "\n" + e.message
          else
-            flash[:success] = "Dépense enregistrée!"
+            flash[:success] = t('flash.depCreateOK')
          end
          end 
          redirect_to User.find(@expense.user_id)
@@ -45,14 +44,14 @@ end
 def destroy
    @expense = Expense.find(params[:id])
    @expense.destroy
-   flash[:success] = "Dépense supprimée."
+   flash[:success] = t('flash.depDestroy')
    redirect_to(:back)
 end
 
 private
 def require_login
    unless current_user
-      flash[:notice] = "Vous devez vous identifier pour accéder à cette page. "
+      flash[:notice] = t('flash.reqLogin')
       redirect_to login_path
    end
 end

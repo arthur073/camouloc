@@ -1389,9 +1389,19 @@ ul.profil {
 	width : 2em;
 }
 
-img.flag {
+img.flag, img.flag2 {
 	width : 20px;
 	height : 20px;
 	float : right;
 	margin-left : 0.2em;
+	position: absolute;
+	top : 1.3em;
+}
+
+img.flag {
+	right : 0.7em;
+}
+
+img.flag2 {
+	right : 1.4em;
 }

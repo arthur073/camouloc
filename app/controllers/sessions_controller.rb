@@ -10,11 +10,11 @@ class SessionsController < ApplicationController
                 user = User.authenticate(params[:session][:email],
                                          params[:session][:password])
                 if user.nil?
-                        flash.now[:error] = "Combinaison Email/Mot de passe invalide."
+                        flash.now[:error] = t('flash.logKO')
                         @titre = "S'identifier"
                         render 'new'
                 else
-                        flash[:notice] = "Vous êtes connecté en tant que " + user.nom + ". "
+                        flash[:notice] = t('flash.logOK')  + user.nom + ". "
                         sign_in user
                         redirect_back_or user
                 end
@@ -23,6 +23,6 @@ class SessionsController < ApplicationController
         def destroy
                 sign_out
                 redirect_to root_path
-                flash[:notice] = "Vous êtes déconnecté."
+                flash[:notice] = t('flash.logOut')
         end
 end

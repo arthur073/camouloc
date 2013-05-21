@@ -54,7 +54,7 @@ class UsersController < ApplicationController
             sign_in @user
          end
 	 redirect_to new_user_path(:coloc_id => @coloc_id)
-         flash[:success] = "Utilisateur enregistré !"
+         flash[:success] = t('flash.userCreate')
       else
          @titre = "Inscription"
          @coloc = Coloc.find(@coloc_id)
@@ -71,7 +71,7 @@ class UsersController < ApplicationController
       @user = User.find(params[:id])
       if @user.update_attributes(params[:user])
          redirect_to @user
-         flash[:success] = "Profil actualisé"
+         flash[:success] = t('flash.userUp')
       else
          @titre = "Edition profil"
          render 'edit'
@@ -81,12 +81,12 @@ class UsersController < ApplicationController
    def destroy
       @user = User.find(params[:id])
       @user.destroy
-      flash[:success] = "Utilisateur supprimé."
+      flash[:success] = t('flash.userDel')
       redirect_to root_path
    end
 
    def user_manquant
-      flash[:error] = "Cet utilisateur n'existe pas."
+      flash[:error] = t('flash.userManq')
       redirect_to users_path	     
    end
 
