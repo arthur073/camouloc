@@ -227,6 +227,7 @@ fr:
         owns: "doit"
         to: "à"
         or: "ou"
+        by: "par"
   header:
         subtitle: "La meilleure manière de gérer sa coloc." 
         new_dep: "Nouvelle dépense"
@@ -333,7 +334,36 @@ fr:
         par19: "Aucun message à afficher."
         par20: "Posté il y a"
         par21: "Etes-vous sûr de vouloir supprimer le message ?"
-
+  user:
+        par1: "Bienvenue chez"
+        par2: "Bienvenue sur le profil de l'utilisateur "
+        par3: "Membre de la colocation "
+        par4: "a créé son compte le"
+        par5: "et a déjà enregistré un total de "
+        par6: "dépenses."
+        par7: "Contacter"
+        par8: "Lier ce compte avec "
+        par9: "et gagner du temps à chaque connexion."
+        par10: "Consulter les "
+        par11: "liaisons du compte"
+        par12: "Editer"
+        par13: "le profil de cet utilisateur."
+        nodep: "Aucune dépense à répertorier."
+        listdep: "Liste des dépenses de l'utilisateur :"
+        par14: "Vous devez appartenir à la colocation pour voir les dépenses de cet utilisateur."
+  inscr:
+        menu1: "Inscrire ma coloc"
+        menu2: "Créer mon profil"
+        menu3: "Inscire mes colocs"
+        title: "Inscription"
+        par1: "Bienvenue sur"
+        par2: "Comment s'appelle votre"
+        par3: "Souhaitez-vous apparaître dans les palmarès des meilleures "
+        par4: "colocs. "
+        par5: "En apparaîssant dans le Palmarès, le chiffre d'affaire de votre colocation sera public. Vous pourrez ainsi vous comparer aux autres colocations déjà créées."
+        par6: "Apparaître dans le palmarès"
+        par7: "Continuer"
+          
 
 
 

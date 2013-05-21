@@ -10,35 +10,35 @@
 	<br/>
 	<br/>
 	<br/>
-	<h1> Bienvenue chez <span class="cam1"> <%= @user.nom %>. </h1>
+	<h1> <%= t 'user.par1' %>  <span class="cam1"> <%= @user.nom %>. </h1>
 
 		<p>
-		Bienvenue sur le profil de l'utilisateur <span class="cam1"> <%= @user.nom %>. </span>
-		Membre de la colocation <span class="cam1"><%= @coloc.nom %></span>, <span class="cam1"> <%= @user.nom %>. </span>
-		a créé son compte le <%= @user.created_at.strftime("%d %b. %Y") %> et a déjà enregistré un total de 
+		<%= t 'user.par2' %> <span class="cam1"> <%= @user.nom %>. </span>
+		<%= t 'user.par3' %> <span class="cam1"><%= @coloc.nom %></span>, <span class="cam1"> <%= @user.nom %>. </span>
+		<%= t 'user.par4' %>  <%= @user.created_at.strftime("%d %b. %Y") %> <%= t 'user.par5' %> 
 		<span class="cam1"><%= @nbrdep %> </span>
-		dépenses.
+		<%= t 'user.par6' %> 
 		</p>
 		<p>
-		Votre profil vous permet de : 
+		<%= t 'coloc.par8' %> 
 		<ul class="profil">
 			<li>
-			Contacter <span class="cam1"> <%= @user.nom %>. </span> par <a href="mailto:<%= @user.email %>">email</a>.
+			<%= t 'user.par7' %><span class="cam1"> <%= @user.nom %>. </span> <%= t 'gen.by' %> <a href="mailto:<%= @user.email %>">email</a>.
 			</li>
 			<% if signed_in? and current_user == @user %>
 			<% if  current_user.authentifications.empty?  %>
 				<li>
-				Lier ce compte avec <%= link_to "Facebook", @faceb_url, :class => "connectFacebook"%> et gagner du temps à chaque connexion.
+				<%= t 'user.par8' %><%= link_to "Facebook", @faceb_url, :class => "connectFacebook"%> <%= t 'user.par9' %>
 				</li>
 			<% else %>
 				<li>
-				Consulter les <%= link_to "liaisons du compte", authentifications_url%>
+				<%= t 'user.par10' %><%= link_to t('user.par11'), authentifications_url%>
 				</li>
 			<% end %>
 			<% end %>
 			<% if signed_in? and (@user.id == current_user.id or current_user.admin?) %>
 				<li>
-				<%= link_to "Editer", edit_user_path(@user) %> le profil de cet utilisateur.
+				<%= link_to t('user.par12') , edit_user_path(@user) %> <%= t 'user.par13' %>
 				</li>
 			<% end %>
 
@@ -51,18 +51,18 @@
 
 		<p>
 		<% if @nbrdep == 0 %>
-			Aucune dépense à répertorier.
+			<%= t 'user.nodep' %>	
 		<% else %>
 			<% if signed_in? and (current_user.coloc_id == @user.coloc_id or current_user.admin?)%>
-				<h3>  Liste des dépenses de l'utilisateur : </h3>
+				<h3>  <%= t 'user.listdep' %> </h3>
 				<table class="depenses black">
 					<tr>
 						<td> Source </td>
 						<% @colocataires.each do |colocataires| %>
 							<td> <%= colocataires.nom %> </td>
 						<% end %>
-						<td> Montant </td>
-						<td> Raison </td>
+						<td> <%= t 'tabbord.monthAmo' %>  </td>
+						<td> <%= t 'tabbord.monthRea' %> </td>
 						<td> Date </td>
 						<% if signed_in? and (current_user.id == @user.id or current_user.admin?) %>
 						<td> </td>
@@ -74,11 +74,12 @@
 								<td >	<%= User.find(depenses.user_id).nom %> </td>
 								<td>	<%= depenses.destinataire_part %>  </td>
 								<td>	<%= depenses.destinataire_part2 %>  </td>
-								<td>	<%= depenses.montant %> € </td>
+								<td>	<%= depenses.montant %> <%= t 'number.currency.format.unit' %>
+ </td>
 								<td>	<%= depenses.raison %> </td>
 								<td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
 								<% if signed_in? and (current_user.id == @user.id or current_user.admin?) %>
-									<td onclick="return confirm('Etes-vous sûr de vouloir supprimer la dépense ?')"> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
+									<td onclick="return confirm(<%= t 'tabbord.confirm' %> )"> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
 								<% end %>
 							</tr>
 						<% end %>
@@ -89,11 +90,12 @@
 								<td>	<%= depenses.destinataire_part %>  </td>
 								<td>	<%= depenses.destinataire_part2 %>  </td>
 								<td>	<%= depenses.destinataire_part3 %>  </td>
-								<td>	<%= depenses.montant %> € </td>
+								<td>	<%= depenses.montant %><%= t 'number.currency.format.unit' %>
+  </td>
 								<td>	<%= depenses.raison %> </td>
 								<td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
 								<% if signed_in? and current_user.id == @user.id %>
-									<td onclick="return confirm('Etes-vous sûr de vouloir supprimer la dépense ?')"> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
+									<td onclick="return confirm(<%= t 'tabbord.confirm' %>)"> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
 								<% end %>
 							</tr>
 						<% end %>
@@ -105,11 +107,12 @@
 								<td>	<%= depenses.destinataire_part2 %>  </td>
 								<td>	<%= depenses.destinataire_part3 %>  </td>
 								<td>	<%= depenses.destinataire_part4 %>  </td>
-								<td>	<%= depenses.montant %> € </td>
+								<td>	<%= depenses.montant %> <%= t 'number.currency.format.unit' %>
+ </td>
 								<td>	<%= depenses.raison %> </td>
 								<td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
 								<% if signed_in? and current_user.id == @user.id %>
-									<td onclick="return confirm('Etes-vous sûr de vouloir supprimer la dépense ?')"> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
+									<td onclick="return confirm(<%= t 'tabbord.confirm' %>)"> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
 								<% end %>
 							</tr>
 						<% end %>
@@ -124,11 +127,12 @@
 										<td> oui </td>
 									<% end %>
 								<% end %>
-								<td>	<%= exp.montant %> € </td>
+								<td>	<%= exp.montant %> <%= t 'number.currency.format.unit' %>
+ </td>
 								<td>	<%= exp.raison %> </td>
 								<td>	<%= exp.created_at.strftime("%d %b. %Y") %> </td>
 								<% if signed_in? and current_user.id == @user.id %>
-									<td onclick="return confirm('Etes-vous sûr de vouloir supprimer la dépense ?')"> <%= button_to "Suppr", exp, :method => :delete  %> </td>
+									<td onclick="return confirm(<%= t 'tabbord.confirm' %>)"> <%= button_to "Suppr", exp, :method => :delete  %> </td>
 								<% end %>
 							</tr>
 						</tr>
@@ -136,7 +140,7 @@
 				<% end %>
 			</table>
 		<% else %>
-			Vous devez appartenir à la colocation pour voir les dépenses de cet utilisateur.
+			<%= t 'user.par15' %> 
 		<% end %>
 	<% end %>
 	</p>

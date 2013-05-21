@@ -18,32 +18,32 @@
 
 
 <ol class="progtrckr" data-progtrckr-steps="3">
-	<li class="progtrckr-done">Inscrire ma coloc</li><!--
-	--><li class="progtrckr-todo">Créer mon profil</li><!--
-	--><li class="progtrckr-todo">Inscire mes colocs</li>
+	<li class="progtrckr-done"><%= t 'inscr.menu1' %></li><!--
+	--><li class="progtrckr-todo"><%= t 'inscr.menu2' %></li><!--
+	--><li class="progtrckr-todo"><%= t 'inscr.menu3' %></li>
 </ol>
-<h1> <%= @titre %> </h1>
+<h1> <%= t 'inscr.title' %> </h1>
 
 <div class="descriptionNormal">
-	Bienvenue sur <span class="cam1"> Camouloc. </span> Comment s'appelle votre <span class="cam1"> coloc. </span> ? 
+<%= t 'inscr.par1' %> <span class="cam1"> Camouloc. </span><%= t 'inscr.par2' %>  <span class="cam1"><%= t 'home.par2' %> </span> ? 
 
 	<%= form_for(@coloc) do |f| %>
 		<div class="field">
 			<%= f.text_field :nom, :class => "colocCreate" %>
 		</div>
-		Souhaitez-vous apparaître dans les palmarès des meilleures <span class="cam1"> colocs. </span>  
+	<%= t 'inscr.par3' %>	<span class="cam1"><%= t 'inscr.par4' %> </span>  
 		<a href="#" class="more_details_button1">?</a>
 		<p class="more_details1">
-		<i> En apparaîssant dans le Palmarès, le chiffre d'affaire de votre colocation sera public. Vous pourrez ainsi vous comparer aux autres colocations déjà créées.  </i>
+		<i><%= t 'inscr.par5' %> </i>
 
 		<div class="field">
 			<%= f.check_box :palm %>
-			<%= f.label "Apparaître dans le palmarès" %>
+			<%= f.label t('inscr.par6')  %>
 			</p>
 		</div>
 
 		<div class="actions">
-			<%= f.submit "Continuer", :id => "btnColocCreate"%>
+			<%= f.submit t('inscr.par7'), :id => "btnColocCreate"%>
 		</div>
 
 	<% end %>
