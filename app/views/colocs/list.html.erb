@@ -5,7 +5,11 @@
 	 */
 var word_array = [
 <% @colocs.each do |c| %>
+	<% if c.palm == 1 %>
 	{text: "<%= c.nom %>", weight: "<%= c.ca / @caTotal %>", link: "<%= coloc_url(c) %>"},
+	<% else %>
+	{text: "<%= c.nom %>", weight: "<%= c.ca / @caTotal %>"},
+	<% end %>	
 <% end %>	
 ];
 
