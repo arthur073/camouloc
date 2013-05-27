@@ -1,8 +1,30 @@
-<h1> <%= t 'list.title2' %>  </h1>
+<h1> <%= t 'list.title2' %> </h1>
+<script type="text/javascript">
+	/*!
+	 * Create an array of word objects, each representing a word in the cloud
+	 */
+var word_array = [
+<% @usersAll.each do |u| %>
+	<% @udep = u.depenses.size + u.trois_depenses.size + u.quatre_depenses.size + u.expenses.size %>
+	{text: "<%= u.nom %>", weight: "<%= @udep %>", link: "<%= user_url(u) %>"},
+<% end %>	
+];
 
+$(function() {
+		// When DOM is ready, select the container element and call the jQCloud method, passing the array of words as the first argument.
+		$("#example").jQCloud(word_array, {
+height: 300,
+delayedMode: true,
+});
+		});
+</script>
+<br>
+<div class="descriptionCloud">
+<div id="example" style="width: 100%; height: 600px;"></div>
+
+<% if signed_in? and current_user.admin? %>
 <%= will_paginate %>
 
-<div class="descriptionNormal">
 <br>
 <ul class="users">
 	<% @users.each do |user| %>
@@ -13,9 +35,7 @@
 		<%= small_gravatar_for user, :size => 40 %> 
 		<% end %> 
 		<%= link_to user.nom, user %>, <%= t 'list.par4' %><%= link_to Coloc.find(user.coloc_id).nom, Coloc.find(user.coloc_id) %>.
-		<% if signed_in? and current_user.admin? %>
 			<li onclick="return confirm('<%= t "list.par5" %>')"> <%= button_to "Suppr", user, :method => :delete  %> </li>
-		<% end %> 
 		</li>
 		<br/>
 	<% end %>
@@ -23,3 +43,4 @@
 </div>
 
 <%= will_paginate %>
+<% end %> 
