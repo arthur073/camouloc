@@ -1,23 +1,42 @@
 <h1> <%= t 'list.title' %>  </h1>
+<script type="text/javascript">
+	/*!
+	 * Create an array of word objects, each representing a word in the cloud
+	 */
+var word_array = [
+<% @colocs.each do |c| %>
+	{text: "<%= c.nom %>", weight: "<%= c.ca / @caTotal %>", link: "<%= coloc_url(c) %>"},
+<% end %>	
+];
 
+$(function() {
+		// When DOM is ready, select the container element and call the jQCloud method, passing the array of words as the first argument.
+		$("#example").jQCloud(word_array, {
+height: 300,
+delayedMode: true,
+});
+		});
+</script>
 <br>
+<div class="descriptionCloud">
+<div id="example" style="width: 100%; height: 600px;"></div>
 
-<div class="descriptionNormal">
+
+			<% if signed_in? and current_user.admin? %>
+	<%= will_paginate %>
+	<ul class="colocs">
+		<% @colocs.each do |coloc| %>
+			<li>  <%= link_to coloc.nom, coloc %> <i> (
+				<% if coloc.users.count < 2 %>
+					<%= coloc.users.count %> <%= t 'list.par1' %> ) 
+				<% else %>
+					<%= coloc.users.count %> <%= t 'list.par2' %> )
+				<% end %> 
+			</i></li>
+				<li onclick="return confirm('<%= t "list.par3" %>')"> <%= button_to "Suppr", coloc, :method => :delete  %> </li>
+			<% end %>
+		<% end %>
+	</ul>
+
 <%= will_paginate %>
-<ul class="colocs">
-        <% @colocs.each do |coloc| %>
-                <li>  <%= link_to coloc.nom, coloc %> <i> (
-                <% if coloc.users.count < 2 %>
-                        <%= coloc.users.count %> <%= t 'list.par1' %> ) 
-                <% else %>
-                        <%= coloc.users.count %> <%= t 'list.par2' %> )
-                <% end %> 
-                </i></li>
-                <% if signed_in? and current_user.admin? %>
-			<li onclick="return confirm('<%= t "list.par3" %>')"> <%= button_to "Suppr", coloc, :method => :delete  %> </li>
-                <% end %>
-        <% end %>
-</ul>
 </div>
-
-<%= will_paginate %>

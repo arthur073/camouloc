@@ -412,6 +412,7 @@ class ColocsController < ApplicationController
         def list
                 @titre = "Toutes les Colocations"
                 @colocs = Coloc.order(:created_at).paginate(:page => params[:page], :per_page => 30)
+		@caTotal = Coloc.sum(:ca)
         end
 
         private
