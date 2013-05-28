@@ -252,6 +252,8 @@ fr:
   slider:
         s11: "Incroyablement"
         s12: "Sécurisée"
+        s11a: "Assurément"
+        s12a: "Pro"
         s21: "Complètement"
         s22: "Automatique"
         s31: "Continuement"

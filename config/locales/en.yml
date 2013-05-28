@@ -235,6 +235,8 @@ en:
   slider:
         s11: "Incredibly"
         s12: "Secure"
+        s11a: "Truly"
+        s12a: "Pro"
         s21: "Completely"
         s22: "Automatic"
         s31: "Continuously"
