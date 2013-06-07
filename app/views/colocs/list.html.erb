@@ -27,7 +27,6 @@ delayedMode: true,
 
 
 			<% if signed_in? and current_user.admin? %>
-	<%= will_paginate %>
 	<ul class="colocs">
 		<% @colocs.each do |coloc| %>
 			<li>  <%= link_to coloc.nom, coloc %> <i> (
@@ -41,6 +40,5 @@ delayedMode: true,
 			<% end %>
 	</ul>
 
-<%= will_paginate %>
 		<% end %>
 </div>
