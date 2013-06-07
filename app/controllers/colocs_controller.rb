@@ -325,7 +325,7 @@ class ColocsController < ApplicationController
                   if @expenses.size != 0   
                   while @i < @colocataires.size - 1 
 			  @arrayTotRM = @arrayTotMod.sort_by {|hsh| hsh[1]}.delete_if {|x| x[1] == 0}
-			  break if @arrayTotRM.nil?
+			  break if @arrayTotRM == []
 			  @ColocCourMal = User.find(@arrayTotRM.first.first)
 			  @ColocCourMieux = User.find(@arrayTotRM.last.first)
 			  @hashRM[@i][1] = @ColocCourMal.nom
