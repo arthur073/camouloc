@@ -210,11 +210,15 @@ type: 'pie',
 <% end %>	
 <% end %>
 <% if @nbrcoloc > 4 %>
+	[WORK IN PROGRESS]
+	<% if signed_in? and current_user.admin? %>
+	<%= @arrayTotMod %>
    <% @hashRM.each do |h| %>
       <% if h[2] > 0.01 %>
          <tr> <td> <%= h[1] %> <%= t 'gen.owns' %>
  <strong><%= "%0.2f" % (h[2]) %><%= t 'number.currency.format.unit' %>
 </strong> <%= t 'gen.to' %> <%= h[3] %>. </td></tr>
+      <% end %>
       <% end %>
    <% end %>
 <% end %>
