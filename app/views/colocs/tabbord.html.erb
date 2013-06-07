@@ -210,9 +210,6 @@ type: 'pie',
 <% end %>	
 <% end %>
 <% if @nbrcoloc > 4 %>
-	[WORK IN PROGRESS]
-	<% if signed_in? and current_user.admin? %>
-	<%= @arrayTotMod %>
    <% @hashRM.each do |h| %>
       <% if h[2] > 0.01 %>
          <tr> <td> <%= h[1] %> <%= t 'gen.owns' %>
@@ -221,7 +218,6 @@ type: 'pie',
       <% end %>
       <% end %>
    <% end %>
-<% end %>
 		</table>
 
 

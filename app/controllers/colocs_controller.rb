@@ -324,18 +324,19 @@ class ColocsController < ApplicationController
                   @i = 0
                   if @expenses.size != 0   
                   while @i < @colocataires.size - 1 
-                  @arrayTotRM = @arrayTotMod.sort_by {|hsh| hsh[1]}.delete_if {|x| x[1] == 0}
-                  @ColocCourMal = User.find(@arrayTotRM.first.first)
-                  @ColocCourMieux = User.find(@arrayTotRM.last.first)
-                  @hashRM[@i][1] = @ColocCourMal.nom
-                  @hashRM[@i][2] = [@arrayTotMod[@ColocCourMieux.id].abs, @arrayTotMod[@ColocCourMal.id].abs].min
-                  @hashRM[@i][3] = @ColocCourMieux.nom
+			  @arrayTotRM = @arrayTotMod.sort_by {|hsh| hsh[1]}.delete_if {|x| x[1] == 0}
+			  break if @arrayTotMod == []
+			  @ColocCourMal = User.find(@arrayTotRM.first.first)
+			  @ColocCourMieux = User.find(@arrayTotRM.last.first)
+			  @hashRM[@i][1] = @ColocCourMal.nom
+			  @hashRM[@i][2] = [@arrayTotMod[@ColocCourMieux.id].abs, @arrayTotMod[@ColocCourMal.id].abs].min
+			  @hashRM[@i][3] = @ColocCourMieux.nom
 
-                  # on remet les champs à zéro
-                  @arrayTotMod[@ColocCourMieux.id] -= @hashRM[@i][2]
-                  @arrayTotMod[@ColocCourMal.id] += @hashRM[@i][2]
+			  # on remet les champs à zéro
+			  @arrayTotMod[@ColocCourMieux.id] -= @hashRM[@i][2]
+			  @arrayTotMod[@ColocCourMal.id] += @hashRM[@i][2]
 
-                  @i+=1
+			  @i+=1
                   end
                   end
                    
