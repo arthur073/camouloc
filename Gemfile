@@ -5,6 +5,8 @@ gem 'rails', '3.2.3'
 gem "will_paginate", :git => "https://github.com/p7r/will_paginate.git", :branch => "rails3"
 #gem 'will_paginate', '>= 3.0.pre'
 gem 'rails-i18n'
+gem 'newrelic_rpm'
+
 
 
 gem 'gravatar_image_tag', '1.0.0.pre2'
