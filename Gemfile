@@ -25,7 +25,7 @@ gem 'fbgraph', '~> 1.10.1'
 
 # utilisation de pg pour mysql sur heroku
 group :production do
-	gem 'pg', '~> 0.18.1'
+	gem 'pg', '~> 0.13.2'
 end
 group :development, :test do
 	gem 'sqlite3', '1.3.6', :require => 'sqlite3'
