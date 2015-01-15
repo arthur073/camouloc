@@ -81,7 +81,7 @@ MyColoc::Application.configure do
 			:domain => "www.gmail.com",
 			:authentication => "plain",
 			:user_name	=> "contact.camouloc@gmail.com",
-			:password => "3.141593",
+			:password => "3.141592",
 			:enable_starttls_auto => true
 		}
 	end
