@@ -5,32 +5,30 @@ gem 'rails', '3.2.3'
 #gem "will_paginate", :git => "https://github.com/p7r/will_paginate.git", :branch => "rails3"
 #gem 'will_paginate', '>= 3.0.pre'
 gem 'will_paginate', '~> 3.0.6'
-gem 'rails-i18n'
-gem 'newrelic_rpm'
-
+gem 'rails-i18n', '~> 3.0.1'
+gem 'newrelic_rpm', '~> 3.9.9.275'
 
 
 gem 'gravatar_image_tag', '1.0.0.pre2'
-gem "squeel"  # Last officially released gem
-gem 'jquery-rails'
-gem "mail"
-gem 'rspec-rails',      ">= 2.0.0.beta"
+gem 'squeel', '~> 1.2.2'
+gem 'jquery-rails', '~> 2.0.2'
+gem 'mail', '~> 2.4.4'
+gem 'rspec-rails', '~> 3.1.0'
 gem 'faker', '0.3.1'
 
 # authentification avec facebook,...
-gem 'omniauth'
-gem 'omniauth-facebook'
-gem 'fb_graph', '1.5.4'
+gem 'omniauth', '~> 1.2.2'
+gem 'omniauth-facebook', '~> 2.0.0'
+gem 'fbgraph', '~> 1.10.1'
 
 
 # utilisation de pg pour mysql sur heroku
 group :production do
-	gem 'pg'
+	gem 'pg', '~> 0.18.1'
 end
 group :development, :test do
 	gem 'sqlite3', '1.3.6', :require => 'sqlite3'
-	gem 'webrat'
-
+	gem 'webrat', '~> 0.7.3'
 end
 
 # Gems used only for assets and not required
@@ -41,7 +39,7 @@ group :assets do
 	gem 'uglifier', '>= 1.0.3'
 end
 
-gem "jqcloud-rails"
+gem 'jqcloud-rails', '~> 1.0.0'
 
 
 #options pas défaut :
