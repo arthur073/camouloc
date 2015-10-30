@@ -75,15 +75,25 @@ MyColoc::Application.configure do
 
 	MyColoc::Application.configure do
 
-		config.action_mailer.smtp_settings = {
-			:address => "smtp.gmail.com",
-			:port	=> 587,
-			:domain => "www.gmail.com",
-			:authentication => "plain",
-			:user_name	=> "contact.camouloc@gmail.com",
-			:password => "3.141592",
-			:enable_starttls_auto => true
-		}
+	#	config.action_mailer.smtp_settings = {
+	#		:address => "smtp.gmail.com",
+	#		:port	=> 587,
+	#		:domain => "www.gmail.com",
+	#		:authentication => "plain",
+	#		:user_name	=> "contact.camouloc@gmail.com",
+	#		:password => "3.141592",
+	#		:enable_starttls_auto => true
+	#	}
+
+	ActionMailer::Base.smtp_settings = {
+	  :port           => ENV['MAILGUN_SMTP_PORT'],
+	  :address        => ENV['MAILGUN_SMTP_SERVER'],
+	  :user_name      => ENV['MAILGUN_SMTP_LOGIN'],
+	  :password       => ENV['MAILGUN_SMTP_PASSWORD'],
+	  :domain         => 'camouloc.heroku.com',
+	  :authentication => :plain,
+	}
+	ActionMailer::Base.delivery_method = :smtp
 	end
 
 	#enlever depreciation warnings
