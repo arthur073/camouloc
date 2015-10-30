@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class UserMailer < ActionMailer::Base
-	default from: "contact.mycoloc@gmail.com"
+	default from: "contact@camouloc.fr"
+    default "Message-ID"=>"#{Digest::SHA2.hexdigest(Time.now.to_i.to_s)}@camouloc.fr"
 
 	def welcome_email(user)
 		@user = user
@@ -18,16 +19,16 @@ class UserMailer < ActionMailer::Base
     		mail :to => "arthur.verger@gmail.com", :subject => "[CAMOULOC] Nouvelle Coloc inscrite."
   	end
 
-        def messagemail(message,coloc)
-                @coloc = coloc
-		@url  = "camouloc.herokuapp.com"
-                @message = message
-                @dest = coloc.users.where(:mail => 1)
-                emails = @dest.collect(&:email).join(",")
-                mail(:to => emails,:subject => "[CAMOULOC] Une colocation vous a contacté !")
-        end
+    def messagemail(message,coloc)
+            @coloc = coloc
+	@url  = "camouloc.herokuapp.com"
+            @message = message
+            @dest = coloc.users.where(:mail => 1)
+            emails = @dest.collect(&:email).join(",")
+            mail(:to => emails,:subject => "[CAMOULOC] Une colocation vous a contacté !")
+    end
 
-        def deleteunusedcolocsmail(nbrcoloc)
-                mail(:to => "arthur.verger@gmail.com", :subject => "[CAMOULOC] Destruction des colocations inutilisées")
-        end
+    def deleteunusedcolocsmail(nbrcoloc)
+            mail(:to => "arthur.verger@gmail.com", :subject => "[CAMOULOC] Destruction des colocations inutilisées")
+    end
 end
