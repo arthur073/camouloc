@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class DepenseMailer < ActionMailer::Base
 	default from: "contact.mycoloc@gmail.com"
+    default "Message-ID"=>"#{Digest::SHA2.hexdigest(Time.now.to_i.to_s)}@camouloc.fr"
 
 	def new_depense_email(depense)
 		@depense = depense
