@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 # Gems nécessaires dans tous les environnements
+#gem 'rack-cache', '~> 1.2'
 gem 'rails', '3.2.3'
 #gem "will_paginate", :git => "https://github.com/p7r/will_paginate.git", :branch => "rails3"
 #gem 'will_paginate', '>= 3.0.pre'
