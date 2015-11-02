@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class SessionsController < ApplicationController
         skip_before_filter :require_login
+        layout 'login'  
 
         def new
                 @titre = "S'identifier"
