@@ -20,6 +20,14 @@ class SessionsController < ApplicationController
                         redirect_back_or user
                 end
         end
+		
+		def register
+                @coloc = Coloc.new
+                @coloc.palm = 1
+				
+				@user = User.new
+				@user.coloc_id = @coloc.id
+		end
 
         def destroy
                 sign_out

@@ -16,7 +16,7 @@ MyColoc::Application.routes.draw do
 
 	match '/auth/:provider/callback' => 'authentifications#create'
 	match '/contact', :to => 'pages#contact'
-	match '/signup', :to => 'colocs#new'
+	match '/signup', :to => 'sessions#register'
 	match '/colocs/:id/edit', :to => 'colocs#edit'
 	match '/signin',  :to => 'sessions#new', :as => 'login'
 	match '/signout', :to => 'sessions#destroy'
@@ -27,6 +27,8 @@ MyColoc::Application.routes.draw do
 	match '/tabbord/:id', :controller => 'colocs', :action => 'tabbord', :as => 'tableau_bord'
 	match '/list', :controller => 'colocs', :action => 'list'
 	match '/choixnbr/:id', :controller => 'colocs', :action => 'choixnbr', :as => 'choix_nbr'
+	get "/verifyuser" => "users#verify_user", :as => "verify_user"
+	get "/verifycoloc" => "colocs#verify_coloc", :as => "verify_coloc"
 	root :to => 'pages#home'
 
 end

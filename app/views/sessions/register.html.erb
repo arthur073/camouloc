@@ -1,0 +1,63 @@
+  <body class="hold-transition register-page">
+    <div class="register-box">
+      <div class="register-logo">
+        <a href="../../index2.html"><b>Camouloc</b></a>
+      </div>
+	  
+
+	 
+
+      <div class="register-box-body">
+        <p class="login-box-msg">Register a new membership</p>
+		
+		<%= form_for @user, :html => { "data-toggle" => "validator", :id => "mainform" } do |f| %>
+		
+		<%= fields_for @coloc do |c| %>
+          <div class="form-group has-feedback">
+			<%= c.text_field :nom, :class => "form-control", :placeholder => "Flatshare name", :required => true, "data-minlength" => "3", 
+							"data-remote" => "/verifycoloc", :name => "nom", "data-remote-error" => "This flatshare name already exists" %>
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+			<div class="help-block with-errors"></div>
+          </div>		
+		
+          <div class="form-group has-feedback">
+			<%= f.text_field :nom, :class => "form-control", :placeholder => "Full name", :required => true, "data-minlength" => "6" %>
+            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+			<div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group has-feedback">
+			<%= f.email_field :email, :class => "form-control", :placeholder => "Email", :required => true, "data-minlength" => "6",
+							"data-remote" => "/verifyuser", :name => "email", "data-remote-error" => "A user with this email already exists" %>
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+			<div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group has-feedback">
+			<%= f.password_field :password, :class => "form-control", :placeholder => "Password", :required => true, "data-minlength" => "8", :id => "inputPassword" %>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+			<span class="help-block">Minimum of 8 characters</span>
+			<div class="help-block with-errors"></div>
+          </div>
+          <div class="form-group has-feedback">
+			<%= f.password_field :password_confirmation, :class => "form-control", :placeholder => "Retype password", :required => true, "data-match" => "#inputPassword" %>
+            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+			<div class="help-block with-errors"></div>
+          </div>	
+		  <%= f.submit "Register", :class => "btn btn-primary btn-block btn-flat"%>
+		
+		<% end %>
+		<% end %>
+        <div class="social-auth-links text-center">
+          <p>- OR -</p>
+          <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using Facebook</a>
+          <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using Google+</a>
+        </div>
+
+        <a href="login.html" class="text-center">I already have a membership</a>
+      </div><!-- /.form-box -->
+    </div><!-- /.register-box -->
+	
+	    <%= javascript_include_tag "jquery.min", "bootstrap.min", "validator.min" %>
+    <script>
+	  	$('#mainform').validator();
+    </script>
+  </body>

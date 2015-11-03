@@ -415,6 +415,10 @@ class ColocsController < ApplicationController
                 @colocs = Coloc.all
 		@caTotal = Coloc.sum(:ca)
         end
+		
+		def verify_coloc
+			render :status => 409 unless Coloc.where('lower(nom) = ?', params[:nom].downcase).first.nil?
+		end
 
         private
 

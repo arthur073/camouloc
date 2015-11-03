@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(:version => 20130304145346) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.float    "ca"
-    t.integer  "palm"
+    t.boolean  "palm"
   end
 
   create_table "depenses", :force => true do |t|
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20130304145346) do
   create_table "users", :force => true do |t|
     t.string   "nom"
     t.string   "email"
+    t.integer  "colloc_id"
     t.datetime "created_at",                            :null => false
     t.datetime "updated_at",                            :null => false
     t.string   "encrypted_password"

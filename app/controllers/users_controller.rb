@@ -4,6 +4,7 @@ class UsersController < ApplicationController
    before_filter :admin_user,   :only => :destroy
    before_filter :correct_user, :only => [:edit, :update]
    rescue_from ActiveRecord::RecordNotFound, :with => :user_manquant
+   layout 'dashboard'
 
    def index
       @titre = "Tous les utilisateurs"
@@ -47,6 +48,12 @@ class UsersController < ApplicationController
    def create
       @user = User.new(params[:user])
       @coloc_id = @user.coloc_id
+	  
+	  puts "HERE"
+	  puts @user
+	  puts "END"
+	  
+	  
       if @user.save
          # Traite un succès d'enregistrement.
          # Envoie un email de bienvenue
@@ -54,7 +61,7 @@ class UsersController < ApplicationController
          unless signed_in?
             sign_in @user
          end
-	 redirect_to new_user_path(:coloc_id => @coloc_id)
+		 redirect_to new_user_path(:coloc_id => @coloc_id)
          flash[:success] = t('flash.userCreate')
       else
          @titre = "Inscription"
@@ -89,6 +96,10 @@ class UsersController < ApplicationController
    def user_manquant
       flash[:error] = t('flash.userManq')
       redirect_to users_path	     
+   end
+   
+   def verify_user
+		render :status => 409 unless User.where('lower(email) = ?', params[:email].downcase).first.nil?
    end
 
    private
