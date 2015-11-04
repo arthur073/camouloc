@@ -26,33 +26,26 @@ class ColocsController < ApplicationController
                 @colocs2 = Coloc.where(:palm=>1).order(:ca)
         end
 
-        def new
-                @coloc = Coloc.new
-                @coloc.palm = 1
-                @titre = "Inscription"
-                @nb_colocs = Coloc
-               
-                @colocs = Coloc.all
-                @nbrcolocs_vides = 0
-                @colocs.each do |col|
-                  if (col.users.size == 0)
-                        @nbrcolocs_vides = @nbrcolocs_vides + 1
-                  end
-                end
-        end
-
         def create
-                @coloc = Coloc.new(params[:coloc])
+                @coloc = Coloc.new
+                @coloc.nom = params[:nom]
+                @coloc.palm = 1              
                 @coloc.ca = 0
+
                 if @coloc.save
-                        # Traite un succès d'enregistrement.
+                    @user = User.new(params[:user])
+                    @user.email = params[:email]
+                    @user.coloc_id = @coloc.id
+                    @user.tot = 0 
+                    
+                    if @user.save
                         redirect_to new_user_path(:coloc_id => @coloc.id)
                         flash[:success] = t('flash.colocCreate') 
                         UserMailer.colocemail(@coloc).deliver
-                else
+                    else
                         flash[:error] = t('flash.colocCreErr') 
-                        @titre = "Inscription"
-                        render 'new'
+                        render 'session#new'
+                    end                   
                 end
         end
 
@@ -429,4 +422,4 @@ class ColocsController < ApplicationController
         def sort_direction
                 %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
         end
-end
+end            

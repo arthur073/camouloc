@@ -4,16 +4,14 @@ class SessionsController < ApplicationController
         layout 'login'  
 
         def new
-                @titre = "S'identifier"
         end
 
         def create
-                user = User.authenticate(params[:session][:email],
-                                         params[:session][:password])
+                user = User.authenticate(params[:session][:email], params[:session][:password])
                 if user.nil?
                         @titre = "S'identifier"
                         flash[:error] = t('flash.logKO')
-			redirect_to login_path
+			            redirect_to login_path
                 else
                         flash[:notice] = t('flash.logOK')  + user.nom + ". "
                         sign_in user
@@ -23,10 +21,7 @@ class SessionsController < ApplicationController
 		
 		def register
                 @coloc = Coloc.new
-                @coloc.palm = 1
-				
 				@user = User.new
-				@user.coloc_id = @coloc.id
 		end
 
         def destroy

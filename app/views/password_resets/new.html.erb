@@ -1,8 +1,45 @@
-<h1><%= @titre %> </h1>
-<%= form_tag password_resets_path, :method => :post do %>
-  <div class="field">
-    <%= label_tag "Entrez votre email : " %>
-    <%= email_field_tag :email, params[:email] %>
-  </div>
-  <div class="actions"><%= submit_tag "Réinitialiser le mot de passe" %></div>
-<% end %>
+ <body class="hold-transition login-page">
+    <div class="login-box">
+      <div class="login-logo">
+        <a href="../../index2.html"><b>Camouloc</b></a>
+      </div><!-- /.login-logo -->
+      <div class="login-box-body">
+        <p class="login-box-msg">Forgotten password? Enter your email below:</p>
+
+        <% flash.each do |type, content| %>
+            <% if content.respond_to?('each') 
+                content.each do |item| %>
+                    <%= render 'layouts/alert', 
+                        type: type,
+                        content: item %>
+                <% end %>
+            <% else %>
+                <%= render 'layouts/alert', 
+                        type: type,
+                        content: content %>
+            <% end %>
+
+        <% end %>
+
+	    <%= form_tag password_resets_path, :method => :post, "data-toggle" => "validator", :id => "passwordresetform"  do %>
+          <div class="form-group has-feedback">
+		    <%= email_field_tag :email, params[:email], :class => "form-control", :placeHolder => "Email", :required => true %>
+            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+			<div class="help-block with-errors"></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+			  <%= submit_tag "Réinitialiser le mot de passe", :class => "btn btn-primary btn-block btn-flat" %>
+            </div><!-- /.col -->
+          </div>
+	    <% end %>
+
+
+      </div><!-- /.login-box-body -->
+    </div><!-- /.login-box -->
+
+	    <%= javascript_include_tag "jquery.min", "bootstrap.min", "validator.min" %>
+    <script>
+	  	$('#passwordresetform').validator();
+    </script>
+  </body>

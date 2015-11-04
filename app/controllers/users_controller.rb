@@ -3,7 +3,7 @@ class UsersController < ApplicationController
    before_filter :authenticate, :only => [:edit, :update]
    before_filter :admin_user,   :only => :destroy
    before_filter :correct_user, :only => [:edit, :update]
-   rescue_from ActiveRecord::RecordNotFound, :with => :user_manquant
+   #rescue_from ActiveRecord::RecordNotFound, :with => :user_manquant
    layout 'dashboard'
 
    def index
@@ -39,19 +39,15 @@ class UsersController < ApplicationController
    end
 
    def new
-      @user = User.new
-      @titre = "Inscription"
-      @coloc = Coloc.find(params[:coloc_id])
-      @user.coloc_id = @coloc.id
+      #@user = User.new
+      #@titre = "Inscription"
+      #@coloc = Coloc.find(params[:coloc_id])
+      #@user.coloc_id = @coloc.id
    end
 
    def create
       @user = User.new(params[:user])
       @coloc_id = @user.coloc_id
-	  
-	  puts "HERE"
-	  puts @user
-	  puts "END"
 	  
 	  
       if @user.save
@@ -64,9 +60,9 @@ class UsersController < ApplicationController
 		 redirect_to new_user_path(:coloc_id => @coloc_id)
          flash[:success] = t('flash.userCreate')
       else
-         @titre = "Inscription"
+         #@titre = "Inscription"
          @coloc = Coloc.find(@coloc_id)
-         render 'new'
+         render 'session#new'
       end
    end
 
