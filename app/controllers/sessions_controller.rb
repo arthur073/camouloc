@@ -24,6 +24,12 @@ class SessionsController < ApplicationController
 				@user = User.new
 		end
 
+        def create_users
+            @user = User.find(params[:user])
+            @coloc = Coloc.find(@user.coloc_id)
+            @additional_user = User.new
+        end
+
         def destroy
                 sign_out
                 redirect_to root_path

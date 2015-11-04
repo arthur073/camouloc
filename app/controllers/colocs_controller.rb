@@ -2,6 +2,7 @@
 class ColocsController < ApplicationController
         #rescue_from ActiveRecord::RecordNotFound, :with => :coloc_manquante
         helper_method :sort_column, :sort_direction
+        layout "dashboard"
 
         def show
                 @coloc = Coloc.find(params[:id])
@@ -31,6 +32,8 @@ class ColocsController < ApplicationController
                 @coloc.nom = params[:nom]
                 @coloc.palm = 1              
                 @coloc.ca = 0
+                @secret = SecureRandom.hex(50)
+                @coloc.secret = @secret
 
                 if @coloc.save
                     @user = User.new(params[:user])
@@ -39,8 +42,8 @@ class ColocsController < ApplicationController
                     @user.tot = 0 
                     
                     if @user.save
-                        redirect_to new_user_path(:coloc_id => @coloc.id)
-                        flash[:success] = t('flash.colocCreate') 
+                        sign_in @user unless signed_in?
+                        redirect_to create_users_path(:user => @user, :secret => @secret)
                         UserMailer.colocemail(@coloc).deliver
                     else
                         flash[:error] = t('flash.colocCreErr') 
@@ -406,7 +409,7 @@ class ColocsController < ApplicationController
         def list
                 @titre = "Toutes les Colocations"
                 @colocs = Coloc.all
-		@caTotal = Coloc.sum(:ca)
+		        @caTotal = Coloc.sum(:ca)
         end
 		
 		def verify_coloc

@@ -1,0 +1,67 @@
+  <body class="hold-transition register-page">
+    <div class="register-box">
+      <div class="register-logo">
+        <a href="../../index2.html"><b>Camouloc</b></a>
+      </div>
+	  
+
+      <div class="register-box-body">
+        <p class="login-box-msg">Great, you're almost done! One last step though, don't forget to add your roommates! </p>
+
+        <% flash.each do |type, content| %>
+            <% if content.respond_to?('each') 
+                content.each do |item| %>
+                    <%= render 'layouts/alert', 
+                        type: type,
+                        content: item %>
+                <% end %>
+            <% else %>
+                <%= render 'layouts/alert', 
+                        type: type,
+                        content: content %>
+            <% end %>
+
+        <% end %>
+
+        <br>
+        <div class="panel panel-default">
+          <!-- Default panel contents -->
+          <div class="panel-heading">Roommates for <strong> <%= @coloc.nom %> </strong> </div>
+          <!-- List group -->
+          <ul id="roommates_list" class="list-group">
+            <% @coloc.users.each do |u| %> 
+                <li class="list-group-item"><strong><%= u.nom %> </strong> - <i> <%= u.email %> </i></li>
+            <% end %>
+          </ul>
+          <div class="panel-footer">
+          <%= form_for @additional_user, :html => { "data-toggle" => "validator", :id => "additionaluserform" } do |f| %>
+                <div class="form-group has-feedback">
+	                <%= f.email_field :nom, :id => "roommateemail", :class => "form-control", :placeholder => "Enter an email and hit enter", :required => true, "data-minlength" => "6", 
+						            "data-remote" => "/verifyuser", :name => "email", "data-remote-error" => "A user with this email already exists" %>
+                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+			        <div class="help-block with-errors"></div>
+                </div><!-- /input-group -->		      
+           <% end %>
+          </div>
+        </div>
+        
+        <%= link_to "I am done", @coloc, :id => "validation_link", :class => "btn btn-primary btn-block btn-flat disabled" %>
+
+      </div><!-- /.form-box -->
+    </div><!-- /.register-box -->
+	
+	    <%= javascript_include_tag "jquery.min", "bootstrap.min", "validator.min" %>
+    <script>
+	  	$('#additionaluserform').validator();
+
+        $("#additionaluserform").submit(function (e) {
+            e.preventDefault(); 
+            $.ajax({
+                url: "/addroommate?email="+$("#roommateemail").val() + "&user_id=<%= @user.id%>&secret=<%= @coloc.secret %>"
+            });
+        });        
+    </script>
+  </body>
+
+
+

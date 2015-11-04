@@ -39,17 +39,12 @@ class UsersController < ApplicationController
    end
 
    def new
-      #@user = User.new
-      #@titre = "Inscription"
-      #@coloc = Coloc.find(params[:coloc_id])
-      #@user.coloc_id = @coloc.id
    end
 
    def create
       @user = User.new(params[:user])
       @coloc_id = @user.coloc_id
-	  
-	  
+
       if @user.save
          # Traite un succès d'enregistrement.
          # Envoie un email de bienvenue
@@ -96,6 +91,38 @@ class UsersController < ApplicationController
    
    def verify_user
 		render :status => 409 unless User.where('lower(email) = ?', params[:email].downcase).first.nil?
+   end
+
+   def add_roommate
+        if params[:email] && params[:user_id] && params[:secret]
+            @user = User.find(params[:user_id])
+            @coloc = Coloc.find(@user.coloc_id)
+            if @coloc.secret.eql? params[:secret]
+                # email
+                @roommate = User.new
+                @roommate.email = params[:email]
+                # name
+                name = params[:email].split("@")[0].split(".").map {|n| n.gsub(/[^a-zA-Z]/, '').capitalize }.join(" ")
+                @roommate.nom = name
+                # passwords
+                pass = SecureRandom.hex(4)
+                @roommate.password = pass
+                @roommate.password_confirmation = pass
+                # coloc id
+                @roommate.coloc_id = @coloc.id
+                
+                if @roommate.save
+                    
+                else
+                    flash[:error] = "Ouch... unable to add your roommate. Please try again."
+                    redirect_to create_users_path(:user => @user, :secret => @coloc.secret)
+                end
+            else
+                render :status => 404
+            end
+        else
+		    render :status => 404
+        end
    end
 
    private

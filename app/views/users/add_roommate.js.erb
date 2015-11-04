@@ -1,0 +1,7 @@
+$("#roommates_list li:first-child").before("<li class='list-group-item'><strong><%= @roommate.nom %> </strong> - <i> <%= @roommate.email %> </i></li>");
+$("#roommateemail").val("");
+<% if @coloc.users.count > 1 %>
+    $("#validation_link").removeClass("disabled");
+<% else %>
+    $("#validation_link").addClass("disabled");    
+<% end %>

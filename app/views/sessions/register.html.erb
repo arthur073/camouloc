@@ -6,7 +6,7 @@
 	  
 
       <div class="register-box-body">
-        <p class="login-box-msg">We just need to know you a little better before creating your <strong> Camouloc </strong> dashboard. </p>
+        <p class="login-box-msg">Hey there! Welcome onboard, we just need some information before creating your <strong> Camouloc </strong> dashboard. </p>
 
         <% flash.each do |type, content| %>
             <% if content.respond_to?('each') 
@@ -27,33 +27,33 @@
 		
 		
           <div class="form-group has-feedback">
-			<%= f.text_field :nom, :class => "form-control", :placeholder => "Flatshare name", :required => true, "data-minlength" => "3", 
+			<%= f.text_field :nom, :class => "form-control", :placeholder => "Give your flatshare a name", :required => true, "data-minlength" => "3", 
 							"data-remote" => "/verifycoloc", :name => "nom", "data-remote-error" => "This flatshare name already exists" %>
-            <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            <span class="glyphicon glyphicon-heart form-control-feedback"></span>
 			<div class="help-block with-errors"></div>
           </div>		
 		
           <%= fields_for @user do |u| %>
 
           <div class="form-group has-feedback">
-			<%= u.text_field :nom, :class => "form-control", :placeholder => "Full name", :required => true, "data-minlength" => "6" %>
+			<%= u.text_field :nom, :class => "form-control", :placeholder => "Enter your name", :required => true, "data-minlength" => "6" %>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
 			<div class="help-block with-errors"></div>
           </div>
           <div class="form-group has-feedback">
-			<%= u.email_field :email, :class => "form-control", :placeholder => "Email", :required => true, "data-minlength" => "6",
+			<%= u.email_field :email, :class => "form-control", :placeholder => "Enter your email", :required => true, "data-minlength" => "6",
 							"data-remote" => "/verifyuser", :name => "email", "data-remote-error" => "A user with this email already exists" %>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 			<div class="help-block with-errors"></div>
           </div>
           <div class="form-group has-feedback">
-			<%= u.password_field :password, :class => "form-control", :placeholder => "Password", :required => true, "data-minlength" => "8", :id => "inputPassword" %>
+			<%= u.password_field :password, :class => "form-control", :placeholder => "Enter a password", :required => true, "data-minlength" => "8", :id => "inputPassword" %>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 			<span class="help-block">Minimum of 8 characters</span>
 			<div class="help-block with-errors"></div>
           </div>
           <div class="form-group has-feedback">
-			<%= u.password_field :password_confirmation, :class => "form-control", :placeholder => "Retype password", :required => true, "data-match" => "#inputPassword" %>
+			<%= u.password_field :password_confirmation, :class => "form-control", :placeholder => "Retype your password", :required => true, "data-match" => "#inputPassword" %>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 			<div class="help-block with-errors"></div>
           </div>	
