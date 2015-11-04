@@ -1,13 +1,6 @@
 # -*- encoding : utf-8 -*-
 module ApplicationHelper
 
-        base_titre = "Simple App du Tutoriel Ruby on Rails"
-        if @titre.nil?
-                base_titre
-        else
-                "#{base_titre} | #{@titre}"
-        end
-
         def sortable(column, title = nil)
                 title ||= column.titleize
                 css_class = column == sort_column ? "current #{sort_direction}" : nil

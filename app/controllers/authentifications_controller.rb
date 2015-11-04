@@ -8,6 +8,7 @@ class AuthentificationsController < ApplicationController
   def create
     auth = request.env["omniauth.auth"] 
 	if signed_in? 
+		# register
 		current_user.authentifications.find_or_create_by_provider_and_uid(auth['provider'], auth['uid'])
 		# on pose un message sur facebook
 		@authent = Authentification.where(:user_id => current_user.id, :provider => auth['provider'], :uid => auth['uid'])
@@ -18,13 +19,13 @@ class AuthentificationsController < ApplicationController
 		@newLastName = auth['info']['last_name']
 		@image_url = auth['info']['image']
 		@image_url["square"] = "large"
-		@user = User.find(current_user.id)
-		@user.update_attribute( :nom, "#{@newFirstName.titleize} #{@newLastName[0].titleize}")
-		@user.update_attribute( :image, @image_url)
+		#@user = User.find(current_user.id)
+		#@user.update_attribute( :nom, "#{@newFirstName.titleize} #{@newLastName[0].titleize}")
+		#@user.update_attribute( :image, @image_url)
 		flash[:success] = t('flash.authCreate1') +   "#{auth['provider']}. "+ t('flash.authCreate2')
 		redirect_to @user
 	else 
-		# l'utilisateur n'est pas connecté, on essaie de le logger
+		# loggin
 		@authent = Authentification.where(:uid=>auth['uid'], :provider=>auth['provider'])
 		User.all.each do |users|
 			@auth = users.authentifications
@@ -51,7 +52,7 @@ class AuthentificationsController < ApplicationController
 				@image_url = auth['info']['image']
 				@email = auth['info']['email']
 				@user.update_attribute(:nom, "#{@newFirstName.titleize} #{@newLastName[0].titleize}")
-				@user.update_attribute( :image, @image_url)
+				#@user.update_attribute( :image, @image_url)
 				@user.update_attribute( :email, @email)
 				@user.update_attribute( :coloc_id, @colocId)
 				@user.authentifications.find_or_create_by_provider_and_uid(auth['provider'], auth['uid'])
@@ -60,8 +61,8 @@ class AuthentificationsController < ApplicationController
 				@token = auth['credentials']['token']
 				@authent.publish('Pour ta Coloc, quoi de mieux que Camouloc ?! Gratuite, pratique et rapide, cette application gère mes comptes à merveille, alors pourquoi pas les tiens ? Viens plutôt jeter un coup d\'oeil !', @token)
 				flash[:success] = t('flash.authCompte')
-				sign_in @user
-				redirect_to Coloc.find(@colocId)
+				sign_in @user unless signed_in?
+                redirect_to create_users_path(:user => @user, :secret => @secret)
 			else
 				# soit c'est une erreur 
 				flash[:error] = t('flash.authKO') 
