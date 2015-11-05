@@ -23,6 +23,11 @@ class SessionsController < ApplicationController
                 @coloc = Coloc.new
 				@user = User.new
 		end
+		
+		def register_provider
+				@coloc = Coloc.new
+				@user = User.find(params[:user_id])
+		end
 
         def create_users
             @user = User.find(params[:user])

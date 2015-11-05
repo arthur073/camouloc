@@ -15,6 +15,7 @@ MyColoc::Application.routes.draw do
 	resources :password_resets
 
 	match '/auth/:provider/callback' => 'authentifications#create'
+	match '/auth/failure', :to => 'authentifications#failure'
 	match '/contact', :to => 'pages#contact'
 	match '/signup', :to => 'sessions#register'
 	match '/create_users', :to => 'sessions#create_users', :as => 'create_users'
@@ -27,6 +28,7 @@ MyColoc::Application.routes.draw do
 	match '/plan-du-site',    :to => 'pages#plandusite', :as => 'plan'
 	match '/tabbord/:id', :controller => 'colocs', :action => 'tabbord', :as => 'tableau_bord'
 	match '/list', :controller => 'colocs', :action => 'list'
+	match '/registerprovider', :controller => 'sessions', :action => 'register_provider', :as => "register_provider"
 	match '/choixnbr/:id', :controller => 'colocs', :action => 'choixnbr', :as => 'choix_nbr'	
 	get "/verifyuser" => "users#verify_user", :as => "verify_user"
 	get "/verifycoloc" => "colocs#verify_coloc", :as => "verify_coloc"	

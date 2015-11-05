@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class UserMailer < ActionMailer::Base
-	default from: "contact@camouloc.fr"
+	default from: "no-reply@camouloc.fr"
     default "Message-ID"=>"#{Digest::SHA2.hexdigest(Time.now.to_i.to_s)}@camouloc.fr"
 
 	def welcome_email(user)

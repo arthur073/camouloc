@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
 	attr_accessor :password
 	attr_accessible :nom, :email, :password, :password_confirmation, :coloc_id, :mail, :image, :tot
 
-
+	
 	validates_uniqueness_of :email
 	# Crée automatique l'attribut virtuel 'password_confirmation'.
 	validates :password, :presence     => true,
@@ -42,6 +42,13 @@ class User < ActiveRecord::Base
 	def self.authenticate_with_salt(id, cookie_salt)
 		user = find_by_id(id)
 		(user && user.salt == cookie_salt) ? user : nil
+	end
+	
+	def add_provider(auth_hash)
+	  # Check if the provider already exists, so we don't add it twice
+	  unless self.authentifications.find_by_provider_and_uid(auth_hash["provider"], auth_hash["uid"])
+		Authentification.create :user_id => self.id, :provider => auth_hash["provider"], :uid => auth_hash["uid"]
+	  end
 	end
 
 	

@@ -36,8 +36,17 @@ class ColocsController < ApplicationController
                 @coloc.secret = @secret
 
                 if @coloc.save
-                    @user = User.new(params[:user])
-                    @user.email = params[:email]
+					
+					if params[:user][:user_id].present?
+						# user is logged via provider
+						@user = User.find(params[:user][:user_id]) 
+						@user.password = params[:user][:password]
+					else 
+						# user is logged via classic form
+						@user = User.new(params[:user])	
+						@user.email = params[:email]
+					end
+					
                     @user.coloc_id = @coloc.id
                     @user.tot = 0 
                     
@@ -46,8 +55,8 @@ class ColocsController < ApplicationController
                         redirect_to create_users_path(:user => @user, :secret => @secret)
                         UserMailer.colocemail(@coloc).deliver
                     else
-                        flash[:error] = t('flash.colocCreErr') 
-                        render 'session#new'
+                        flash[:error] = "Error!"
+                        render 'sessions#new'
                     end                   
                 end
         end

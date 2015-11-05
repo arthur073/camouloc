@@ -2,11 +2,11 @@
     <div class="register-box">
       <div class="register-logo">
         <%= link_to "<b>Camouloc</b>".html_safe, root_path %>
-	  </div>
+      </div>
 	  
 
       <div class="register-box-body">
-        <p class="login-box-msg">Hey there! Welcome onboard, we just need some information before creating your <strong> Camouloc </strong> dashboard. </p>
+        <p class="login-box-msg">You're account has been created. <br> We just need some additional information to create your profile </p>
 
         <% flash.each do |type, content| %>
             <% if content.respond_to?('each') 
@@ -34,18 +34,9 @@
           </div>		
 		
           <%= fields_for @user do |u| %>
+		  
+		  <%= u.hidden_field :user_id, :value => @user.id %>
 
-          <div class="form-group has-feedback">
-			<%= u.text_field :nom, :class => "form-control", :placeholder => "Enter your name", :required => true, "data-minlength" => "6" %>
-            <span class="glyphicon glyphicon-user form-control-feedback"></span>
-			<div class="help-block with-errors"></div>
-          </div>
-          <div class="form-group has-feedback">
-			<%= u.email_field :email, :class => "form-control", :placeholder => "Enter your email", :required => true, "data-minlength" => "6",
-							"data-remote" => "/verifyuser", :name => "email", "data-remote-error" => "A user with this email already exists" %>
-            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-			<div class="help-block with-errors"></div>
-          </div>
           <div class="form-group has-feedback">
 			<%= u.password_field :password, :class => "form-control", :placeholder => "Enter a password", :required => true, "data-minlength" => "8", :id => "inputPassword" %>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
@@ -61,13 +52,6 @@
 
           <%= f.submit "Register", :class => "btn btn-primary btn-block btn-flat"%>
 		<% end %>
-        <div class="social-auth-links text-center">
-          <p>- OR -</p>
-          <a href="/auth/facebook" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using Facebook</a>
-          <a href="/auth/google_oauth2" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using Google+</a>
-        </div>
-
-        <%= link_to "I am already a member!", login_path, :class => "text-center" %>
       </div><!-- /.form-box -->
     </div><!-- /.register-box -->
 	

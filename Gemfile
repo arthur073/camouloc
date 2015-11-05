@@ -4,6 +4,7 @@ ruby '1.9.3'
 # Gems nécessaires dans tous les environnements
 #gem 'rack-cache', '~> 1.2'
 gem 'rails', '3.2.3'
+gem 'rack', '1.4.1'
 #gem "will_paginate", :git => "https://github.com/p7r/will_paginate.git", :branch => "rails3"
 #gem 'will_paginate', '>= 3.0.pre'
 gem 'will_paginate', '~> 3.0.6'
@@ -21,7 +22,8 @@ gem 'faker', '0.3.1'
 
 # authentification avec facebook,...
 gem 'omniauth', '~> 1.2.2'
-gem 'omniauth-facebook', '~> 2.0.0'
+gem 'omniauth-facebook', '~> 3.0'
+gem 'omniauth-google-oauth2', '~> 0.2.9'
 gem 'fbgraph', '~> 1.10.1'
 
 
@@ -44,23 +46,3 @@ end
 
 gem 'jqcloud-rails', '~> 1.0.0'
 
-
-#options pas défaut :
-
-# See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer', :platform => :ruby
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-#gem 'capistrano'
-
-# To use debugger
-# gem 'ruby-debug19', :require => 'ruby-debug'
