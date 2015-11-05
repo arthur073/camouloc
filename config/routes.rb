@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 MyColoc::Application.routes.draw do
-
+	default_url_options :host => "camouloc.kerokuapp.com"
 
 
 	resources :users

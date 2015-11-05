@@ -52,8 +52,9 @@ class ColocsController < ApplicationController
                     
                     if @user.save
                         sign_in @user unless signed_in?
-                        redirect_to create_users_path(:user => @user, :secret => @secret)
                         UserMailer.colocemail(@coloc).deliver
+                        UserMailer.progress_email(@user).deliver
+                        redirect_to create_users_path(:user => @user, :secret => @secret)
                     else
                         flash[:error] = "Error!"
                         render 'sessions#new'

@@ -3,6 +3,15 @@ class UserMailer < ActionMailer::Base
 	default from: "no-reply@camouloc.fr"
     default "Message-ID"=>"#{Digest::SHA2.hexdigest(Time.now.to_i.to_s)}@camouloc.fr"
 
+	def progress_email(user)
+		@firstname = user.nom.split(" ")[0]
+		secret = Coloc.find(user.coloc_id).secret
+		url_end = url_for create_users_path(:user => user, :secret => secret)
+		url_start = url_for root_url
+		@url = url_start + url_end[1..-1]
+		mail(:to => user.email, :subject => "[CAMOULOC] Welcome aboard! Your account is almost ready")
+	end
+	
 	def welcome_email(user)
 		@user = user
 		@url  = "camouloc.herokuapp.com"
