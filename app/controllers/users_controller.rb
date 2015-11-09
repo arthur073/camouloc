@@ -102,7 +102,7 @@ class UsersController < ApplicationController
                 @roommate = User.new
                 @roommate.email = params[:email]
                 # name
-                name = params[:email].split("@")[0].split(".").map {|n| n.gsub(/[^a-zA-Z]/, '').capitalize }.join(" ")
+                name = params[:email].split("@")[0].split(".").map {|n| n.capitalize }.join(" ")
                 @roommate.nom = name
                 # passwords
                 pass = SecureRandom.hex(4)
@@ -110,6 +110,9 @@ class UsersController < ApplicationController
                 @roommate.password_confirmation = pass
                 # coloc id
                 @roommate.coloc_id = @coloc.id
+                # image
+                @roommate.set_image
+
                 
                 if @roommate.save
                     

@@ -1,148 +1,213 @@
+<section class="content-header">
+  <h1>
+    User Profile
+  </h1>
+</section>
 
-<div class="descriptionNormal">
-	<% if @user.has_image %>
-		<%= image_tag (@user.image) , :size => "100x100", :class => "imgframeProfil" %>
-	<% else %>
-		<%= gravatar_for @user %>
-	<% end %> 
+<!-- Main content -->
+<section class="content">
 
+  <div class="row">
+    <div class="col-md-3">
 
-	<br/>
-	<br/>
-	<br/>
-	<h1> <%= t 'user.par1' %>  <span class="cam1"> <%= @user.nom %>. </h1>
+      <!-- Profile Image -->
+      <div class="box box-primary">
+        <div class="box-body box-profile">
+          <%= image_tag(@user.image, :alt => "User profile picture", :class => "profile-user-img img-responsive img-circle") %>
+          <h3 class="profile-username text-center">Nina Mcintire</h3>
+          <p class="text-muted text-center">Software Engineer</p>
 
-		<p>
-		<%= t 'user.par2' %> <span class="cam1"> <%= @user.nom %>. </span>
-		<%= t 'user.par3' %> <span class="cam1"><%= @coloc.nom %></span>, <span class="cam1"> <%= @user.nom %>. </span>
-		<%= t 'user.par4' %>  <%= @user.created_at.strftime("%d %b. %Y") %> <%= t 'user.par5' %> 
-		<span class="cam1"><%= @nbrdep %> </span>
-		<%= t 'user.par6' %> 
-		</p>
-		<p>
-		<%= t 'coloc.par8' %> 
-		<ul class="profil">
-			<li>
-			<%= t 'user.par7' %><span class="cam1"> <%= @user.nom %>. </span> <%= t 'gen.by' %> <a href="mailto:<%= @user.email %>">email</a>.
-			</li>
-			<% if signed_in? and current_user == @user %>
-			<% if  current_user.authentifications.empty?  %>
-				<li>
-				<%= t 'user.par8' %><%= link_to "Facebook", @faceb_url, :class => "connectFacebook"%> <%= t 'user.par9' %>
-				</li>
-			<% else %>
-				<li>
-				<%= t 'user.par10' %><%= link_to t('user.par11'), authentifications_url%>
-				</li>
-			<% end %>
-			<% end %>
-			<% if signed_in? and (@user.id == current_user.id or current_user.admin?) %>
-				<li>
-				<%= link_to t('user.par12') , edit_user_path(@user) %> <%= t 'user.par13' %>
-				</li>
-			<% end %>
+          <ul class="list-group list-group-unbordered">
+            <li class="list-group-item">
+              <b>Followers</b> <a class="pull-right">1,322</a>
+            </li>
+            <li class="list-group-item">
+              <b>Following</b> <a class="pull-right">543</a>
+            </li>
+            <li class="list-group-item">
+              <b>Friends</b> <a class="pull-right">13,287</a>
+            </li>
+          </ul>
 
+          <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
+        </div><!-- /.box-body -->
+      </div><!-- /.box -->
 
+      <!-- About Me Box -->
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">About Me</h3>
+        </div><!-- /.box-header -->
+        <div class="box-body">
+          <strong><i class="fa fa-book margin-r-5"></i>  Education</strong>
+          <p class="text-muted">
+            B.S. in Computer Science from the University of Tennessee at Knoxville
+          </p>
 
-		</ul>
-		</p>
-		<br/>
+          <hr>
 
+          <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+          <p class="text-muted">Malibu, California</p>
 
-		<p>
-		<% if @nbrdep == 0 %>
-			<%= t 'user.nodep' %>	
-		<% else %>
-			<% if signed_in? and (current_user.coloc_id == @user.coloc_id or current_user.admin?)%>
-				<h3>  <%= t 'user.listdep' %> </h3>
-				<table class="depenses black">
-					<tr>
-						<td> Source </td>
-						<% @colocataires.each do |colocataires| %>
-							<td> <%= colocataires.nom %> </td>
-						<% end %>
-						<td> <%= t 'tabbord.monthAmo' %>  </td>
-						<td> <%= t 'tabbord.monthRea' %> </td>
-						<td> Date </td>
-						<% if signed_in? and (current_user.id == @user.id or current_user.admin?) %>
-						<td> </td>
-						<% end %>
-					</tr>
-					<% if @colocataires.size == 2 %>
-						<% @liste1.reverse.each do |depenses|%>
-							<tr class="depenses">
-								<td >	<%= User.find(depenses.user_id).nom %> </td>
-								<td>	<%= depenses.destinataire_part %>  </td>
-								<td>	<%= depenses.destinataire_part2 %>  </td>
-								<td>	<%= depenses.montant %> <%= t 'number.currency.format.unit' %>
- </td>
-								<td>	<%= depenses.raison %> </td>
-								<td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
-								<% if signed_in? and (current_user.id == @user.id or current_user.admin?) %>
-									<td onclick="return confirm('<%= t "tabbord.confirm" %>' )"> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
-								<% end %>
-							</tr>
-						<% end %>
-					<% elsif @colocataires.size == 3 %>
-						<% @liste2.reverse.each do |depenses|%>
-							<tr class="depenses">
-								<td >	<%= User.find(depenses.user_id).nom %> </td>
-								<td>	<%= depenses.destinataire_part %>  </td>
-								<td>	<%= depenses.destinataire_part2 %>  </td>
-								<td>	<%= depenses.destinataire_part3 %>  </td>
-								<td>	<%= depenses.montant %><%= t 'number.currency.format.unit' %>
-  </td>
-								<td>	<%= depenses.raison %> </td>
-								<td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
-								<% if signed_in? and current_user.id == @user.id %>
-									<td onclick="return confirm('<%= t "tabbord.confirm" %>')"> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
-								<% end %>
-							</tr>
-						<% end %>
-					<% elsif @colocataires.size == 4 %>
-						<% @liste3.reverse.each do |depenses|%>
-							<tr class="depenses">
-								<td >	<%= User.find(depenses.user_id).nom %> </td>
-								<td>	<%= depenses.destinataire_part %>  </td>
-								<td>	<%= depenses.destinataire_part2 %>  </td>
-								<td>	<%= depenses.destinataire_part3 %>  </td>
-								<td>	<%= depenses.destinataire_part4 %>  </td>
-								<td>	<%= depenses.montant %> <%= t 'number.currency.format.unit' %>
- </td>
-								<td>	<%= depenses.raison %> </td>
-								<td>	<%= depenses.created_at.strftime("%d %b. %Y") %> </td>
-								<% if signed_in? and current_user.id == @user.id %>
-									<td onclick="return confirm('<%= t "tabbord.confirm" %>')"> <%= button_to "Suppr", depenses, :method => :delete  %> </td>
-								<% end %>
-							</tr>
-						<% end %>
-					<% elsif @colocataires.size > 4 %>
-						<% @expenses.reverse.each do |exp| %>
-							<tr class="depenses">
-								<td>	<%= User.find(exp.user_id).nom %> </td>
-								<% exp.parties.each do |p| %> 
-									<% if p.last == "0"%>
-										<td> non </td>
-									<% else %>
-										<td> oui </td>
-									<% end %>
-								<% end %>
-								<td>	<%= exp.montant %> <%= t 'number.currency.format.unit' %>
- </td>
-								<td>	<%= exp.raison %> </td>
-								<td>	<%= exp.created_at.strftime("%d %b. %Y") %> </td>
-								<% if signed_in? and current_user.id == @user.id %>
-									<td onclick="return confirm('<%= t "tabbord.confirm" %>')"> <%= button_to "Suppr", exp, :method => :delete  %> </td>
-								<% end %>
-							</tr>
-						</tr>
-					<% end %>
-				<% end %>
-			</table>
-		<% else %>
-			<%= t 'user.par15' %> 
-		<% end %>
-	<% end %>
-	</p>
-</table>
-</div>
+          <hr>
+
+          <strong><i class="fa fa-pencil margin-r-5"></i> Skills</strong>
+          <p>
+            <span class="label label-danger">UI Design</span>
+            <span class="label label-success">Coding</span>
+            <span class="label label-info">Javascript</span>
+            <span class="label label-warning">PHP</span>
+            <span class="label label-primary">Node.js</span>
+          </p>
+
+          <hr>
+
+          <strong><i class="fa fa-file-text-o margin-r-5"></i> Notes</strong>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+        </div><!-- /.box-body -->
+      </div><!-- /.box -->
+    </div><!-- /.col -->
+    <div class="col-md-9">
+      <div class=" nav-tabs-custom">
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#timeline" data-toggle="tab">Timeline</a></li>
+          <li><a href="#settings" data-toggle="tab">Settings</a></li>
+        </ul>
+        <div class="tab-content">
+          <div class="active tab-pane" id="timeline">
+            <!-- The timeline -->
+            <ul class="timeline timeline-inverse">
+              <!-- timeline time label -->
+              <li class="time-label">
+                <span class="bg-red">
+                  10 Feb. 2014
+                </span>
+              </li>
+              <!-- /.timeline-label -->
+              <!-- timeline item -->
+              <li>
+                <i class="fa fa-envelope bg-blue"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fa fa-clock-o"></i> 12:05</span>
+                  <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
+                  <div class="timeline-body">
+                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+                    weebly ning heekya handango imeem plugg dopplr jibjab, movity
+                    jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+                    quora plaxo ideeli hulu weebly balihoo...
+                  </div>
+                  <div class="timeline-footer">
+                    <a class="btn btn-primary btn-xs">Read more</a>
+                    <a class="btn btn-danger btn-xs">Delete</a>
+                  </div>
+                </div>
+              </li>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <li>
+                <i class="fa fa-user bg-aqua"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fa fa-clock-o"></i> 5 mins ago</span>
+                  <h3 class="timeline-header no-border"><a href="#">Sarah Young</a> accepted your friend request</h3>
+                </div>
+              </li>
+              <!-- END timeline item -->
+              <!-- timeline item -->
+              <li>
+                <i class="fa fa-comments bg-yellow"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fa fa-clock-o"></i> 27 mins ago</span>
+                  <h3 class="timeline-header"><a href="#">Jay White</a> commented on your post</h3>
+                  <div class="timeline-body">
+                    Take me to your leader!
+                    Switzerland is small and neutral!
+                    We are more like Germany, ambitious and misunderstood!
+                  </div>
+                  <div class="timeline-footer">
+                    <a class="btn btn-warning btn-flat btn-xs">View comment</a>
+                  </div>
+                </div>
+              </li>
+              <!-- END timeline item -->
+              <!-- timeline time label -->
+              <li class="time-label">
+                <span class="bg-green">
+                  3 Jan. 2014
+                </span>
+              </li>
+              <!-- /.timeline-label -->
+              <!-- timeline item -->
+              <li>
+                <i class="fa fa-camera bg-purple"></i>
+                <div class="timeline-item">
+                  <span class="time"><i class="fa fa-clock-o"></i> 2 days ago</span>
+                  <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos</h3>
+                  <div class="timeline-body">
+                    <img src="http://placehold.it/150x100" alt="..." class="margin">
+                    <img src="http://placehold.it/150x100" alt="..." class="margin">
+                    <img src="http://placehold.it/150x100" alt="..." class="margin">
+                    <img src="http://placehold.it/150x100" alt="..." class="margin">
+                  </div>
+                </div>
+              </li>
+              <!-- END timeline item -->
+              <li>
+                <i class="fa fa-clock-o bg-gray"></i>
+              </li>
+            </ul>
+          </div><!-- /.tab-pane -->
+
+          <div class="tab-pane" id="settings">
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="inputName" placeholder="Name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                  <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputName" placeholder="Name">
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputExperience" class="col-sm-2 control-label">Experience</label>
+                <div class="col-sm-10">
+                  <textarea class="form-control" id="inputExperience" placeholder="Experience"></textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="inputSkills" class="col-sm-2 control-label">Skills</label>
+                <div class="col-sm-10">
+                  <input type="text" class="form-control" id="inputSkills" placeholder="Skills">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox"> I agree to the <a href="#">terms and conditions</a>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-danger">Submit</button>
+                </div>
+              </div>
+            </form>
+          </div><!-- /.tab-pane -->
+        </div><!-- /.tab-content -->
+      </div><!-- /.nav-tabs-custom -->
+    </div><!-- /.col -->
+  </div><!-- /.row -->
+
+</section><!-- /.content -->

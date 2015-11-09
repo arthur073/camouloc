@@ -50,6 +50,15 @@ class User < ActiveRecord::Base
 		Authentification.create :user_id => self.id, :provider => auth_hash["provider"], :uid => auth_hash["uid"]
 	  end
 	end
+	
+	def set_image
+		first_letter = self.nom[0].downcase
+		if first_letter =~ /[[:alpha:]]/
+			self.image = "avatar-" + first_letter + ".png"
+		else
+			self.image = "avatar-a.png"
+		end
+	end
 
 	
 	private

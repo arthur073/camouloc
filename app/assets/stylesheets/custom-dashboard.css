@@ -1,0 +1,7 @@
+.white-border {
+    border: 3px solid #fff;
+}
+
+.white-border-big {
+    border: 3px solid #fff !important;
+}

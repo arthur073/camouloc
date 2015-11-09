@@ -49,6 +49,7 @@ class ColocsController < ApplicationController
 					
                     @user.coloc_id = @coloc.id
                     @user.tot = 0 
+                    @user.set_image
                     
                     if @user.save
                         sign_in @user unless signed_in?
