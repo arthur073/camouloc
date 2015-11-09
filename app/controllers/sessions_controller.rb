@@ -15,7 +15,7 @@ class SessionsController < ApplicationController
                 else
                         flash[:notice] = t('flash.logOK')  + user.nom + ". "
                         sign_in user
-                        redirect_back_or user
+                        redirect_back_or Coloc.find(user.coloc_id)
                 end
         end
 		

@@ -12,12 +12,12 @@ class AuthentificationsController < ApplicationController
 		sign_in user
 		user.add_provider(auth_hash)
 		flash[:success] = "You logged in successfully using #{auth_hash["provider"].capitalize} !"
-		redirect_to user
+		redirect_to Coloc.find(user.coloc_id)
 	elsif signed_in?
 		# Add the authorization to the user
 		current_user.add_provider(auth_hash)
 		flash[:success] = "You can now login using #{auth_hash["provider"].capitalize} too!"
-		redirect_to current_user
+		redirect_to Coloc.find(current_user.coloc_id)
 	else
 		# Create user using classical path
 		auth = Authentification.find_or_create(auth_hash)
