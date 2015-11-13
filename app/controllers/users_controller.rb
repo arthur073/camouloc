@@ -58,18 +58,20 @@ class UsersController < ApplicationController
    end
 
    def edit
-      @user = User.find(params[:id])
-      @titre = "Edition Profil"
    end
 
-   def update
-      @user = User.find(params[:id])
-      if @user.update_attributes(params[:user])
-         redirect_to @user
-         flash[:success] = t('flash.userUp')
+   def update   
+      user = User.find(params[:id])
+	  user.nom = params[:user][:nom]
+	  user.email = params[:email]
+	  user.password = params[:user][:password]
+	  
+      if user.save
+         redirect_to user
+         flash[:success] = "Profile successfully updated"
       else
-         @titre = "Edition profil"
-         render 'edit'
+         flash[:error] = "Something went wrong when editing your profile, please try again"
+         redirect_to user
       end
    end
 
@@ -86,7 +88,7 @@ class UsersController < ApplicationController
    end
    
    def verify_user
-		render :status => 409 unless User.where('lower(email) = ?', params[:email].downcase).first.nil?
+		render :status => 409 unless User.where('lower(email) = ?', params[:email].downcase).first.nil? || (params[:prev_email] && params[:prev_email] == params[:email])
    end
 
    def add_roommate
