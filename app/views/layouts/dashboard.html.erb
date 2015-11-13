@@ -59,13 +59,13 @@
                         <%= image_tag(current_user.image, :alt => "User image", :class => "img-circle white-border-big") %>
                         <p>
                           <%= current_user.nom %>
-                          <small>Member since <%= current_user.created_at.strftime('%b %e') %></small>
+                          <small>Member since <%= current_user.created_at.strftime('%b %e') %> </small>
                         </p>
                       </li>
                       <!-- Menu Footer-->
                       <li class="user-footer">
                         <div class="pull-left">
-                          <%= link_to "Progile", current_user, :class => "btn btn-default btn-flat" %>
+                          <%= link_to "Profile", current_user, :class => "btn btn-default btn-flat" %>
                         </div>
                         <div class="pull-right">
                           <%= link_to "Sign out", signout_path, :class => "btn btn-default btn-flat" %>
@@ -103,8 +103,8 @@
               <ul class="sidebar-menu">
                 <li class="header">HEADER</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li class="active"><a href="#"><i class="fa fa-link"></i> <span>My Flatshare</span></a></li>
-                <li><a href="#"><i class="fa fa-link"></i> <span>My profile</span></a></li>
+                <li id="flatshare_link"><%= link_to "<i class='fa fa-home'></i> <span>My Flatshare</span>".html_safe, @coloc %></li>
+				<li id="user_link" ><%= link_to "<i class='fa fa-user'></i> <span>My profile</span>".html_safe, current_user %></li>
               </ul><!-- /.sidebar-menu -->
             </section>
             <!-- /.sidebar -->
@@ -143,59 +143,47 @@
           <!-- Control Sidebar -->
           <aside class="control-sidebar control-sidebar-dark">
             <!-- Create the tabs -->
-            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-              <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-              <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-            </ul>
             <!-- Tab panes -->
             <div class="tab-content">
               <!-- Home tab content -->
-              <div class="tab-pane active" id="control-sidebar-home-tab">
-                <h3 class="control-sidebar-heading">Recent Activity</h3>
-                <ul class="control-sidebar-menu">
-                  <li>
-                    <a href="javascript::;">
-                      <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-                      <div class="menu-info">
-                        <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-                        <p>Will be 23 on April 24th</p>
-                      </div>
-                    </a>
-                  </li>
-                </ul><!-- /.control-sidebar-menu -->
+              <div class="tab-pane active">
+                <h3 class="control-sidebar-heading">Profile settings</h3>
+				<%= form_for current_user, :html => { "data-toggle" => "validator", :id => "editform" } do |f| %>
 
-                <h3 class="control-sidebar-heading">Tasks Progress</h3>
-                <ul class="control-sidebar-menu">
-                  <li>
-                    <a href="javascript::;">
-                      <h4 class="control-sidebar-subheading">
-                        Custom Template Design
-                        <span class="label label-danger pull-right">70%</span>
-                      </h4>
-                      <div class="progress progress-xxs">
-                        <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-                      </div>
-                    </a>
-                  </li>
-                </ul><!-- /.control-sidebar-menu -->
+					<label class="control-sidebar-subheading">
+					  Name
+					</label>
+					<div class="form-group has-feedback">
+						<%= f.text_field :nom, :class => "form-control", :placeholder => "Name" %>
+						<span class="glyphicon glyphicon-user form-control-feedback"></span>
+						<div class="help-block with-errors"></div>
+					</div>
+					<label class="control-sidebar-subheading">
+					  Email
+					</label>
+					<div class="form-group has-feedback">
+						<%= f.email_field :email, :id => "edit_email_field", :class => "form-control", :placeholder => "Email" %>
+						<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+						<div class="help-block with-errors"></div>
+					</div>		
+					<label class="control-sidebar-subheading">
+					  Password
+					</label>
+					<div class="form-group has-feedback">
+						<%= f.password_field :password, :class => "form-control", :placeholder => "Password" %>
+						<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+						<div class="help-block with-errors"></div>
+					</div>
+					<label class="control-sidebar-subheading">
+					  Password confirmation
+					</label>
+					<div class="form-group has-feedback">
+						<%= f.password_field :password_confirmation, :class => "form-control", :placeholder => "Retype password" %>
+						<span class="glyphicon glyphicon-lock form-control-feedback"></span>
+						<div class="help-block with-errors"></div>
+					</div>					
+				<% end %>
 
-              </div><!-- /.tab-pane -->
-              <!-- Stats tab content -->
-              <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div><!-- /.tab-pane -->
-              <!-- Settings tab content -->
-              <div class="tab-pane" id="control-sidebar-settings-tab">
-                <form method="post">
-                  <h3 class="control-sidebar-heading">General Settings</h3>
-                  <div class="form-group">
-                    <label class="control-sidebar-subheading">
-                      Report panel usage
-                      <input type="checkbox" class="pull-right" checked>
-                    </label>
-                    <p>
-                      Some information about this general settings option
-                    </p>
-                  </div><!-- /.form-group -->
-                </form>
               </div><!-- /.tab-pane -->
             </div>
           </aside><!-- /.control-sidebar -->
@@ -207,5 +195,16 @@
 
 
         <%= javascript_include_tag "jquery.min", "bootstrap.min", "app.min" %>
+		
+		
+		<script>
+		
+			if (window.location.pathname.indexOf("colocs") > -1) {
+				$("#flatshare_link").addClass("active");
+			} else if (window.location.pathname.indexOf("users") > -1) {			
+				$("#user_link").addClass("active");
+			}
+		
+		</script>
     </body>
 </html>

@@ -36,7 +36,7 @@
           <div class="panel-footer">
           <%= form_for @additional_user, :html => { "data-toggle" => "validator", :id => "additionaluserform" } do |f| %>
                 <div class="form-group has-feedback">
-	                <%= f.email_field :nom, :id => "roommateemail", :class => "form-control", :placeholder => "Enter an email and hit enter", :required => true, "data-minlength" => "6", 
+	                <%= f.email_field :email, :id => "roommateemail", :class => "form-control", :placeholder => "Enter an email and hit enter", :required => true, "data-minlength" => "6", 
 						            "data-remote" => "/verifyuser", :name => "email", "data-remote-error" => "A user with this email already exists" %>
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 			        <div class="help-block with-errors"></div>

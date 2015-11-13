@@ -15,27 +15,23 @@ class UsersController < ApplicationController
 
    def show
       @user = User.find(params[:id])
-      @faceb_url = "http://camouloc.herokuapp.com/auth/facebook"
-      @titre = @user.nom
       @coloc = Coloc.find(@user.coloc_id)
       @colocataires = @coloc.users.order(:created_at)
+	  @most_recent_colocataire = @colocataires.last
+	  # Crunching data to create timeline
       if @colocataires.size == 2 
-         @liste1 = @user.depenses.where(:auto => 0).order(:created_at)
-         @nbrdep = @liste1.size
+         @expenses = @user.depenses.where(:auto => 0).order(:created_at)
       elsif  @colocataires.size == 3 
-         @liste2 = @user.trois_depenses.where(:auto => 0).order(:created_at)
-         @liste1 = @liste2 if mobile_device?
-         @nbrdep = @liste2.size
+         @expenses = @user.trois_depenses.where(:auto => 0).order(:created_at)
       elsif  @colocataires.size == 4
-         @liste3 = @user.quatre_depenses.where(:auto => 0).order(:created_at)
-         @liste1 = @liste3 if mobile_device?
-         @nbrdep = @liste3.size
+         @expenses = @user.quatre_depenses.where(:auto => 0).order(:created_at)
       elsif @colocataires.size > 4
          @expenses = Expense.where(:user_id => @user.id, :auto => 0)
-         @nbrdep = @expenses.size
       else
-         @nbrdep = 0
+         @expenses = []
       end
+	  @most_recent_expense = @expenses.last unless @expenses = []
+	  
    end
 
    def new
