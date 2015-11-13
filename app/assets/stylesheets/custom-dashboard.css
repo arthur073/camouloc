@@ -5,3 +5,8 @@
 .white-border-big {
     border: 3px solid #fff !important;
 }
+
+.alert-wrapper {
+	padding:10px;
+	padding-bottom:0px;
+}

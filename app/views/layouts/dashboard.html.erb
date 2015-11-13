@@ -112,8 +112,8 @@
 
           <!-- Content Wrapper. Contains page content -->
           <div class="content-wrapper">
+			<div class="alert-wrapper">
                 <% flash.each do |type, content| %>
-					<br>
                     <% if content.respond_to?('each') 
                         content.each do |item| %>
                             <%= render 'layouts/alert', 
@@ -127,6 +127,7 @@
                     <% end %>
 
                 <% end %>
+			</div>
 
                 <%= yield %>
           </div><!-- /.content-wrapper -->
