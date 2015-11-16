@@ -402,18 +402,18 @@ class ColocsController < ApplicationController
         end
 
         def edit
-                @coloc = Coloc.find(params[:id])
-                @titre = "Editer ma Coloc"
         end
 
         def update
                 @coloc = Coloc.find(params[:id])
-                if @coloc.update_attributes(params[:coloc])
+                @coloc.nom = params[:nom]
+                
+                if @coloc.save
                         redirect_to @coloc
-                        flash[:success] = t('flash.colocUp') 
+                        flash[:success] = "Flatshare settings updated"
                 else
-                        @titre = "Edition Colocation"
-                        render 'edit'
+                        redirect_to @coloc
+                        flash[:error] = "Error updating your flatshare settings. Please try again."
                 end
         end
 
@@ -424,7 +424,7 @@ class ColocsController < ApplicationController
         end
 		
 		def verify_coloc
-			render :status => 409 unless Coloc.where('lower(nom) = ?', params[:nom].downcase).first.nil?
+			render :status => 409 unless Coloc.where('lower(nom) = ?', params[:nom].downcase).first.nil? || (params[:prev_name] && params[:prev_name] == params[:nom])
 		end
 
         private

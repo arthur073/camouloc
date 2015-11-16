@@ -46,15 +46,6 @@
 
           <hr>
 
-          <strong><i class="fa fa-users margin-r-5"></i> Roommates</strong>
-          <p class="text-muted">
-			<% @coloc.users.each do |u| %>
-					<%= u.nom %> <%= link_to "[+]", u %> <br>
-			<% end %>
-          </p>
-		  
-		  <hr>
-
           <strong><i class="fa fa-calendar margin-r-5"></i> Creation date </strong>
           <p class="text-muted"><%= @coloc.created_at.strftime('%b %e, %Y') %></p>		  
         </div><!-- /.box-body -->

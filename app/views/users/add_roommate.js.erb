@@ -1,4 +1,12 @@
-$("#roommates_list li:first-child").before("<li class='list-group-item'><strong><%= @roommate.nom %> </strong> - <i> <%= @roommate.email %> </i></li>");
+$("#roommates_list li:first-child").before("<li class='list-group-item' id='roommate-<%= @roommate.id %>'>"
+    + "<strong><%= @roommate.nom %> </strong> - <i> <%= @roommate.email %> </i>"
+    + "<span class='pull-right'>"
+    + "<button class='btn btn-xs btn-danger' onclick='removeUser(<%= @roommate.id %>)'>"
+    + "<span class='glyphicon glyphicon-trash'></span>"
+    + "</button>"
+    + "</span>"
+    + "</li>"
+);
 $("#roommateemail").val("");
 <% if @coloc.users.count > 1 %>
     $("#validation_link").removeClass("disabled");

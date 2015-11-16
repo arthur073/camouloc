@@ -51,9 +51,8 @@ class UsersController < ApplicationController
 		 redirect_to new_user_path(:coloc_id => @coloc_id)
          flash[:success] = t('flash.userCreate')
       else
-         #@titre = "Inscription"
-         @coloc = Coloc.find(@coloc_id)
-         render 'session#new'
+         flash[:error] = "Something went wrong, please try again"
+         redirect_to signup_path
       end
    end
 
@@ -118,6 +117,21 @@ class UsersController < ApplicationController
                     flash[:error] = "Ouch... unable to add your roommate. Please try again."
                     redirect_to create_users_path(:user => @user, :secret => @coloc.secret)
                 end
+            else
+                render :status => 404
+            end
+        else
+		    render :status => 404
+        end
+   end
+   
+  def remove_roommate
+        if params[:id] && params[:secret]
+            @user = User.find(params[:id])
+            @coloc = Coloc.find(@user.coloc_id)
+            if @coloc.secret.eql? params[:secret]
+                # removing user
+                @user.destroy
             else
                 render :status => 404
             end

@@ -145,13 +145,31 @@
           <!-- Control Sidebar -->
           <aside class="control-sidebar control-sidebar-dark">
             <!-- Create the tabs -->
+            <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+                  <li><a href="#flatshare-settings" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+                  <li><a href="#profile-settings" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+            </ul>   
             <!-- Tab panes -->
             <div class="tab-content">
               <!-- Home tab content -->
-              <div class="tab-pane active">
-                <h3 class="control-sidebar-heading">Profile settings</h3>
-				<%= form_for current_user, :html => { "data-toggle" => "validator", :id => "editform" } do |f| %>
-
+              <div class="tab-pane active" id="flatshare-settings">
+               <h3 class="control-sidebar-heading">Flatshare settings</h3>                
+				<%= form_for Coloc.find(current_user.coloc_id), :html => { "data-toggle" => "validator", :id => "editform_flatshare" } do |f| %>
+					<label class="control-sidebar-subheading">
+					  Name
+					</label>
+					<div class="form-group has-feedback">
+			            <%= f.text_field :nom, :class => "form-control", :placeholder => "Flatshare name", :required => true, "data-minlength" => "3", 
+							"data-remote" => "/verifycoloc?prev_name="+Coloc.find(current_user.coloc_id).nom, :name => "nom", "data-remote-error" => "This flatshare name already exists" %>
+						<span class="glyphicon glyphicon-home form-control-feedback"></span>
+						<div class="help-block with-errors"></div>
+					</div>		
+				  <%= f.submit "Save", :class => "btn btn-primary btn-block btn-flat"%>
+				<% end %>
+              </div><!-- /.tab-pane -->
+              <div class="tab-pane" id="profile-settings">
+               <h3 class="control-sidebar-heading">Profile settings</h3>
+				<%= form_for current_user, :html => { "data-toggle" => "validator", :id => "editform_user" } do |f| %>
 					<label class="control-sidebar-subheading">
 					  Name
 					</label>
@@ -185,7 +203,6 @@
 					</div>			
 				  <%= f.submit "Save", :class => "btn btn-primary btn-block btn-flat"%>
 				<% end %>
-
               </div><!-- /.tab-pane -->
             </div>
           </aside><!-- /.control-sidebar -->
@@ -207,7 +224,8 @@
 				$("#user_link").addClass("active");
 			}
 			
-			$('#editform').validator();
+			$('#editform_flatshare').validator();
+			$('#editform_user').validator();
 
 		</script>
     </body>

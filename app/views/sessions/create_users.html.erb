@@ -29,14 +29,23 @@
           <div class="panel-heading">Roommates for <strong> <%= @coloc.nom %> </strong> </div>
           <!-- List group -->
           <ul id="roommates_list" class="list-group">
-            <% @coloc.users.each do |u| %> 
-                <li class="list-group-item"><strong><%= u.nom %> </strong> - <i> <%= u.email %> </i></li>
+            <% @coloc.users.reverse_each do |u| %> 
+                <li class="list-group-item" id="roommate-<%= u.id %>"><strong><%= u.nom %> </strong> - <i> <%= u.email %> </i>
+                <% if u.id != @min_user_id %>
+                    <span class='pull-right'>
+                        <button class='btn btn-xs btn-danger' onclick='removeUser(<%= u.id %>)'>
+                            <span class='glyphicon glyphicon-trash'></span>
+                        </button>
+                    </span>                
+                <% end %>
+                </li>
             <% end %>
           </ul>
           <div class="panel-footer">
           <%= form_for @additional_user, :html => { "data-toggle" => "validator", :id => "additionaluserform" } do |f| %>
+			    <span class="help-block">Enter your roommate's email</span>
                 <div class="form-group has-feedback">
-	                <%= f.email_field :email, :id => "roommateemail", :class => "form-control", :placeholder => "Enter an email and hit enter", :required => true, "data-minlength" => "6", 
+	                <%= f.email_field :email, :id => "roommateemail", :class => "form-control", :placeholder => "Email", :required => true, "data-minlength" => "6", 
 						            "data-remote" => "/verifyuser", :name => "email", "data-remote-error" => "A user with this email already exists" %>
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 			        <div class="help-block with-errors"></div>
@@ -60,7 +69,22 @@
             $.ajax({
                 url: "/addroommate?email="+$("#roommateemail").val() + "&user_id=<%= @user.id%>&secret=<%= @coloc.secret %>"
             });
-        });        
+        });   
+        
+        var removeUser = function(id) {
+            // Call server to remove user
+            $.ajax({
+                url: "/removeroommate?id="+id + "&secret=<%= @coloc.secret %>",
+                success: function(data, status) {
+                    // At this stage, user has been removed from server. 
+                    // Removing it from client
+                    $("#roommate-"+id).remove();
+                },
+                error: function(result, error) {
+                    console.log("An error occurred when trying to delete user. Error: + " + error);
+                }
+            });
+        }
     </script>
   </body>
 

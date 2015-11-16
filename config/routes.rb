@@ -32,7 +32,8 @@ MyColoc::Application.routes.draw do
 	match '/choixnbr/:id', :controller => 'colocs', :action => 'choixnbr', :as => 'choix_nbr'	
 	get "/verifyuser" => "users#verify_user", :as => "verify_user"
 	get "/verifycoloc" => "colocs#verify_coloc", :as => "verify_coloc"	
-	get "/addroommate" => "users#add_roommate", :as => "add_roommmate"
+	get "/addroommate" => "users#add_roommate", :as => "add_roommmate"	
+	get "/removeroommate" => "users#remove_roommate", :as => "remove_roommmate"
 	root :to => 'pages#home'
 
 end

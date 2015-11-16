@@ -33,6 +33,7 @@ class SessionsController < ApplicationController
             @user = User.find(params[:user])
             @coloc = Coloc.find(@user.coloc_id)
             @additional_user = User.new
+            @min_user_id = @coloc.users.first(:order => 'created_at asc').id          
         end
 
         def destroy
