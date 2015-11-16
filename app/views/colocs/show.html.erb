@@ -1,3 +1,190 @@
-<%= debug @coloc %>
+<section class="content-header">
+  <h1>
+    <%= @coloc.nom %>
+  </h1>
+</section>
 
-<%= debug current_user %>
+<section class="content">
+    <div class="row">
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <h3><%= @coloc.users.count %></h3>
+              <p>Roommates registered</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-person-stalker"></i>
+            </div>
+          </div>
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <h3><%= @expenses.count %></h3>
+              <p>Expenses reported</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-card"></i>
+            </div>
+          </div>
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <h3><%= number_to_currency(@coloc.ca, precision: 0) %></h3>
+              <p>Invested in this flatshare</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-bag"></i>
+            </div>
+          </div>
+        </div><!-- ./col -->
+        <div class="col-lg-3 col-xs-6">
+          <!-- small box -->
+          <div class="small-box bg-blue">
+            <div class="inner">
+              <h3>#<%= @coloc_ranking %><sup style="font-size: 20px"> out of <%= @total_coloc_count %></sup></h3>
+              <p>Global Camouloc ranking</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-arrow-graph-up-right"></i>
+            </div>
+          </div>
+        </div><!-- ./col -->
+      </div>
+      <div class="row"> 
+        <div class="col-md-6">
+        <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Expenses distribution</h3>
+                  <div class="box-tools pull-right">
+                <span class="label label-primary"><%= @coloc.users.count %> roommates</span>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div class="chart-responsive">
+                        <canvas id="pieChart" height="165" width="206" style="width: 206px; height: 165px;"></canvas>
+                      </div><!-- ./chart-responsive -->
+                    </div><!-- /.col -->
+                    <div class="col-md-4">
+                      <ul class="chart-legend clearfix">
+                        <% @roommates.each do |u| %>
+                        <li><i class="fa fa-circle-o text-<%= u.color[0] %>"></i> <%= u.nom %></li>
+                        <% end %>
+                      </ul>
+                    </div><!-- /.col -->
+                  </div><!-- /.row -->
+                </div><!-- /.box-body -->
+                <div class="box-footer no-padding">
+                  <ul class="nav nav-pills nav-stacked">
+                    <% @roommates.each do |u| %>                    
+                    <li>
+                        <%= link_to (u.nom + "<span class='pull-right text-green'><i class='fa fa-angle-down'></i> 12%</span>").html_safe, u, :class => "users-list-name" %>
+                        
+                    </li>
+                    <% end %>
+                  </ul>
+                </div><!-- /.footer -->
+              </div>
+              </div>
+        
+
+        <div class="col-md-6">
+            <div class="box box-primary">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Latest expenses</h3>
+                      <div class="box-tools pull-right">
+                        <span class="label label-primary"><%= @expenses.count %> expenses in total</span>
+                      </div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="table-responsive">
+                        <table class="table no-margin">
+                          <thead>
+                            <tr>
+                              <th>Author</th>
+                              <th>Reason</th>
+                              <th>Roommates involved</th>
+                              <th>Value</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% @expenses.last(5).each do |e| %>
+                            <tr>
+                              <td><%= link_to User.find(e.user_id).nom, User.find(e.user_id) %></td>
+                              <td><%= e.raison %></td>                              
+                              <td><%= e.roommates_involved %></td>
+                              <td><%= number_to_currency(e.montant) %></td>
+                            </tr>
+                            <% end %>
+                          </tbody>
+                        </table>
+                      </div><!-- /.table-responsive -->
+                    </div><!-- /.box-body -->
+                    <div class="box-footer clearfix">
+                      <%= link_to "Add an expense", add_expense_path(:id => @coloc.id), :class => "btn btn-sm btn-primary btn-flat pull-left" %>
+                      <%= link_to "View all expenses", add_expense_path(:id => @coloc.id), :class => "btn btn-sm btn-default btn-flat pull-right" %>
+                    </div><!-- /.box-footer -->
+                  </div>
+            </div
+      </div>
+</section>
+
+<script type="text/javascript">
+  //-------------
+  //- PIE CHART -
+  //-------------
+  // Get context with jQuery - using jQuery's .get() method.
+  var pieChartCanvas = $("#pieChart").get(0).getContext("2d");
+  var pieChart = new Chart(pieChartCanvas);
+  var PieData = [
+    <% @roommates.each do |u| %>
+    {
+      value: 700,
+      color: "<%= u.color[1] %>",
+      highlight: "<%= u.color[2] %>",
+      label: "<%= u.nom %>"
+    }
+        <% unless u == @roommates.last %>
+            ,
+        <% end %>
+    <% end %>
+  ];
+  var pieOptions = {
+    //Boolean - Whether we should show a stroke on each segment
+    segmentShowStroke: true,
+    //String - The colour of each segment stroke
+    segmentStrokeColor: "#fff",
+    //Number - The width of each segment stroke
+    segmentStrokeWidth: 1,
+    //Number - The percentage of the chart that we cut out of the middle
+    percentageInnerCutout: 50, // This is 0 for Pie charts
+    //Number - Amount of animation steps
+    animationSteps: 100,
+    //String - Animation easing effect
+    animationEasing: "easeOut",
+    //Boolean - Whether we animate the rotation of the Doughnut
+    animateRotate: true,
+    //Boolean - Whether we animate scaling the Doughnut from the centre
+    animateScale: true,
+    //Boolean - whether to make the chart responsive to window resizing
+    responsive: true,
+    // Boolean - whether to maintain the starting aspect ratio or not when responsive, if set to false, will take up entire container
+    maintainAspectRatio: false,
+    //String - A legend template
+    //String - A tooltip template
+  };
+  //Create pie or douhnut chart
+  // You can switch between pie and douhnut using the method below.
+  pieChart.Doughnut(PieData, pieOptions);
+  //-----------------
+  //- END PIE CHART -
+  //-----------------
+</script>
+
+

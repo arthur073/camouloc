@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class TroisDepensesController < ApplicationController
    before_filter :require_login
+   layout "dashboard"
 
    def new
       @troisdepense = TroisDepense.new

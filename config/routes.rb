@@ -27,9 +27,8 @@ MyColoc::Application.routes.draw do
 	match '/partenaires',    :to => 'pages#partenaires'
 	match '/plan-du-site',    :to => 'pages#plandusite', :as => 'plan'
 	match '/tabbord/:id', :controller => 'colocs', :action => 'tabbord', :as => 'tableau_bord'
-	match '/list', :controller => 'colocs', :action => 'list'
+	match '/addexpense', :controller => 'colocs', :action => 'add_expense', :as => 'add_expense'
 	match '/registerprovider', :controller => 'sessions', :action => 'register_provider', :as => "register_provider"
-	match '/choixnbr/:id', :controller => 'colocs', :action => 'choixnbr', :as => 'choix_nbr'	
 	get "/verifyuser" => "users#verify_user", :as => "verify_user"
 	get "/verifycoloc" => "colocs#verify_coloc", :as => "verify_coloc"	
 	get "/addroommate" => "users#add_roommate", :as => "add_roommmate"	

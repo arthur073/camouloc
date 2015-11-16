@@ -19,7 +19,7 @@
 
           <ul class="list-group list-group-unbordered">
             <li class="list-group-item">
-              <b>Flatshare</b> <span class="pull-right"><%= @coloc.nom %></span>
+              <b>Flatshare</b> <span class="pull-right"><%= link_to @coloc.nom, @coloc %></span>
             </li>
             <li class="list-group-item">
               <b>Roommates</b> <span class="pull-right"><%= @coloc.users.count %></span>

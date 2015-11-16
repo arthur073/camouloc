@@ -6,17 +6,21 @@ class ColocsController < ApplicationController
 
         def show
                 @coloc = Coloc.find(params[:id])
-                @titre = @coloc.nom
-                @liste = @coloc.users.order(:created_at) 
-                @messagespubl = @coloc.messages.where(:private=>0).order(:created_at).reverse.paginate(:page => params[:page], :per_page => 6)
-                @messagespriv = @coloc.messages.where(:private=>1).order(:created_at).reverse.paginate(:page => params[:page], :per_page => 6)
-                @param1 = params[:param1] # "value1"
-                @colocs = Coloc.where(:palm=>1).order(:ca)
-                @pleine = false
-                Expense.all.each do |e|
-                  if User.find(e.parties.first.first.to_i).coloc_id == @coloc.id
-                     @pleine = true
-                  end
+                @coloc_ranking = Coloc.order(:ca).index(@coloc)
+                @total_coloc_count = Coloc.all.count
+                @roommates = @coloc.users.order(:created_at)
+                user_number = @roommates.count
+                
+                @expenses = []
+                if user_number <= 2
+                    @expenses = Depense.all(:conditions => {:user_id => [@roommates[0].id, @roommates[1].id]}, :order => "created_at ASC")
+                elsif user_number == 3
+                    @expenses = TroisDepense.all(:conditions => {:user_id => [@roommates[0].id, @roommates[1].id, @roommates[2].id]}, :order => "created_at ASC")
+                elsif user_number == 4
+                    @expenses = QuatreDepense.all(:conditions => {:user_id => [@roommates[0].id, @roommates[1].id, @roommates[2].id, @roommates[3].id]}, :order => "created_at ASC")
+                elsif user_number > 4
+                    @expenses = Expense.find(:all, :conditions => ["user_id IN (?) AND auto = 0", @roommates.map { |c| c.id }])
+                    @expenses.delete_if {|item| item == [] } #or item.auto == 1 } 
                 end
         end
 
@@ -36,7 +40,6 @@ class ColocsController < ApplicationController
                 @coloc.secret = @secret
 
                 if @coloc.save
-					
 					if params[:user][:user_id].present?
 						# user is logged via provider
 						@user = User.find(params[:user][:user_id]) 
@@ -53,6 +56,7 @@ class ColocsController < ApplicationController
                     
                     if @user.save
                         sign_in @user unless signed_in?
+                
                         UserMailer.colocemail(@coloc).deliver
                         UserMailer.progress_email(@user).deliver
                         redirect_to create_users_path(:user => @user, :secret => @secret)
@@ -61,6 +65,21 @@ class ColocsController < ApplicationController
                         render 'sessions#new'
                     end                   
                 end
+        end
+        
+        def add_expense
+            coloc = Coloc.find(params[:id])
+            roommates_count = coloc.users.count
+            
+            if roommates_count <= 2
+                redirect_to new_depense_path
+            elsif roommates_count == 3
+                redirect_to new_trois_depense_path
+            elsif roommates_count == 4
+                redirect_to new_quatre_depense_path
+            elsif roommates_count > 4
+                redirect_to new_expense_path
+            end
         end
 
         def tabbord 
@@ -107,11 +126,11 @@ class ColocsController < ApplicationController
 
                 if @coloc.users.count < 2
                         # si la coloc n'a qu'un user, son tableau de bord n'existe pas
-                        flash[:error] = t('flash.tabbord2') 
-                        redirect_to @coloc
+                        flash[:error] = "Error, this flatshare doesn't have enough roommates." 
+                        redirect_to @coloc.users[0]
                 end
 
-                #calcul des dettes :
+                # calcul des dettes :
                 if @nbrcoloc == 2
                         #pour le coloc 1 :
                         @sesdep1 = @colocataires[0].depenses.where(:nbr_users => 1, :destinataire_part => 0, :auto => 0).sum(:montant)

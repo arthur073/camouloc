@@ -60,6 +60,25 @@ class User < ActiveRecord::Base
 		end
 	end
 
+	def color
+		relative_id = Coloc.find(self.coloc_id).users.index(self)
+		case relative_id % 6 
+		when 0    
+		  return ["red","#f56954","#f56954"]
+		when 1    
+		  return ["green","#00a65a","#00a65a"]
+		when 2    
+		  return ["yellow","#f39c12","#f39c12"]
+		when 3    
+		  return ["aqua","#00c0ef","#00c0ef"]
+		when 4    
+		  return ["light-blue","#3c8dbc","#3c8dbc"]
+		when 5   
+		  return ["gray","#d2d6de","#d2d6de"]
+		else
+		  return ["default","gray","gray"]
+		end
+	end
 	
 	private
 

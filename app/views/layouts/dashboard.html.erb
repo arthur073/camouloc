@@ -8,8 +8,8 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<%= csrf_meta_tag %>
 	<%= favicon_link_tag "/favicon.ico" %>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	<%= stylesheet_link_tag "bootstrap", "ionicons", "AdminLTE.min", "skin-blue.min", "custom-dashboard"  %>
+	<%= stylesheet_link_tag "bootstrap", "ionicons", "AdminLTE.min", "skin-blue.min", "custom-dashboard", "ionicons.min", "font-awesome.min"  %>
+    <%= javascript_include_tag "jquery.min", "Chart.min" %>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -101,10 +101,11 @@
 
               <!-- Sidebar Menu -->
               <ul class="sidebar-menu">
-                <li class="header">HEADER</li>
+                <li class="header">MENU</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li id="flatshare_link"><%= link_to "<i class='fa fa-home'></i> <span>My Flatshare</span>".html_safe, @coloc %></li>
+                <li id="flatshare_link"><%= link_to "<i class='fa fa-home'></i> <span>My Flatshare</span>".html_safe, Coloc.find(current_user.coloc_id) %></li>
 				<li id="user_link" ><%= link_to "<i class='fa fa-user'></i> <span>My profile</span>".html_safe, current_user %></li>
+				<li id="expense_link" ><%= link_to "<i class='fa fa-money'></i> <span>Expenses</span>".html_safe, add_expense_path(:id => current_user.coloc.id) %></li>
               </ul><!-- /.sidebar-menu -->
             </section>
             <!-- /.sidebar -->
@@ -213,7 +214,7 @@
     
 
 
-        <%= javascript_include_tag "jquery.min", "bootstrap.min", "app.min", "validator.min" %>
+        <%= javascript_include_tag "bootstrap.min", "app.min", "validator.min" %>
 		
 		
 		<script>
@@ -222,6 +223,8 @@
 				$("#flatshare_link").addClass("active");
 			} else if (window.location.pathname.indexOf("users") > -1) {			
 				$("#user_link").addClass("active");
+			} else if (window.location.pathname.indexOf("penses") > -1) {
+				$("#expense_link").addClass("active");
 			}
 			
 			$('#editform_flatshare').validator();
