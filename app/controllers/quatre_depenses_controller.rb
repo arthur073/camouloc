@@ -43,8 +43,7 @@ class QuatreDepensesController < ApplicationController
                 @colocation = Coloc.find(current_user.coloc_id)
                 @colocation.ca = @colocation.ca - @quatredepense.montant
                 @colocation.save
-                flash[:success] = t('flash.depDestroy')
-                redirect_to(:back)
+				flash[:success] = "This expense has been successfully deleted"
         end
 
         private

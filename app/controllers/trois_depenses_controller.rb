@@ -43,9 +43,9 @@ class TroisDepensesController < ApplicationController
       @colocation = Coloc.find(current_user.coloc_id)
       @colocation.ca = @colocation.ca - @troisdepense.montant
       @colocation.save
-      flash[:success] = t('flash.depDestroy') 
-      redirect_to(:back)
+      flash[:success] = "This expense has been successfully deleted"
    end
+   
    private
    def require_login
       unless current_user

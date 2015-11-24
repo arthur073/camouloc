@@ -10,10 +10,21 @@ class TroisDepense < ActiveRecord::Base
   def roommates_involved
     coloc = Coloc.find(User.find(self.user_id).coloc_id)
     roommates = coloc.users.order(:created_at)
-    r_i = ""
-    r_i += roommates[0].nom + ", " if self.destinataire_part == 1
-    r_i += roommates[1].nom + " and " if self.destinataire_part2 == 1
-    r_i += roommates[2].nom if self.destinataire_part3 == 1
+	#Getting only roommates involved 
+	rm_involved = []
+	rm_involved.push(roommates[0]) if self.destinataire_part == 1
+	rm_involved.push(roommates[1]) if self.destinataire_part2 == 1
+	rm_involved.push(roommates[2]) if self.destinataire_part3 == 1
+	
+	r_i = ""
+	i = 0
+	rm_involved.each do |rm|
+		r_i += rm.nom
+		r_i += ", " if i < (rm_involved.count -1)
+		r_i += " and " if i == (rm_involved.count -1)
+		i+=1
+	end
+	return r_i
   end
   
 end

@@ -44,8 +44,10 @@ end
 def destroy
    @expense = Expense.find(params[:id])
    @expense.destroy
-   flash[:success] = t('flash.depDestroy')
-   redirect_to(:back)
+   @colocation = Coloc.find(current_user.coloc_id)
+   @colocation.ca = @colocation.ca - @troisdepense.montant
+   @colocation.save
+   flash[:success] = "This expense has been successfully deleted"
 end
 
 private

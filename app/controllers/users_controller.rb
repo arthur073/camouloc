@@ -16,22 +16,23 @@ class UsersController < ApplicationController
    def show
       @user = User.find(params[:id])
       @coloc = Coloc.find(@user.coloc_id)
-      @colocataires = @coloc.users.order(:created_at)
-	  @most_recent_colocataire = @colocataires.last
-	  # Crunching data to create timeline
-      if @colocataires.size == 2 
-         @expenses = @user.depenses.where(:auto => 0).order(:created_at)
-      elsif  @colocataires.size == 3 
-         @expenses = @user.trois_depenses.where(:auto => 0).order(:created_at)
-      elsif  @colocataires.size == 4
-         @expenses = @user.quatre_depenses.where(:auto => 0).order(:created_at)
-      elsif @colocataires.size > 4
-         @expenses = Expense.where(:user_id => @user.id, :auto => 0)
-      else
-         @expenses = []
-      end
-	  @most_recent_expense = @expenses.last unless @expenses = []
+	  @roommates = @coloc.users.order(:created_at)
+	  @most_recent_colocataire = @roommates.last
 	  
+	  # Crunching data to create timeline
+	  user_number = @roommates.count
+	  @expenses = []
+	  if user_number <= 2
+		  @expenses = Depense.all(:conditions => {:user_id => [@roommates[0].id, @roommates[1].id]}, :order => "created_at ASC")
+	  elsif user_number == 3
+  		  @expenses = TroisDepense.all(:conditions => {:user_id => [@roommates[0].id, @roommates[1].id, @roommates[2].id]}, :order => "created_at ASC")
+	  elsif user_number == 4
+		  @expenses = QuatreDepense.all(:conditions => {:user_id => [@roommates[0].id, @roommates[1].id, @roommates[2].id, @roommates[3].id]}, :order => "created_at ASC")
+	  elsif user_number > 4
+		  @expenses = Expense.find(:all, :conditions => ["user_id IN (?) AND auto = 0", @roommates.map { |c| c.id }])
+		  @expenses.delete_if {|item| item == [] } #or item.auto == 1 } 
+	  end
+	  @most_recent_expense = @expenses.last unless @expenses == []
    end
 
    def new

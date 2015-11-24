@@ -71,17 +71,24 @@
               <!-- /.timeline-label -->
               <!-- timeline item -->
 			  <% @expenses.reverse_each do |e| %>
-                <i class="fa fa-eur bg-blue"></i>
+				<li>
+                <i class="fa fa-money bg-blue"></i>
                 <div class="timeline-item">
                   <span class="time"><i class="fa fa-clock-o"></i> <%= e.created_at.strftime('%b %e, %Y') %></span>
-                  <h3 class="timeline-header"><%= link_to @user.nom, @user %> created a new expense</h3>
+                  <h3 class="timeline-header"><%= link_to User.find(e.user_id).nom, User.find(e.user_id) %> created a new expense</h3>
                   <div class="timeline-body">
-                    Describe content of expense here.
+                    <strong>How much?</strong> <%= number_to_currency(e.montant, precision: 2) %> &ndash;				  
+                    <strong>Why?</strong> <%= e.raison %> &ndash;
+                    <strong>Who is involved?</strong> <%= e.roommates_involved %> 
+				  <div class="timeline-footer pull-right">
+						<button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#myModal" 
+							onclick="populateRemoveModal(<%= e.id %>, '<%= User.find(e.user_id).nom %>','<%= number_to_currency(e.montant, precision: 2) %>','<%= e.raison %>', '<%= e.roommates_involved %>', '<%= url_for e %>');">
+							<span class='glyphicon glyphicon-trash'></span>
+						</button>						
+					</div>
                   </div>		
-                  <div class="timeline-footer">
-                    <a class="btn btn-danger btn-xs">Delete?</a>
-                  </div>
 				</div>
+				</li>
 			  <% end %>
               <!-- timeline time label -->
               <li class="time-label">
@@ -92,7 +99,7 @@
               <!-- /.timeline-label -->
               <!-- timeline item -->
               <!-- timeline item -->
-			  <% @colocataires.reverse_each do |c| %>
+			  <% @roommates.reverse_each do |c| %>
 				  <li>
 					<i class="fa fa-user-plus bg-blue"></i>
 					<div class="timeline-item">
@@ -119,3 +126,74 @@
   </div><!-- /.row -->
 
 </section><!-- /.content -->
+
+
+<!-- Modal -->
+<div class="modal fade modal-default" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Warning: Removing an expense</h4>
+      </div>
+      <div class="modal-body">
+        You are about to remove the following expense, please confirm your choice: <br><br>
+
+		<div class="table-responsive">
+			<table class="table no-margin">
+			  <thead>
+				<tr>
+				  <th>Author</th>
+				  <th>Reason</th>
+				  <th>Roommates involved</th>
+				  <th>Value</th>
+				</tr>
+			  </thead>
+			  <tbody>
+				<tr>
+				  <td><span id="expense_author"></span></td>
+				  <td><span id="expense_reason"></span></td>
+				  <td><span id="expense_roommatesinvolved"></span></td>
+				  <td><span id="expense_amount"></span></td>
+				</tr>
+			  </tbody>
+			</table>
+		  </div>
+		<span id="expense_id" style="display:none"></span>
+		<span id="expense_classDestroyUrl" style="display:none"></span>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" onclick="deleteExpense();">Remove expense</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+	var populateRemoveModal = function(id, author, amount, reason, roommates_involved, classDestroyUrl) {
+		$("#expense_id").html(id);
+		$("#expense_author").html(author);
+		$("#expense_amount").html(amount);
+		$("#expense_reason").html(reason);
+		$("#expense_roommatesinvolved").html(roommates_involved);
+		$("#expense_classDestroyUrl").html(classDestroyUrl);
+	}
+	
+	var deleteExpense = function() {
+		/* Pas utile si on peut changer le lien en une form delete */
+		
+		var id = $("#expense_id").html();
+		var classDestroyUrl = $("#expense_classDestroyUrl").html();
+		var redirectUrl = "/";
+		
+		console.log(classDestroyUrl);
+		
+		$.ajax({
+		  method: "DELETE",
+		  url: classDestroyUrl
+    	})
+	}
+</script>
