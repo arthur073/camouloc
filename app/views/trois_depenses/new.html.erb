@@ -1,20 +1,41 @@
-<h1> <%= t 'expense.title' %> </h1>
+<section class="content-header">
+  <h1>
+    Expenses
+  </h1>
+</section>
 
-<%= form_for(@troisdepense) do |f| %>
-        <%= render 'shared/error_messages', :object => f.object %>
-<div class="descriptionNormal">
+<!-- Main content -->
+<section class="content">
 
-<%= render 'shared/depenses_global', :object => f %>
+  <div class="row">
+    <div class="col-md-6">
+            <div class="box box-primary">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Add an expense</h3>
+                      <div class="box-tools pull-right">
+                      </div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+						Use our brand new expense engine... <br><br>
+						<%= form_for @troisdepense, :html => { "data-toggle" => "validator", :id => "expenseForm" } do |f| %>
+						  <div class="form-group has-feedback">
+							<%= text_field_tag "tweet", nil, class: "form-control", placeholder: "Tweet your expense", "data-roommates" => "bar", "data-reason" => "bar", "data-amount" => "bar" %>
+							<div class="help-block with-errors">
+								<div id="errorRoom" style="display:none"></div>
+								<div id="errorReas" style="display:none"></div>
+								<div id="errorAmou" style="display:none"></div>
+							</div>
+						  </div>
+						...or the old fashion way
+						<br>Reason:<span id="reason"></span>
+<br>Amount:<span id="amount"></span>
+<br>Roommates:<span id="roommates"></span>
+						<% end %>
+                    </div><!-- /.box-body -->
+                    <div class="box-footer clearfix">
+                    </div><!-- /.box-footer -->
+		  </div>
+	</div>
 
-<% end %>
-
-
-<!-- modal content -->
-<div id="osx-modal-content">
-<div id="osx-modal-title"><%= t 'captcha' %></div>
-<div id="osx-modal-data">
-<iframe src="http://captcha.olympe.in" scrolling="no" class="icaptcha" id="icaptcha"></iframe>
-</div>
-</div>
-</div>
+	<%= render 'shared/depenses_global' %>
 

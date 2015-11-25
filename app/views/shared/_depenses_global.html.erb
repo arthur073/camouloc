@@ -1,119 +1,97 @@
-<p>
-<%= t 'expense.par1' %>
-<span class ="cam1"> <%= Coloc.find(@colocataires.first.coloc_id).nom %>.</span>
-<%= t 'expense.par2' %>
-<span class="cam1"> <%= t 'header.tabbord' %>. </span>
-</p>
+    <div class="col-md-6">
+            <div class="box box-primary">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Latest expenses</h3>
+                      <div class="box-tools pull-right">
+                        <span class="label label-primary"><%= @expenses.count %> expenses in total</span>
+                      </div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="table-responsive">
+                        <table class="table no-margin">
+                          <thead>
+                            <tr>
+                              <th>Author</th>
+                              <th>Reason</th>
+                              <th>Roommates involved</th>
+                              <th>Value</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% @expenses.each do |e| %>
+                            <tr>
+                              <td><%= link_to User.find(e.user_id).nom, User.find(e.user_id) %></td>
+                              <td><%= e.raison %></td>                              
+                              <td><%= e.roommates_involved %></td>
+                              <td><%= number_to_currency(e.montant) %></td>
+                            </tr>
+                            <% end %>
+                          </tbody>
+                        </table>
+                      </div><!-- /.table-responsive -->
+                    </div><!-- /.box-body -->
+                    <div class="box-footer clearfix">
+                    </div><!-- /.box-footer -->
+		  </div>
+	</div>
+  </div>
+</section>
 
 
-<div class="field colocCreate">
-	<strong> <%= t 'expense.q1' %>  </strong><br>
-	<%= object.select :user_id, options_for_select(@colocataires.map{ |c| [c.nom, c.id]}, [current_user.nom, current_user.id]) %>
-</div>
-<br/>
+<%= javascript_include_tag "jquery.caret.min", "jquery.atwho.min" %>
+<%= @colocataires.map{|c| c.nom.to_s} %>
+<script type="text/javascript">
+	$('#tweet').atwho({
+		at: "@",
+		data:<%= raw @colocataires.map{|c| c.nom}.to_json %>
+	}).atwho({
+	   at: "#",
+		data:<%= raw @expenses.last(5).map{|e| e.raison}.to_json %>
+	});
+	
+	$("#tweet").keyup(function() {
+		var value = $("#tweet").val();
+		var gotRoommate = extractFromRegexp(value, /(^|\W)(@[a-z\d][\w-]*)/ig, "roommates", true)
+		var gotReason = extractFromRegexp(value, /(^|\W)(#[a-z\d][\w-]*)/i, "reason");
+		var gotAmount = extractFromRegexp(value, /(^|\W)([a-z\d][\w-]*€)/i, "amount");
+		
+	});
 
-<div class="field">
-	<strong> <%= t 'expense.q2' %> </strong><br>
-	<% if object.object.instance_of?(Depense) %>
-		<div class="userChoice">
-			<%= aligned_gravatar_for(@colocataires[0]) %>
-			<%= object.label @colocataires[0].nom, :class => "colocCreate" %>
-			<%= object.check_box :destinataire_part, :class => "colocCreate" %>  		
-		</div>
-		<div class="userChoice">
-			<%= aligned_gravatar_for(@colocataires[1]) %>
-			<%= object.label @colocataires[1].nom, :class => "colocCreate" %>
-			<%= object.check_box :destinataire_part2, :class => "colocCreate" %> 
-		</div>
-	<% end %>
-	<% if object.object.instance_of?(TroisDepense) %>
-		<div class="userChoice">
-			<%= aligned_gravatar_for(@colocataires[0]) %>
-			<%= object.label @colocataires[0].nom, :class => "colocCreate" %>
-			<%=object.check_box :destinataire_part, :class => "colocCreate" %>  		
-		</div>
-		<div class="userChoice">
-			<%= aligned_gravatar_for(@colocataires[1]) %>
-			<%= object.label @colocataires[1].nom, :class => "colocCreate" %>
-			<%=object.check_box :destinataire_part2, :class => "colocCreate" %> 
-		</div>
-		<div class="userChoice">
-			<%= aligned_gravatar_for(@colocataires[2]) %>
-			<%= object.label @colocataires[2].nom, :class => "colocCreate" %>
-			<%=object.check_box :destinataire_part3, :class => "colocCreate" %> 
-		</div>
-	<% end %>
-	<% if object.object.instance_of?(QuatreDepense) %>
-		<div class="userChoice">
-			<%= aligned_gravatar_for(@colocataires[0]) %>
-			<%= object.label @colocataires[0].nom, :class => "colocCreate" %>
-			<%= object.check_box :destinataire_part, :class => "colocCreate" %>  		
-		</div>
-		<div class="userChoice">
-			<%= aligned_gravatar_for(@colocataires[1]) %>
-			<%= object.label @colocataires[1].nom, :class => "colocCreate" %>
-			<%=object.check_box :destinataire_part2, :class => "colocCreate" %> 
-		</div>
-		<div class="userChoice">
-			<%= aligned_gravatar_for(@colocataires[2]) %>
-			<%= object.label @colocataires[2].nom, :class => "colocCreate" %>
-			<%=object.check_box :destinataire_part3, :class => "colocCreate" %> 
-		</div>
-		<div class="userChoice">
-			<%= aligned_gravatar_for(@colocataires[3]) %>
-			<%= object.label @colocataires[3].nom, :class => "colocCreate" %>
-			<%=object.check_box :destinataire_part4, :class => "colocCreate" %> 
-		</div>
-	<% end %>
-	<% if object.object.instance_of?(Expense) %>
-		<%= fields_for :parties do |p| %>
-			<% @colocataires.each do |c| %>      
-				<div class="userChoice">
-					<%= aligned_gravatar_for(c) %>
-					<%= object.label c.nom, :class => "colocCreate" %>
-					<%= p.check_box c.id, :class => "colocCreate" %> 
-				</div>
-			<% end %>
-		<% end %>
-	<% end %>
-</div>
-<br/>
-
-
-<div class="field">
-	<%= object.label t('expense.q3') %><br>
-	<i> <%= t 'expense.q4bis' %> </i> <br>
-	<%= object.text_field :montant, :class => "colocCreate" %> <%= t 'number.currency.format.unit' %>
-</div>
-<br/>
-
-
-<div class="field">
-	<%= object.label t('expense.q4')%><br>
-	<%= object.text_field :raison, :class => "colocCreate" %>
-</div>
-<br/>
-
-<!--POPUP-->    
-<script>
-	function reload() {
-		var iframe = document.getElementById("icaptcha");
-		iframe.src = iframe.src;
+	var extractFromRegexp = function(value, regexp, target, global) {
+		global = global || false;
+		var splitHash = value.match(regexp);
+		if (splitHash != null) {
+			if (global) {
+				$("#"+target).text(splitHash);
+			} else {
+				$("#"+target).text(splitHash[2]);
+			}
+			return true;
+		} else {
+			return false;   
+		}
 	}
+	
+	$('#expenseForm').validator({
+		custom: {
+			roommates: function($el) { 
+				var value = $("#tweet").val();
+				return extractFromRegexp(value, /(^|\W)(@[a-z\d][\w-]*)/ig, "roommates", true);
+			}, 
+			reason: function($el) { 
+				var value = $("#tweet").val();
+				return extractFromRegexp(value, /(^|\W)(#[a-z\d][\w-]*)/i, "reason");
+			} , 
+			amount: function($el) { 
+				var value = $("#tweet").val();
+				return extractFromRegexp(value, /(^|\W)([a-z\d][\w-]*€)/i, "amount");
+			} 
+		},
+		errors: {
+			roommates: 'Mention your roommates using "@"',
+			reason: 'Specify a reason with "#"',
+			amount: 'Specify the expensewith "€"'
+		}
+	});
+
 </script>
-
-
-<div class="field">
-	<strong> <%= t 'expense.q5' %>  </strong>
-	<%= object.select :auto, options_for_select([[ t('expense.occ'),  0 ], [t('expense.mens'), 1 ]]) %>
-	<i><%= t 'expense.par3' %> <span class="cam1"> <%= t 'expense.par4' %> </span> <%= t 'expense.par5' %></i>
-</div>
-<br/>
-
-
-<div id="valider">
-	<i><%= t 'expense.val2' %>  </i> <br>
-	<%= object.submit t('expense.save'), :id => "btnColocCreate" %>
-</div>
-
-

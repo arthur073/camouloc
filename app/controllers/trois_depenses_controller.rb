@@ -4,6 +4,20 @@ class TroisDepensesController < ApplicationController
    layout "dashboard"
 
    def new
+	  @roommates = Coloc.find(current_user.coloc_id).users.order(:created_at)  
+	  user_number = @roommates.count
+	  @expenses = []
+	  if user_number <= 2
+		  @expenses = Depense.all(:conditions => {:user_id => [@roommates[0].id, @roommates[1].id]}, :order => "created_at ASC")
+	  elsif user_number == 3
+  		  @expenses = TroisDepense.all(:conditions => {:user_id => [@roommates[0].id, @roommates[1].id, @roommates[2].id]}, :order => "created_at ASC")
+	  elsif user_number == 4
+		  @expenses = QuatreDepense.all(:conditions => {:user_id => [@roommates[0].id, @roommates[1].id, @roommates[2].id, @roommates[3].id]}, :order => "created_at ASC")
+	  elsif user_number > 4
+		  @expenses = Expense.find(:all, :conditions => ["user_id IN (?) AND auto = 0", @roommates.map { |c| c.id }])
+		  @expenses.delete_if {|item| item == [] or item.auto == 1 } 
+	  end
+	  
       @troisdepense = TroisDepense.new
       @titre = "Nouvelle dépense"
       @colocataires = User.where(:coloc_id => current_user.coloc_id).order(:created_at)
@@ -14,8 +28,7 @@ class TroisDepensesController < ApplicationController
       @troisdepense.nbr_users = @troisdepense.destinataire_part + @troisdepense.destinataire_part2 + @troisdepense.destinataire_part3
       @colocataires = User.where(:coloc_id => current_user.coloc_id).order(:created_at)
       if @troisdepense.save
-         #Traite un succès d'enregistrement.
-         # ajoute la somme dépensée au Chiffre d'Affaires
+         # Ajoute la somme dépensée au Chiffre d'Affaires
          @colocation = Coloc.find(current_user.coloc_id)
          @colocation.ca = @colocation.ca + @troisdepense.montant
          @colocation.save
@@ -30,7 +43,7 @@ class TroisDepensesController < ApplicationController
                flash[:success] = t('flash.depCreateOK')
             end
          end 
-         redirect_to User.find(@troisdepense.user_id)
+         redirect_to @troisdepense
       else
          @titre = "Nouvelle dépense"
          render 'new'

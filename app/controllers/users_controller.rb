@@ -30,7 +30,7 @@ class UsersController < ApplicationController
 		  @expenses = QuatreDepense.all(:conditions => {:user_id => [@roommates[0].id, @roommates[1].id, @roommates[2].id, @roommates[3].id]}, :order => "created_at ASC")
 	  elsif user_number > 4
 		  @expenses = Expense.find(:all, :conditions => ["user_id IN (?) AND auto = 0", @roommates.map { |c| c.id }])
-		  @expenses.delete_if {|item| item == [] } #or item.auto == 1 } 
+		  @expenses.delete_if {|item| item == [] or item.auto == 1 } 
 	  end
 	  @most_recent_expense = @expenses.last unless @expenses == []
    end
