@@ -52,6 +52,28 @@
 			enabled: false
 		});
 	});
+	
+	$('#expenseForm').validator({
+		custom: {
+			roommates: function($el) { 
+				var value = $("#tweet").val();
+				return extractFromRegexp(value, /(^|\W)(@[a-z\d][\w-]*)/ig, "roommates", true);
+			}, 
+			reason: function($el) { 
+				var value = $("#tweet").val();
+				return extractFromRegexp(value, /(^|\W)(#[a-z\d][\w-]*)/i, "reason");
+			} , 
+			amount: function($el) { 
+				var value = $("#tweet").val();
+				return extractFromRegexp(value, /(^|\W)([a-z\d][\w-]*€)/i, "amount");
+			}
+		},
+		errors: {
+			roommates: 'Mention your roommates using "@"',
+			reason: 'Specify a reason with "#"',
+			amount: 'Specify the expense amount with "€"'
+		}
+	});
 
 	$('#tweet').atwho({
 		at: "@",
@@ -61,14 +83,11 @@
 		data:<%= raw @expenses.last(5).map{|e| e.raison}.to_json %>
 	});
 	
-	$("#expense_author").change(function() {
-		$("#expense_author_view").text($("#expense_author option:selected").text());
-	});
-	
 	$multi.on("select2:select", function(e) {
 		var inputVal = $("#tweet").val();
 		if (inputVal.indexOf(e.params.data.text) == -1) {
 			$("#tweet").val(inputVal += " @" + e.params.data.text);
+			$('#expenseForm').validator('validate');
 		}			
 	});
 
@@ -76,6 +95,7 @@
 		var inputVal = $("#tweet").val();
 		if (inputVal.indexOf(e.params.data.text) > -1) {
 			$("#tweet").val(inputVal.replace("@" + e.params.data.text, ""));
+			$('#expenseForm').validator('validate');
 		}	
 	});
 
@@ -99,7 +119,7 @@
 				});
 				$multi.val(selectedRoommates.filter(function(elem) { return elem != ""})).trigger("change");
 			} else {
-				$("#"+target).text(splitHash[2]);
+				$("#"+target).val(splitHash[2].substring(1));
 			}
 			return true;
 		} else {
@@ -107,26 +127,12 @@
 		}
 	}
 	
-	$('#expenseForm').validator({
-		custom: {
-			roommates: function($el) { 
-				var value = $("#tweet").val();
-				return extractFromRegexp(value, /(^|\W)(@[a-z\d][\w-]*)/ig, "roommates", true);
-			}, 
-			reason: function($el) { 
-				var value = $("#tweet").val();
-				return extractFromRegexp(value, /(^|\W)(#[a-z\d][\w-]*)/i, "reason");
-			} , 
-			amount: function($el) { 
-				var value = $("#tweet").val();
-				return extractFromRegexp(value, /(^|\W)([a-z\d][\w-]*€)/i, "amount");
-			}
-		},
-		errors: {
-			roommates: 'Mention your roommates using "@"',
-			reason: 'Specify a reason with "#"',
-			amount: 'Specify the expense amount with "€"'
-		}
+	$("#expense_author").change(function() {
+		$("#expense_author_view").text($("#expense_author option:selected").text());
+	});
+	
+	$("#reason").keyup(function() {
+		$("#tweet").val(" #"+ $("#reason").val());
 	});
 	
 

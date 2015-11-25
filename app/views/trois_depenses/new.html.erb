@@ -40,11 +40,13 @@
 							<%= f.select :user_id, options_for_select(@colocataires.map{ |c| [c.nom, c.id]}), {}, {:id => "roommates", :class => "form-control", :multiple => "multiple" } %>
 							<div class="help-block with-errors"></div>
 						  </div>				  						  
+						  <div class="form-group has-feedback">
+							<label>Reason</label>
+							<%= f.text_field :raison, :id => "reason", :class => "form-control", :placeholder => "Why have you spent this money?", :required => true %>
+							<div class="help-block with-errors"></div>
+						  </div>	
 						  
-						  
-						  
-						<br>Reason:<span id="reason"></span>
-<br>Amount:<span id="amount"></span>
+						  <br>Amount:<span id="amount"></span>
 						<% end %>
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">
