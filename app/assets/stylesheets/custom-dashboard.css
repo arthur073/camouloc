@@ -10,3 +10,23 @@
 	padding:10px;
 	padding-bottom:0px;
 }
+
+.select2-container--default{
+  border: 1px solid #d2d6de;
+  border-radius: 0; 
+}
+
+.select2-container--default .select2-selection--multiple {
+  border: none !important;
+  border-radius: 0; 
+  padding: 0px 10px;
+}
+
+.select2-selection__choice {
+	background-color: #3c8dbc !important;
+	border-color: #3c8dbc !important;
+}
+
+.select2-selection__choice .select2-selection__choice__remove {
+	color:white !important;
+}

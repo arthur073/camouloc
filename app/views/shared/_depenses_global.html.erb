@@ -38,9 +38,21 @@
 </section>
 
 
-<%= javascript_include_tag "jquery.caret.min", "jquery.atwho.min" %>
-<%= @colocataires.map{|c| c.nom.to_s} %>
+<%= javascript_include_tag "jquery.caret.min", "jquery.atwho.min", "select2.min" %>
 <script type="text/javascript">
+	var $multi = $("#roommates").select2({
+		  placeholder: "Select your roommates"	
+    });
+	
+	var multiOptions = []
+	$("#roommates > option").each(function() {
+		multiOptions.push({
+			text: this.text,
+			val: this.value,
+			enabled: false
+		});
+	});
+
 	$('#tweet').atwho({
 		at: "@",
 		data:<%= raw @colocataires.map{|c| c.nom}.to_json %>
@@ -49,12 +61,22 @@
 		data:<%= raw @expenses.last(5).map{|e| e.raison}.to_json %>
 	});
 	
-	$("#tweet").keyup(function() {
-		var value = $("#tweet").val();
-		var gotRoommate = extractFromRegexp(value, /(^|\W)(@[a-z\d][\w-]*)/ig, "roommates", true)
-		var gotReason = extractFromRegexp(value, /(^|\W)(#[a-z\d][\w-]*)/i, "reason");
-		var gotAmount = extractFromRegexp(value, /(^|\W)([a-z\d][\w-]*€)/i, "amount");
-		
+	$("#expense_author").change(function() {
+		$("#expense_author_view").text($("#expense_author option:selected").text());
+	});
+	
+	$multi.on("select2:select", function(e) {
+		var inputVal = $("#tweet").val();
+		if (inputVal.indexOf(e.params.data.text) == -1) {
+			$("#tweet").val(inputVal += " @" + e.params.data.text);
+		}			
+	});
+
+	$multi.on("select2:unselect", function(e) {
+		var inputVal = $("#tweet").val();
+		if (inputVal.indexOf(e.params.data.text) > -1) {
+			$("#tweet").val(inputVal.replace("@" + e.params.data.text, ""));
+		}	
 	});
 
 	var extractFromRegexp = function(value, regexp, target, global) {
@@ -62,7 +84,20 @@
 		var splitHash = value.match(regexp);
 		if (splitHash != null) {
 			if (global) {
-				$("#"+target).text(splitHash);
+				splitHash = splitHash.map(function(e) {
+					return e.trim().substring(1);
+				});
+				multiOptions.forEach(function(elem) {
+					if (splitHash.indexOf(elem.text) > -1) {
+						if (!elem.enabled) { elem.enabled = true; }
+					} else {	
+						if (elem.enabled) { elem.enabled = false; }
+					}
+				});
+				var selectedRoommates = multiOptions.map(function(elem) {
+					if (elem.enabled) { return elem.val; } else { return ""; }
+				});
+				$multi.val(selectedRoommates.filter(function(elem) { return elem != ""})).trigger("change");
 			} else {
 				$("#"+target).text(splitHash[2]);
 			}
@@ -85,13 +120,15 @@
 			amount: function($el) { 
 				var value = $("#tweet").val();
 				return extractFromRegexp(value, /(^|\W)([a-z\d][\w-]*€)/i, "amount");
-			} 
+			}
 		},
 		errors: {
 			roommates: 'Mention your roommates using "@"',
 			reason: 'Specify a reason with "#"',
-			amount: 'Specify the expensewith "€"'
+			amount: 'Specify the expense amount with "€"'
 		}
 	});
+	
+
 
 </script>
