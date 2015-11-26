@@ -33,20 +33,30 @@
 						  <div class="form-group has-feedback">
 							<label>Author</label>
 							<%= f.select :user_id, options_for_select(@colocataires.map{ |c| [c.nom, c.id]}, [current_user.nom, current_user.id]), {}, {:id => "expense_author", :class => "form-control" } %>
+
 							<div class="help-block with-errors"></div>
 						  </div>
 						  <div class="form-group has-feedback">
 							<label>Roommates involved</label>
 							<%= f.select :user_id, options_for_select(@colocataires.map{ |c| [c.nom, c.id]}), {}, {:id => "roommates", :class => "form-control", :multiple => "multiple" } %>
+							<span class="glyphicon glyphicon-user form-control-feedback"></span>														
 							<div class="help-block with-errors"></div>
 						  </div>				  						  
 						  <div class="form-group has-feedback">
 							<label>Reason</label>
 							<%= f.text_field :raison, :id => "reason", :class => "form-control", :placeholder => "Why have you spent this money?", :required => true %>
+							<span class="glyphicon glyphicon-pencil form-control-feedback"></span>
 							<div class="help-block with-errors"></div>
 						  </div>	
-						  
-						  <br>Amount:<span id="amount"></span>
+						  <div class="form-group has-feedback">
+							<label>Amount</label>
+							<%= f.text_field :montant, :id => "amount", :class => "form-control", 
+								:placeholder => "How much money have you spent?", :required => true, 
+								"pattern" => '^\d+[,.]?(\d*)?€', "data-error" => "Input can only be digits followed by \"€\" (ex: 1€ 1.23€ or 1,23€)" %>
+							<span class="glyphicon glyphicon-euro form-control-feedback"></span>
+							<div class="help-block with-errors"></div>
+						  </div>	
+		                  <%= f.submit "Add an expense", :class => "btn btn-primary btn-block btn-flat"%>	      
 						<% end %>
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">

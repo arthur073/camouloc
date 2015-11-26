@@ -65,7 +65,7 @@
 			} , 
 			amount: function($el) { 
 				var value = $("#tweet").val();
-				return extractFromRegexp(value, /(^|\W)([a-z\d][\w-]*€)/i, "amount");
+				return extractFromRegexp(value, /(^|\W)([a-z\d][\w-,.]*[ ]?€)/i, "amount");
 			}
 		},
 		errors: {
@@ -119,7 +119,11 @@
 				});
 				$multi.val(selectedRoommates.filter(function(elem) { return elem != ""})).trigger("change");
 			} else {
-				$("#"+target).val(splitHash[2].substring(1));
+				if (target == "amount") {
+					$("#amount").val(splitHash[2]);
+				} else if (target == "reason") {
+					$("#reason").val(splitHash[2].substring(1));
+				}
 			}
 			return true;
 		} else {
@@ -138,6 +142,13 @@
 		$("#tweet").val(tweetValue + "#" + $(this).val());
 	});
 	
-
+	$("#amount").on('keyup', function(e) {
+		var tweetValue = $("#tweet").val();
+		var regexp = new RegExp('([^\\s]*[ ]?€)','i');
+		var tweetValue = tweetValue.replace(regexp, "");
+		if ($(this).val().substr($(this).val().length - 1) == "€") {
+			$("#tweet").val(tweetValue + $(this).val());
+		}
+	});
 
 </script>
