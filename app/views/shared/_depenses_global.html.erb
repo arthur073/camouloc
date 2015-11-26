@@ -131,8 +131,11 @@
 		$("#expense_author_view").text($("#expense_author option:selected").text());
 	});
 	
-	$("#reason").keyup(function() {
-		$("#tweet").val(" #"+ $("#reason").val());
+	$("#reason").on('keyup', function(e) {
+		var tweetValue = $("#tweet").val();
+		var regexp = new RegExp('#([^\\s]*)','g');
+		var tweetValue = tweetValue.replace(regexp, "");
+		$("#tweet").val(tweetValue + "#" + $(this).val());
 	});
 	
 
