@@ -4,7 +4,8 @@ class TroisDepensesController < ApplicationController
    layout "dashboard"
 
    def new
-	  @roommates = Coloc.find(current_user.coloc_id).users.order(:created_at)  
+      @coloc = Coloc.find(current_user.coloc_id)
+	  @roommates = @coloc.users.order(:created_at)  
 	  user_number = @roommates.count
 	  @expenses = []
 	  if user_number <= 2
@@ -17,9 +18,8 @@ class TroisDepensesController < ApplicationController
 		  @expenses = Expense.find(:all, :conditions => ["user_id IN (?) AND auto = 0", @roommates.map { |c| c.id }])
 		  @expenses.delete_if {|item| item == [] or item.auto == 1 } 
 	  end
-	  
-      @troisdepense = TroisDepense.new
-      @titre = "Nouvelle dépense"
+
+      @expense = TroisDepense.new
       @colocataires = User.where(:coloc_id => current_user.coloc_id).order(:created_at)
    end
 

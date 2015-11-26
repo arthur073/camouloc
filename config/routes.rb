@@ -33,6 +33,7 @@ MyColoc::Application.routes.draw do
 	get "/verifycoloc" => "colocs#verify_coloc", :as => "verify_coloc"	
 	get "/addroommate" => "users#add_roommate", :as => "add_roommmate"	
 	get "/removeroommate" => "users#remove_roommate", :as => "remove_roommmate"
+	post "/newexpense" => "colocs#new_expense", :as => "new_expense"
 	root :to => 'pages#home'
 
 end

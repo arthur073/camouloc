@@ -87,7 +87,7 @@
 		var inputVal = $("#tweet").val();
 		if (inputVal.indexOf(e.params.data.text) == -1) {
 			$("#tweet").val(inputVal += " @" + e.params.data.text);
-			$('#expenseForm').validator('validate');
+			//$('#expenseForm').validator('validate');
 		}			
 	});
 

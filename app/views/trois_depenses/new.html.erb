@@ -17,7 +17,7 @@
                     </div><!-- /.box-header -->
                     <div class="box-body">
 						Use Camouloc's expense engine to save time... <br><br>
-						<%= form_for @troisdepense, :html => { "data-toggle" => "validator", :id => "expenseForm" } do |f| %>
+						<%= form_for @expense, :html => { "data-toggle" => "validator", :id => "expenseForm" }, :url => "/newexpense" do |f| %>
 						  <div class="form-group has-feedback">
 							<%= text_field_tag "tweet", nil, class: "form-control", placeholder: "Tweet your expense", "data-roommates" => "bar", "data-reason" => "bar", "data-amount" => "bar" %>
 							<span class="help-block"><i>Expense author is <strong id="expense_author_view"><%= current_user.nom %></strong>, you can change it below</i></span>
@@ -33,12 +33,11 @@
 						  <div class="form-group has-feedback">
 							<label>Author</label>
 							<%= f.select :user_id, options_for_select(@colocataires.map{ |c| [c.nom, c.id]}, [current_user.nom, current_user.id]), {}, {:id => "expense_author", :class => "form-control" } %>
-
 							<div class="help-block with-errors"></div>
 						  </div>
 						  <div class="form-group has-feedback">
 							<label>Roommates involved</label>
-							<%= f.select :user_id, options_for_select(@colocataires.map{ |c| [c.nom, c.id]}), {}, {:id => "roommates", :class => "form-control", :multiple => "multiple" } %>
+							<%= select_tag "roommates_involved", options_for_select(@colocataires.map{ |c| [c.nom, c.id]}), {:id => "roommates", :class => "form-control", :multiple => "multiple" } %>
 							<span class="glyphicon glyphicon-user form-control-feedback"></span>														
 							<div class="help-block with-errors"></div>
 						  </div>				  						  
@@ -56,7 +55,9 @@
 							<span class="glyphicon glyphicon-euro form-control-feedback"></span>
 							<div class="help-block with-errors"></div>
 						  </div>	
-		                  <%= f.submit "Add an expense", :class => "btn btn-primary btn-block btn-flat"%>	      
+		                  <%= f.submit "Add an expense", :class => "btn btn-primary btn-block btn-flat"%>
+		                  <%= f.hidden_field :coloc_id, :value => @coloc.id %>	  
+		                  <%= f.hidden_field :coloc_secret, :value => @coloc.secret %>	  
 						<% end %>
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">
