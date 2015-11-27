@@ -17,9 +17,9 @@
                     </div><!-- /.box-header -->
                     <div class="box-body">
 						Use Camouloc's expense engine to save time... <br><br>
-						<%= form_for @expense, :html => { "data-toggle" => "validator", :id => "expenseForm" }, :url => "/newexpense" do |f| %>
+						<%= form_tag "/newexpense", "data-toggle" => "validator", :id => "expenseForm" do -%>
 						  <div class="form-group has-feedback">
-							<%= text_field_tag "tweet", nil, class: "form-control", placeholder: "Tweet your expense", "data-roommates" => "bar", "data-reason" => "bar", "data-amount" => "bar" %>
+							<%= text_field_tag "tweet", nil, class: "form-control", placeholder: "Tweet your expense", "data-roommates" => "bar", "data-reason" => "bar", "data-amount" => "bar"%>
 							<span class="help-block"><i>Expense author is <strong id="expense_author_view"><%= current_user.nom %></strong>, you can change it below</i></span>
 							<span class="glyphicon glyphicon-star form-control-feedback"></span>
 							<div class="help-block with-errors">
@@ -32,7 +32,7 @@
 						...or the old fashion way: <br><br>
 						  <div class="form-group has-feedback">
 							<label>Author</label>
-							<%= f.select :user_id, options_for_select(@colocataires.map{ |c| [c.nom, c.id]}, [current_user.nom, current_user.id]), {}, {:id => "expense_author", :class => "form-control" } %>
+							<%= select_tag :user_id, options_for_select(@colocataires.map{ |c| [c.nom, c.id]}, [current_user.nom, current_user.id]), {:id => "expense_author", :class => "form-control" } %>
 							<div class="help-block with-errors"></div>
 						  </div>
 						  <div class="form-group has-feedback">
@@ -43,21 +43,21 @@
 						  </div>				  						  
 						  <div class="form-group has-feedback">
 							<label>Reason</label>
-							<%= f.text_field :raison, :id => "reason", :class => "form-control", :placeholder => "Why have you spent this money?", :required => true %>
+							<%= text_field_tag "raison", nil, :id => "reason", :class => "form-control", :placeholder => "Why have you spent this money?", :required => true %>
 							<span class="glyphicon glyphicon-pencil form-control-feedback"></span>
 							<div class="help-block with-errors"></div>
 						  </div>	
 						  <div class="form-group has-feedback">
 							<label>Amount</label>
-							<%= f.text_field :montant, :id => "amount", :class => "form-control", 
+							<%= text_field_tag "montant", nil, :id => "amount", :class => "form-control", 
 								:placeholder => "How much money have you spent?", :required => true, 
 								"pattern" => '^\d+[,.]?(\d*)?€', "data-error" => "Input can only be digits followed by \"€\" (ex: 1€ 1.23€ or 1,23€)" %>
 							<span class="glyphicon glyphicon-euro form-control-feedback"></span>
 							<div class="help-block with-errors"></div>
 						  </div>	
-		                  <%= f.submit "Add an expense", :class => "btn btn-primary btn-block btn-flat"%>
-		                  <%= f.hidden_field :coloc_id, :value => @coloc.id %>	  
-		                  <%= f.hidden_field :coloc_secret, :value => @coloc.secret %>	  
+		                  <%= submit_tag "Add an expense", :class => "btn btn-primary btn-block btn-flat"%>
+		                  <%= hidden_field_tag :coloc_id, :value => @coloc.id %>	  
+		                  <%= hidden_field_tag :coloc_secret, :value => @coloc.secret %>	  
 						<% end %>
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">

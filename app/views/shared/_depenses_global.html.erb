@@ -40,6 +40,7 @@
 
 <%= javascript_include_tag "jquery.caret.min", "jquery.atwho.min", "select2.min" %>
 <script type="text/javascript">
+
 	var $multi = $("#roommates").select2({
 		  placeholder: "Select your roommates"	
     });
@@ -77,10 +78,10 @@
 
 	$('#tweet').atwho({
 		at: "@",
-		data:<%= raw @colocataires.map{|c| c.nom}.to_json %>
+		data:["Arthur","Toto","Tutu"]
 	}).atwho({
 	   at: "#",
-		data:<%= raw @expenses.last(5).map{|e| e.raison}.to_json %>
+		data:[]
 	});
 	
 	$multi.on("select2:select", function(e) {
@@ -137,18 +138,24 @@
 	
 	$("#reason").on('keyup', function(e) {
 		var tweetValue = $("#tweet").val();
-		var regexp = new RegExp('#([^\\s]*)','g');
+		var regexp = new RegExp('[ ]?#([^\\s]*)','g');
 		var tweetValue = tweetValue.replace(regexp, "");
-		$("#tweet").val(tweetValue + "#" + $(this).val());
+		if ($(this).val() == "") {
+			$("#tweet").val(tweetValue);
+		} else {
+			$("#tweet").val(tweetValue + " #" + $(this).val().replace(/ /g,"_"));
+		}
 	});
 	
 	$("#amount").on('keyup', function(e) {
 		var tweetValue = $("#tweet").val();
-		var regexp = new RegExp('([^\\s]*[ ]?€)','i');
-		var tweetValue = tweetValue.replace(regexp, "");
+		var tweetValue = tweetValue.replace(/(^|\W)([ ]?[\d][\w-,.]*[ ]?€)/i, "");
 		if ($(this).val().substr($(this).val().length - 1) == "€") {
-			$("#tweet").val(tweetValue + $(this).val());
+			$("#tweet").val(tweetValue + " " + $(this).val());
+		} else if ($(this).val() == "") {
+			$("#tweet").val(tweetValue);
 		}
 	});
+
 
 </script>

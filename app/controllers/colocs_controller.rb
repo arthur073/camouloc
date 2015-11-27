@@ -83,10 +83,10 @@ class ColocsController < ApplicationController
         end
 
         def new_expense
-            puts "HERE"
-            puts params[:coloc_id].to_f
-            coloc = Coloc.find(params[:coloc_id])
-            render :text => coloc
+			montant = params[:montant]
+			
+			
+            render :text => params.inspect
         end
 
         def tabbord 
