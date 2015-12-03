@@ -24,13 +24,6 @@ class ColocsController < ApplicationController
                 end
         end
 
-        def index
-                @titre = "Palmarès des colocs"
-                @colocs = Coloc.order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 10)
-                @colocs3 = Coloc.where(:palm=>1).order(sort_column + " " + sort_direction).paginate(:page => params[:page], :per_page => 10)
-                @colocs2 = Coloc.where(:palm=>1).order(:ca)
-        end
-
         def create
                 @coloc = Coloc.new
                 @coloc.nom = params[:nom]
@@ -56,7 +49,6 @@ class ColocsController < ApplicationController
                     
                     if @user.save
                         sign_in @user unless signed_in?
-                
                         UserMailer.colocemail(@coloc).deliver
                         UserMailer.progress_email(@user).deliver
                         redirect_to create_users_path(:user => @user, :secret => @secret)
@@ -70,7 +62,6 @@ class ColocsController < ApplicationController
         def add_expense
             coloc = Coloc.find(params[:id])
             roommates_count = coloc.users.count
-            
             if roommates_count <= 2
                 redirect_to new_depense_path
             elsif roommates_count == 3
@@ -83,10 +74,68 @@ class ColocsController < ApplicationController
         end
 
         def new_expense
-			montant = params[:montant]
 			
-			
-            render :text => params.inspect
+			if params[:user_id] && params[:montant] && params[:raison] && params[:coloc_id] && params[:coloc_secret] && params[:roommates_involved]		
+				_author = params[:user_id]
+				_amount = params[:montant].gsub("/[ €$]/g","").gsub(",",".").to_f
+				_reason = params[:raison].gsub("_"," ").capitalize							
+				_coloc = Coloc.find(params[:coloc_id])	
+				_colocataires = _coloc.users.all
+				_colocataires_id = _colocataires.map{|c| c.id}
+				_coloc_secret_received = params[:coloc_secret]
+				_roommates_involved = params[:roommates_involved]
+				
+				if _coloc.secret.eql? _coloc_secret_received				
+					if _colocataires.count <= 2
+						_expense = Depense.new
+						_expense.destinataire_part = 0
+						_expense.destinataire_part2 = 0
+						_roommates_involved.each_with_index do |r,i|
+							_expense.destinataire_part = 1 if _colocataires_id.index(r.to_i) >= -1 && r.to_i == _colocataires_id[0].to_i
+							_expense.destinataire_part2 = 1 if _colocataires_id.index(r.to_i) >= -1 && r.to_i == _colocataires_id[1].to_i
+						end
+					elsif _colocataires.count == 3
+						_expense = TroisDepense.new
+						_expense.destinataire_part = 0
+						_expense.destinataire_part2 = 0
+						_expense.destinataire_part3 = 0						
+						_roommates_involved.each_with_index do |r,i|
+							_expense.destinataire_part = 1 if _colocataires_id.index(r.to_i) >= -1 && r.to_i == _colocataires_id[0].to_i
+							_expense.destinataire_part2 = 1 if _colocataires_id.index(r.to_i) >= -1 && r.to_i == _colocataires_id[1].to_i
+							_expense.destinataire_part3 = 1 if _colocataires_id.index(r.to_i) >= -1 && r.to_i == _colocataires_id[2].to_i
+						end
+					elsif _colocataires.count == 4
+						_expense = QuatreDepense.new
+						_expense.destinataire_part = 0
+						_expense.destinataire_part2 = 0
+						_expense.destinataire_part3 = 0						
+						_expense.destinataire_part4 = 0						
+						_roommates_involved.each_with_index do |r,i|
+							_expense.destinataire_part = 1  if _colocataires_id.index(r.to_i) >= -1 && r.to_i == _colocataires_id[0].to_i
+							_expense.destinataire_part2 = 1 if _colocataires_id.index(r.to_i) >= -1 && r.to_i == _colocataires_id[1].to_i
+							_expense.destinataire_part3 = 1 if _colocataires_id.index(r.to_i) >= -1 && r.to_i == _colocataires_id[2].to_i
+							_expense.destinataire_part4 = 1 if _colocataires_id.index(r.to_i) >= -1 && r.to_i == _colocataires_id[3].to_i
+						end
+					elsif _colocataires.count > 4
+						_expense = Expense.new
+					end
+					
+					# Shared params
+					_expense.raison = _reason
+					_expense.montant = _amount
+					_expense.user_id = _author
+					_expense.nbr_users = _roommates_involved.count
+				
+					if _expense.save
+                        flash[:success] = "Expense successfully saved!"
+					else	
+                        flash[:error] = "Error creating your expense. Please verify your inputs."
+					end
+					redirect_to :back
+				else	
+					render :text => "Unauthorized"
+				end
+			end
         end
 
         def tabbord 

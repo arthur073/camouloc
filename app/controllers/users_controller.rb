@@ -110,10 +110,8 @@ class UsersController < ApplicationController
                 @roommate.coloc_id = @coloc.id
                 # image
                 @roommate.set_image
-
-                
-                if @roommate.save
-                    
+             
+                if @roommate.save                   
                 else
                     flash[:error] = "Ouch... unable to add your roommate. Please try again."
                     redirect_to create_users_path(:user => @user, :secret => @coloc.secret)
