@@ -88,7 +88,7 @@
                     </div><!-- /.box-header -->
                     <div class="box-body">
                       <div class="table-responsive">
-                        <table class="table no-margin">
+                        <table class="table no-margin" id="expenseTable">
                           <thead>
                             <tr>
                               <th>Author</th>
@@ -246,4 +246,14 @@
 	var tweetSubmit = function() {
 		$("#expenseForm").submit();
 	};
+	
+	$("#expenseTable").DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false,
+		  "pageLength": 15
+	});
 </script>
