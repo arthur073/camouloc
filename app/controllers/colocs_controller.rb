@@ -127,7 +127,13 @@ class ColocsController < ApplicationController
 					_expense.nbr_users = _roommates_involved.count
 				
 					if _expense.save
-                        flash[:success] = "Expense successfully saved!"
+					    begin
+							DepenseMailer.new_expense_email(_expense).deliver
+						rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+							flash[:success] = "Expense successfully saved! Email has not been sent however."							
+						else
+							flash[:success] = "Expense successfully saved!"
+						end
 					else	
                         flash[:error] = "Error creating your expense. Please verify your inputs."
 					end
