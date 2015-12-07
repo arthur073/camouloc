@@ -20,11 +20,16 @@ class Expense < ActiveRecord::Base
    end
    
    def roommates_involved
-      r_i = ""
+      _roommates_array = []
       self.parties.each do |party|
-        r_i += party
+        _roommates_array << User.find(party.first).nom if party.last.to_i == 1
       end
-      return r_i
+	  _r_i = ""
+	  _roommates_array.each_with_index do |roommate,i|
+		_r_i += roommate if i == 0
+		_r_i += " - " + roommate if i != 0
+	  end
+      return _r_i
    end
 
 end

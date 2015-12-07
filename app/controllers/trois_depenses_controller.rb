@@ -4,23 +4,10 @@ class TroisDepensesController < ApplicationController
    layout "dashboard"
 
    def new
-      @coloc = Coloc.find(current_user.coloc_id)
-	  @roommates = @coloc.users.order(:created_at)  
-	  user_number = @roommates.count
-	  @expenses = []
-	  if user_number <= 2
-		  @expenses = Depense.all(:conditions => {:user_id => [@roommates[0].id, @roommates[1].id]}, :order => "created_at ASC")
-	  elsif user_number == 3
-  		  @expenses = TroisDepense.all(:conditions => {:user_id => [@roommates[0].id, @roommates[1].id, @roommates[2].id]}, :order => "created_at ASC")
-	  elsif user_number == 4
-		  @expenses = QuatreDepense.all(:conditions => {:user_id => [@roommates[0].id, @roommates[1].id, @roommates[2].id, @roommates[3].id]}, :order => "created_at ASC")
-	  elsif user_number > 4
-		  @expenses = Expense.find(:all, :conditions => ["user_id IN (?) AND auto = 0", @roommates.map { |c| c.id }])
-		  @expenses.delete_if {|item| item == [] or item.auto == 1 } 
-	  end
-
       @expense = TroisDepense.new
-      @colocataires = User.where(:coloc_id => current_user.coloc_id).order(:created_at)
+	  @coloc = Coloc.find(current_user.coloc_id)
+	  @roommates = @coloc.users.order(:created_at)
+	  @expenses = @coloc.get_expenses
    end
 
    def create

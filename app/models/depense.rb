@@ -8,21 +8,18 @@ class Depense < ActiveRecord::Base
   validates :montant, :numericality => {:less_than => 3000}
 
   def roommates_involved
-    coloc = Coloc.find(User.find(self.user_id).coloc_id)
-    roommates = coloc.users.order(:created_at)
+    _coloc = Coloc.find(User.find(self.user_id).coloc_id)
+    _roommates = _coloc.users.order(:created_at)
 	#Getting only roommates involved 
-	rm_involved = []
-	rm_involved.push(roommates[0]) if self.destinataire_part == 1
-	rm_involved.push(roommates[1]) if self.destinataire_part2 == 1
+	_roommates_array = []
+	_roommates_array.push(_roommates[0]) if self.destinataire_part == 1
+	_roommates_array.push(_roommates[1]) if self.destinataire_part2 == 1
 	
-	r_i = ""
-	i = 0
-	rm_involved.each do |rm|
-		r_i += rm.nom
-		r_i += ", " if i < (rm_involved.count -1)
-		r_i += " and " if i == (rm_involved.count -1)
-		i+=1
+	_r_i = ""
+	_roommates_array.each_with_index do |rm, i|
+		_r_i += rm.nom if i == 0
+		_r_i += " - " + rm.nom if i != 0
 	end
-	return r_i
+	return _r_i
   end
 end

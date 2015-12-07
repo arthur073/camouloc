@@ -15,7 +15,7 @@
         <div class="box-body box-profile">
           <%= image_tag(@user.image, :alt => "User profile picture", :class => "profile-user-img img-responsive img-circle") %>
           <h3 class="profile-username text-center"><%= @user.nom %></h3>
-          <p class="text-muted text-center">Member since <%= @user.created_at.strftime('%b %e') %></p>
+          <p class="text-muted text-center">Member since <%= @user.created_at.strftime("%b %e") %></p>
 
           <ul class="list-group list-group-unbordered">
             <li class="list-group-item">
@@ -47,7 +47,7 @@
           <hr>
 
           <strong><i class="fa fa-calendar margin-r-5"></i> Creation date </strong>
-          <p class="text-muted"><%= @coloc.created_at.strftime('%b %e, %Y') %></p>		  
+          <p class="text-muted"><%= @coloc.created_at.strftime("%b %e, %Y") %></p>		  
         </div><!-- /.box-body -->
       </div><!-- /.box -->
     </div><!-- /.col -->
@@ -74,7 +74,7 @@
 				<li>
                 <i class="fa fa-money bg-blue"></i>
                 <div class="timeline-item">
-                  <span class="time"><i class="fa fa-clock-o"></i> <%= e.created_at.strftime('%b %e, %Y') %></span>
+                  <span class="time"><i class="fa fa-clock-o"></i> <%= e.created_at.strftime("%b %e, %Y") %></span>
                   <h3 class="timeline-header"><%= link_to User.find(e.user_id).nom, User.find(e.user_id) %> created a new expense</h3>
                   <div class="timeline-body">
                     <strong>How much?</strong> <%= number_to_currency(e.montant, precision: 2) %> &ndash;				  
@@ -128,72 +128,3 @@
 </section><!-- /.content -->
 
 
-<!-- Modal -->
-<div class="modal fade modal-default" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Warning: Removing an expense</h4>
-      </div>
-      <div class="modal-body">
-        You are about to remove the following expense, please confirm your choice: <br><br>
-
-		<div class="table-responsive">
-			<table class="table no-margin">
-			  <thead>
-				<tr>
-				  <th>Author</th>
-				  <th>Reason</th>
-				  <th>Roommates involved</th>
-				  <th>Value</th>
-				</tr>
-			  </thead>
-			  <tbody>
-				<tr>
-				  <td><span id="expense_author"></span></td>
-				  <td><span id="expense_reason"></span></td>
-				  <td><span id="expense_roommatesinvolved"></span></td>
-				  <td><span id="expense_amount"></span></td>
-				</tr>
-			  </tbody>
-			</table>
-		  </div>
-		<span id="expense_id" style="display:none"></span>
-		<span id="expense_classDestroyUrl" style="display:none"></span>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="deleteExpense();">Remove expense</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<script type="text/javascript">
-
-	var populateRemoveModal = function(id, author, amount, reason, roommates_involved, classDestroyUrl) {
-		$("#expense_id").html(id);
-		$("#expense_author").html(author);
-		$("#expense_amount").html(amount);
-		$("#expense_reason").html(reason);
-		$("#expense_roommatesinvolved").html(roommates_involved);
-		$("#expense_classDestroyUrl").html(classDestroyUrl);
-	}
-	
-	var deleteExpense = function() {
-		/* Pas utile si on peut changer le lien en une form delete */
-		
-		var id = $("#expense_id").html();
-		var classDestroyUrl = $("#expense_classDestroyUrl").html();
-		var redirectUrl = "/";
-		
-		console.log(classDestroyUrl);
-		
-		$.ajax({
-		  method: "DELETE",
-		  url: classDestroyUrl
-    	})
-	}
-</script>

@@ -59,7 +59,7 @@
                         <%= image_tag(current_user.image, :alt => "User image", :class => "img-circle white-border-big") %>
                         <p>
                           <%= current_user.nom %>
-                          <small>Member since <%= current_user.created_at.strftime('%b %e') %> </small>
+                          <small>Member since <%= current_user.created_at.strftime("%b %e") %> </small>
                         </p>
                       </li>
                       <!-- Menu Footer-->
@@ -105,7 +105,7 @@
                 <!-- Optionally, you can add icons to the links -->
                 <li id="flatshare_link"><%= link_to "<i class='fa fa-home'></i> <span>My Flatshare</span>".html_safe, Coloc.find(current_user.coloc_id) %></li>
 				<li id="user_link" ><%= link_to "<i class='fa fa-user'></i> <span>My profile</span>".html_safe, current_user %></li>
-				<li id="expense_link" ><%= link_to "<i class='fa fa-money'></i> <span>Expenses</span>".html_safe, add_expense_path(:id => current_user.coloc.id) %></li>
+				<li id="expense_link" ><%= link_to "<i class='fa fa-money'></i> <span>Expenses</span>".html_safe, redirect_to_expense_screen_path(:id => current_user.coloc.id) %></li>
               </ul><!-- /.sidebar-menu -->
             </section>
             <!-- /.sidebar -->
@@ -133,6 +133,48 @@
                 <%= yield %>
           </div><!-- /.content-wrapper -->
 
+		<!-- Modal -->
+		<div class="modal fade modal-default" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Warning: Removing an expense</h4>
+			  </div>
+			  <div class="modal-body">
+				You are about to remove the following expense, please confirm your choice: <br><br>
+
+				<div class="table-responsive">
+					<table class="table no-margin">
+					  <thead>
+						<tr>
+						  <th>Author</th>
+						  <th>Reason</th>
+						  <th>Roommates involved</th>
+						  <th>Value</th>
+						</tr>
+					  </thead>
+					  <tbody>
+						<tr>
+						  <td><span id="expense_author_modal"></span></td>
+						  <td><span id="expense_reason_modal"></span></td>
+						  <td><span id="expense_roommatesinvolved_modal"></span></td>
+						  <td><span id="expense_amount_modal"></span></td>
+						</tr>
+					  </tbody>
+					</table>
+				  </div>
+				<span id="expense_id_modal" style="display:none"></span>
+				<span id="expense_classDestroyUrl_modal" style="display:none"></span>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" onclick="deleteExpense();">Remove expense</button>
+			  </div>
+			</div>
+		  </div>
+		</div>		  
+		  
           <!-- Main Footer -->
           <footer class="main-footer">
             <!-- To the right -->
@@ -215,21 +257,41 @@
 
 
         <%= javascript_include_tag "bootstrap.min", "app.min" %>
-		
-		
-		<script>
-		
-			if (window.location.pathname.indexOf("colocs") > -1) {
-				$("#flatshare_link").addClass("active");
-			} else if (window.location.pathname.indexOf("users") > -1) {			
-				$("#user_link").addClass("active");
-			} else if (window.location.pathname.indexOf("penses") > -1) {
-				$("#expense_link").addClass("active");
-			}
-			
-			$('#editform_flatshare').validator();
-			$('#editform_user').validator();
 
+		<script type="text/javascript">
+
+			var populateRemoveModal = function(id, author, amount, reason, roommates_involved, classDestroyUrl) {
+				console.log(author);
+				$("#expense_id_modal").html(id);
+				$("#expense_author_modal").html(author);
+				$("#expense_amount_modal").html(amount);
+				$("#expense_reason_modal").html(reason);
+				$("#expense_roommatesinvolved_modal").html(roommates_involved);
+				$("#expense_classDestroyUrl_modal").html(classDestroyUrl);
+			};
+			
+			var deleteExpense = function() {				
+				var id = $("#expense_id_modal").html();
+				var classDestroyUrl = $("#expense_classDestroyUrl_modal").html();
+				var redirectUrl = "/";
+				$.ajax({
+				  method: "DELETE",
+				  url: classDestroyUrl
+				})
+			};
+			
+			$( document ).ready(function() {
+				if (window.location.pathname.indexOf("colocs") > -1) {
+					$("#flatshare_link").addClass("active");
+				} else if (window.location.pathname.indexOf("users") > -1) {			
+					$("#user_link").addClass("active");
+				} else if (window.location.pathname.indexOf("penses") > -1) {
+					$("#expense_link").addClass("active");
+				}
+				
+				$('#editform_flatshare').validator();
+				$('#editform_user').validator();
+			});
 		</script>
     </body>
 </html>

@@ -16,9 +16,9 @@
                     </div><!-- /.box-header -->
                     <div class="box-body">
 						<br>
-						Try this example: <i> "I just got back from #shopping for @<%= @colocataires[0].nom %> and @<%= @colocataires[1].nom %>. Spent 100€." </i>
+						Try this example: <i> "I just got back from #shopping for @<%= @roommates[0].nom %> and @<%= @roommates[1].nom %>. Spent 100€." </i>
 						<br><br>
-						<%= form_tag "/newexpense", "data-toggle" => "validator", :id => "tweetForm", :onsubmit => "tweetSubmit(); return false" do -%>
+						<%= form_tag "/saveexpense", "data-toggle" => "validator", :id => "tweetForm", :onsubmit => "tweetSubmit(); return false" do -%>
 						  <div class="form-group has-feedback">
 							<%= text_field_tag "tweet", nil, class: "form-control", placeholder: "Tweet your expense", "data-roommates" => "bar", "data-reason" => "bar", "data-amount" => "bar"%>
 							<span class="help-block"><i>Expense author is <strong id="expense_author_view"><%= current_user.nom %></strong>, you can change it below</i></span>
@@ -43,15 +43,15 @@
                       </div>
                     </div><!-- /.box-header -->
                     <div class="box-body">
-						<%= form_tag "/newexpense", "data-toggle" => "validator", :id => "expenseForm" do -%>
+						<%= form_tag "/saveexpense", "data-toggle" => "validator", :id => "expenseForm" do -%>
 						  <div class="form-group has-feedback">
 							<label>Author</label>
-							<%= select_tag :user_id, options_for_select(@colocataires.map{ |c| [c.nom, c.id]}, [current_user.nom, current_user.id]), {:id => "expense_author", :class => "form-control" } %>
+							<%= select_tag :user_id, options_for_select(@roommates.map{ |c| [c.nom, c.id]}, [current_user.nom, current_user.id]), {:id => "expense_author", :class => "form-control" } %>
 							<div class="help-block with-errors"></div>
 						  </div>
 						  <div class="form-group has-feedback">
 							<label>Roommates involved</label>
-							<%= select_tag "roommates_involved", options_for_select(@colocataires.map{ |c| [c.nom, c.id]}), {:id => "roommates", :class => "form-control", :multiple => true, :required => true } %>
+							<%= select_tag "roommates_involved", options_for_select(@roommates.map{ |c| [c.nom.gsub(" ","_"), c.id]}), {:id => "roommates", :class => "form-control", :multiple => true, :required => true } %>
 							<span class="glyphicon glyphicon-user form-control-feedback"></span>														
 							<div class="help-block with-errors"></div>
 						  </div>				  						  
@@ -62,7 +62,7 @@
 							<div class="help-block with-errors"></div>
 						  </div>	
 						  <div class="form-group has-feedback">
-							<label>Amount</label>
+							<label>Value</label>
 							<%= text_field_tag "montant", nil, :id => "amount", :class => "form-control", 
 								:placeholder => "How much money have you spent?", :required => true, 
 								"pattern" => '^\d+[,.]?(\d*)?€', "data-error" => "Input can only be digits followed by \"€\" (ex: 1€ 1.23€ or 1,23€)" %>
@@ -103,7 +103,12 @@
                               <td><%= link_to User.find(e.user_id).nom, User.find(e.user_id) %></td>
                               <td><%= e.raison %></td>                              
                               <td><%= e.roommates_involved %></td>
-                              <td><%= number_to_currency(e.montant) %></td>
+                              <td><%= number_to_currency(e.montant) %>
+								<button type="button" class="btn btn-xs btn-danger pull-right" data-toggle="modal" data-target="#myModal" 
+									onclick="populateRemoveModal(<%= e.id %>, '<%= User.find(e.user_id).nom %>','<%= number_to_currency(e.montant, precision: 2) %>','<%= e.raison %>', '<%= e.roommates_involved %>', '<%= url_for e %>');">
+									<span class='glyphicon glyphicon-trash'></span>
+								</button>								  
+							  </td>
                             </tr>
                             <% end %>
                           </tbody>
@@ -164,7 +169,7 @@
 
 	$('#tweet').atwho({
 		at: "@",
-		data:<%= raw @colocataires.map{|c| c.nom }.to_json %>
+		data:<%= raw @roommates.map{|c| c.nom.gsub(" ","_") }.to_json %>
 	}).atwho({
 	   at: "#",
 		data:<%= raw @expenses.last(5).map{|e| e.raison }.to_json %>
@@ -174,7 +179,6 @@
 		var inputVal = $("#tweet").val();
 		if (inputVal.indexOf(e.params.data.text) == -1) {
 			$("#tweet").val(inputVal += " @" + e.params.data.text);
-			//$('#expenseForm').validator('validate');
 		}			
 	});
 
@@ -182,7 +186,6 @@
 		var inputVal = $("#tweet").val();
 		if (inputVal.indexOf(e.params.data.text) > -1) {
 			$("#tweet").val(inputVal.replace("@" + e.params.data.text, ""));
-			$('#expenseForm').validator('validate');
 		}	
 	});
 

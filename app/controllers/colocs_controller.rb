@@ -59,22 +59,20 @@ class ColocsController < ApplicationController
                 end
         end
         
-        def add_expense
-            coloc = Coloc.find(params[:id])
-            roommates_count = coloc.users.count
-            if roommates_count <= 2
+        def redirect_to_expense_screen
+            _roommates_count = Coloc.find(current_user.coloc_id).users.count
+            if _roommates_count <= 2
                 redirect_to new_depense_path
-            elsif roommates_count == 3
+            elsif _roommates_count == 3
                 redirect_to new_trois_depense_path
-            elsif roommates_count == 4
+            elsif _roommates_count == 4
                 redirect_to new_quatre_depense_path
-            elsif roommates_count > 4
+            elsif _roommates_count > 4
                 redirect_to new_expense_path
             end
         end
 
-        def new_expense
-			
+        def save_expense
 			if params[:user_id] && params[:montant] && params[:raison] && params[:coloc_id] && params[:coloc_secret] && params[:roommates_involved]		
 				_author = params[:user_id]
 				_amount = params[:montant].gsub("/[ €$]/g","").gsub(",",".").to_f
@@ -118,15 +116,25 @@ class ColocsController < ApplicationController
 						end
 					elsif _colocataires.count > 4
 						_expense = Expense.new
+						_parties = {}
+						_colocataires.each do |c| 
+							_parties[c.id] = 0
+						end
+						_roommates_involved.each_with_index do |r,i|
+							_parties[r.to_i] = 1
+						end
+						_expense.parties = _parties
 					end
-					
+
 					# Shared params
 					_expense.raison = _reason
 					_expense.montant = _amount
 					_expense.user_id = _author
 					_expense.nbr_users = _roommates_involved.count
-				
+									
 					if _expense.save
+						_coloc.ca += _expense.montant
+						_coloc.save
 					    begin
 							DepenseMailer.new_expense_email(_expense).deliver
 						rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
