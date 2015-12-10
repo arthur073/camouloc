@@ -27,6 +27,7 @@ var svg = d3.select("#chart").append("svg")
 svg.append("circle")
     .attr("r", outerRadius);
 
+
  
 // Compute the chord layout.
 layout.matrix(matrix);
@@ -48,7 +49,8 @@ var groupPath = group.append("path")
 .attr("id", function(d, i) { return "group" + i; })
 .attr("d", arc)
 .style("fill", function(d, i) { return cities[i].color; });
- 
+
+
 // Add a text label.
 var groupText = group.append("text")
 .attr("x", 6)

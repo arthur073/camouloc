@@ -3,8 +3,9 @@
     <%= @coloc.nom %>
   </h1>
 </section>
-
-<%= raw @arrayReimbursement.inspect %>
+<%= raw @arrayTot.inspect %><br>
+<%= raw @arrayReimbursement.inspect %><br>
+<%= raw @expensesMatrix.inspect %>
 
 <section class="content">
     <div class="row">
@@ -108,7 +109,7 @@
 						<% @arrayReimbursement.each_with_index do |elem,i| %>
 							<tr>
 							  <td>Transaction #<%= i+1 %></td>
-							  <td><strong><%= elem[0] %></strong> gives <span class="badge bg-red"><%= number_to_currency elem[1] %></span>
+							  <td><strong><%= elem[0] %></strong> gives <span class="badge bg-green"><%= number_to_currency elem[1] %></span>
 								to <strong><%= elem[2] %></strong>
 							  </td>
 							</tr>
