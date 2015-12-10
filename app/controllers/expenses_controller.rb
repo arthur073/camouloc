@@ -14,7 +14,7 @@ class ExpensesController < ApplicationController
 	   @expense = Expense.find(params[:id])
 	   @expense.destroy
 	   @colocation = Coloc.find(current_user.coloc_id)
-	   @colocation.ca = @colocation.ca - @troisdepense.montant
+	   @colocation.ca = @colocation.ca - @expense.montant
 	   @colocation.save
 	   flash[:success] = "This expense has been successfully deleted"
 	end

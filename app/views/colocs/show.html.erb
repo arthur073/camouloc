@@ -107,7 +107,7 @@
 						</tr>
 						<% @arrayReimbursement.each_with_index do |elem,i| %>
 							<tr>
-							  <td>Transaction #1</td>
+							  <td>Transaction #<%= i+1 %></td>
 							  <td><strong><%= elem[0] %></strong> gives <span class="badge bg-red"><%= number_to_currency elem[1] %></span>
 								to <strong><%= elem[2] %></strong>
 							  </td>
@@ -115,9 +115,6 @@
 						<% end %>
 					  </tbody></table>				  
 				</div>
-                <div class="box-footer ">
-					<i> Sharing these results with your roommates will not execute the transactions</i>
-                </div><!-- /.footer -->
               </div>
               </div>
         <div class="col-md-7">
@@ -239,7 +236,7 @@
 	});
 		
 	var NameProvider = [
-		<% @roommates.each do |r| %>"<%= r.nom %>",<% end %>
+		<% @roommates.each do |r| %>"<%= r.nom.first(3).capitalize %>",<% end %>
 	];
 		
 	var matrix = <%= @expensesMatrix %>;

@@ -146,9 +146,9 @@ function runProgressBar(time) {
 /////////////// Initiate Chord Diagram /////////////////////
 //////////////////////////////////////////////////////////*/
 
-var margin = {top: 0, right: 10, bottom: 0, left: 10},
-	width = 500 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom,
+var margin = {top: 60, right: 10, bottom: 60, left: 10},
+	width = 600 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom,
     innerRadius = Math.min(width, height) * .39,
     outerRadius = innerRadius * 1.04;
 

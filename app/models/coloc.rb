@@ -93,6 +93,59 @@ class Coloc < ActiveRecord::Base
 	end
 	
 	def get_expenses_matrix
-		return [[10,20][30,40]]
+		_roommates = self.users.order(:created_at)
+		_nbr_users = _roommates.count
+		_expenses = self.get_expenses
+		
+		# generating array
+		_result_array = []
+		_roommates.each do |r|
+			_result_array << Array.new(_nbr_users,0)
+		end
+		
+		# populating array
+		_expenses.each do |e|
+			# getting cells to increase
+			_row = _roommates.map{|r| r.id}.index(e.user_id)
+			_lines = []
+			if _nbr_users == 2
+				_lines << 0 if e.destinataire_part == 1
+				_lines << 1 if e.destinataire_part2 == 1
+			elsif _nbr_users == 3
+				_lines << 0 if e.destinataire_part == 1
+				_lines << 1 if e.destinataire_part2 == 1
+				_lines << 2 if e.destinataire_part3 == 1
+			elsif _nbr_users == 4
+				_lines << 0 if e.destinataire_part == 1
+				_lines << 1 if e.destinataire_part2 == 1
+				_lines << 2 if e.destinataire_part3 == 1			
+				_lines << 3 if e.destinataire_part4 == 1			
+			elsif _nbr_users > 4
+				e.parties.each do |party|
+					_lines << _roommates.map{|r| r.id}.index(party.first) if party.last == 1
+				end
+			end
+			
+			# increasing cells
+			_lines.each do |_line|
+				_result_array[_row][_line] += e.montant / _lines.count
+			end
+		end
+		
+		# readjusting array so its sum is 100
+		_array_sum = 0
+		_result_array.each do |row|
+			row.each do |line|
+				_array_sum += line
+			end
+		end
+		_adjustment_coef = 100 / _array_sum 
+		_result_array.each_with_index do |row,i|
+			row.each_with_index do |line,j|
+				_result_array[i][j] = line * _adjustment_coef
+			end
+		end		
+		
+		return _result_array
 	end
 end
