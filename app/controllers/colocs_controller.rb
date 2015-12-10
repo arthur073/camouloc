@@ -22,6 +22,8 @@ class ColocsController < ApplicationController
                     @expenses = Expense.find(:all, :conditions => ["user_id IN (?) AND auto = 0", @roommates.map { |c| c.id }])
                     @expenses.delete_if {|item| item == [] or item.auto == 1 } 
                 end
+                
+                flash[:info] = "Hey! It looks like you haven't entered any expense yet. You can do so from the expense screen." if @expenses.count == 0
 				
 				@arrayTot = @coloc.get_tot
 				@arrayReimbursement = @coloc.get_reimbursement(@arrayTot)

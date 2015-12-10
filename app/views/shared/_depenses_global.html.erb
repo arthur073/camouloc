@@ -16,7 +16,7 @@
                     </div><!-- /.box-header -->
                     <div class="box-body">
 						<br>
-						Try this example: <i> "I just got back from #shopping for @<%= @roommates[0].nom %> and @<%= @roommates[1].nom %>. Spent 100€." </i>
+						Try this example: <i> "I just got back from #shopping for @<%= @roommates[0].nom.gsub(" ","_") %> and @<%= @roommates[1].nom.gsub(" ","_") %>. Spent 100€." </i>
 						<br><br>
 						<%= form_tag "/saveexpense", "data-toggle" => "validator", :id => "tweetForm", :onsubmit => "tweetSubmit(); return false" do -%>
 						  <div class="form-group has-feedback">

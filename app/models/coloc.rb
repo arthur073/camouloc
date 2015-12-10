@@ -103,6 +103,8 @@ class Coloc < ActiveRecord::Base
 			_result_array << Array.new(_nbr_users,0)
 		end
 		
+		return _result_array if _expenses.count == 0
+		
 		# populating array
 		_expenses.each do |e|
 			# getting cells to increase

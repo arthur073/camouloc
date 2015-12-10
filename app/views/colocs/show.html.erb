@@ -4,7 +4,7 @@
   </h1>
 </section>
 
-<%= raw @expensesMatrix.inspect %>
+<%= raw @arrayReimbursement.inspect %>
 
 <section class="content">
     <div class="row">
@@ -234,23 +234,19 @@
           "autoWidth": false,
 		  "pageLength": 15
 	});
-		
-	var NameProvider = [
-		<% @roommates.each do |r| %>"<%= r.nom.first(3).capitalize %>",<% end %>
-	];
-		
-	var matrix = <%= @expensesMatrix %>;
+	
+	var cities = [
+	    <% @roommates.each do |r| %>   
+	        {"name": "<%= r.nom %>", "color": "<%= raw r.color[1] %>"},
+	    <% end %>
+    ]
+	
+	var matrix = <%= @expensesMatrix %>
 
-	var colors = <%= raw @roommates.map{|r| h r.color[1]} %>;
-
-	/*Initiate the color scale*/
-	var fill = d3.scale.ordinal()
-		.domain(d3.range(NameProvider.length))
-		.range(colors);
 </script>
 <%= javascript_include_tag "mainChord" %>
 <script type="text/javascript">	
-	finalChord();
+
 </script>
 
 
