@@ -22,6 +22,10 @@ class ColocsController < ApplicationController
                     @expenses = Expense.find(:all, :conditions => ["user_id IN (?) AND auto = 0", @roommates.map { |c| c.id }])
                     @expenses.delete_if {|item| item == [] or item.auto == 1 } 
                 end
+				
+				@arrayTot = @coloc.get_tot
+				@arrayReimbursement = @coloc.get_reimbursement(@arrayTot)
+				@expensesMatrix = @coloc.get_expenses_matrix
         end
 
         def create

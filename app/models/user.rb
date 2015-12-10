@@ -64,20 +64,30 @@ class User < ActiveRecord::Base
 		relative_id = Coloc.find(self.coloc_id).users.index(self)
 		case relative_id % 6 
 		when 0    
-		  return ["red","#f56954","#f56954"]
+		  return ["blue1","#8DC3E3"]
 		when 1    
-		  return ["green","#00a65a","#00a65a"]
+		  return ["blue2","#5EA5CF"]
 		when 2    
-		  return ["yellow","#f39c12","#f39c12"]
+		  return ["blue3","#3C8CBC"]
 		when 3    
-		  return ["aqua","#00c0ef","#00c0ef"]
+		  return ["blue4","#1E77AB"]
 		when 4    
-		  return ["light-blue","#3c8dbc","#3c8dbc"]
+		  return ["blue5","#085B8C"]
 		when 5   
-		  return ["gray","#d2d6de","#d2d6de"]
+		  return ["blue6","#054972"]
 		else
-		  return ["default","gray","gray"]
+		  return ["default","gray"]
 		end
+	end
+	
+	def tot_html(user_tot)
+		_ending_html = "<span class='pull-right text-green'><i class='fa fa-angle-up'></i> " + ActionController::Base.helpers.number_to_currency(user_tot, precision: 2) + "</span>" if user_tot >= 0
+		_ending_html = "<span class='pull-right text-red'><i class='fa fa-angle-down'></i> " + ActionController::Base.helpers.number_to_currency(user_tot, precision: 2) + "</span>" if user_tot < 0
+		return self.nom + _ending_html
+	end
+	
+	def get_tot_for_chart(array_tot)
+		return array_tot[self.id]["spent"]
 	end
 	
 	private

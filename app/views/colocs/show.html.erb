@@ -4,6 +4,8 @@
   </h1>
 </section>
 
+<%= raw @expensesMatrix.inspect %>
+
 <section class="content">
     <div class="row">
         <div class="col-lg-3 col-xs-6">
@@ -56,7 +58,7 @@
         </div><!-- ./col -->
       </div>
       <div class="row"> 
-        <div class="col-md-6">
+        <div class="col-md-5">
         <div class="box box-primary">
                 <div class="box-header with-border">
                   <h3 class="box-title">Expenses distribution</h3>
@@ -84,17 +86,59 @@
                   <ul class="nav nav-pills nav-stacked">
                     <% @roommates.each do |u| %>                    
                     <li>
-                        <%= link_to (u.nom + "<span class='pull-right text-green'><i class='fa fa-angle-down'></i> 12%</span>").html_safe, u, :class => "users-list-name" %>
-                        
+                        <%= link_to (u.tot_html(@arrayTot[u.id]["tot"])).html_safe, u, :class => "users-list-name" %>
                     </li>
                     <% end %>
                   </ul>
                 </div><!-- /.footer -->
               </div>
+        <div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">How to reset counters?</h3>
+                  <div class="box-tools pull-right">
+					<button class="btn btn-xs btn-primary pull-right"><i class='fa fa-envelope'></i> Share </button>
+                  </div>
+                </div><!-- /.box-header -->
+				<div class="box-body no-padding">
+					<table class="table">
+						<tbody><tr>
+						  <th>Transaction ID</th>
+						  <th>Description</th>
+						</tr>
+						<% @arrayReimbursement.each_with_index do |elem,i| %>
+							<tr>
+							  <td>Transaction #1</td>
+							  <td><strong><%= elem[0] %></strong> gives <span class="badge bg-red"><%= number_to_currency elem[1] %></span>
+								to <strong><%= elem[2] %></strong>
+							  </td>
+							</tr>
+						<% end %>
+					  </tbody></table>				  
+				</div>
+                <div class="box-footer ">
+					<i> Sharing these results with your roommates will not execute the transactions</i>
+                </div><!-- /.footer -->
               </div>
-        
-
-        <div class="col-md-6">
+              </div>
+        <div class="col-md-7">
+            <div class="box box-primary">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Expenses graph</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+						<div id="cont" class="container-fluid">
+							<div class="row text-center">
+								<div class="col-md-12">									
+										<div id="chart"></div>
+								</div>
+							</div>
+						</div>
+                    </div><!-- /.box-body -->
+			  </div>
+		</div>
+      </div>
+      <div class="row"> 
+        <div class="col-md-12">
             <div class="box box-primary">
                     <div class="box-header with-border">
                       <h3 class="box-title">Latest expenses</h3>
@@ -104,7 +148,7 @@
                     </div><!-- /.box-header -->
                     <div class="box-body">
                       <div class="table-responsive">
-                        <table class="table no-margin">
+                        <table class="table no-margin" id="expenseTable">
                           <thead>
                             <tr>
                               <th>Author</th>
@@ -114,7 +158,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <% @expenses.last(5).each do |e| %>
+                            <% @expenses.last(10).each do |e| %>
                             <tr>
                               <td><%= link_to User.find(e.user_id).nom, User.find(e.user_id) %></td>
                               <td><%= e.raison %></td>                              
@@ -131,10 +175,10 @@
                       <%= link_to "View all expenses", redirect_to_expense_screen_path(:id => @coloc.id), :class => "btn btn-sm btn-default btn-flat pull-right" %>
                     </div><!-- /.box-footer -->
                   </div>
-            </div
+            </div>
       </div>
 </section>
-
+<%= javascript_include_tag "d3.v3.min" %>
 <script type="text/javascript">
   //-------------
   //- PIE CHART -
@@ -145,14 +189,12 @@
   var PieData = [
     <% @roommates.each do |u| %>
     {
-      value: 700,
+      value: <%= u.get_tot_for_chart(@arrayTot) %>,
       color: "<%= u.color[1] %>",
-      highlight: "<%= u.color[2] %>",
-      label: "<%= u.nom %>"
+      highlight: "<%= u.color[1] %>",
+      label: "<%= u.nom %> "
     }
-        <% unless u == @roommates.last %>
-            ,
-        <% end %>
+	<% unless u == @roommates.last %>,<% end %>
     <% end %>
   ];
   var pieOptions = {
@@ -163,9 +205,9 @@
     //Number - The width of each segment stroke
     segmentStrokeWidth: 1,
     //Number - The percentage of the chart that we cut out of the middle
-    percentageInnerCutout: 50, // This is 0 for Pie charts
+    percentageInnerCutout: 0, // This is 0 for Pie charts
     //Number - Amount of animation steps
-    animationSteps: 100,
+    animationSteps: 30,
     //String - Animation easing effect
     animationEasing: "easeOut",
     //Boolean - Whether we animate the rotation of the Doughnut
@@ -181,10 +223,37 @@
   };
   //Create pie or douhnut chart
   // You can switch between pie and douhnut using the method below.
-  pieChart.Doughnut(PieData, pieOptions);
+  pieChart.Pie(PieData, pieOptions);
   //-----------------
   //- END PIE CHART -
   //-----------------
+  
+  	$("#expenseTable").DataTable({
+          "paging": false,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": false,
+          "autoWidth": false,
+		  "pageLength": 15
+	});
+		
+	var NameProvider = [
+		<% @roommates.each do |r| %>"<%= r.nom %>",<% end %>
+	];
+		
+	var matrix = <%= @expensesMatrix %>;
+
+	var colors = <%= raw @roommates.map{|r| h r.color[1]} %>;
+
+	/*Initiate the color scale*/
+	var fill = d3.scale.ordinal()
+		.domain(d3.range(NameProvider.length))
+		.range(colors);
+</script>
+<%= javascript_include_tag "mainChord" %>
+<script type="text/javascript">	
+	finalChord();
 </script>
 
 
