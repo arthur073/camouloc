@@ -61,7 +61,7 @@
         </div><!-- ./col -->
       </div>
       <div class="row"> 
-        <div class="col-md-5">
+        <div class="col-md-6">
         <div class="box box-primary">
                 <div class="box-header with-border">
                   <h3 class="box-title">Expenses distribution</h3>
@@ -120,17 +120,31 @@
 				</div>
               </div>
               </div>
-        <div class="col-md-7">
+        <div class="col-md-6">
             <div class="box box-primary">
                     <div class="box-header with-border">
                       <h3 class="box-title">Expenses graph</h3>
+                      <div class="box-tools pull-right">
+                        <span class="label label-primary"><%= @expenses.count %> expenses in total</span>
+                      </div>
                     </div><!-- /.box-header -->
                     <div class="box-body">
 						<div id="cont" class="container-fluid">
+						  <div class="row">
+							<div class="col-md-8">
+								<span id="nochart"> Graph is not available as no expense has been added.</span>
+								<div id="chart"></div>
+							</div><!-- /.col -->
+							<div class="col-md-4">
+							  <ul class="chart-legend clearfix">
+								<% @roommates.each do |u| %>
+								<li><i class="fa fa-circle-o text-<%= u.color[0] %>"></i> <%= u.nom %></li>
+								<% end %>
+							  </ul>
+							</div><!-- /.col -->
+						  </div><!-- /.row -->
 							<div class="row text-center">
-								<div class="col-md-12">									
-										<div id="chart"></div>
-								</div>
+
 							</div>
 						</div>
                     </div><!-- /.box-body -->
@@ -238,23 +252,12 @@
 		  "pageLength": 15
 	});
 	
-	var cities = [
-	    <% @roommates.each do |r| %>   
-	        {"name": "<%= r.nom %>", "color": "<%= raw r.color[1] %>"},
-	    <% end %>
-    ]
-
 	var Names = <%= raw @namesMatrix %>;
+	var Colors = <%= raw @colorsMatrix %>;
 
-	var respondents = <%= raw @params_chord[0] %>, //Total number of respondents (i.e. the number that makes up the total group)
-		emptyPerc = 0.2, //What % of the circle should become empty
-		emptyStroke = <%= raw @params_chord[1] %>; //Math.round(respondents*emptyPerc); 
-	/*var matrix = [
-		[0,0,20,0], //X
-		[0,0,0,emptyStroke], //Dummy stroke
-		[10,0,0,0], //C
-		[0,emptyStroke,0,0] //Dummy stroke
-	];*/
+	var respondents = <%= raw @params_chord %>, //Total number of respondents (i.e. the number that makes up the total group)
+		emptyPerc = 0, //What % of the circle should become empty
+		emptyStroke = 0; //Math.round(respondents*emptyPerc); 
 	var matrix = <%= raw @expensesMatrix %>;
 
 </script>

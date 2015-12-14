@@ -29,6 +29,7 @@ class ColocsController < ApplicationController
 				@arrayReimbursement = @coloc.get_reimbursement(@arrayTot)
 				@expensesMatrix = @coloc.get_expenses_matrix
 				@namesMatrix = @coloc.get_names_matrix
+				@colorsMatrix = @roommates.map{|r| r.color[1] }
 				@params_chord = @coloc.get_chord_params(@expensesMatrix)
         end
 
