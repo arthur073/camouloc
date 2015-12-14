@@ -81,7 +81,7 @@ class Coloc < ActiveRecord::Base
 			
 			_worst_user = _array_tot_sorted.first.first
 			_best_user = _array_tot_sorted.last.first
-			_transaction_amount = [_array_tot_sorted.first.last.to_i.abs, _array_tot_sorted.last.last.to_i.abs].min
+			_transaction_amount = [_array_tot_sorted.first.last.round(2).abs, _array_tot_sorted.last.last.round(2).abs].min
 			_array_transactions << [User.find(_worst_user).nom, _transaction_amount, User.find(_best_user).nom]
 			
 			# on remet les champs à zéro
@@ -90,7 +90,7 @@ class Coloc < ActiveRecord::Base
 		end
 		
 		_array_reimbursement = _array_tot_sorted
-		return _array_transactions
+		return _array_transactions.delete_if{|elem| elem[1] == 0}
 	end
 	
 	def get_expenses_matrix

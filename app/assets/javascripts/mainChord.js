@@ -4,7 +4,7 @@
 var screenWidth = $("#chart").parent().parent().width(),
 	mobileScreen = (screenWidth > 400 ? false : true);	
 
-var margin = {left: -20, top: -50, right: 10, bottom: -70},
+var margin = {left: -70, top: -50, right: 10, bottom: -70},
 	width = (screenWidth) - margin.left - margin.right,
 	height = (respondents == 0 ? 0 : 400) - margin.top - margin.bottom;
 			
