@@ -28,6 +28,8 @@ class ColocsController < ApplicationController
 				@arrayTot = @coloc.get_tot
 				@arrayReimbursement = @coloc.get_reimbursement(@arrayTot)
 				@expensesMatrix = @coloc.get_expenses_matrix
+				@namesMatrix = @coloc.get_names_matrix
+				@params_chord = @coloc.get_chord_params(@expensesMatrix)
         end
 
         def create

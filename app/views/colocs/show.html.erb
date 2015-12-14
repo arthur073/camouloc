@@ -5,7 +5,9 @@
 </section>
 <%= raw @arrayTot.inspect %><br>
 <%= raw @arrayReimbursement.inspect %><br>
-<%= raw @expensesMatrix.inspect %>
+<%= raw @expensesMatrix.inspect %><br>
+<%= raw @namesMatrix.inspect %><br>
+<%= raw @params_chord.inspect %>
 
 <section class="content">
     <div class="row">
@@ -176,7 +178,7 @@
             </div>
       </div>
 </section>
-<%= javascript_include_tag "d3.v3.min" %>
+<%= javascript_include_tag "d3.v3.min", "d3.stretched.chord", "d3.layout.chord.sort" %>
 <script type="text/javascript">
   //-------------
   //- PIE CHART -
@@ -241,8 +243,19 @@
 	        {"name": "<%= r.nom %>", "color": "<%= raw r.color[1] %>"},
 	    <% end %>
     ]
-	
-	var matrix = <%= @expensesMatrix %>
+
+	var Names = <%= raw @namesMatrix %>;
+
+	var respondents = <%= raw @params_chord[0] %>, //Total number of respondents (i.e. the number that makes up the total group)
+		emptyPerc = 0.2, //What % of the circle should become empty
+		emptyStroke = <%= raw @params_chord[1] %>; //Math.round(respondents*emptyPerc); 
+	/*var matrix = [
+		[0,0,20,0], //X
+		[0,0,0,emptyStroke], //Dummy stroke
+		[10,0,0,0], //C
+		[0,emptyStroke,0,0] //Dummy stroke
+	];*/
+	var matrix = <%= raw @expensesMatrix %>;
 
 </script>
 <%= javascript_include_tag "mainChord" %>

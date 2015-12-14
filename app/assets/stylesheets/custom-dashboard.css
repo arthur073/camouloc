@@ -69,20 +69,19 @@
 
 /* d3 chart settings */
 
-#circle circle {
-fill: none;
-pointer-events: all;
+line {
+  stroke: #000;
+  stroke-width: 1.px;
 }
- 
-.group path {
-fill-opacity: .5;
+
+text {
+  font-size: 8px;
 }
- 
+
+.titles{
+  font-size: 10px;
+}
+
 path.chord {
-stroke: #000;
-stroke-width: .25px;
-}
- 
-#circle:hover path.fade {
-display: none;
+  fill-opacity: .80;
 }
