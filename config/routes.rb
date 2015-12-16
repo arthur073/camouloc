@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 MyColoc::Application.routes.draw do
 	default_url_options :host => "camouloc.kerokuapp.com"
-	
+	# rescue error 404	
 	resources :users
 	resources :authentifications
 	resources :depenses
@@ -28,4 +28,5 @@ MyColoc::Application.routes.draw do
 	get "/removeroommate" => "users#remove_roommate", :as => "remove_roommmate"
 	post "/saveexpense" => "colocs#save_expense", :as => "save_expense"
 	root :to => 'pages#home'
+	match '*unmatched_route', :to => 'application#not_found'	
 end

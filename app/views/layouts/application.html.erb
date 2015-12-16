@@ -60,6 +60,22 @@
 		<section id="home" name="home"></section>
 		<div id="headerwrap">
 			<div class="container">
+				<div class="alert-wrapper">
+                <% flash.each do |type, content| %>
+                    <% if content.respond_to?('each') 
+                        content.each do |item| %>
+                            <%= render 'layouts/alert', 
+                                type: type,
+                                content: item %>
+                        <% end %>
+                    <% else %>
+                        <%= render 'layouts/alert', 
+                                type: type,
+                                content: content %>
+                    <% end %>
+
+                <% end %>
+			</div>
 				<div class="row centered">
 					<div class="col-lg-12">
 						<h1><b>Camouloc</b></h1>

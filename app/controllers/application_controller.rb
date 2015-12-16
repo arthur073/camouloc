@@ -32,10 +32,16 @@ class ApplicationController < ActionController::Base
 		{:locale => I18n.locale}
 	end
 
+	def not_found
+		# Rescuing error 404
+		flash[:error] = "Warning: the page you are looking for doesn't exist"
+		redirect_to root_url unless signed_in?
+		redirect_to Coloc.find(current_user.coloc_id) if signed_in?
+	end	
+	
 	private
 
 	def set_user_language
 		I18n.locale = 'fr'
 	end
-
 end
