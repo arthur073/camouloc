@@ -110,7 +110,7 @@ class UsersController < ApplicationController
              
                 if @roommate.save      
 					# Send an email to welcome the user
-					_rommate = Coloc.users.order(:created_at).first
+					_roommate = Coloc.users.order(:created_at).first
 					UserMailer.welcome_email(@user,_roommate).deliver
                 else
                     flash[:error] = "Ouch... unable to add your roommate. Please try again."
