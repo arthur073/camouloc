@@ -66,6 +66,9 @@ class ColocsController < ApplicationController
                         sign_in @user unless signed_in?
                         UserMailer.colocemail(@coloc).deliver
                         UserMailer.progress_email(@user).deliver
+						rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+							flash[:success] = "Your account has been created, but we are currently unable to send you a confirmation email"
+						end
                         redirect_to create_users_path(:user => @user, :secret => @secret)
                     else
                         flash[:error] = "Error!"
