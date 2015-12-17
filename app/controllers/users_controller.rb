@@ -111,6 +111,7 @@ class UsersController < ApplicationController
                 if @roommate.save      
 					# Send an email to welcome the user
 					_roommate = Coloc.users.order(:created_at).first
+					begin
 					UserMailer.welcome_email(@user,_roommate).deliver
 					rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
 						flash[:success] = "User created, but unable to send him an email"

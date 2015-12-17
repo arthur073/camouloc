@@ -64,6 +64,7 @@ class ColocsController < ApplicationController
                     
                     if @user.save
                         sign_in @user unless signed_in?
+					    begin
                         UserMailer.colocemail(@coloc).deliver
                         UserMailer.progress_email(@user).deliver
 						rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
