@@ -19,13 +19,4 @@ class DepensesController < ApplicationController
       @colocation.save
       flash[:success] = "This expense has been successfully deleted"
    end
-
-   private
-   def require_login
-      unless current_user
-         flash[:notice] = t('flash.reqLogin')
-         redirect_to login_path
-      end
-   end
-
 end

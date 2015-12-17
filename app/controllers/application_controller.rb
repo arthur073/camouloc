@@ -1,12 +1,10 @@
 # -*- encoding : utf-8 -*-
 class ApplicationController < ActionController::Base
 
-	require 'will_paginate/array'
-
 	protect_from_forgery
 	include SessionsHelper
 
-	before_filter :prepare_for_mobile
+	#before_filter :prepare_for_mobile
 	before_filter :set_user_language
 	before_filter :set_locale
 

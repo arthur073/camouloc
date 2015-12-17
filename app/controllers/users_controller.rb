@@ -1,21 +1,18 @@
 # -*- encoding : utf-8 -*-
 class UsersController < ApplicationController
-   before_filter :authenticate, :only => [:edit, :update]
-   before_filter :admin_user,   :only => :destroy
-   before_filter :correct_user, :only => [:edit, :update]
-   #rescue_from ActiveRecord::RecordNotFound, :with => :user_manquant
-   layout 'dashboard'
 
-   def index
-      @titre = "Tous les utilisateurs"
-      @users = User.all(:order => "created_at ASC").paginate(:page => params[:page], :per_page => 30)
-      @usersAll = User.all
-      @depTotal = Depense.all.size + TroisDepense.all.size + QuatreDepense.all.size + Expense.all.size
-   end
+   rescue_from ActiveRecord::RecordNotFound, :with => :user_manquant    
+   layout 'dashboard'
+   before_filter :require_login, :only => [:show, :destroy, :edit, :update, :user_manquant]
+
 
    def show
-      @user = User.find(params[:id])
+      @user = User.find(params[:id])      
       @coloc = Coloc.find(@user.coloc_id)
+      
+      # Avoiding confidential data leak      
+      redirect_if_wrong_user(@user)
+      
 	  @roommates = @coloc.users.order(:created_at)
 	  @most_recent_colocataire = @roommates.last
 	  
@@ -83,8 +80,8 @@ class UsersController < ApplicationController
    end
 
    def user_manquant
-      flash[:error] = t('flash.userManq')
-      redirect_to users_path	     
+      flash[:error] = "Error: unable to find this user"
+      redirect_to current_user    
    end
    
    def verify_user
@@ -145,12 +142,10 @@ class UsersController < ApplicationController
       deny_access unless signed_in?
    end
 
-   def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_path) unless current_user?(@user)
-   end
-
-   def admin_user
-      redirect_to(root_path) unless current_user.admin?
+   def redirect_if_wrong_user(_user)
+      if _user.coloc_id != current_user.coloc_id
+        flash[:warning] = "Oops! You are not able to see this user's data"
+        redirect_to(current_user)
+      end      
    end
 end
