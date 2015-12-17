@@ -9,7 +9,7 @@ class PasswordResetsController < ApplicationController
 		@user = User.find_by_email(params[:email])
 
 		if @user
-			@user.password = SecureRandom.hex(5) 
+			@user.password = SecureRandom.hex(4) 
 			@user.save 
 			UserMailer.password_reset(@user).deliver 
 			redirect_to login_path
