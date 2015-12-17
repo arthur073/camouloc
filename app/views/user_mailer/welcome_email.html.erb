@@ -1067,7 +1067,7 @@ a:hover{color:#555 !important}blockquote{border-left:4px solid #eaf7fc}center.di
 			<p style="font-style: normal;font-weight: 400;text-align: left;Margin-bottom: 25px;Margin-top: 0;font-size: 15px;line-height: 24px;font-family: Roboto,Tahoma,sans-serif;color: #888794;"> Anyway, you can login to Camouloc using the following credentials: <i>(we recommend to change you temporary password as soon as possible) </i></p>	
 							<p style="font-style: normal;font-weight: 400;text-align: left;Margin-bottom: 0;Margin-top: 25px;font-size: 15px;line-height: 24px;font-family: Roboto,Tahoma,sans-serif;color: #888794;"><span style="color:rgb(136, 135, 148); text-align:center">
 									Email: <strong><%= @user.email %><br></strong>
-									Temporary password: <strong><%= @user.password %><br></strong>
+									Temporary password: <strong><%= @user.encrypted_password %><br></strong>
 									Flashare: <strong><%= @flatshare_name %><br></strong>
 								</p> 
 							</td>
