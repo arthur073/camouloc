@@ -39,4 +39,12 @@ class UserMailer < ActionMailer::Base
 		@nbrcoloc = nbrcoloc
 		mail(:to => "arthur.verger@gmail.com", :subject => "[CAMOULOC] Destruction des colocations inutilisées")
     end
+	
+    def reset_counters_email(coloc)
+		@coloc = coloc
+		_arrayTot = @coloc.get_tot
+		@arrayReimbursement = @coloc.get_reimbursement(_arrayTot)
+		@url  = root_url
+		mail(:to => coloc.users.where(:mail => 1).map(&:email), :subject => "[CAMOULOC] Instructions for resetting counters")
+    end
 end

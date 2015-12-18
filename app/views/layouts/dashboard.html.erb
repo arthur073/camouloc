@@ -174,7 +174,28 @@
 			</div>
 		  </div>
 		</div>		  
-		  
+
+		<!-- Modal -->
+		<div class="modal fade modal-default" id="resetCountersModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Sharing expenses distribution</h4>
+			  </div>
+			  <div class="modal-body">
+				You are about to share the expenses distribution to all your roommates. Each member of your flatshare will receive an email with instructions for resetting counters.
+				<br><br>
+				<i>For information, this action will not automatically reset counters.</i>
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary" onclick="resetCounters();">Share expense distribution</button>
+			  </div>
+			</div>
+		  </div>
+		</div>	
+		
           <!-- Main Footer -->
           <footer class="main-footer">
             <!-- To the right -->
@@ -274,6 +295,13 @@
 				$.ajax({
 				  method: "DELETE",
 				  url: classDestroyUrl
+				})
+			};
+			
+			var resetCounters = function() {				
+				$.ajax({
+				  method: "GET",
+				  url: "<%= raw url_for reset_counters_path(:coloc_id => current_user.coloc_id) %>"
 				})
 			};
 			

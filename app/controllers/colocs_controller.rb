@@ -200,6 +200,21 @@ class ColocsController < ApplicationController
 			render :status => 409 unless Coloc.where('lower(nom) = ?', params[:nom].downcase).first.nil? || (params[:prev_name] && params[:prev_name] == params[:nom])
 		end
 		
+		def reset_counters
+			if !params[:coloc_id].blank?
+				_coloc = Coloc.find(params[:coloc_id])
+				begin
+					UserMailer.reset_counters_email(_coloc).deliver
+				rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+					flash[:warning] = "Unable to reach all your roommmates. Please check there email addresses for typing errors"							
+				else
+					flash[:success] = "Expenses distribution successfully shared with your roommates"
+				end
+			else
+				render :status => 404
+			end
+		end
+		
 		private
 		
 	        def missing_flatshare
