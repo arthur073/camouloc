@@ -43,11 +43,9 @@ class UsersController < ApplicationController
          # Traite un succès d'enregistrement.
          # Envoie un email de bienvenue
          UserMailer.welcome_email(@user).deliver
-         unless signed_in?
-            sign_in @user
-         end
+		 sign_in @user
 		 redirect_to new_user_path(:coloc_id => @coloc_id)
-         flash[:success] = t('flash.userCreate')
+         flash[:success] = "Your account has been successfully created"
       else
          flash[:error] = "Something went wrong, please try again"
          redirect_to signup_path
