@@ -8,8 +8,15 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<%= csrf_meta_tag %>
 	<%= favicon_link_tag "/favicon.ico" %>
-	<%= stylesheet_link_tag "bootstrap", "ionicons", "AdminLTE.min", "skin-blue.min", "custom-dashboard", "ionicons.min", "font-awesome.min", "jquery.atwho.min", "select2.min", "dataTables.bootstrap.min"  %>
-    <%= javascript_include_tag "jquery.min", "Chart.min", "validator.min", "jquery.dataTables.min", "dataTables.bootstrap.min" %>
+	<!-- Using CDN to speed up page load -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<%= stylesheet_link_tag "AdminLTE.min", "skin-blue.min", "custom-dashboard", "jquery.atwho.min", "select2.min", "dataTables.bootstrap.min"  %>
+	
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.10/js/jquery.dataTables.min.js"></script>
+    <%= javascript_include_tag "Chart.min", "validator.min", "dataTables.bootstrap.min" %>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -275,7 +282,8 @@
           <div class="control-sidebar-bg"></div>
         </div><!-- ./wrapper -->
 
-        <%= javascript_include_tag "bootstrap.min", "app.min" %>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <%= javascript_include_tag "app.min" %>
 		<script type="text/javascript">
 
 			var populateRemoveModal = function(id, author, amount, reason, roommates_involved, classDestroyUrl) {
