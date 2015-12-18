@@ -134,6 +134,3 @@ function fadeOnChord(d) {
 		});
 }//fadeOnChord
 
-if (respondents != 0) {
-	$("#nochart").hide();
-}

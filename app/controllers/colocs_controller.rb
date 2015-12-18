@@ -37,6 +37,7 @@ class ColocsController < ApplicationController
 				@namesMatrix = @coloc.get_names_matrix
 				@colorsMatrix = @roommates.map{|r| r.color[1] }
 				@params_chord = @coloc.get_chord_params(@expensesMatrix)
+				@params_lineChart = @coloc.get_lineChart_params(@expenses)				
         end
 
         def create

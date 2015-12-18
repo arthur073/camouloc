@@ -67,8 +67,9 @@
                 <div class="box-body">
                   <div class="row">
                     <div class="col-md-8">
+					  <span class="noexpense"> Graph is not available as no expense has been added.</span>
                       <div class="chart-responsive">
-                        <canvas id="pieChart" height="165" width="206" style="width: 206px; height: 165px;"></canvas>
+                        <canvas id="pieChart" style="width: 100%; height: auto; margin:5% 10% 0;"></canvas>
                       </div><!-- ./chart-responsive -->
                     </div><!-- /.col -->
                     <div class="col-md-4">
@@ -127,7 +128,7 @@
 						<div id="cont" class="container-fluid">
 						  <div class="row">
 							<div class="col-md-8">
-								<span id="nochart"> Graph is not available as no expense has been added.</span>
+								<span class="noexpense"> Graph is not available as no expense has been added.</span>
 								<div id="chart"></div>
 							</div><!-- /.col -->
 							<div class="col-md-4">
@@ -144,6 +145,22 @@
 						</div>
                     </div><!-- /.box-body -->
 			  </div>
+			<div class="box box-primary">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Expenses accross time</h3>
+                  <div class="box-tools pull-right">
+                <span class="label label-primary">Showing last <%= @params_lineChart[2] %> expenses</span>
+                  </div>
+                </div><!-- /.box-header -->
+                <div class="box-body">
+					  <span class="noexpense"> Graph is not available as no expense has been added.</span>
+                      <div class="chart-responsive">
+                        <canvas id="lineChart" style="width: 80%; height: auto; margin:5% 10% 0;"></canvas>
+                      </div><!-- ./chart-responsive -->
+                </div><!-- /.box-body -->
+                <div class="box-footer">
+                </div><!-- /.footer -->
+              </div>
 		</div>
       </div>
       <div class="row"> 
@@ -162,6 +179,7 @@
                             <tr>
                               <th>Author</th>
                               <th>Reason</th>
+                              <th>Date</th>
                               <th>Roommates involved</th>
                               <th>Value</th>
                             </tr>
@@ -171,6 +189,7 @@
                             <tr>
                               <td><%= link_to User.find(e.user_id).nom, User.find(e.user_id) %></td>
                               <td><%= e.raison %></td>                              
+                              <td><%= e.created_at.strftime("%d %b. %Y") %></td>
                               <td><%= e.roommates_involved %></td>
                               <td><%= number_to_currency(e.montant) %></td>
                             </tr>
@@ -236,7 +255,37 @@
   //-----------------
   //- END PIE CHART -
   //-----------------
-  
+
+  //-------------
+  //- LINE CHART -
+  //-------------
+  // Get context with jQuery - using jQuery's .get() method.
+  var lineChartCanvas = $("#lineChart").get(0).getContext("2d");
+  var lineChart = new Chart(lineChartCanvas);
+  var LineData = {
+    labels: <%= raw @params_lineChart[0] %>,
+    datasets: [
+        {
+            label: "Expenses by year",
+            fillColor: "rgba(151,187,205,0.2)",
+            strokeColor: "rgb(60,141,188)",
+            pointColor: "rgb(60,141,188)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(151,187,205,1)",
+            data: <%= raw @params_lineChart[1] %>
+        }
+    ]
+  };
+  var lineOptions = {
+	scaleBeginAtZero: true
+  };
+  //Create pie or douhnut chart
+  // You can switch between pie and douhnut using the method below.
+  lineChart.Line(LineData, lineOptions);
+  //-----------------
+  //- END LINE CHART -
+  //-----------------
   	$("#expenseTable").DataTable({
           "paging": false,
           "lengthChange": false,
@@ -255,6 +304,10 @@
 		emptyStroke = 0; //Math.round(respondents*emptyPerc); 
 	var matrix = <%= raw @expensesMatrix %>;
 
+	if (respondents != 0) {
+		$(".noexpense").hide();
+	}
+	
 </script>
 <%= javascript_include_tag "mainChord" %>
 <script type="text/javascript">	
