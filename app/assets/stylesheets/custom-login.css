@@ -1,3 +1,10 @@
+body {
+	/*background-image: url('login-background.jpg') !important;
+	background-repeat: no-repeat !important;
+	background-attachment: fixed !important;*/
+	background: #34495e  !important;
+}
+
 .register-box-header {
 	background: #fff;
 	padding: 10px;
@@ -13,4 +20,8 @@
 
 #roommateemail {
 	margin-bottom: none;
+}
+
+div.login-logo  a , div.register-logo a {
+	color:#fff !important;
 }

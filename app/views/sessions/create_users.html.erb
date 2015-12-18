@@ -43,11 +43,17 @@
           </ul>
           <div class="panel-footer">
           <%= form_for @additional_user, :html => { "data-toggle" => "validator", :id => "additionaluserform" } do |f| %>
-			    <span class="help-block">Enter your roommate's email</span>
+			    <span class="help-block">Enter your roommate's details</span>
                 <div class="form-group has-feedback">
-	                <%= f.email_field :email, :id => "roommateemail", :class => "form-control", :placeholder => "Email", :required => true, "data-minlength" => "6", 
+	                <%= f.text_field :email, :id => "roommatename", :class => "form-control", :placeholder => "Name", :required => true, "data-minlength" => "6" %>
+                    <span class="glyphicon glyphicon-user form-control-feedback"></span>
+			        <div class="help-block with-errors"></div>
+                </div><!-- /input-group -->	
+                <div class="form-group has-feedback">
+	                <%= f.email_field :email, :id => "roommateemail", :class => "form-control", :placeholder => "Email", :required => false, "data-minlength" => "6", 
 						            "data-remote" => "/verifyuser", :name => "email", "data-remote-error" => "A user with this email already exists" %>
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+				<span class="help-block">Email is not mandatory, however you roommate will not be able to login to Camouloc without one</span>
 			        <div class="help-block with-errors"></div>
                 </div><!-- /input-group -->	
                 <%= f.submit "Add a roommate", :class => "btn btn-success btn-block btn-flat"%>	      
@@ -67,7 +73,7 @@
         $("#additionaluserform").submit(function (e) {
             e.preventDefault(); 
             $.ajax({
-                url: "/addroommate?email="+$("#roommateemail").val() + "&user_id=<%= @user.id%>&secret=<%= @coloc.secret %>"
+                url: "/addroommate?email="+$("#roommateemail").val() + "&user_id=<%= @user.id%>&name=" + $("#roommatename").val() + "&secret=<%= @coloc.secret %>"
             });
         });   
         

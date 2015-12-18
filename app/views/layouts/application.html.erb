@@ -24,7 +24,6 @@
 		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
 
-		<%= javascript_include_tag "jquery.min", "smoothscroll" %>
 	</head>
 
 
@@ -44,13 +43,12 @@
 	        </div>
 	        <div class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav">
-	            <li class="active"><a href="#home" class="smothscroll">Home</a></li>
-	            <li><a href="#desc" class="smothscroll">Description</a></li>
-	            <li><a href="#showcase" class="smothScroll">Showcase</a></li>
-	            <li><a href="#contact" class="smothScroll">Contact</a></li>	            
+	            <li class="active"><a data-scroll href="#home">Home</a></li>
+	            <li><a data-scroll href="#desc">Our values</a></li>
+	            <li><a data-scroll href="#showcase">Showcase</a></li>
 	          </ul>
 			  <ul class="nav navbar-nav navbar-right">
-				<li class="wrap"><%= link_to "Try it out!", signup_path, :class => "smothScroll", :id => "try_button" %></li>
+				<li class="wrap"><%= link_to "Register", signup_path, :id => "try_button" %></li>
 				<li><%= link_to "Login", login_path %></li>				
 			  </ul>
 	        </div><!--/.nav-collapse -->
@@ -214,8 +212,6 @@
 				<br>	
 			</div><!-- /container -->
 		</div>	
-
-
 		<div id="c">
 			<div class="container">
 				<p>Copyright &copy; <%= Date.today.strftime("%Y") %> <strong> <%= link_to "Camouloc", root_url %> </strong></p>
@@ -224,18 +220,9 @@
 
 
 		<!-- End of page -->
-		<%= javascript_include_tag "bootstrap" %>
-		<script type="text/javascript">
-			var _gaq = _gaq || [];
-			_gaq.push(['_setAccount', 'UA-32790951-1']);
-			_gaq.push(['_trackPageview']);
-			(function() {
-			 var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-			 ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-			 var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-			 })();
-		</script>
+		<%= javascript_include_tag "jquery.min", "smoothscroll", "bootstrap" %>
 		<script>
+		smoothScroll.init();
 		$('.carousel').carousel({
 		  interval: 3500
 		})

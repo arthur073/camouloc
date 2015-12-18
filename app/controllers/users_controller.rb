@@ -87,15 +87,19 @@ class UsersController < ApplicationController
    end
 
    def add_roommate
-        if params[:email] && params[:user_id] && params[:secret]
+        if !params[:name].blank? && !params[:user_id].blank? && !params[:secret].blank?
             @user = User.find(params[:user_id])
             @coloc = Coloc.find(@user.coloc_id)
             if @coloc.secret.eql? params[:secret]
                 # email
                 @roommate = User.new
-                @roommate.email = params[:email]
+				if !params[:email].blank?
+					@roommate.email = params[:email]
+				else
+					@roommate.email = params[:name].gsub(/[^0-9a-z ]/i, '') + "@camouloc.fr"
+				end
                 # name
-                name = params[:email].split("@")[0].split(".").map {|n| n.capitalize }.join(" ")
+                name = params[:name]
                 @roommate.nom = name
                 # passwords
                 pass = SecureRandom.hex(4)

@@ -74,11 +74,12 @@ li.wrap {
 #try_button {
 	border-style: solid;
     border-width: 1px;
-    border-radius: 10px;
+    border-radius: 7px;
 	padding-top:7px;
 	padding-bottom:7px;
+	background-color:#00b3e1;
 	border-color:#00b3e1;
-	color:#00b3e1;
+	color:#fff;
 	font-weight:bold;
 }
 
