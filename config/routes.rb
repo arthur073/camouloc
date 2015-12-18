@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 MyColoc::Application.routes.draw do
-	default_url_options :host => "http://camouloc.herokuapp.com"
+	default_url_options :host => "http://www.camouloc.fr.cr"
 	# rescue error 404	
 	resources :users
 	resources :authentifications
