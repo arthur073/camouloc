@@ -55,7 +55,9 @@
       </div><!-- /.form-box -->
     </div><!-- /.register-box -->
 	
-	    <%= javascript_include_tag "jquery.min", "bootstrap.min", "validator.min" %>
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<%= javascript_include_tag "validator.min" %>
     <script>
 	  	$('#mainform').validator();
     </script>
