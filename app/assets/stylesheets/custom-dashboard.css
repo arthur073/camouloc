@@ -17,7 +17,11 @@
     color: #000;    
 }
 
+/* Navbar settings */
 
+.navbar-nav>.messages-menu>.dropdown-menu>li .menu>li>a>p, .navbar-nav>.messages-menu>.dropdown-menu>li .menu>li>a>h4 {
+	margin: 0 0 0 0 !important;
+}
 
 /* Select2 settings */
 
