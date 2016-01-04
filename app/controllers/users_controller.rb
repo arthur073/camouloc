@@ -96,7 +96,7 @@ class UsersController < ApplicationController
 				if !params[:email].blank?
 					@roommate.email = params[:email]
 				else
-					@roommate.email = params[:name].gsub(/[^0-9a-z ]/i, '') + "@camouloc.fr"
+					@roommate.email = params[:name].downcase.gsub(/[^0-9a-z]/i, '') + "@camouloc.fr"
 				end
                 # name
                 name = params[:name]
@@ -109,7 +109,7 @@ class UsersController < ApplicationController
                 @roommate.coloc_id = @coloc.id
                 # image
                 @roommate.set_image
-             
+				             
                 if @roommate.save      
 					# Send an email to welcome the user
 					_first_roommate = @coloc.users.order(:created_at).first
@@ -119,8 +119,8 @@ class UsersController < ApplicationController
 						flash[:success] = "User created, but unable to send him an email"
 					end
                 else
-                    flash[:error] = "Ouch... unable to add your roommate. Please try again."
-                    redirect_to create_users_path(:user => @user, :secret => @coloc.secret)
+                    flash[:warning] = "Hey! It looks like this name is already taken, please try another one."
+					render :status => 409
                 end
             else
                 render :status => 404

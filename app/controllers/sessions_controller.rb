@@ -30,6 +30,7 @@ class SessionsController < ApplicationController
 
         def create_users
             @user = User.find(params[:user])
+			sign_in @user
             @coloc = Coloc.find(@user.coloc_id)
             @additional_user = User.new
             @min_user_id = @coloc.users.first(:order => 'created_at asc').id          

@@ -157,7 +157,7 @@ class ColocsController < ApplicationController
 						_coloc.save
 					    begin
 							DepenseMailer.new_expense_email(_expense).deliver
-						rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+						rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError, NoMethodError => e
 							flash[:success] = "Expense successfully saved! Email has not been sent however."							
 						else
 							flash[:success] = "Expense successfully saved!"
@@ -174,10 +174,15 @@ class ColocsController < ApplicationController
 
 
         def destroy
-                @coloc = Coloc.find(params[:id])
-                @coloc.destroy
-                flash[:success] = t('flash.colocDestr') 
-                redirect_to colocs_path
+				if params[:coloc][:id] && params[:coloc][:nom]
+					_coloc = Coloc.find(params[:coloc][:id])
+					_coloc.destroy
+					flash[:success] = "Flatshare successfully removed. See you soon on Camouloc"
+					redirect_to root_path
+				else
+					flash[:error] = "Error: you are not authorized to delete this flatshare"
+					redirect_to root_path
+				end
         end
 
         def edit
