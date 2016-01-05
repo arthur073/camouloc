@@ -64,7 +64,7 @@ task :month_auto_depenses => :environment do
          @user_source = User.find(@autoclone.user_id)
          @coloc = Coloc.find(@user_source.coloc_id)
          if (@coloc.users.where(:mail => 1).size != 0 )
-            DepenseMailer.new_depense_auto_email(@autoclone).deliver
+            DepenseMailer.new_expense_email(@autoclone).deliver
          end 
       end
 
@@ -82,7 +82,7 @@ task :month_auto_depenses => :environment do
          @user_source = User.find(@autoclone.user_id)
          @coloc = Coloc.find(@user_source.coloc_id)
          if (@coloc.users.where(:mail => 1).size != 0 )
-            DepenseMailer.new_depense_auto_email(@autoclone).deliver
+            DepenseMailer.new_expense_email(@autoclone).deliver
          end 
       end
 
@@ -101,7 +101,7 @@ task :month_auto_depenses => :environment do
          @user_source = User.find(@autoclone.user_id)
          @coloc = Coloc.find(@user_source.coloc_id)
          if (@coloc.users.where(:mail => 1).size != 0 )
-            DepenseMailer.new_depense_auto_email(@autoclone).deliver
+            DepenseMailer.new_expense_email(@autoclone).deliver
          end 
       end
 
@@ -117,7 +117,7 @@ task :month_auto_depenses => :environment do
          @user_source = User.find(@autoclone.user_id)
          @coloc = Coloc.find(@user_source.coloc_id)
          if (@coloc.users.where(:mail => 1).size != 0 )
-            DepenseMailer.new_expense_auto_email(@autoclone).deliver
+            DepenseMailer.new_expense_email(@autoclone).deliver
          end 
 
       end

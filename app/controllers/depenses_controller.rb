@@ -3,7 +3,6 @@ class DepensesController < ApplicationController
    before_filter :require_login
    layout "dashboard"
 
-
    def new
       @expense = Depense.new
 	  @coloc = Coloc.find(current_user.coloc_id)

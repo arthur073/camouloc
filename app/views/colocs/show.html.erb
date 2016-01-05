@@ -115,6 +115,43 @@
 					  </tbody></table>				  
 				</div>
               </div>
+            <div class="box box-primary">
+                    <div class="box-header with-border">
+                      <h3 class="box-title">Recurring expenses <small>(added every month)</small></h3>
+                      <div class="box-tools pull-right">
+                        <span class="label label-primary"><%= @auto_expenses.count %> expenses in total</span>
+                      </div>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                      <div class="table-responsive">
+                        <table class="table no-margin" id="expenseTable">
+                          <thead>
+                            <tr>
+                              <th>Author</th>
+                              <th>Reason</th>
+                              <th>Date</th>
+                              <th>Roommates involved</th>
+                              <th>Value</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% @auto_expenses.last(10).reverse_each do |e| %>
+                            <tr>
+                              <td><%= link_to User.find(e.user_id).nom, User.find(e.user_id) %></td>
+                              <td><%= e.raison %></td>                              
+                              <td><%= e.created_at.strftime("%d %b. %Y") %></td>
+                              <td><%= e.roommates_involved %></td>
+                              <td><%= number_to_currency(e.montant) %></td>
+                            </tr>
+                            <% end %>
+                          </tbody>
+                        </table>
+                      </div><!-- /.table-responsive -->
+                    </div><!-- /.box-body -->
+                    <div class="box-footer clearfix">
+                      <%= link_to "View all recurring expenses", redirect_to_expense_screen_path(:id => @coloc.id), :class => "btn btn-sm btn-default btn-flat pull-right" %>
+                    </div><!-- /.box-footer -->
+                  </div>
               </div>
         <div class="col-md-6">
             <div class="box box-primary">
@@ -185,7 +222,7 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <% @expenses.last(10).each do |e| %>
+                            <% @expenses.last(10).reverse_each do |e| %>
                             <tr>
                               <td><%= link_to User.find(e.user_id).nom, User.find(e.user_id) %></td>
                               <td><%= e.raison %></td>                              

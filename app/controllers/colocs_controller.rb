@@ -10,24 +10,15 @@ class ColocsController < ApplicationController
                 
                 # Avoiding confidential data leak      
                 redirect_if_wrong_flatshare(@coloc)
-                
                                 
                 @coloc_ranking = Coloc.order(:ca).index(@coloc)
                 @total_coloc_count = Coloc.all.count
                 @roommates = @coloc.users.order(:created_at)
                 user_number = @roommates.count
                 
-                @expenses = []
-                if user_number <= 2
-                    @expenses = Depense.all(:conditions => {:user_id => [@roommates[0].id, @roommates[1].id]}, :order => "created_at ASC")
-                elsif user_number == 3
-                    @expenses = TroisDepense.all(:conditions => {:user_id => [@roommates[0].id, @roommates[1].id, @roommates[2].id]}, :order => "created_at ASC")
-                elsif user_number == 4
-                    @expenses = QuatreDepense.all(:conditions => {:user_id => [@roommates[0].id, @roommates[1].id, @roommates[2].id, @roommates[3].id]}, :order => "created_at ASC")
-                elsif user_number > 4
-                    @expenses = Expense.find(:all, :conditions => ["user_id IN (?) AND auto = 0", @roommates.map { |c| c.id }])
-                    @expenses.delete_if {|item| item == [] or item.auto == 1 } 
-                end
+                @expenses = @coloc.get_expenses
+				@auto_expenses = @expenses.select{|item| item.auto == 1}
+				@expenses = @expenses.keep_if{|item| item.auto == 0}
                 
                 flash[:info] = "Hey! It looks like you haven't entered any expense yet. You can do so from the expense screen." if @expenses.count == 0
 				
@@ -37,7 +28,8 @@ class ColocsController < ApplicationController
 				@namesMatrix = @coloc.get_names_matrix
 				@colorsMatrix = @roommates.map{|r| r.color[1] }
 				@params_chord = @coloc.get_chord_params(@expensesMatrix)
-				@params_lineChart = @coloc.get_lineChart_params(@expenses)				
+				@params_lineChart = @coloc.get_lineChart_params(@expenses)	
+
         end
 
         def create
@@ -151,6 +143,7 @@ class ColocsController < ApplicationController
 					_expense.montant = _amount
 					_expense.user_id = _author
 					_expense.nbr_users = _roommates_involved.count
+					_expense.auto = 1 if params[:auto]
 									
 					if _expense.save
 						_coloc.ca += _expense.montant
