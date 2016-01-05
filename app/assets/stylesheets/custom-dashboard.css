@@ -23,6 +23,17 @@
 	margin: 0 0 0 0 !important;
 }
 
+.feedback {
+	color: rgb(60, 141, 188) !important;
+	display: inline !important;
+	padding: 0 !important;
+}
+
+.feedback:hover {
+	background-color:white !important;
+	text-decoration:underline !important;
+}
+
 /* Select2 settings */
 
 .select2-container--default{
