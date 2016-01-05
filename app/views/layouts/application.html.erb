@@ -45,7 +45,7 @@
 	          <ul class="nav navbar-nav">
 	            <li class="active"><a data-scroll href="#home">Home</a></li>
 	            <li><a data-scroll href="#desc">Our values</a></li>
-	            <li><a data-scroll href="#showcase">Showcase</a></li>
+	            <li><a data-scroll href="#showcase">Features</a></li>
 	          </ul>
 			  <ul class="nav navbar-nav navbar-right">
 				<li class="wrap"><%= link_to "Register", signup_path, :id => "try_button" %></li>
@@ -135,6 +135,7 @@
 					<h1 class="centered">What's included?</h1>
 					<br>
 					<br>
+					<br>
 					<div class="col-lg-8 col-lg-offset-2">
 						<div id="carousel-example-generic" class="carousel slide">
 						  <!-- Indicators -->
@@ -143,73 +144,91 @@
 							<li data-target="#carousel-example-generic" data-slide-to="1"></li>
 							<li data-target="#carousel-example-generic" data-slide-to="2"></li>
 							<li data-target="#carousel-example-generic" data-slide-to="3"></li>
+							<li data-target="#carousel-example-generic" data-slide-to="4"></li>
 						  </ol>
 					
 						  <!-- Wrapper for slides -->
 						  <div class="carousel-inner">
 							<div class="item active">
 								<div class="row">
-									<div class="col-md-6">
-										<%= image_tag("rocket.png") %>
+									<div class="col-md-7">
+										<%= image_tag("feature_1.png", :class => "feature_img") %>
 									</div>
-									<div class="col-md-6">
-										<h2>Some feature</h2>
-										<p> 
-											Some description here
+									<div class="col-md-5">
+										<br>
+										<h2>Visualize your flatshare situation at one glance</h2>
+										<p class="carousel-custom"> 
+											No need to spend hours processing your expenses, you can have a quick overview on Camouloc that will tell you how money is spread inside your flatshare.
 										</p>
 									</div>								
 								</div>
-								<br><br>
+								<br><br><br><br>
+							</div>	
+							<div class="item">
+								<div class="row">
+									<div class="col-md-4">
+										<br><br>
+										<h2>See how your spending over time</h2>
+										<p class="carousel-custom"> 
+											Camouloc keeps track of your expenses so you can see on which months were the most costly for your flatshare.
+										</p>
+									</div>	
+									<div class="col-md-8">
+										<%= image_tag("feature_4.png") %>
+									</div>
+								</div>
+								<br><br><br><br>
+						  </div>														  
+							<div class="item">
+								<div class="row">
+									<div class="col-md-8">
+										<%= image_tag("feature_3.png") %>
+									</div>
+									<div class="col-md-4">
+										<br><br>
+										<h2>You want to reset your counters?</h2>
+										<p class="carousel-custom"> 
+											Camouloc will tell you how to do so. You can even share it with your roommates via email in two clicks.
+										</p>
+									</div>	
+								</div>
+								<br><br><br><br>
+							</div>						  
+							<div class="item">
+								<div class="row">
+									<div class="col-md-4">
+										<br>
+										<h2>See how your expenses flow within your flatshare</h2>
+										<p class="carousel-custom"> 
+											Use the expenses graph to get an overview of flows of money within your flatshare, and make sure everything is allright. 
+										</p>
+									</div>	
+									<div class="col-md-8">
+										<%= image_tag("feature_2.png", :class => "feature_img") %>
+									</div>							
+								</div>
+								<br><br><br><br>
 							</div>
 							<div class="item">
 								<div class="row">
-									<div class="col-md-6">
-										<%= image_tag("rocket.png") %>
+									<div class="col-md-8">
+										<%= image_tag("feature_5.png") %>
 									</div>
-									<div class="col-md-6">
-										<h2>Some feature</h2>
-										<p> 
-											Some description here
+									<div class="col-md-4">
+										<br><br>
+										<h2>Don't just save your expenses, tweet them!</h2>
+										<p class="carousel-custom"> 
+											It only takes 5 seconds to enter a new expense. The less time you spend on Camouloc, the more you spend with your roommates and the happier we are!
 										</p>
-									</div>								
+									</div>	
 								</div>
-								<br><br>							
-							</div>
-							<div class="item">
-								<div class="row">
-									<div class="col-md-6">
-										<%= image_tag("rocket.png") %>
-									</div>
-									<div class="col-md-6">
-										<h2>Some feature</h2>
-										<p> 
-											Some description here
-										</p>
-									</div>								
-								</div>
-								<br><br>							
-							</div>
-							<div class="item">
-								<div class="row">
-									<div class="col-md-6">
-										<%= image_tag("rocket.png") %>
-									</div>
-									<div class="col-md-6">
-										<h2>Some feature</h2>
-										<p> 
-											Some description here
-										</p>
-									</div>								
-								</div>
-								<br><br>							
-							</div>							
+								<br><br><br><br>
+							</div>	
+							</div>						  
 						  </div>
-						</div>
+						  </div>
 					</div>
-				</div>
-				<br>
-				<br>
-				<br>	
+				</div>	
 			</div><!-- /container -->
 		</div>	
 		<div id="c">
@@ -226,7 +245,7 @@
 		<script>
 		smoothScroll.init();
 		$('.carousel').carousel({
-		  interval: 3500
+		  interval: 5000
 		})
 		</script>
  	</body>
