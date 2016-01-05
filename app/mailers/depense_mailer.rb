@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 class DepenseMailer < ActionMailer::Base
-	default from: "camouloc@noreply-camouloc.fr"
+	default from: "Camouloc@noreply-camouloc.fr"
     default "Message-ID"=>"#{Digest::SHA2.hexdigest(Time.now.to_i.to_s)}@camouloc.fr"
 
    def new_expense_email(_expense)
@@ -11,7 +11,7 @@ class DepenseMailer < ActionMailer::Base
 		@amount = _expense.montant
 		@reason = _expense.raison.capitalize
 		@roommates_involved = _expense.roommates_involved
-		@expensedate = _expense.created_at.strftime('%b %e')
+		@expensedate = _expense.created_at.strftime('%b %e, %Y')
 		mail(:to => _coloc.users.where(:mail => 1).map(&:email), :subject => "[CAMOULOC] New expense")
 	end
 end

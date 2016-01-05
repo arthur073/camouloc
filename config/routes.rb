@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 MyColoc::Application.routes.draw do
-	default_url_options :host => "http://www.camouloc.fr.cr"
+	default_url_options :host => "www.camouloc.fr.cr"
 	# rescue error 404	
 	resources :users
 	resources :authentifications
@@ -21,7 +21,8 @@ MyColoc::Application.routes.draw do
 	match '/signin',  :to => 'sessions#new', :as => 'login'
 	match '/signout', :to => 'sessions#destroy'
 	match '/redirecttoexpensescreen', :controller => 'colocs', :action => 'redirect_to_expense_screen', :as => 'redirect_to_expense_screen'
-	match '/registerprovider', :controller => 'sessions', :action => 'register_provider', :as => "register_provider"
+	match '/registerprovider', :controller => 'sessions', :action => 'register_provider', :as => 'register_provider'
+	
 	get "/verifyuser" => "users#verify_user", :as => "verify_user"
 	get "/verifycoloc" => "colocs#verify_coloc", :as => "verify_coloc"	
 	get "/addroommate" => "users#add_roommate", :as => "add_roommmate"	
