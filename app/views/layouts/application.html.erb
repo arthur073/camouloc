@@ -43,17 +43,17 @@
 	        </div>
 	        <div class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav">
-	            <li class="active"><a data-scroll href="#home">Home</a></li>
-	            <li><a data-scroll href="#desc">Our values</a></li>
-	            <li><a data-scroll href="#showcase">Features</a></li>
+	            <li class="active"><a data-scroll href="#home"><%= t "home.home" %></a></li>
+	            <li><a data-scroll href="#desc"><%= t "home.values" %></a></li>
+	            <li><a data-scroll href="#showcase"><%= t "home.features" %></a></li>
 	          </ul>
 			  <ul class="nav navbar-nav navbar-right">
-				<li class="wrap"><%= link_to "Register", signup_path, :id => "try_button" %></li>
-				<li><%= link_to "Login", login_path %></li>				
+				<li class="wrap"><%= link_to t("home.register"), signup_path, :id => "try_button" %></li>
+				<li><%= link_to t("home.login"), login_path %></li>				
 				<li>				
-					<div class="btn-group dropdown language-selector">
+					<div class="btn-group dropdown language-selector" id="language_box" style="display:none">
 					  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-						<span class="lang-sm" lang="fr"></span><span class="caret"></span>
+						<span class="lang-sm" id="current_language"></span><span class="caret"></span>
 					  </button>
 					  <ul class="dropdown-menu" role="menu">
 						<li><a href="<%= url_for root_url(:locale => "en") %>"><span class="lang-sm lang-lbl" lang="en"></span></a></li>
@@ -88,13 +88,12 @@
 				<div class="row centered">
 					<div class="col-lg-12">
 						<h1><b>Camouloc</b></h1>
-						<h3>Manage your flatshare <i>(like a pro).</i></h3>
+						<h3><%= t("home.subtitle").html_safe %></h3>
 						<br><br>
 					</div>
 					
 					<div class="col-lg-2">
-						<h5>Dead simple</h5>
-						<p>Camouloc takes the pain of flatshare management away. <br> You can forget about your notebooks or Excel spreadsheets.</p>
+						<%= t("home.caption1").html_safe %>
 						<%= image_tag("arrow1.png", :class => "hidden-xs hidden-sm hidden-md") %>
 					</div>
 					<div class="col-lg-8">
@@ -103,8 +102,7 @@
 					<div class="col-lg-2">
 						<br>
 						<%= image_tag("arrow2.png", :class => "hidden-xs hidden-sm hidden-md") %>
-						<h5>No fuzz. No muss.</h5>
-						<p>Every interaction with Camouloc has been carefully designed to make sure you spend the least amount of time doing it.</p>
+						<%= t("home.caption2").html_safe %>
 					</div>
 				</div>
 			</div> <!--/ .container -->
@@ -117,23 +115,20 @@
 		<div id="intro">
 			<div class="container">
 				<div class="row centered">
-					<h1>Our values</h1>
+					<h1><%= t "home.values" %></h1>
 					<br>
 					<br>
 					<div class="col-lg-4">
 						<%= image_tag("free.png") %>
-						<h3>It's free <i>(and always will be)</i></h3>
-						<p>We don't need subscriptions, ads or spam to run Camouloc. We are non-profit oriented and will never charge you for any service.</p>
+						<%= t("home.value1").html_safe %>
 					</div>
 					<div class="col-lg-4">
 						<%= image_tag("rocket.png") %>
-						<h3>It's fast <i>(blazingly)</i></h3>
-						<p>Try us out! We have looked into each and every interaction you may have with Camouloc to make sure it is optimized and cannot be quicker.</p>
+						<%= t("home.value2").html_safe %>
 					</div>
 					<div class="col-lg-4">
 						<%= image_tag("perfect.png") %>
-						<h3>It looks good <i>(at least for us!)</i></h3>
-						<p>We are true user interface guru and we work hard every day to make sure your user experience is awesome on Camouloc.</p>
+						<%= t("home.value3").html_safe %>
 					</div>
 				</div>
 				<br>
@@ -143,7 +138,7 @@
 		<div id="showcase">
 			<div class="container">
 				<div class="row">
-					<h1 class="centered">What's included?</h1>
+					<h1 class="centered"><%= t "home.included" %></h1>
 					<br>
 					<br>
 					<br>
@@ -167,10 +162,7 @@
 									</div>
 									<div class="col-md-5">
 										<br>
-										<h2>Visualize your flatshare situation at one glance</h2>
-										<p class="carousel-custom"> 
-											No need to spend hours processing your expenses, you can have a quick overview on Camouloc that will tell you how money is spread inside your flatshare.
-										</p>
+										<%= t("home.feature1").html_safe %>
 									</div>								
 								</div>
 								<br><br><br><br>
@@ -179,10 +171,7 @@
 								<div class="row">
 									<div class="col-md-4">
 										<br><br>
-										<h2>See how your spending over time</h2>
-										<p class="carousel-custom"> 
-											Camouloc keeps track of your expenses so you can see on which months were the most costly for your flatshare.
-										</p>
+										<%= t("home.feature2").html_safe %>
 									</div>	
 									<div class="col-md-8">
 										<%= image_tag("feature_4.png") %>
@@ -197,10 +186,7 @@
 									</div>
 									<div class="col-md-4">
 										<br><br>
-										<h2>You want to reset your counters?</h2>
-										<p class="carousel-custom"> 
-											Camouloc will tell you how to do so. You can even share it with your roommates via email in two clicks.
-										</p>
+										<%= t("home.feature3").html_safe %>
 									</div>	
 								</div>
 								<br><br><br><br>
@@ -209,10 +195,7 @@
 								<div class="row">
 									<div class="col-md-4">
 										<br>
-										<h2>See how your expenses flow within your flatshare</h2>
-										<p class="carousel-custom"> 
-											Use the expenses graph to get an overview of flows of money within your flatshare, and make sure everything is allright. 
-										</p>
+										<%= t("home.feature4").html_safe %>
 									</div>	
 									<div class="col-md-8">
 										<%= image_tag("feature_2.png", :class => "feature_img") %>
@@ -227,10 +210,7 @@
 									</div>
 									<div class="col-md-4">
 										<br><br>
-										<h2>Don't just save your expenses, tweet them!</h2>
-										<p class="carousel-custom"> 
-											It only takes 5 seconds to enter a new expense. The less time you spend on Camouloc, the more you spend with your roommates and the happier we are!
-										</p>
+										<%= t("home.feature5").html_safe %>										
 									</div>	
 								</div>
 								<br><br><br><br>
@@ -254,10 +234,28 @@
 		<%= javascript_include_tag "smoothscroll" %>
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 		<script>
-		smoothScroll.init();
-		$('.carousel').carousel({
-		  interval: 5000
-		})
+			smoothScroll.init();
+			$('.carousel').carousel({
+			  interval: 5000
+			})
+			
+			var getUrlParameter = function getUrlParameter(sParam) {
+				var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+					sURLVariables = sPageURL.split('&'),
+					sParameterName,
+					i;
+
+				for (i = 0; i < sURLVariables.length; i++) {
+					sParameterName = sURLVariables[i].split('=');
+
+					if (sParameterName[0] === sParam) {
+						return sParameterName[1] === undefined ? true : sParameterName[1];
+					}
+				}
+			};
+			
+			$("#current_language").attr("lang",getUrlParameter("locale"));
+			$("#language_box").show();
 		</script>
  	</body>
  </html>

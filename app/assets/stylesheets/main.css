@@ -25,6 +25,10 @@ p {
     margin-bottom: 25px;
 }
 
+#c > div > p {
+	margin-bottom:15px;
+}
+
 .centered {
     text-align: center;
 }
