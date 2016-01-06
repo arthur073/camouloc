@@ -83,6 +83,21 @@ li.wrap {
 	font-weight:bold;
 }
 
+.language-selector {
+	margin-top:8px;
+}
+
+.language-selector .caret{
+	margin-left:3px;
+}
+
+.language-selector button {
+	background-color:#f8f8f8;
+}
+
+.language-selector .dropdown-menu {
+	background-color:#f8f8f8;
+}
 
 /* ==========================================================================
    Wrap Sections

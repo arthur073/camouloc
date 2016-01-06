@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title> Camouloc </title>
-		<meta name="description" content="L'application la plus professionnelle pour gérer votre coloc ! Simple, élégante et gratuite, venez découvrir l'univers Camouloc !" /> 
+		<meta name="description" content="L'application la plus professionnelle pour gérer votre coloc ! Simple, élégante et gratuite, venez découvrir l'univers Camouloc" /> 
 		<meta name="google-site-verification" content="5C7iTdSIxkpZvOM701oAEloD7LvzkoxkgSosSvhGc4M" />
 		<meta name="keywords" content="colocation, collocation, coloc,colloc, collocataire, colocataire, pro,  roommate, roommates, share, partage, appartement, co-location, comptes, dépenses, courses, facture, loyer, edf, téléphone, diviser, répartir, remboursement, cahier, argent, ze-coloc, camouloc, the coloc, zecoloc, copropriété, ze-coloc, camouloc, colocatioonline, online, maison, charges, statistiques, courses, expense, housemate, foyer, gestion, facile, gratuit">
 		<meta name="dc.keywords" content="colocation, collocation, coloc,colloc, collocataire, colocataire,  roommate, roommates, share, partage, appartement, co-location, comptes, dépenses, courses, facture, loyer, edf, téléphone, diviser, répartir, remboursement, cahier, argent, camouloc, ze-coloc, the coloc, zecoloc, copropriété, ze-coloc, colocatioonline, online, maison, charges, statistiques, courses, expense, housemate, foyer, gestion, facile, gratuit">
@@ -19,7 +19,7 @@
 		<%= csrf_meta_tag %>
 		<%= favicon_link_tag "/favicon.ico" %>
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
-		<%= stylesheet_link_tag "main" %>
+		<%= stylesheet_link_tag "languages.min", "main" %>
 
 		<link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
 		<link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
@@ -50,6 +50,17 @@
 			  <ul class="nav navbar-nav navbar-right">
 				<li class="wrap"><%= link_to "Register", signup_path, :id => "try_button" %></li>
 				<li><%= link_to "Login", login_path %></li>				
+				<li>				
+					<div class="btn-group dropdown language-selector">
+					  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+						<span class="lang-sm" lang="fr"></span><span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu" role="menu">
+						<li><a href="<%= url_for root_url(:locale => "en") %>"><span class="lang-sm lang-lbl" lang="en"></span></a></li>
+						<li><a href="<%= url_for root_url(:locale => "fr") %>"><span class="lang-sm lang-lbl" lang="fr"></span></a></li>
+					  </ul>
+					</div>
+				</li>				
 			  </ul>
 	        </div><!--/.nav-collapse -->
 	      </div>
