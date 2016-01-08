@@ -124,7 +124,7 @@
                     </div><!-- /.box-header -->
                     <div class="box-body">
                       <div class="table-responsive">
-                        <table class="table no-margin" id="expenseTable">
+                        <table class="table no-margin" id="recurringexpenseTable">
                           <thead>
                             <tr>
                               <th>Author</th>
@@ -333,7 +333,15 @@
           "autoWidth": false,
 		  "pageLength": 15
 	});
-	
+  	$("#recurringexpenseTable").DataTable({
+          "paging": false,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": false,
+          "autoWidth": false,
+		  "pageLength": 15
+	});	
 	var Names = <%= raw @namesMatrix %>;
 	var Colors = <%= raw @colorsMatrix %>;
 
