@@ -6,7 +6,7 @@
 	  
 
       <div class="register-box-body">
-        <p class="login-box-msg">Great, you're almost done! One last step though, don't forget to add your roommates! </p>
+        <p class="login-box-msg"><%= t "login.createuserscaption" %> </p>
 
         <% flash.each do |type, content| %>
             <% if content.respond_to?('each') 
@@ -26,7 +26,7 @@
         <br>
         <div class="panel panel-default">
           <!-- Default panel contents -->
-          <div class="panel-heading">Roommates for <strong> <%= @coloc.nom %> </strong> </div>
+          <div class="panel-heading"><%= t "login.roommatesfor" %> <strong> <%= @coloc.nom %> </strong> </div>
           <!-- List group -->
           <ul id="roommates_list" class="list-group">
             <% @coloc.users.reverse_each do |u| %> 
@@ -43,9 +43,9 @@
           </ul>
           <div class="panel-footer">
           <%= form_for @additional_user, :html => { "data-toggle" => "validator", :id => "additionaluserform" } do |f| %>
-			    <span class="help-block">Enter your roommate's details</span>
+			    <span class="help-block"><%= t "login.roommatedetails" %></span>
                 <div class="form-group has-feedback">
-	                <%= f.text_field :nom, :id => "roommatename", :class => "form-control", :placeholder => "Name", :required => true %>
+	                <%= f.text_field :nom, :id => "roommatename", :class => "form-control", :placeholder => t("login.roommatename"), :required => true %>
                     <span class="glyphicon glyphicon-user form-control-feedback"></span>
 			        <div class="help-block with-errors"></div>
                 </div><!-- /input-group -->	
@@ -53,15 +53,15 @@
 	                <%= f.email_field :email, :id => "roommateemail", :class => "form-control", :placeholder => "Email", :required => false, "data-minlength" => "6", 
 						            "data-remote" => "/verifyuser", :name => "email", "data-remote-error" => "A user with this email already exists" %>
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-				<span class="help-block">Email is not mandatory, however your roommate will not be able to login to Camouloc without one</span>
+				<span class="help-block"><%= t "login.emailnotmandatory" %></span>
 			        <div class="help-block with-errors"></div>
                 </div><!-- /input-group -->	
-                <%= f.submit "Add a roommate", :class => "btn btn-success btn-block btn-flat"%>	      
+                <%= f.submit t("login.addaroommate"), :class => "btn btn-success btn-block btn-flat"%>	      
            <% end %>
           </div>
         </div>
         
-        <%= link_to "I am done", @coloc, :id => "validation_link", :class => "btn btn-primary btn-block btn-flat disabled" %>
+        <%= link_to t("login.iamdone"), @coloc, :id => "validation_link", :class => "btn btn-primary btn-block btn-flat disabled" %>
 
       </div><!-- /.form-box -->
     </div><!-- /.register-box -->
