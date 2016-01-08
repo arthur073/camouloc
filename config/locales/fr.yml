@@ -47,3 +47,5 @@ fr:
     emailnotmandatory: "L'email n'est pas obligatoire, cependant votre colocataire ne pourra pas se connecter à Camouloc sans email."
     addaroommate: "Ajouter mon colocataire"
     iamdone: "J'ai terminé"
+    registerprovidercaption: "Votre compte a bien été créé. <br> Nous avons juste besoin de quelques informations avant de continuer"
+    providerflatsharename: "Le nom de votre coloc"

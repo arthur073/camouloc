@@ -6,7 +6,7 @@
 	  
 
       <div class="register-box-body">
-        <p class="login-box-msg">You're account has been created. <br> We just need some additional information to create your profile </p>
+        <p class="login-box-msg"> <%= t("login.registerprovidercaption").html_safe %> </p>
 
         <% flash.each do |type, content| %>
             <% if content.respond_to?('each') 
@@ -27,7 +27,7 @@
 		
 		
           <div class="form-group has-feedback">
-			<%= f.text_field :nom, :class => "form-control", :placeholder => "Give your flatshare a name", :required => true, "data-minlength" => "3", 
+			<%= f.text_field :nom, :class => "form-control", :placeholder => t("login.providerflatsharename"), :required => true, "data-minlength" => "3", 
 							"data-remote" => "/verifycoloc", :name => "nom", "data-remote-error" => "This flatshare name already exists" %>
             <span class="glyphicon glyphicon-home form-control-feedback"></span>
 			<div class="help-block with-errors"></div>
@@ -38,19 +38,19 @@
 		  <%= u.hidden_field :user_id, :value => @user.id %>
 
           <div class="form-group has-feedback">
-			<%= u.password_field :password, :class => "form-control", :placeholder => "Enter a password", :required => true, "data-minlength" => "8", :id => "inputPassword" %>
+			<%= u.password_field :password, :class => "form-control", :placeholder => t("login.userpassword"), :required => true, "data-minlength" => "8", :id => "inputPassword" %>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 			<div class="help-block with-errors"></div>
           </div>
           <div class="form-group has-feedback">
-			<%= u.password_field :password_confirmation, :class => "form-control", :placeholder => "Retype your password", :required => true, "data-match" => "#inputPassword" %>
+			<%= u.password_field :password_confirmation, :class => "form-control", :placeholder => t("login.userretypepassword"), :required => true, "data-match" => "#inputPassword" %>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-			<span class="help-block">Minimum of 8 characters</span>
+			<span class="help-block"><%= t "login.minimumcharacters" %></span>
 			<div class="help-block with-errors"></div>
           </div>	
 		  <% end %>
 
-          <%= f.submit "Register", :class => "btn btn-primary btn-block btn-flat"%>
+          <%= f.submit t("login.register"), :class => "btn btn-primary btn-block btn-flat"%>
 		<% end %>
       </div><!-- /.form-box -->
     </div><!-- /.register-box -->

@@ -47,3 +47,5 @@ en:
     emailnotmandatory: "Email is not mandatory, however your roommate will not be able to login to Camouloc without one"
     addaroommate: "Add a roommate"
     iamdone: "I am done"
+    registerprovidercaption: "You're account has been created. <br> We just need some additional information to create your profile"
+    providerflatsharename: "Give your flatshare a name"
