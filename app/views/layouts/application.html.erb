@@ -254,8 +254,15 @@
 				}
 			};
 			
-			$("#current_language").attr("lang",getUrlParameter("locale"));
-			$("#language_box").show();
+			$( document ).ready(function() {
+				var language = "fr"
+				if (getUrlParameter("locale") != undefined && !(getUrlParameter("locale") != "fr" && getUrlParameter("locale") != "en")) {
+					language = getUrlParameter("locale");
+				}
+				$("#current_language").attr("lang",language);
+				$("#language_box").show();			
+			});
+
 		</script>
  	</body>
  </html>

@@ -4,7 +4,7 @@
         <%= link_to "<b>Camouloc</b>".html_safe, root_path %>
       </div><!-- /.login-logo -->
       <div class="login-box-body">
-        <p class="login-box-msg">Forgotten password? Enter your email below:</p>
+        <p class="login-box-msg"><%= t("login.forgotpasswordcaption").html_safe %></p>
 
         <% flash.each do |type, content| %>
             <% if content.respond_to?('each') 
@@ -29,12 +29,12 @@
           </div>
           <div class="row">
             <div class="col-xs-12">
-			  <%= submit_tag "Réinitialiser le mot de passe", :class => "btn btn-primary btn-block btn-flat" %>
+			  <%= submit_tag t("login.resetpassword"), :class => "btn btn-primary btn-block btn-flat" %>
             </div><!-- /.col -->
           </div>
 	    <% end %>
         <br>
-        <%= link_to "Return to login", login_path, :class => "text-center" %>
+        <%= link_to t("login.returntologin"), login_path, :class => "text-center" %>
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->

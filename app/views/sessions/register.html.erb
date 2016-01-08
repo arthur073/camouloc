@@ -6,7 +6,7 @@
 	  
 
       <div class="register-box-body">
-        <p class="login-box-msg">Hey there! Welcome onboard, we just need some information before creating your <strong> Camouloc </strong> dashboard. </p>
+        <p class="login-box-msg"><%= t("login.registercaption").html_safe %> </p>
 
         <% flash.each do |type, content| %>
             <% if content.respond_to?('each') 
@@ -27,7 +27,7 @@
 		
 		
           <div class="form-group has-feedback">
-			<%= f.text_field :nom, :class => "form-control", :placeholder => "Give your flatshare a name", :required => true, "data-minlength" => "3", 
+			<%= f.text_field :nom, :class => "form-control", :placeholder => t("login.flatsharename"), :required => true, "data-minlength" => "3", 
 							"data-remote" => "/verifycoloc", :name => "nom", "data-remote-error" => "This flatshare name already exists" %>
             <span class="glyphicon glyphicon-home form-control-feedback"></span>
 			<div class="help-block with-errors"></div>
@@ -36,38 +36,38 @@
           <%= fields_for @user do |u| %>
 
           <div class="form-group has-feedback">
-			<%= u.text_field :nom, :class => "form-control", :placeholder => "Enter your name", :required => true, "data-minlength" => "6" %>
+			<%= u.text_field :nom, :class => "form-control", :placeholder => t("login.username"), :required => true, "data-minlength" => "6" %>
             <span class="glyphicon glyphicon-user form-control-feedback"></span>
 			<div class="help-block with-errors"></div>
           </div>
           <div class="form-group has-feedback">
-			<%= u.email_field :email, :class => "form-control", :placeholder => "Enter your email", :required => true, "data-minlength" => "6",
+			<%= u.email_field :email, :class => "form-control", :placeholder => t("login.useremail"), :required => true, "data-minlength" => "6",
 							"data-remote" => "/verifyuser", :name => "email", "data-remote-error" => "A user with this email already exists" %>
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 			<div class="help-block with-errors"></div>
           </div>
           <div class="form-group has-feedback">
-			<%= u.password_field :password, :class => "form-control", :placeholder => "Enter a password", :required => true, "data-minlength" => "8", :id => "inputPassword" %>
+			<%= u.password_field :password, :class => "form-control", :placeholder => t("login.userpassword"), :required => true, "data-minlength" => "8", :id => "inputPassword" %>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
 			<div class="help-block with-errors"></div>
           </div>
           <div class="form-group has-feedback">
-			<%= u.password_field :password_confirmation, :class => "form-control", :placeholder => "Retype your password", :required => true, "data-match" => "#inputPassword" %>
+			<%= u.password_field :password_confirmation, :class => "form-control", :placeholder => t("login.userretypepassword"), :required => true, "data-match" => "#inputPassword" %>
             <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-			<span class="help-block">Minimum of 8 characters</span>
+			<span class="help-block"><%= t "login.minimumcharacters" %></span>
 			<div class="help-block with-errors"></div>
           </div>	
 		  <% end %>
 
-          <%= f.submit "Register", :class => "btn btn-primary btn-block btn-flat"%>
+          <%= f.submit t("login.register"), :class => "btn btn-primary btn-block btn-flat"%>
 		<% end %>
         <div class="social-auth-links text-center">
-          <p>- OR -</p>
-          <a href="/auth/facebook" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign up using Facebook</a>
-          <a href="/auth/google_oauth2" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign up using Google+</a>
+          <p>- <%= t "login.or" %> -</p>
+          <a href="/auth/facebook" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> <%= t("login.facebooksi") %></a>
+          <a href="/auth/google_oauth2" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> <%= t("login.googleplussi") %></a>
         </div>
 
-        <%= link_to "I am already a member!", login_path, :class => "text-center" %>
+        <%= link_to t("login.alreadymember"), login_path, :class => "text-center" %>
       </div><!-- /.form-box -->
     </div><!-- /.register-box -->
 	
