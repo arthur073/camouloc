@@ -1,6 +1,6 @@
 <section class="content-header">
   <h1>
-    User Profile
+    <%= t "db.userprofile" %>
   </h1>
 </section>
 
@@ -15,38 +15,38 @@
         <div class="box-body box-profile">
           <%= image_tag(@user.image, :alt => "User profile picture", :class => "profile-user-img img-responsive img-circle") %>
           <h3 class="profile-username text-center"><%= @user.nom.capitalize %></h3>
-          <p class="text-muted text-center">Member since <%= @user.created_at.strftime("%b %e") %></p>
+          <p class="text-muted text-center"><%= t "db.membersince" %> <%= @user.created_at.strftime("%b %e") %></p>
 
           <ul class="list-group list-group-unbordered">
             <li class="list-group-item">
-              <b>Flatshare</b> <span class="pull-right"><%= link_to @coloc.nom, @coloc %></span>
+              <b><%= t("db.flatshare") %></b> <span class="pull-right"><%= link_to @coloc.nom, @coloc %></span>
             </li>
             <li class="list-group-item">
-              <b>Roommates</b> <span class="pull-right"><%= @coloc.users.count %></span>
+              <b><%= t("db.roommates").titleize %></b> <span class="pull-right"><%= @coloc.users.count %></span>
             </li>
           </ul>
 
-          <%= mail_to @user.email, ("<i class='fa fa-envelope'></i> Contact <b>" + @user.nom + "</b>").html_safe, :class => "btn btn-primary btn-block" %>
+          <%= mail_to @user.email, ("<i class='fa fa-envelope'></i> " + t("db.contact")+ " <b>" + @user.nom + "</b>").html_safe, :class => "btn btn-primary btn-block" %>
         </div><!-- /.box-body -->
       </div><!-- /.box -->
 
       <!-- About Me Box -->
       <div class="box box-primary">
         <div class="box-header with-border">
-          <h3 class="box-title">Flatshare</h3>
+          <h3 class="box-title"><%= t("db.flatshare") %></h3>
         </div><!-- /.box-header -->
         <div class="box-body">
-          <strong><i class="fa fa-home margin-r-5"></i> Name</strong>
+          <strong><i class="fa fa-home margin-r-5"></i> <%= t("db.name") %></strong>
           <p class="text-muted"><%= @coloc.nom %></p>
 		
 		  <hr>
 		
-          <strong><i class="fa fa-map-marker margin-r-5"></i> Location</strong>
+          <strong><i class="fa fa-map-marker margin-r-5"></i> <%= t("db.location") %></strong>
           <p class="text-muted"><i>Coming soon...</i></p>
 
           <hr>
 
-          <strong><i class="fa fa-calendar margin-r-5"></i> Creation date </strong>
+          <strong><i class="fa fa-calendar margin-r-5"></i> <%= t "db.creationdate" %> </strong>
           <p class="text-muted"><%= @coloc.created_at.strftime("%b %e, %Y") %></p>		  
         </div><!-- /.box-body -->
       </div><!-- /.box -->
@@ -75,11 +75,11 @@
                 <i class="fa fa-money bg-blue"></i>
                 <div class="timeline-item">
                   <span class="time"><i class="fa fa-clock-o"></i> <%= e.created_at.strftime("%b %e, %Y") %></span>
-                  <h3 class="timeline-header"><%= link_to User.find(e.user_id).nom.capitalize, User.find(e.user_id) %> created a new expense</h3>
+                  <h3 class="timeline-header"><%= link_to User.find(e.user_id).nom.capitalize, User.find(e.user_id) %> <%= t "db.creatednewexpense" %></h3>
                   <div class="timeline-body">
-                    <strong>How much?</strong> <%= number_to_currency(e.montant, precision: 2) %> &ndash;				  
-                    <strong>Why?</strong> <%= e.raison %> &ndash;
-                    <strong>Who is involved?</strong> <%= e.roommates_involved %> 
+                    <strong><%= t "db.value" %>:</strong> <%= number_to_currency(e.montant, precision: 2) %> &ndash;				  
+                    <strong><%= t "db.reason" %>:</strong> <%= e.raison %> &ndash;
+                    <strong><%= t "db.roommatesinvolved" %>:</strong> <%= e.roommates_involved %> 
 				  <div class="timeline-footer pull-right">
 						<button type="button" class="btn btn-xs btn-danger" data-toggle="modal" data-target="#myModal" 
 							onclick="populateRemoveModal(<%= e.id %>, '<%= User.find(e.user_id).nom %>','<%= number_to_currency(e.montant, precision: 2) %>','<%= e.raison %>', '<%= e.roommates_involved %>', '<%= url_for e %>');">
@@ -104,7 +104,7 @@
 					<i class="fa fa-user-plus bg-blue"></i>
 					<div class="timeline-item">
 					  <span class="time"><i class="fa fa-clock-o"></i> <%= c.created_at.strftime("%e %b. %Y") %></span>
-					  <h3 class="timeline-header no-border"><%= link_to c.nom.capitalize, c %> has been added to <%= @coloc.nom %></h3>
+					  <h3 class="timeline-header no-border"><%= link_to c.nom.capitalize, c %> <%= t "db.hasbeenadded" %> <%= @coloc.nom %></h3>
 					</div>
 				  </li>			  
 			  <% end %>
@@ -112,7 +112,7 @@
 				<i class="fa fa-home bg-blue"></i>
 				<div class="timeline-item">
 				  <span class="time"><i class="fa fa-clock-o"></i> <%= @coloc.created_at.strftime("%e %b. %Y") %></span>
-				  <h3 class="timeline-header no-border"><%= link_to @coloc.nom, @coloc %> has been created! </h3>
+				  <h3 class="timeline-header no-border"><%= link_to @coloc.nom, @coloc %> <%= t "db.hasbeencreated" %> </h3>
 				</div>
 			  </li>	
               <!-- END timeline item -->

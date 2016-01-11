@@ -1,6 +1,6 @@
 <section class="content-header">
   <h1>
-    Expenses
+    <%= t "db.expenses" %>
   </h1>
 </section>
 <!-- Main content -->
@@ -10,18 +10,18 @@
     <div class="col-md-5">
             <div class="box box-primary">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Tweet your expense to save time</h3>
+                      <h3 class="box-title"><%= t "db.expensestweet" %></h3>
                       <div class="box-tools pull-right">
                       </div>
                     </div><!-- /.box-header -->
                     <div class="box-body">
 						<br>
-						Try this example: <i> "I just got back from #shopping for @<%= @roommates[0].nom.gsub(" ","_") %> and @<%= @roommates[1].nom.gsub(" ","_") %>. Spent 100€." </i>
+						<%= t("db.expensestweetexample", r1: @roommates[0].nom.gsub(" ","_"), r2: @roommates[1].nom.gsub(" ","_")).html_safe %>
 						<br><br>
 						<%= form_tag "/saveexpense", "data-toggle" => "validator", :id => "tweetForm", :onsubmit => "tweetSubmit(); return false" do -%>
 						  <div class="form-group has-feedback">
-							<%= text_field_tag "tweet", nil, class: "form-control", placeholder: "Tweet your expense", "data-roommates" => "bar", "data-reason" => "bar", "data-amount" => "bar"%>
-							<span class="help-block"><i>Expense author is <strong id="expense_author_view"><%= current_user.nom %></strong>, you can change it below</i></span>
+							<%= text_field_tag "tweet", nil, class: "form-control", placeholder: t("db.expensestweetcaption"), "data-roommates" => "bar", "data-reason" => "bar", "data-amount" => "bar"%>
+							<span class="help-block"><i><%= t("db.expensestweetauthor", author: current_user.nom).html_safe %></i></span>
 							<span class="glyphicon glyphicon-star form-control-feedback"></span>
 							<div class="help-block with-errors">
 								<div id="errorRoom" style="display:none"></div>
@@ -29,7 +29,7 @@
 								<div id="errorAmou" style="display:none"></div>
 							</div>
 						  </div>
-		                  <%= submit_tag "Tweet an expense", :class => "btn btn-primary btn-block btn-flat" %>
+		                  <%= submit_tag t("db.expensestweetcaption"), :class => "btn btn-primary btn-block btn-flat" %>
 					  <% end %>
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">
@@ -38,45 +38,45 @@
 		  
             <div class="box box-primary">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Or do it the old fashion way</h3>
+                      <h3 class="box-title"><%= t("db.oldfashion") %></h3>
                       <div class="box-tools pull-right">
                       </div>
                     </div><!-- /.box-header -->
                     <div class="box-body">
 						<%= form_tag "/saveexpense", "data-toggle" => "validator", :id => "expenseForm" do -%>
 						  <div class="form-group has-feedback">
-							<label>Author</label>
+							<label><%= t "db.author" %></label>
 							<%= select_tag :user_id, options_for_select(@roommates.map{ |c| [c.nom, c.id]}, [current_user.nom, current_user.id]), {:id => "expense_author", :class => "form-control" } %>
 							<div class="help-block with-errors"></div>
 						  </div>
 						  <div class="form-group has-feedback">
-							<label>Roommates involved</label>
+							<label><%= t "db.roommatesinvolved" %></label>
 							<%= select_tag "roommates_involved", options_for_select(@roommates.map{ |c| [c.nom.gsub(" ","_"), c.id]}), {:id => "roommates", :class => "form-control", :multiple => true, :required => true } %>
 							<span class="glyphicon glyphicon-user form-control-feedback"></span>														
 							<div class="help-block with-errors"></div>
 						  </div>				  						  
 						  <div class="form-group has-feedback">
-							<label>Reason</label>
-							<%= text_field_tag "raison", nil, :id => "reason", :class => "form-control", :placeholder => "Why have you spent this money?", :required => true %>
+							<label><%= t "db.reason" %></label>
+							<%= text_field_tag "raison", nil, :id => "reason", :class => "form-control", :placeholder => t("db.whymoneyspent"), :required => true %>
 							<span class="glyphicon glyphicon-pencil form-control-feedback"></span>
 							<div class="help-block with-errors"></div>
 						  </div>	
 						  <div class="form-group has-feedback">
-							<label>Value</label>
+							<label><%= t "db.value" %></label>
 							<%= text_field_tag "montant", nil, :id => "amount", :class => "form-control", 
-								:placeholder => "How much money have you spent?", :required => true, 
-								"pattern" => '^\d+[,.]?(\d*)?€', "data-error" => "Input can only be digits followed by \"€\" (ex: 1€ 1.23€ or 1,23€)" %>
+								:placeholder => t("db.howmuchmoneyspent"), :required => true, 
+								"pattern" => '^\d+[,.]?(\d*)?€', "data-error" => t("db.howmuchmoneyspenterror") %>
 							<span class="glyphicon glyphicon-euro form-control-feedback"></span>
 							<div class="help-block with-errors"></div>
 						  </div>
 						  <div class="form-group has-feedback">
-							<label>Expense type</label><br>
-							<%= check_box_tag :auto, false, false, "data-toggle" => "toggle", "data-on" => "Recurring", "data-off" => "Punctual", "data-size" => "small" %>
-							<br><i> Recurring expenses are added every month. </i>
+							<label><%= t "db.expensetype" %></label><br>
+							<%= check_box_tag :auto, false, false, "data-toggle" => "toggle", "data-on" => t("db.recurring"), "data-off" => t("db.punctual"), "data-size" => "small" %>
+							<br><i> <%= t "db.recurringexpensesareaddedeverymonth" %> </i>
 						  </div>	
 						  <br>
 
-		                  <%= submit_tag "Add an expense", :class => "btn btn-primary btn-block btn-flat"%>
+		                  <%= submit_tag t("db.addanexpense"), :class => "btn btn-primary btn-block btn-flat"%>
 		                  <%= hidden_field_tag :coloc_id, @coloc.id %>	  
 		                  <%= hidden_field_tag :coloc_secret, @coloc.secret %>	  
 						<% end %>					
@@ -88,9 +88,9 @@
    <div class="col-md-7">
             <div class="box box-primary">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Latest expenses</h3>
+                      <h3 class="box-title"><%= t "db.latestexpenses" %></h3>
                       <div class="box-tools pull-right">
-                        <span class="label label-primary"><%= @expenses.select{|item| item.auto == 0 }.count %> expenses in total</span>
+                        <span class="label label-primary"><%= @expenses.select{|item| item.auto == 0 }.count %> <%= t "db.expensesintotal" %></span>
                       </div>
                     </div><!-- /.box-header -->
                     <div class="box-body">
@@ -98,11 +98,11 @@
                         <table class="table no-margin" id="expenseTable">
                           <thead>
                             <tr>
-                              <th>Author</th>
-                              <th>Reason</th>
+                              <th><%= t "db.author" %></th>
+                              <th><%= t "db.reason" %></th>
                               <th>Date</th>
-                              <th>Roommates involved</th>
-                              <th>Value</th>
+                              <th><%= t "db.roommatesinvolved" %></th>
+                              <th><%= t "db.value" %></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -129,9 +129,9 @@
 		  </div>
             <div class="box box-primary">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Recurring expenses <small>(added every month)</small></h3>
+                      <h3 class="box-title"><%= t("db.recurringexpenses").html_safe %></h3>
                       <div class="box-tools pull-right">
-                        <span class="label label-primary"><%= @expenses.select{|item| item.auto == 1 }.count %> recurring expenses in total</span>
+                        <span class="label label-primary"><%= @expenses.select{|item| item.auto == 1 }.count %> <%= t "db.recurringexpensesintotal" %></span>
                       </div>
                     </div><!-- /.box-header -->
                     <div class="box-body">
@@ -139,11 +139,11 @@
                         <table class="table no-margin" id="expenseTable_auto">
                           <thead>
                             <tr>
-                              <th>Author</th>
-                              <th>Reason</th>
+                              <th><%= t "db.author" %></th>
+                              <th><%= t "db.reason" %></th>
                               <th>Date</th>
-                              <th>Roommates involved</th>
-                              <th>Value</th>
+                              <th><%= t "db.roommatesinvolved" %></th>
+                              <th><%= t "db.value" %></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -184,7 +184,7 @@
 <script type="text/javascript">
 
 	var $multi = $("#roommates").select2({
-		  placeholder: "Select your roommates"	
+		  placeholder: <%= raw t("db.selectyourroommates").to_json %>
     });
 	
 	var multiOptions = []
@@ -309,7 +309,15 @@
           "ordering": false,
           "info": true,
           "autoWidth": false,
-		  "pageLength": 10
+		  "pageLength": 10,
+		  "language": {
+			"info": <%= raw t("db.datatablepages").to_json %>,
+			"oPaginate": {
+				"sPrevious": 	<%= raw t("db.datatablepagesprevious").to_json %>,
+				"sNext":     	<%= raw t("db.datatablepagesnext").to_json %>,
+			},
+			"sEmptyTable": <%= raw t("db.datatablenorecord").to_json %>
+		  }
 	});
 	
 	$("#expenseTable_auto").DataTable({
@@ -317,8 +325,16 @@
           "lengthChange": false,
           "searching": false,
           "ordering": false,
-          "info": true,
+          "info": false,
           "autoWidth": false,
-		  "pageLength": 5
+		  "pageLength": 5,
+		  "language": {
+			"info": <%= raw t("db.datatablepages").to_json %>,
+			"oPaginate": {
+				"sPrevious": 	<%= raw t("db.datatablepagesprevious").to_json %>,
+				"sNext":     	<%= raw t("db.datatablepagesnext").to_json %>,
+			},
+			"sEmptyTable": <%= raw t("db.datatablenorecord").to_json %>
+		  }
 	});
 </script>

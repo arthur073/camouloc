@@ -11,7 +11,7 @@
           <div class="small-box bg-blue">
             <div class="inner">
               <h3><%= @coloc.users.count %></h3>
-              <p>Roommates registered</p>
+              <p><%= t "db.roommatesregistered" %></p>
             </div>
             <div class="icon">
               <i class="ion ion-person-stalker"></i>
@@ -23,7 +23,7 @@
           <div class="small-box bg-blue">
             <div class="inner">
               <h3><%= @expenses.count %></h3>
-              <p>Expenses reported</p>
+              <p><%= t "db.expensesreported" %></p>
             </div>
             <div class="icon">
               <i class="ion ion-card"></i>
@@ -35,7 +35,7 @@
           <div class="small-box bg-blue">
             <div class="inner">
               <h3><%= number_to_currency(@coloc.ca, precision: 0) %></h3>
-              <p>Invested in this flatshare</p>
+              <p><%= t "db.investedinthisflatshare" %></p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>
@@ -46,8 +46,8 @@
           <!-- small box -->
           <div class="small-box bg-blue">
             <div class="inner">
-              <h3>#<%= @coloc_ranking %><sup style="font-size: 20px"> out of <%= @total_coloc_count %></sup></h3>
-              <p>Global Camouloc ranking</p>
+              <h3>#<%= @coloc_ranking %><sup style="font-size: 20px"> <%= t "db.outof" %> <%= @total_coloc_count %></sup></h3>
+              <p><%= t "db.globalranking" %></p>
             </div>
             <div class="icon">
               <i class="ion ion-arrow-graph-up-right"></i>
@@ -59,15 +59,15 @@
         <div class="col-md-6">
         <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Expenses distribution</h3>
+                  <h3 class="box-title"><%= t "db.expensesdistribution" %></h3>
                   <div class="box-tools pull-right">
-                <span class="label label-primary"><%= @coloc.users.count %> roommates</span>
+                <span class="label label-primary"><%= @coloc.users.count %> <%= t "db.roommates" %></span>
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
                   <div class="row">
                     <div class="col-md-8">
-					  <span class="noexpense"> Graph is not available as no expense has been added.</span>
+					  <span class="noexpense"> <%= t "db.graphunavailable" %></span>
                       <div class="chart-responsive">
                         <canvas id="pieChart" style="width: 100%; height: auto; margin:5% 10% 0;"></canvas>
                       </div><!-- ./chart-responsive -->
@@ -93,22 +93,22 @@
               </div>
         <div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">How to reset counters?</h3>
+                  <h3 class="box-title"><%= t "db.howtoresetcounters" %></h3>
                   <div class="box-tools pull-right">
-					<button class="btn btn-xs btn-primary pull-right" data-toggle="modal" data-target="#resetCountersModal"><i class='fa fa-envelope'></i> Share </button>
+					<button class="btn btn-xs btn-primary pull-right" data-toggle="modal" data-target="#resetCountersModal"><i class='fa fa-envelope'></i> <%= t "db.share" %> </button>
                   </div>
                 </div><!-- /.box-header -->
 				<div class="box-body no-padding">
 					<table class="table">
 						<tbody><tr>
-						  <th>Transaction ID</th>
+						  <th><%= t "db.transactionid" %></th>
 						  <th>Description</th>
 						</tr>
 						<% @arrayReimbursement.each_with_index do |elem,i| %>
 							<tr>
 							  <td>Transaction #<%= i+1 %></td>
-							  <td><strong><%= elem[0] %></strong> gives <span class="badge bg-green"><%= number_to_currency elem[1] %></span>
-								to <strong><%= elem[2] %></strong>
+							  <td><strong><%= elem[0] %></strong> <%= t "db.gives" %> <span class="badge bg-green"><%= number_to_currency elem[1] %></span>
+								<%= t "db.to" %> <strong><%= elem[2] %></strong>
 							  </td>
 							</tr>
 						<% end %>
@@ -117,9 +117,9 @@
               </div>
             <div class="box box-primary">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Recurring expenses <small>(added every month)</small></h3>
+                      <h3 class="box-title"><%= t("db.recurringexpenses").html_safe %></h3>
                       <div class="box-tools pull-right">
-                        <span class="label label-primary"><%= @auto_expenses.count %> expenses in total</span>
+                        <span class="label label-primary"><%= @auto_expenses.count %> <%= t "db.expensesintotal" %></span>
                       </div>
                     </div><!-- /.box-header -->
                     <div class="box-body">
@@ -127,11 +127,11 @@
                         <table class="table no-margin" id="recurringexpenseTable">
                           <thead>
                             <tr>
-                              <th>Author</th>
-                              <th>Reason</th>
+                              <th><%= t "db.author" %></th>
+                              <th><%= t "db.reason" %></th>
                               <th>Date</th>
-                              <th>Roommates involved</th>
-                              <th>Value</th>
+                              <th><%= t "db.roommatesinvolved" %></th>
+                              <th><%= t "db.value" %></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -149,23 +149,23 @@
                       </div><!-- /.table-responsive -->
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">
-                      <%= link_to "View all recurring expenses", redirect_to_expense_screen_path(:id => @coloc.id), :class => "btn btn-sm btn-default btn-flat pull-right" %>
+                      <%= link_to t("db.viewallrecurringexpenses"), redirect_to_expense_screen_path(:id => @coloc.id), :class => "btn btn-sm btn-default btn-flat pull-right" %>
                     </div><!-- /.box-footer -->
                   </div>
               </div>
         <div class="col-md-6">
             <div class="box box-primary">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Expenses graph</h3>
+                      <h3 class="box-title"><%= t "db.expensesgraph" %></h3>
                       <div class="box-tools pull-right">
-                        <span class="label label-primary"><%= @expenses.count %> expenses in total</span>
+                        <span class="label label-primary"><%= @expenses.count %> <%= t "db.expensesintotal" %></span>
                       </div>
                     </div><!-- /.box-header -->
                     <div class="box-body">
 						<div id="cont" class="container-fluid">
 						  <div class="row">
 							<div class="col-md-8">
-								<span class="noexpense"> Graph is not available as no expense has been added.</span>
+								<span class="noexpense"> <%= t "db.graphunavailable" %></span>
 								<div id="chart"></div>
 							</div><!-- /.col -->
 							<div class="col-md-4">
@@ -184,13 +184,13 @@
 			  </div>
 			<div class="box box-primary">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Expenses accross time</h3>
+                  <h3 class="box-title"><%= t "db.expensesaccrosstime" %></h3>
                   <div class="box-tools pull-right">
-                <span class="label label-primary">Showing last <%= @params_lineChart[2] %> expenses</span>
+                <span class="label label-primary"><%= t("db.showinglastexpenses", parameter: @params_lineChart[2]) %> </span>
                   </div>
                 </div><!-- /.box-header -->
                 <div class="box-body">
-					  <span class="noexpense"> Graph is not available as no expense has been added.</span>
+					  <span class="noexpense"> <%= t "db.graphunavailable" %></span>
                       <div class="chart-responsive">
                         <canvas id="lineChart" style="width: 80%; height: auto; margin:5% 10% 0;"></canvas>
                       </div><!-- ./chart-responsive -->
@@ -204,9 +204,9 @@
         <div class="col-md-12">
             <div class="box box-primary">
                     <div class="box-header with-border">
-                      <h3 class="box-title">Latest expenses</h3>
+                      <h3 class="box-title"><%= t "db.latestexpenses" %></h3>
                       <div class="box-tools pull-right">
-                        <span class="label label-primary"><%= @expenses.count %> expenses in total</span>
+                        <span class="label label-primary"><%= @expenses.count %> <%= t "db.expensesintotal" %></span>
                       </div>
                     </div><!-- /.box-header -->
                     <div class="box-body">
@@ -214,11 +214,11 @@
                         <table class="table no-margin" id="expenseTable">
                           <thead>
                             <tr>
-                              <th>Author</th>
-                              <th>Reason</th>
+                              <th><%= t "db.author" %></th>
+                              <th><%= t "db.reason" %></th>
                               <th>Date</th>
-                              <th>Roommates involved</th>
-                              <th>Value</th>
+                              <th><%= t "db.roommatesinvolved" %></th>
+                              <th><%= t "db.value" %></th>
                             </tr>
                           </thead>
                           <tbody>
@@ -236,8 +236,8 @@
                       </div><!-- /.table-responsive -->
                     </div><!-- /.box-body -->
                     <div class="box-footer clearfix">
-                      <%= link_to "Add an expense", redirect_to_expense_screen_path(:id => @coloc.id), :class => "btn btn-sm btn-primary btn-flat pull-left" %>
-                      <%= link_to "View all expenses", redirect_to_expense_screen_path(:id => @coloc.id), :class => "btn btn-sm btn-default btn-flat pull-right" %>
+                      <%= link_to t("db.addanexpense"), redirect_to_expense_screen_path(:id => @coloc.id), :class => "btn btn-sm btn-primary btn-flat pull-left" %>
+                      <%= link_to t("db.viewallexpenses"), redirect_to_expense_screen_path(:id => @coloc.id), :class => "btn btn-sm btn-default btn-flat pull-right" %>
                     </div><!-- /.box-footer -->
                   </div>
             </div>

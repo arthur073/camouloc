@@ -57,10 +57,10 @@
 								  <span class="label label-danger">1</span>
 								</a>
 								<ul class="dropdown-menu">
-								  <li class="header">You have 1 notification</li>
+								  <li class="header"><%= t "db.notifcaption" %></li>
 								  <li class="header">
-									<strong><i class="fa fa-envelope"></i> Meet the new Camouloc!</strong><br>
-									Camouloc has been rebuilt from the ground up to ensure you have the best user experience. Don't hesitate to <a href="mailto:arthur.verger@gmail.com?subject=User feedback" class="feedback"> give us your feedback </a> on this design.
+									<strong><i class="fa fa-envelope"></i> 
+									<%= t("db.notifmessage").html_safe %> 
 								  </li>
 								</ul>
 							  </li>
@@ -79,16 +79,16 @@
                         <%= image_tag(current_user.image, :alt => "User image", :class => "img-circle white-border-big") %>
                         <p>
                           <%= current_user.nom.capitalize %>
-                          <small>Member since <%= current_user.created_at.strftime("%b %e") %> </small>
+                          <small><%= t "db.membersince" %> <%= current_user.created_at.strftime("%b %e") %> </small>
                         </p>
                       </li>
                       <!-- Menu Footer-->
                       <li class="user-footer">
                         <div class="pull-left">
-                          <%= link_to "Profile", current_user, :class => "btn btn-default btn-flat" %>
+                          <%= link_to t("db.profile"), current_user, :class => "btn btn-default btn-flat" %>
                         </div>
                         <div class="pull-right">
-                          <%= link_to "Sign out", signout_path, :class => "btn btn-default btn-flat" %>
+                          <%= link_to t("db.signout"), signout_path, :class => "btn btn-default btn-flat" %>
                         </div>
                       </li>
                     </ul>
@@ -115,7 +115,7 @@
                 <div class="pull-left info">
                   <p><%= current_user.nom.capitalize %></p>
                   <!-- Status -->
-                  <a href="#" style="cursor:default"><i class="fa fa-circle text-success"></i> Online</a>
+                  <a href="#" style="cursor:default"><i class="fa fa-circle text-success"></i> <%= t "db.online" %></a>
                 </div>
               </div>
 
@@ -123,9 +123,9 @@
               <ul class="sidebar-menu">
                 <li class="header">MENU</li>
                 <!-- Optionally, you can add icons to the links -->
-                <li id="flatshare_link"><%= link_to "<i class='fa fa-home'></i> <span>My Flatshare</span>".html_safe, Coloc.find(current_user.coloc_id) %></li>
-				<li id="user_link" ><%= link_to "<i class='fa fa-user'></i> <span>My profile</span>".html_safe, current_user %></li>
-				<li id="expense_link" ><%= link_to "<i class='fa fa-money'></i> <span>Expenses</span>".html_safe, redirect_to_expense_screen_path(:id => current_user.coloc.id) %></li>
+                <li id="flatshare_link"><%= link_to t("db.flatsharelink").html_safe, Coloc.find(current_user.coloc_id) %></li>
+				<li id="user_link" ><%= link_to t("db.profilelink").html_safe, current_user %></li>
+				<li id="expense_link" ><%= link_to t("db.expenseslink").html_safe, redirect_to_expense_screen_path(:id => current_user.coloc.id) %></li>
               </ul><!-- /.sidebar-menu -->
             </section>
             <!-- /.sidebar -->
@@ -159,19 +159,19 @@
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Warning: Removing an expense</h4>
+				<h4 class="modal-title" id="myModalLabel"><%= t "db.warningremovingexpense" %></h4>
 			  </div>
 			  <div class="modal-body">
-				You are about to remove the following expense, please confirm your choice: <br><br>
+				<%= t "db.warningremovingexpensecaption" %> <br><br>
 
 				<div class="table-responsive">
 					<table class="table no-margin">
 					  <thead>
 						<tr>
-						  <th>Author</th>
-						  <th>Reason</th>
-						  <th>Roommates involved</th>
-						  <th>Value</th>
+						  <th><%= t "db.author" %></th>
+						  <th><%= t "db.reason" %></th>
+						  <th><%= t "db.roommatesinvolved" %></th>
+						  <th><%= t "db.value" %></th>
 						</tr>
 					  </thead>
 					  <tbody>
@@ -188,8 +188,8 @@
 				<span id="expense_classDestroyUrl_modal" style="display:none"></span>
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary" onclick="deleteExpense();">Remove expense</button>
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal"><%= t "db.close" %></button>
+				<button type="button" class="btn btn-primary" onclick="deleteExpense();"><%= t "db.removeexpense" %></button>
 			  </div>
 			</div>
 		  </div>
@@ -201,16 +201,14 @@
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Sharing expenses distribution</h4>
+				<h4 class="modal-title" id="myModalLabel"><%= t "db.sharingexpensesdistribution" %></h4>
 			  </div>
 			  <div class="modal-body">
-				You are about to share the expenses distribution to all your roommates. Each member of your flatshare will receive an email with instructions for resetting counters.
-				<br><br>
-				<i>For information, this action will not automatically reset counters.</i>
+				<%= t("db.sharingexpensesdistributioncaption").html_safe %>
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary" onclick="resetCounters();">Share expense distribution</button>
+				<button type="button" class="btn btn-default pull-left" data-dismiss="modal"><%= t "db.close" %></button>
+				<button type="button" class="btn btn-primary" onclick="resetCounters();"><%= t "db.sharingexpensesdistributionbutton" %></button>
 			  </div>
 			</div>
 		  </div>
@@ -222,10 +220,10 @@
 			<div class="modal-content">
 			  <div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Delete flatshare</h4>
+				<h4 class="modal-title" id="myModalLabel"><%= t "db.deleteflatshare" %></h4>
 			  </div>
 			  <div class="modal-body">
-				<strong>Warning: you are about to delete your flatshare. <br> Please enter your flatshare name below to confirm the deletion: </strong><br><br>
+				<strong><%= t("db.deleteflatsharecaption").html_safe %></strong><br><br>
 
 				<%= form_for Coloc.find(current_user.coloc_id), :method => :delete, :html => { "data-toggle" => "validator", :id => "delete_flatshare_form" } do |f| %>
 					<%= f.text_field :nom, :class => "form-control", :placeholder => "Flatshare name", :required => true %>
@@ -234,8 +232,8 @@
 				<br><br>
 			  </div>
 			  <div class="modal-footer">
-				<button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Cancel</button>
-				<button type="button" class="btn btn-outline" onclick="confirmFlatshareDeletion();">Confirm deletion</button>
+				<button type="button" class="btn btn-outline pull-left" data-dismiss="modal"><%= t "db.cancel" %></button>
+				<button type="button" class="btn btn-outline" onclick="confirmFlatshareDeletion();"><%= t "db.confirmdeletion" %></button>
 			  </div>
 			</div>
 		  </div>
@@ -245,7 +243,7 @@
           <footer class="main-footer">
             <!-- To the right -->
             <div class="pull-right hidden-xs">
-                All rights reserved.
+                <%= t "db.allrightsreserved" %>
             </div>
             <!-- Default to the left -->
             <strong>Copyright &copy; <%= Date.today.strftime("%Y") %> <a href="#">Camouloc</a></strong> 
@@ -262,33 +260,33 @@
             <div class="tab-content">
               <!-- Home tab content -->
               <div class="tab-pane active" id="flatshare-settings">
-               <h3 class="control-sidebar-heading">Flatshare settings</h3>                
+               <h3 class="control-sidebar-heading"><%= t "db.flatsharesettings" %></h3>                
 				<%= form_for Coloc.find(current_user.coloc_id), :html => { "data-toggle" => "validator", :id => "editform_flatshare" } do |f| %>
 					<label class="control-sidebar-subheading">
-					  Name
+					  <%= t "db.name" %>
 					</label>
 					<div class="form-group has-feedback">
 			            <%= f.text_field :nom, :class => "form-control", :placeholder => "Flatshare name", :required => true, "data-minlength" => "3", 
-							"data-remote" => "/verifycoloc?prev_name="+Coloc.find(current_user.coloc_id).nom, :name => "nom", "data-remote-error" => "This flatshare name already exists" %>
+							"data-remote" => "/verifycoloc?prev_name="+Coloc.find(current_user.coloc_id).nom, :name => "nom", "data-remote-error" => t("db.namealreadyexists") %>
 						<span class="glyphicon glyphicon-home form-control-feedback"></span>
 						<div class="help-block with-errors"></div>
 					</div>		
-				  <%= f.submit "Save", :class => "btn btn-primary btn-block btn-flat"%>
+				  <%= f.submit t("db.save"), :class => "btn btn-primary btn-block btn-flat"%>
 				<% end %>
-               <h3 class="control-sidebar-heading">Danger zone</h3>   
+               <h3 class="control-sidebar-heading text-red"><%= t "db.dangerzone" %></h3>   
 					<label class="control-sidebar-subheading">
-					  <span class="text-red">Delete my flatshare</span>
+					  <span class="text-red"><%= t "db.deletemyflatshare" %></span>
 						<a href="#" class="text-red pull-right" data-toggle="modal" data-target="#deleteFlatshareModal"><i class='fa fa-trash-o'></i></a>
 					</label>			   
               </div><!-- /.tab-pane -->
               <div class="tab-pane" id="profile-settings">
-               <h3 class="control-sidebar-heading">Profile settings</h3>
+               <h3 class="control-sidebar-heading"><%= t "db.profilesettings" %></h3>
 				<%= form_for current_user, :html => { "data-toggle" => "validator", :id => "editform_user" } do |f| %>
 					<label class="control-sidebar-subheading">
-					  Name
+					  <%= t "db.name" %>
 					</label>
 					<div class="form-group has-feedback">
-						<%= f.text_field :nom, :class => "form-control", :placeholder => "Name", "data-minlength" => "6", "required" => true %>
+						<%= f.text_field :nom, :class => "form-control", :placeholder => t("db.name"), "data-minlength" => "6", "required" => true %>
 						<span class="glyphicon glyphicon-user form-control-feedback"></span>
 						<div class="help-block with-errors"></div>
 					</div>
@@ -297,25 +295,25 @@
 					</label>
 					<div class="form-group has-feedback">
 						<%= f.email_field :email, :id => "edit_email_field", :class => "form-control", :placeholder => "Email", :required => true, "data-minlength" => "6",
-							"data-remote" => "/verifyuser?prev_email="+current_user.email, :name => "email", "data-remote-error" => "A user with this email already exists" %>
+							"data-remote" => "/verifyuser?prev_email="+current_user.email, :name => "email", "data-remote-error" => t("db.userexists") %>
 						<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 						<div class="help-block with-errors"></div>
 					</div>		
 					<label class="control-sidebar-subheading">
-					  Password
+					  <%= t "db.password" %>
 					</label>
 					<div class="form-group has-feedback">
-						<%= f.password_field :password, :class => "form-control", :placeholder => "Password", :required => true, "data-minlength" => "8" %>
+						<%= f.password_field :password, :class => "form-control", :placeholder => t("db.password"), :required => true, "data-minlength" => "8" %>
 						<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 						<div class="help-block with-errors"></div>
 					</div>
 					<div class="form-group has-feedback">
-						<%= f.password_field :password_confirmation, :class => "form-control", :placeholder => "Retype password", :required => true, "data-minlength" => "8" %>
+						<%= f.password_field :password_confirmation, :class => "form-control", :placeholder => t("db.retypepassword"), :required => true, "data-minlength" => "8" %>
 						<span class="glyphicon glyphicon-lock form-control-feedback"></span>
-						<span class="help-block">Minimum of 8 characters</span>
+						<span class="help-block"><%= t "db.passwordminimum"%></span>
 						<div class="help-block with-errors"></div>
 					</div>			
-				  <%= f.submit "Save", :class => "btn btn-primary btn-block btn-flat"%>
+				  <%= f.submit t("db.save"), :class => "btn btn-primary btn-block btn-flat"%>
 				<% end %>
               </div><!-- /.tab-pane -->
             </div>
