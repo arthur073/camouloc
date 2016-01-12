@@ -331,7 +331,15 @@
           "ordering": true,
           "info": false,
           "autoWidth": false,
-		  "pageLength": 15
+		  "pageLength": 15,
+		  "language": {
+			"info": <%= raw t("db.datatablepages").to_json %>,
+			"oPaginate": {
+				"sPrevious": 	<%= raw t("db.datatablepagesprevious").to_json %>,
+				"sNext":     	<%= raw t("db.datatablepagesnext").to_json %>,
+			},
+			"sEmptyTable": <%= raw t("db.datatablenorecord").to_json %>
+		  }
 	});
   	$("#recurringexpenseTable").DataTable({
           "paging": false,
@@ -340,7 +348,15 @@
           "ordering": true,
           "info": false,
           "autoWidth": false,
-		  "pageLength": 15
+		  "pageLength": 15,
+		  "language": {
+			"info": <%= raw t("db.datatablepages").to_json %>,
+			"oPaginate": {
+				"sPrevious": 	<%= raw t("db.datatablepagesprevious").to_json %>,
+				"sNext":     	<%= raw t("db.datatablepagesnext").to_json %>,
+			},
+			"sEmptyTable": <%= raw t("db.datatablenorecord").to_json %>
+		  }
 	});	
 	var Names = <%= raw @namesMatrix %>;
 	var Colors = <%= raw @colorsMatrix %>;
