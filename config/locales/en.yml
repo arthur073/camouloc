@@ -141,7 +141,7 @@ en:
     datatablenorecord: "No expense to display"
   mailer:
     expensesubject: "[CAMOULOC] New expense"
-    welcomeaboardsubject: "[CAMOULOC] Welcome aboard! Your flatshare is almost ready"
+    welcomeaboardsubject: "[CAMOULOC] Welcome onboard! Your flatshare is almost ready"
     invitationsubject: "[CAMOULOC] You have been invited to join Camouloc"
     passwordresetsubject: "[CAMOULOC] Password reset"
     countersresetsubject: "[CAMOULOC] Instructions for resetting counters"
@@ -160,4 +160,18 @@ en:
     temppassword: "Temporary password"
     youcanaccesscamouloc: "You can access Camouloc using the following link:"
     accesscamouloc: "Access Camouloc"
-    
+  progressemail:
+    welcomeaboardcaption: "Welcome aboard"
+    youarenow: "You are now a fellow member of <strong style='font-weight: bold;'>Camouloc</strong>, with a fully setup account."
+    youarealmostover: "You are almost over, however you might feel lonely without your roommates!"
+    pleasecomplete: "Please complete the last registration step by clicking the link below&nbsp;</span>to enjoy all the features of <strong style='font-weight: bold;'>Camouloc</strong>!"
+    continue: "Finalize registration"
+  welcomeemail: 
+    yourroommate: "Your roommate <strong style='font-weight: bold;'>%{roommate}</strong> has just created your account on <strong style='font-weight: bold;'>Camouloc</strong> as a fellow member of the flatshare <strong style='font-weight: bold;'>%{flatshare}</strong>."						
+    coldbeer: "The least you can do is to offer him a <strong> nice cold beer </strong> for his efforts!"
+    anyway: "Anyway, you can login to Camouloc using the following credentials: <i>(we recommend to change you temporary password as soon as possible) </i>"
+  resetcountersemail:
+    youhaverequested: "You have requested instructions to reset your counters, and return to a state where no one owes money to anyone."
+    youwillfindbelow: "You will find below <strong>%{steps} steps </strong> to follow if you want to reset your counters:"
+    step: "Step"
+    youcanexecute: "You can execute these steps on Camouloc using the following link:"

@@ -160,4 +160,13 @@ fr:
     temppassword: "Mot de passe temporaire"
     youcanaccesscamouloc: "Vous pouvez accéder Camouloc en cliquant sur le lien suivant:"
     accesscamouloc: "Accéder à Camouloc"
-  
+  progressemail:
+    welcomeaboardcaption: "Bienvenue "
+    youarenow: "Vous êtes maintenant membre de <strong style='font-weight: bold;'>Camouloc</strong>, et nous vous en remercions."
+    youarealmostover: "Vous avez presque fini, mais n'oubliez pas de rajouter vos colocataires !"
+    pleasecomplete: "Vous pouvez ajouter vos colocataires en cliquant sur le lien ci-dessous &nbsp;</span>et profiter de toutes les fonctionnalités de <strong style='font-weight: bold;'>Camouloc</strong>!"
+    continue: "Finalizer mon inscription"
+  welcomeemail: 
+    yourroommate: "Votre colocataire <strong style='font-weight: bold;'>%{roommate}</strong> vient de créer votre compte sur <strong style='font-weight: bold;'>Camouloc</strong> en tant que membre de la colocation <strong style='font-weight: bold;'>%{flatshare}</strong>."						
+    coldbeer: "D'après nous, il mériterait une <strong> bonne bière fraiche </strong> pour le récompenser de ses efforts!"
+    anyway: "Dans tous les cas, vous pouvez maintenant vos connecter sur Camouloc grâce aux informations suivantes: <i>(nous vous recommandons de changer votre mot de passe temporaire dès que possible) </i>"
