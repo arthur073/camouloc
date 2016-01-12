@@ -12,6 +12,6 @@ class DepenseMailer < ActionMailer::Base
 		@reason = _expense.raison.capitalize
 		@roommates_involved = _expense.roommates_involved
 		@expensedate = _expense.created_at.strftime('%b %e, %Y')
-		mail(:to => _coloc.users.where(:mail => 1).map(&:email), :subject => "[CAMOULOC] New expense")
+		mail(:to => _coloc.users.where(:mail => 1).map(&:email), :subject => t("mailer.expensesubject"))
 	end
 end

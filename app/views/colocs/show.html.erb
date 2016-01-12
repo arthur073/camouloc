@@ -139,7 +139,7 @@
                             <tr>
                               <td><%= link_to User.find(e.user_id).nom, User.find(e.user_id) %></td>
                               <td><%= e.raison %></td>                              
-                              <td><%= e.created_at.strftime("%d %b. %Y") %></td>
+                              <td><%= l e.created_at %></td>
                               <td><%= e.roommates_involved %></td>
                               <td><%= number_to_currency(e.montant) %></td>
                             </tr>
@@ -226,7 +226,7 @@
                             <tr>
                               <td><%= link_to User.find(e.user_id).nom, User.find(e.user_id) %></td>
                               <td><%= e.raison %></td>                              
-                              <td><%= e.created_at.strftime("%d %b. %Y") %></td>
+                              <td><%= l e.created_at %></td>
                               <td><%= e.roommates_involved %></td>
                               <td><%= number_to_currency(e.montant) %></td>
                             </tr>

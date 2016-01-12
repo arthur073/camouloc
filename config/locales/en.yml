@@ -1,4 +1,8 @@
 en:
+  time:
+    formats:
+      default: "%b. %e, %Y"
+      short: "%b. %Y"
   home:
     home: "Home"
     values: "Our values"
@@ -118,7 +122,7 @@ en:
     hasbeencreated: "has been created!"
     expenses: "Expenses"
     expensestweet: "Tweet your expense to save time"
-    expensestweetexample: "Try this example: <i> \"I just got back from #shopping for %{r1} and %{r2}. Spent 100€.\" </i>"
+    expensestweetexample: "Try this example: <i> \"I just got back from #shopping for @%{r1} and @%{r2}. Spent 100€.\" </i>"
     expensestweetcaption: "Tweet your expense"
     expensestweetauthor: "Expense author is <strong id='expense_author_view'>%{author}</strong>, you can change it below"
     oldfashion: "Or do it the old fashion way"
@@ -135,3 +139,9 @@ en:
     datatablepagesprevious: "Previous"
     datatablepagesnext: "Next"
     datatablenorecord: "No expense to display"
+  mailer:
+    expensesubject: "[CAMOULOC] New expense"
+    welcomeaboardsubject: "[CAMOULOC] Welcome aboard! Your flatshare is almost ready"
+    invitationsubject: "[CAMOULOC] You have been invited to join Camouloc"
+    passwordresetsubject: "[CAMOULOC] Password reset"
+    countersresetsubject: "[CAMOULOC] Instructions for resetting counters"

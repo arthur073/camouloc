@@ -4,8 +4,6 @@ class ApplicationController < ActionController::Base
 	protect_from_forgery
 	include SessionsHelper
 
-	#before_filter :prepare_for_mobile
-	before_filter :set_user_language
 	before_filter :set_locale
 
 	def mobile_device?
@@ -19,7 +17,7 @@ class ApplicationController < ActionController::Base
 
 	def set_locale
 		if params[:locale].blank? or !(params[:locale].eql? "fr" or params[:locale].eql? "en")
-			I18n.locale = 'fr'
+			I18n.locale = extract_locale_from_accept_language_header
 		else
 			I18n.locale = params[:locale]
 		end
@@ -38,8 +36,7 @@ class ApplicationController < ActionController::Base
 	end	
 	
 	private
-
-	def set_user_language
-		I18n.locale = 'fr'
-	end
+	  def extract_locale_from_accept_language_header
+		request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+	  end
 end

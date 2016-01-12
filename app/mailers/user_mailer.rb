@@ -9,7 +9,7 @@ class UserMailer < ActionMailer::Base
 		url_end = url_for create_users_path(:user => user, :secret => secret)
 		url_start = url_for root_url
 		@url = url_start + url_end[1..-1]
-		mail(:to => user.email, :subject => "[CAMOULOC] Welcome aboard! Your flatshare is almost ready")
+		mail(:to => user.email, :subject => t("mailer.welcomeaboardsubject"))
 	end
 	
 	def welcome_email(user, roommate)
@@ -18,7 +18,7 @@ class UserMailer < ActionMailer::Base
 		@roommate = roommate
 		@flatshare_name = Coloc.find(user.coloc_id).nom
 		@url  = root_url
-		mail(:to => user.email, :subject => "[CAMOULOC] You have been invited to join Camouloc")
+		mail(:to => user.email, :subject => t("mailer.invitationsubject"))
 	end
 
 	def password_reset(user)
@@ -26,7 +26,7 @@ class UserMailer < ActionMailer::Base
 		@firstname = user.nom.split(" ")[0]
 		@flatshare_name = Coloc.find(user.coloc_id).nom
 		@url  = root_url
-		mail :to => user.email, :subject => "[CAMOULOC] Password reset"
+		mail :to => user.email, :subject => t("mailer.passwordresetsubject")
   	end
 
 	def colocemail(coloc)
@@ -45,6 +45,6 @@ class UserMailer < ActionMailer::Base
 		_arrayTot = @coloc.get_tot
 		@arrayReimbursement = @coloc.get_reimbursement(_arrayTot)
 		@url  = root_url
-		mail(:to => coloc.users.where(:mail => 1).map(&:email), :subject => "[CAMOULOC] Instructions for resetting counters")
+		mail(:to => coloc.users.where(:mail => 1).map(&:email), :subject => t("mailer.countersresetsubject"))
     end
 end

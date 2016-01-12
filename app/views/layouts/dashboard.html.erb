@@ -79,7 +79,7 @@
                         <%= image_tag(current_user.image, :alt => "User image", :class => "img-circle white-border-big") %>
                         <p>
                           <%= current_user.nom.capitalize %>
-                          <small><%= t "db.membersince" %> <%= current_user.created_at.strftime("%b %e") %> </small>
+                          <small><%= t "db.membersince" %> <%= l current_user.created_at %> </small>
                         </p>
                       </li>
                       <!-- Menu Footer-->
@@ -243,9 +243,9 @@
           <footer class="main-footer">
             <!-- To the right -->
             <div class="pull-right hidden-xs">
-					  <%= link_to "<span class='lang-sm' lang='fr'></span>".html_safe, coloc_path(:id => current_user.coloc_id, :locale => "fr") %>
+					  <%= link_to "<span class='lang-sm' lang='fr'></span>".html_safe, params.merge(:locale => "fr") %>
 					&ndash;	 
-					  <%= link_to "<span class='lang-sm' lang='en'></span>".html_safe, coloc_path(:id => current_user.coloc_id, :locale => "en") %>
+					  <%= link_to "<span class='lang-sm' lang='en'></span>".html_safe, params.merge(:locale => "en") %>
             </div>
             <!-- Default to the left -->
             <strong>Copyright &copy; <%= Date.today.strftime("%Y") %> <a href="#">Camouloc</a></strong> 

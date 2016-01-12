@@ -158,7 +158,7 @@ class Coloc < ActiveRecord::Base
 		_relevant_expenses_count = expenses.last(50).count
 		_relevant_expenses = expenses.last(50).sort_by{|e| e[:created_at]}.group_by{|e| e.created_at.beginning_of_month}
 		
-		_expenses_dates = _relevant_expenses.map{|elem| elem.last[0].created_at.strftime("%b. %Y")}
+		_expenses_dates = _relevant_expenses.map{|elem| I18n.l(elem.last[0].created_at, :format => :short).titleize}
 		_expenses_values = _relevant_expenses.map{|elem| elem.last.inject(0){|sum,e| sum += e.montant }}
 	
 		return [_expenses_dates, _expenses_values, _relevant_expenses_count]

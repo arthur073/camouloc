@@ -1,4 +1,8 @@
 fr:
+  time:
+    formats:
+      default: "%e %B %Y"
+      short: "%B %Y"
   home:
     home: "Accueil"
     values: "Nos valeurs"
@@ -52,7 +56,7 @@ fr:
   db:
     notifcaption: "Vous avez 1 notification"
     notifmessage: "Voici le nouveau Camouloc!</strong><br>Camouloc a été reconstruite entièrement pour vous assurer la meilleure expérience utilisateur. N'hésitez pas à <a href='mailto:arthur.verger@gmail.com?subject=Feedback Utilisateur' class='feedback'> nous faire vos retours </a> sur ce nouveau design."
-    membersince: "Membre depuis "
+    membersince: "Membre depuis le "
     profile: "Mon profil"    
     signout: "Se déconnecter"
     online: "En ligne"
@@ -118,7 +122,7 @@ fr:
     hasbeencreated: "a été créée!"	
     expenses: "Dépenses"
     expensestweet: "Tweetez votre dépense pour gagner du temps"
-    expensestweetexample: "Essayez cet exemple: <i> \"Je rentre juste des #courses pour %{r1} et %{r2}. j'ai dépensé 100€.\" </i>"
+    expensestweetexample: "Essayez cet exemple: <i> \"Je rentre juste des #courses pour @%{r1} et @%{r2}. j'ai dépensé 100€.\" </i>"
     expensestweetcaption: "Tweetez votre dépense"
     expensestweetauthor: "L'auteur de la dépense est <strong id='expense_author_view'>%{author}</strong>, vous pouvez le changer ci-dessous"
     oldfashion: "Ou faîtes-le de manière classique"
@@ -135,3 +139,9 @@ fr:
     datatablepagesprevious: "Précédent"
     datatablepagesnext: "Suivant"
     datatablenorecord: "Pas de dépense à afficher"
+  mailer:
+    expensesubject: "[CAMOULOC] Nouvelle dépense"
+    welcomeaboardsubject: "[CAMOULOC] Bienvenue à bord! Votre coloc est presque prête"
+    invitationsubject: "[CAMOULOC] Vous avez été invité(e) sur Camouloc"
+    passwordresetsubject: "[CAMOULOC] Remise à zéro du mot de passe"
+    countersresetsubject: "[CAMOULOC] Instructions pour remettre les comptes à zéro"
