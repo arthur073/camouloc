@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
 	end
 
 	def set_locale
-		if params[:locale].blank? or !(params[:locale].eql? "fr" or params[:locale].eql? "en")
+		if params[:locale].blank? or (!params[:locale].eql? "fr" and !params[:locale].eql? "en")
 			I18n.locale = extract_locale_from_accept_language_header
 		else
 			I18n.locale = params[:locale]
@@ -37,6 +37,8 @@ class ApplicationController < ActionController::Base
 	
 	private
 	  def extract_locale_from_accept_language_header
+		puts "HERE"
+		puts request.env['HTTP_ACCEPT_LANGUAGE']
 		request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
 	  end
 end
