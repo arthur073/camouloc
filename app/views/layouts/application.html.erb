@@ -49,7 +49,7 @@
 	          </ul>
 			  <ul class="nav navbar-nav navbar-right">
 				<li class="wrap"><%= link_to t("home.register"), signup_path, :id => "try_button" %></li>
-				<li><%= link_to t("home.login"), login_path %></li>				
+				<li><%= link_to t("home.login"), login_path, :id => "login_button" %></li>				
 				<li>				
 					<div class="btn-group dropdown language-selector" id="language_box" style="display:none">
 					  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
@@ -239,25 +239,10 @@
 			  interval: 5000
 			})
 			
-			var getUrlParameter = function getUrlParameter(sParam) {
-				var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-					sURLVariables = sPageURL.split('&'),
-					sParameterName,
-					i;
-
-				for (i = 0; i < sURLVariables.length; i++) {
-					sParameterName = sURLVariables[i].split('=');
-
-					if (sParameterName[0] === sParam) {
-						return sParameterName[1] === undefined ? true : sParameterName[1];
-					}
-				}
-			};
-			
 			$( document ).ready(function() {
 				var language = "fr"
-				if (getUrlParameter("locale") != undefined && !(getUrlParameter("locale") != "fr" && getUrlParameter("locale") != "en")) {
-					language = getUrlParameter("locale");
+				if ($("#login_button").text() == "Login") {
+					language = "en";
 				}
 				$("#current_language").attr("lang",language);
 				$("#language_box").show();			
