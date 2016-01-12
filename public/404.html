@@ -1,53 +1,92 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
-<link rel="icon" type="image/ico" href="favicon.ico">
-  <title>Page non trouvée !</title>
-  <style type="text/css">
-    body { background-image:url('fond.jpg');
-	background-attachment: fixed;
- 	color: #666; 
-	text-align: center; 
-	font-family: arial, sans-serif;
- 	}
-    
-   div.dialog {
-	background-color: #175475;
-	color: white;
-      width: 40em;
-      padding: 1em 4em;
-      margin: 8em auto 0 auto;
-	box-shadow: 0px 2px 5px #1c1a19;
-border-radius: 10px;
-      }
-
-    h1 { font-size: 150%;  line-height: 1.5em; }
-
-/* Liens */
-
-a {
-	color: #09c;
-	text-decoration: none;
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="404 Not Found">
+<meta name="author" content="">
+<title>404 Not Found</title>
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<style>
+/* Error Page Inline Styles */
+body {
+  padding-top: 20px;
 }
-
-a:hover {
-	color: #09c;
-	text-decoration: underline;
+/* Layout */
+.jumbotron {
+  font-size: 21px;
+  font-weight: 200;
+  line-height: 2.1428571435;
+  color: inherit;
+  padding: 10px 0px;
 }
-
-a:visited {
-	color: #09c;
+/* Everything but the jumbotron gets side spacing for mobile-first views */
+.masthead, .body-content, {
+  padding-left: 15px;
+  padding-right: 15px;
 }
-  </style>
+/* Main marketing message and sign up button */
+.jumbotron {
+  text-align: center;
+  background-color: transparent;
+}
+.jumbotron .btn {
+  font-size: 21px;
+  padding: 14px 24px;
+}
+/* Colors */
+.green {color:#5cb85c;}
+.orange {color:#f0ad4e;}
+.red {color:#d9534f;}
+</style>
+<script type="text/javascript">
+  function loadDomain() {
+    var display = document.getElementById("display-domain");
+    display.innerHTML = document.domain;
+  }
+</script>
 </head>
-
-<body>
-  <div class="dialog">
-    <h1>Ooops, la page que vous recherchez n'existe pas.</h1> <br>
-	Vous pouvez cliquer <a href="http://camouloc.herokuapp.com">ici</a> pour revenir à la page d'accueil, ou envoyer un mail au développeur pour signaler le problème en cliquant <a href="mailto:arthur.verger@gmail.com">ici</a>, pour que le problème soit corrigé dans les plus brefs délais. <br> <br>
-
-	Merci de votre compréhension.
+<body onload="javascript:loadDomain();">
+<!-- Error Page Content -->
+<div class="container">
+  <!-- Jumbotron -->
+  <div class="jumbotron">
+    <h1><i class="fa fa-frown-o red"></i> 404 Not Found</h1>
+    <p class="lead">We couldn't find what you're looking for on <em><span id="display-domain"></span></em>.</p>
+    <p><a onclick=javascript:checkSite(); class="btn btn-default btn-lg"><span class="green">Take Me To The Homepage</span></a>
+        <script type="text/javascript">
+            function checkSite(){
+              var currentSite = window.location.hostname;
+                window.location = "http://" + currentSite;
+            }
+        </script>
+    </p>
   </div>
+</div>
+<div class="container">
+  <div class="body-content">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>What happened?</h2>
+        <p class="lead">A 404 error status implies that the file or page that you're looking for could not be found.</p>
+      </div>
+      <div class="col-md-6">
+        <h2>What can I do?</h2>
+        <p class="lead">If you're a site vistor</p>
+        <p>Please use your browsers back button and check that you're in the right place. If you need immediate assistance, please <a href="mailto:arthur.verger@gmail.com?subject=Contact - Application error 404">send us an email</a> instead.</p>
+        <p class="lead">If you're the site owner</p>
+         <p>Please check that you're in the right place and get in touch with your website provider if you believe this to be an error.</p>
+     </div>
+    </div>
+  </div>
+</div>
+<!-- End Error Page Content -->
+<!--Scripts-->
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 </body>
 </html>
