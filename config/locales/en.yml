@@ -145,3 +145,19 @@ en:
     invitationsubject: "[CAMOULOC] You have been invited to join Camouloc"
     passwordresetsubject: "[CAMOULOC] Password reset"
     countersresetsubject: "[CAMOULOC] Instructions for resetting counters"
+  expenseemail:
+    dearmembers: "Dear members of"
+    wejustreceived: "We just received a new expense for your flatshare"
+    belowaresomedetails: "Below are some details about this expense:"
+    thefulllist: "The full list of your flatshare's expenses is available on Camouloc."
+    checkitout: "Check it out!"
+    welookforward: "We look forward to seeing you on"
+    yourcamoulocteam: "Your Camouloc team"
+  passwordresetemail: 
+    dear: "Dear"
+    caption: "You have just requested your password to be reset."
+    smallercaption: "You will find below your credentials to login to <strong> Camouloc </strong>:<br> <i>(we recommend to change you temporary password as soon as possible) </i></p>"
+    temppassword: "Temporary password"
+    youcanaccesscamouloc: "You can access Camouloc using the following link:"
+    accesscamouloc: "Access Camouloc"
+    
