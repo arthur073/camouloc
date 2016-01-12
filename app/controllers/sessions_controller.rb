@@ -9,10 +9,10 @@ class SessionsController < ApplicationController
         def create
                 user = User.authenticate(params[:session][:email], params[:session][:password])
                 if user.nil?
-                        flash[:error] = "Invalid username/password combinaison"
+                        flash[:error] = t("main.loginfailure")
 			            redirect_to login_path
                 else
-                        flash[:notice] = "You are logged in as "  + user.nom.capitalize + ". "
+                        flash[:notice] = t("main.loginsuccess", :name => user.nom.capitalize)
                         sign_in user
                         redirect_back_or Coloc.find(user.coloc_id)
                 end
@@ -39,6 +39,6 @@ class SessionsController < ApplicationController
         def destroy
                 sign_out
                 redirect_to root_path
-                flash[:notice] = "You are logged out"
+                flash[:notice] = t("main.logout")
         end
 end

@@ -20,7 +20,7 @@ class ColocsController < ApplicationController
 				@auto_expenses = @expenses.select{|item| item.auto == 1}
 				@expenses = @expenses.keep_if{|item| item.auto == 0}
                 
-                flash[:info] = "Hey! It looks like you haven't entered any expense yet. You can do so from the expense screen." if @expenses.count == 0
+                flash[:info] = t("main.noexpenseadded") if @expenses.count == 0
 				
 				@arrayTot = @coloc.get_tot
 				@arrayReimbursement = @coloc.get_reimbursement(@arrayTot)
@@ -61,11 +61,11 @@ class ColocsController < ApplicationController
                         UserMailer.colocemail(@coloc).deliver
                         UserMailer.progress_email(@user).deliver
 						rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
-							flash[:success] = "Your account has been created, but we are currently unable to send you a confirmation email"
+							flash[:success] = t("main.createcolocwithoutemail")
 						end
                         redirect_to create_users_path(:user => @user, :secret => @secret)
                     else
-                        flash[:error] = "Error!"
+                        flash[:error] = t("main.unabletocreateflatshare")
                         render 'sessions#new'
                     end                   
                 end
@@ -151,12 +151,12 @@ class ColocsController < ApplicationController
 					    begin
 							DepenseMailer.new_expense_email(_expense).deliver
 						rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError, NoMethodError => e
-							flash[:success] = "Expense successfully saved! Email has not been sent however."							
+							flash[:success] = t("main.expensesuccessnoemail")							
 						else
-							flash[:success] = "Expense successfully saved!"
+							flash[:success] = t("main.expensesuccess")
 						end
 					else	
-                        flash[:error] = "Error creating your expense. Please verify your inputs."
+                        flash[:error] = t("main.expensefailure")
 					end
 					redirect_to :back
 				else	
@@ -170,10 +170,10 @@ class ColocsController < ApplicationController
 				if params[:coloc][:id] && params[:coloc][:nom]
 					_coloc = Coloc.find(params[:coloc][:id])
 					_coloc.destroy
-					flash[:success] = "Flatshare successfully removed. See you soon on Camouloc"
+					flash[:success] = t("main.flatsharedeletionsuccess")
 					redirect_to root_path
 				else
-					flash[:error] = "Error: you are not authorized to delete this flatshare"
+					flash[:error] = t("main.flatsharedeletionfailure")
 					redirect_to root_path
 				end
         end
@@ -187,10 +187,10 @@ class ColocsController < ApplicationController
                 
                 if @coloc.save
                         redirect_to @coloc
-                        flash[:success] = "Flatshare settings updated"
+                        flash[:success] = t("main.flatshareupdatesuccess")
                 else
                         redirect_to @coloc
-                        flash[:error] = "Error updating your flatshare settings. Please try again."
+                        flash[:error] = t("main.flatshareupdatefailure")
                 end
         end
 	
@@ -203,10 +203,10 @@ class ColocsController < ApplicationController
 				_coloc = Coloc.find(params[:coloc_id])
 				begin
 					UserMailer.reset_counters_email(_coloc).deliver
-				rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
-					flash[:warning] = "Unable to reach all your roommmates. Please check there email addresses for typing errors"							
+				rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError, NoMethodError => e
+					flash[:warning] = t("main.shareexpensedistributionfailure")							
 				else
-					flash[:success] = "Expenses distribution successfully shared with your roommates"
+					flash[:success] = t("main.shareexpensedistributionsuccess")
 				end
 			else
 				render :status => 404
@@ -216,13 +216,13 @@ class ColocsController < ApplicationController
 		private
 		
 	        def missing_flatshare
-                flash[:error] = "Error: unable to find this flatshare"
+                flash[:error] = t("main.missingflatshareerror")
                 redirect_to Coloc.find(current_user.coloc_id) 		        
 	        end
 	        
 	        def redirect_if_wrong_flatshare(coloc)
                   if coloc.id != current_user.coloc_id
-                    flash[:warning] = "Oops! You are not able to see this flatshare's data"
+                    flash[:warning] = t("main.unabletoseeflatsharedata")
                     redirect_to(Coloc.find(current_user.coloc_id))
                   end   	        
 	        end

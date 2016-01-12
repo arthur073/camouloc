@@ -13,9 +13,9 @@ class PasswordResetsController < ApplicationController
 			@user.save 
 			UserMailer.password_reset(@user).deliver 
 			redirect_to login_path
-			flash[:success] = "Your password has been reset and sent to your email address: " + @user.email
+			flash[:success] = t("main.passwordresetsuccess", :email => @user.email)
 		else
-			flash[:error] = "No user found with this email"
+			flash[:error] = t("main.passwordresetfailure")
 			redirect_to new_password_reset_path
 		end
 	end

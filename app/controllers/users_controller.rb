@@ -11,7 +11,11 @@ class UsersController < ApplicationController
       @coloc = Coloc.find(@user.coloc_id)
       
       # Avoiding confidential data leak      
-      redirect_if_wrong_user(@user)
+	  if @user.coloc_id != current_user.coloc_id
+        flash[:warning] = t("main.unabletoseeuser")
+		redirect_to(current_user)
+		return
+      end  
       
 	  @roommates = @coloc.users.order(:created_at)
 	  @most_recent_colocataire = @roommates.last
@@ -27,7 +31,7 @@ class UsersController < ApplicationController
 		  @expenses = QuatreDepense.all(:conditions => {:user_id => [@roommates[0].id, @roommates[1].id, @roommates[2].id, @roommates[3].id]}, :order => "created_at ASC")
 	  elsif user_number > 4
 		  @expenses = Expense.find(:all, :conditions => ["user_id IN (?) AND auto = 0", @roommates.map { |c| c.id }])
-		  @expenses.delete_if {|item| item == [] or item.auto == 1 } 
+		  # @expenses.delete_if {|item| item == [] or item.auto == 1 } 
 	  end
 	  @most_recent_expense = @expenses.last unless @expenses == []
    end
@@ -45,9 +49,9 @@ class UsersController < ApplicationController
          UserMailer.welcome_email(@user).deliver
 		 sign_in @user
 		 redirect_to new_user_path(:coloc_id => @coloc_id)
-         flash[:success] = "Your account has been successfully created"
+         flash[:success] = t("main.useraccountcreatedsuccess")
       else
-         flash[:error] = "Something went wrong, please try again"
+         flash[:error] = t("main.useraccountcreatedfailure")
          redirect_to signup_path
       end
    end
@@ -63,22 +67,15 @@ class UsersController < ApplicationController
 	  
       if user.save
          redirect_to user
-         flash[:success] = "Profile successfully updated"
+         flash[:success] = t("main.updateprofilesuccess")
       else
-         flash[:error] = "Something went wrong when editing your profile, please try again"
+         flash[:error] = t("main.updateprofilefailure")
          redirect_to user
       end
    end
 
-   def destroy
-      @user = User.find(params[:id])
-      @user.destroy
-      flash[:success] = t('flash.userDel')
-      redirect_to root_path
-   end
-
    def user_manquant
-      flash[:error] = "Error: unable to find this user"
+      flash[:error] = t("main.unabletofinduser")
       redirect_to current_user    
    end
    
@@ -116,10 +113,10 @@ class UsersController < ApplicationController
 					begin
 					UserMailer.welcome_email(@roommate,_first_roommate).deliver
 					rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
-						flash[:success] = "User created, but unable to send him an email"
+						flash[:success] = t("main.usercreatedemailfailure")
 					end
                 else
-                    flash[:warning] = "Hey! It looks like this name is already taken, please try another one."
+                    flash[:warning] = t("main.usercreatedfailure")
 					render :status => 409
                 end
             else
@@ -149,12 +146,5 @@ class UsersController < ApplicationController
 
    def authenticate
       deny_access unless signed_in?
-   end
-
-   def redirect_if_wrong_user(_user)
-      if _user.coloc_id != current_user.coloc_id
-        flash[:warning] = "Oops! You are not able to see this user's data"
-        redirect_to(current_user)
-      end      
    end
 end

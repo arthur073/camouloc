@@ -11,12 +11,12 @@ class AuthentificationsController < ApplicationController
 		# Sign him in and add authorization
 		sign_in user
 		user.add_provider(auth_hash)
-		flash[:success] = "You logged in successfully using #{auth_hash["provider"].capitalize} !"
+		flash[:success] = t("main.authsuccess", :auth_hash => auth_hash["provider"].capitalize)
 		redirect_to Coloc.find(user.coloc_id)
 	elsif signed_in?
 		# Add the authorization to the user
 		current_user.add_provider(auth_hash)
-		flash[:success] = "You can now login using #{auth_hash["provider"].capitalize} too!"
+		flash[:success] = t("main.authsuccess2", :auth_hash => auth_hash["provider"].capitalize)
 		redirect_to Coloc.find(current_user.coloc_id)
 	else
 		# Create user using classical path
@@ -26,7 +26,7 @@ class AuthentificationsController < ApplicationController
   end
   
   def failure
-	flash[:error] = "Sorry, but you didn't allow access to our app! Please use the form below instead"
+	flash[:error] = t("main.authfailure")
 	redirect_to signup_path
   end
   

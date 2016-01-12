@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
 
 	def not_found
 		# Rescuing error 404
-		flash[:error] = "Warning: the page you are looking for doesn't exist"
+		flash[:error] = t("main.error404")
 		redirect_to root_url unless signed_in?
 		redirect_to Coloc.find(current_user.coloc_id) if signed_in?
 	end	
