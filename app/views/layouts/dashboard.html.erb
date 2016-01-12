@@ -12,7 +12,7 @@
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha256-7s5uDGW3AHqw6xtJmNNtr+OBRJUlgkNJEo78P4b0yRw= sha512-nNo+yCHEyn0smMxSswnf/OnX6/KwJuZTlNZBjauKhTK0c+zT+q5JOCx0UFhXQ6rJR9jg6Es8gPuD2uZcYDLqSw==" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-	<%= stylesheet_link_tag "AdminLTE.min", "skin-blue.min", "custom-dashboard", "jquery.atwho.min", "select2.min", "dataTables.bootstrap.min"  %>
+	<%= stylesheet_link_tag "languages.min", "AdminLTE.min", "skin-blue.min", "custom-dashboard", "jquery.atwho.min", "select2.min", "dataTables.bootstrap.min"  %>
 	<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.0/css/bootstrap-toggle.min.css" rel="stylesheet">
 
 	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
@@ -243,7 +243,9 @@
           <footer class="main-footer">
             <!-- To the right -->
             <div class="pull-right hidden-xs">
-                <%= t "db.allrightsreserved" %>
+					  <%= link_to "<span class='lang-sm' lang='fr'></span>".html_safe, coloc_path(:id => current_user.coloc_id, :locale => "fr") %>
+					&ndash;	 
+					  <%= link_to "<span class='lang-sm' lang='en'></span>".html_safe, coloc_path(:id => current_user.coloc_id, :locale => "en") %>
             </div>
             <!-- Default to the left -->
             <strong>Copyright &copy; <%= Date.today.strftime("%Y") %> <a href="#">Camouloc</a></strong> 
