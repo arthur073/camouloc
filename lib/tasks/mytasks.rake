@@ -19,7 +19,7 @@ task :delete_unused_colocs => :environment do
 			if (col.users.count == 1 && col.created_at <= 3.months.ago)
 				# Delete after three months
 				col.destroy
-				puts col.id
+				puts "one user > " + col.id.to_s
 				_nbrcolocs_oneuser += 1
 				next
 			end
@@ -32,11 +32,11 @@ task :delete_unused_colocs => :environment do
 			if (col.users.count >= 2 && col.get_expenses.count > 0 && col.get_expenses.last.created_at <= 12.months.ago)
 				# Send confirmation email and delete after 12 months
 				begin
-					UserMailer.reset_counters_email_batch(col).deliver
+					#UserMailer.reset_counters_email_batch(col).deliver
 				rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError, NoMethodError, Errno::ECONNREFUSED => e
 					puts "Unable to send email for coloc " + col.id.to_s							
 				else
-					puts "Email was sent successfully - we can destroy the flatshare"
+					#puts "Email was sent successfully - we can destroy the flatshare"
 					#col.destroy
 				end
 				_nbrcolocs_tooold += 1

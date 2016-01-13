@@ -1070,7 +1070,7 @@ a:hover{color:#555 !important}blockquote{border-left:4px solid #eaf7fc}center.di
             <p style="font-style: normal;font-weight: 400;text-align: left;Margin-bottom: 25px;Margin-top: 0;font-size: 15px;line-height: 24px;font-family: Roboto,Tahoma,sans-serif;color: #888794;">
 						<% @arrayReimbursement.each_with_index do |elem,i| %>
 							  <%= t "resetcountersemail.step" %> #<%= i+1 %>:<br>
-							  <strong><%= elem[0] %></strong> <%= t "db.gives" %> <%= number_to_currency elem[1] %> <%= "db.to" %> <strong><%= elem[2] %></strong><br>
+							  <strong><%= elem[0] %></strong> <%= t "db.gives" %> <%= number_to_currency elem[1] %> <%= t "db.to" %> <strong><%= elem[2] %></strong><br>
 						<% end %>
 			</p>							
 			</td>
