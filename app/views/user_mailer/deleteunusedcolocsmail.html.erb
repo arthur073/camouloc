@@ -6,6 +6,6 @@
         <body>
                 La suppression des colocations inutilisées s'est déroulée normalement et se termine à <%= Time.now %>. <br> 
                 Voici le rapport: <br>
-				<%= @summary %>
+				<%= @summary.html_safe %>
         </body>
 </html>
