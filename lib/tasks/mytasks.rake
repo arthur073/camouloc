@@ -1,24 +1,59 @@
 #encoding: utf-8 
 
 task :delete_unused_colocs => :environment do
-   if Date.today.day == 1 or Date.today.day == 7 or Date.today.day == 14 or Date.today.day == 21 or Date.today.day == 28
-      desc "Detruit les colocations sans utilisateurs"
-      @colocs = Coloc.all
-      @nbrcoloc = 0
-      @colocs.each do |col|
-         if (col.users.count == 0)
-            col.destroy
-            @nbrcoloc = @nbrcoloc + 1
-         end
-      end
+   if true#Date.today.day == 1 or Date.today.day == 7 or Date.today.day == 14 or Date.today.day == 21 or Date.today.day == 28
+		desc "Desctruction des colocations non utilisées"
+		_colocs = Coloc.all
+		_nbrcolocs_nouser = 0
+		_nbrcolocs_oneuser = 0
+		_nbrcolocs_no_expense = 0
+		_nbrcolocs_tooold = 0
+		
+		_colocs.each do |col|
+			if (col.users.count == 0)
+				# Delete right away
+				#col.destroy
+				_nbrcolocs_nouser += 1
+				next
+			end
+			if (col.users.count == 1 && col.created_at <= 3.months.ago)
+				# Delete after three months
+				#col.destroy
+				_nbrcolocs_oneuser += 1
+				next
+			end
+			if (col.get_expenses.count == 0 && col.created_at <= 6.months.ago)
+				# Delete after 6 months
+				#col.destroy
+				_nbrcolocs_no_expense += 1
+				next
+			end
+			if (col.get_expenses.count > 0 && col.get_expenses.last.created_at <= 10.months.ago)
+				# Send confirmation email and delete after 12 months
+				begin
+					#UserMailer.reset_counters_email_batch(col).deliver
+				rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError, NoMethodError, Errno::ECONNREFUSED => e
+					puts "Unable to send email for coloc " + col.id.to_s							
+				else
+					puts "Email was sent successfully - we can destroy the flatshare"
+					#col.destroy
+				end
+				_nbrcolocs_tooold += 1
+				next
+			end
+		end
 
-      puts "Coloc destroyed" 
-      puts @nbrcoloc
-      begin
-         UserMailer.deleteunusedcolocsmail(@nbrcoloc).deliver
-      rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e      
-          puts 'Your work submitted successfully however there was a problem with email notification. Cause : ' + e.message 
-      end
+		_summary = "Colocs with no user: " + _nbrcolocs_nouser.to_s
+		_summary += "\nColocs with 1 user: " + _nbrcolocs_oneuser.to_s
+		_summary += "\nColocs with no expense: " + _nbrcolocs_no_expense.to_s
+		_summary += "\nColocs with not used for 12 months: " + _nbrcolocs_tooold.to_s
+		puts _summary
+		
+		begin
+			UserMailer.deleteunusedcolocsmail(_summary).deliver
+		rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e      
+			puts 'Your work submitted successfully however there was a problem with email notification. Cause : ' + e.message 
+		end
    end
 end
 

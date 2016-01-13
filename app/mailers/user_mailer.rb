@@ -35,8 +35,8 @@ class UserMailer < ActionMailer::Base
   	end
 
 
-    def deleteunusedcolocsmail(nbrcoloc)
-		@nbrcoloc = nbrcoloc
+    def deleteunusedcolocsmail(_summary)
+		@summary = _summary
 		mail(:to => "arthur.verger@gmail.com", :subject => "[CAMOULOC] Destruction des colocations inutilisées")
     end
 	
