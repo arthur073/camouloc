@@ -34,7 +34,7 @@ task :unused_colocs => :environment do
          _nbrcolocs_nouser += 1
 		 next
       end
-	  if col.get_expenses.count == 0 & col.created_at <= 10.months.ago
+	  if col.get_expenses.count == 0 && col.created_at <= 10.months.ago
 		_nbrcolocs_no_expense += 1	
 		next
 	  end
