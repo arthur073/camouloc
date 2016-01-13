@@ -19,6 +19,7 @@ task :delete_unused_colocs => :environment do
 			if (col.users.count == 1 && col.created_at <= 3.months.ago)
 				# Delete after three months
 				#col.destroy
+				puts col.id
 				_nbrcolocs_oneuser += 1
 				next
 			end
@@ -44,9 +45,9 @@ task :delete_unused_colocs => :environment do
 		end
 
 		_summary = "Colocs with no user: " + _nbrcolocs_nouser.to_s
-		_summary += "\nColocs with 1 user: " + _nbrcolocs_oneuser.to_s
-		_summary += "\nColocs with no expense: " + _nbrcolocs_no_expense.to_s
-		_summary += "\nColocs with not used for 12 months: " + _nbrcolocs_tooold.to_s
+		_summary += "<br>Colocs with 1 user: " + _nbrcolocs_oneuser.to_s
+		_summary += "<br>Colocs with no expense: " + _nbrcolocs_no_expense.to_s
+		_summary += "<br>Colocs not used for 12 months: " + _nbrcolocs_tooold.to_s
 		puts _summary
 		
 		begin
