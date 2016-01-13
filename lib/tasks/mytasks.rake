@@ -28,13 +28,20 @@ task :unused_colocs => :environment do
    desc "Donne le nombre de colocs non utilisees"
    _nbrcolocs_nouser = 0
    _nbrcolocs_tooold = 0
+   _nbrcolocs_no_expense = 0
    Coloc.all.each do |col|
       if (col.users.size <= 1)
          _nbrcolocs_nouser += 1
 		 next
       end
-	  if (col.get_expenses.last.created_at > 10.months.ago)
+	  if col.get_expenses.count == 0 & col.created_at <= 10.months.ago
+		_nbrcolocs_no_expense += 1	
+		next
+	  end
+	  if (col.get_expenses.count > 0 && col.get_expenses.last.created_at <= 10.months.ago)
 		_nbrcolocs_tooold += 1
+		puts col.id
+		next
 	  end
    end
    
@@ -42,6 +49,8 @@ task :unused_colocs => :environment do
    puts _nbrcolocs_nouser  
    puts "Colocations avec moins de 1 utilisateur" 
    puts " -- "
+   puts _nbrcolocs_no_expense
+   puts "Colocations sans dépenses depuis trop longtemps"
    puts _nbrcolocs_tooold
    puts "Colocations trop agees"
 end
