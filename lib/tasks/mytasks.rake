@@ -1,3 +1,5 @@
+#encoding: utf-8 
+
 task :delete_unused_colocs => :environment do
    if Date.today.day == 1 or Date.today.day == 7 or Date.today.day == 14 or Date.today.day == 21 or Date.today.day == 28
       desc "Detruit les colocations sans utilisateurs"
@@ -24,15 +26,23 @@ end
 
 task :unused_colocs => :environment do
    desc "Donne le nombre de colocs non utilisees"
-   _nbrcolocs = 0
+   _nbrcolocs_nouser = 0
+   _nbrcolocs_tooold = 0
    Coloc.all.each do |col|
       if (col.users.size <= 1)
-         _nbrcolocs += 1
+         _nbrcolocs_nouser += 1
       end
+	  if (col.get_expenses.last.created_at > 10.months.ago)
+		_nbrcolocs_tooold += 1
+	  end
    end
-
-   puts _nbrcolocs  
-   puts "Colocations vides" 
+   
+   
+   puts _nbrcolocs_nouser  
+   puts "Colocations avec moins de 1 utilisateur" 
+   puts " -- "
+   puts _nbrcolocs_tooold
+   puts "Colocations trop agees"
 end
 
 
@@ -126,4 +136,3 @@ task :month_auto_depenses => :environment do
       puts "Mauvais jour" 
    end 
 end
-
