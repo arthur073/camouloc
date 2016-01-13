@@ -28,8 +28,6 @@ class Coloc < ActiveRecord::Base
 		_roommates = self.users.order(:created_at)
 		_nbr_users = _roommates.count
 		_expenses = self.get_expenses
-		 puts "ROOMMATES NUMBER"
-		 puts _nbr_users
 		
 		# Init return value
 		_array_tot = {}
@@ -55,8 +53,7 @@ class Coloc < ActiveRecord::Base
 				_array_tot[_roommates[2].id]["tot"] -= e.montant / e.nbr_users if e.destinataire_part3 == 1 
 				_array_tot[_roommates[4].id]["tot"] -= e.montant / e.nbr_users if e.destinataire_part4 == 1 
 			elsif _nbr_users > 4
-				 puts "PARTIES"
-				 puts e.parties
+				 puts "PARTIES - " + _expenses.id
 				 e.parties.each do |p|
 					_array_tot[p.first.to_i]["tot"] -= e.montant / e.nbr_users if p.last == 1
 				 end			
