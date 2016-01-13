@@ -60,7 +60,7 @@ class ColocsController < ApplicationController
 					    begin
                         UserMailer.colocemail(@coloc).deliver
                         UserMailer.progress_email(@user).deliver
-						rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError => e
+						rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError, Errno::ECONNREFUSED => e
 							flash[:success] = t("main.createcolocwithoutemail")
 						end
                         redirect_to create_users_path(:user => @user, :secret => @secret)
@@ -150,7 +150,7 @@ class ColocsController < ApplicationController
 						_coloc.save
 					    begin
 							DepenseMailer.new_expense_email(_expense).deliver
-						rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError, NoMethodError => e
+						rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError, NoMethodError, Errno::ECONNREFUSED => e
 							flash[:success] = t("main.expensesuccessnoemail")							
 						else
 							flash[:success] = t("main.expensesuccess")
@@ -203,7 +203,7 @@ class ColocsController < ApplicationController
 				_coloc = Coloc.find(params[:coloc_id])
 				begin
 					UserMailer.reset_counters_email(_coloc).deliver
-				rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError, NoMethodError => e
+				rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError, NoMethodError, Errno::ECONNREFUSED => e
 					flash[:warning] = t("main.shareexpensedistributionfailure")							
 				else
 					flash[:success] = t("main.shareexpensedistributionsuccess")
