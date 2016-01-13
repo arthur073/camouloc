@@ -11,7 +11,7 @@ class ColocsController < ApplicationController
                 # Avoiding confidential data leak      
                 redirect_if_wrong_flatshare(@coloc)
                                 
-                @coloc_ranking = Coloc.order(:ca).index(@coloc)
+                @coloc_ranking = Coloc.order("ca DESC").index(@coloc)
                 @total_coloc_count = Coloc.last.id
                 @roommates = @coloc.users.order(:created_at)
                 user_number = @roommates.count
