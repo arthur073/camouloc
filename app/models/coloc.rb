@@ -124,8 +124,8 @@ class Coloc < ActiveRecord::Base
 				_lines << 2 if e.destinataire_part3 == 1			
 				_lines << 3 if e.destinataire_part4 == 1			
 			elsif _nbr_users > 4
-				e.parties.each_with_index do |party,i|
-					_lines << _roommates.map{|r| r.id}.index(party.first) if party.last.to_i == 1
+				e.parties.each do |party|
+					_lines << _roommates.map{|r| r.id}.index(party.first.to_i) if party.last.to_i == 1
 				end
 			end
 			
