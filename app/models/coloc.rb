@@ -53,9 +53,10 @@ class Coloc < ActiveRecord::Base
 				_array_tot[_roommates[2].id]["tot"] -= e.montant / e.nbr_users if e.destinataire_part3 == 1 
 				_array_tot[_roommates[4].id]["tot"] -= e.montant / e.nbr_users if e.destinataire_part4 == 1 
 			elsif _nbr_users > 4
-				 puts "PARTIES - " + index.to_s 
+				 puts "PARTIES - " + index.to_s
 				 e.parties.each do |p|
-					_array_tot[p.first.to_i]["tot"] -= e.montant / e.nbr_users if p.last == 1
+					puts "> Removing:" + (e.montant / e.nbr_users) + " to:" + p.first + "yes?" + p.last
+					_array_tot[p.first.to_i]["tot"] -= e.montant / e.nbr_users if p.last.to_i == 1
 				 end			
 			end			
 		end	
