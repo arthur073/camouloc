@@ -24,15 +24,14 @@ end
 
 task :unused_colocs => :environment do
    desc "Donne le nombre de colocs non utilisees"
-   @colocs = Coloc.all
-   @nbrcolocs = 0
-   @colocs.each do |col|
-      if (col.users.size == 0)
-         @nbrcolocs = @nbrcolocs + 1
+   _nbrcolocs = 0
+   Coloc.all.each do |col|
+      if (col.users.size <= 1)
+         _nbrcolocs += 1
       end
    end
 
-   puts @nbrcolocs  
+   puts _nbrcolocs  
    puts "Colocations vides" 
 end
 
