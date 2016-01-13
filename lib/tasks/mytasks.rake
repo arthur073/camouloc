@@ -31,6 +31,7 @@ task :unused_colocs => :environment do
    Coloc.all.each do |col|
       if (col.users.size <= 1)
          _nbrcolocs_nouser += 1
+		 next
       end
 	  if (col.get_expenses.last.created_at > 10.months.ago)
 		_nbrcolocs_tooold += 1
