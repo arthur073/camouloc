@@ -154,8 +154,8 @@ class Coloc < ActiveRecord::Base
 	end
 	
 	def get_lineChart_params(expenses)
-		_relevant_expenses_count = expenses.last(50).count
-		_relevant_expenses = expenses.last(50).sort_by{|e| e[:created_at]}.group_by{|e| e.created_at.beginning_of_month}
+		_relevant_expenses_count = expenses.count
+		_relevant_expenses = expenses.sort_by{|e| e[:created_at]}.group_by{|e| e.created_at.beginning_of_month}
 		
 		_expenses_dates = _relevant_expenses.map{|elem| I18n.l(elem.last[0].created_at, :format => :short).titleize}
 		_expenses_values = _relevant_expenses.map{|elem| elem.last.inject(0){|sum,e| sum += e.montant }}
