@@ -12,7 +12,7 @@ class ColocsController < ApplicationController
                 redirect_if_wrong_flatshare(@coloc)
                                 
                 @coloc_ranking = Coloc.order(:ca).index(@coloc)
-                @total_coloc_count = Coloc.all.count
+                @total_coloc_count = Coloc.last.id
                 @roommates = @coloc.users.order(:created_at)
                 user_number = @roommates.count
                 
