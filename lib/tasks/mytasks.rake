@@ -2,7 +2,7 @@
 
 task :delete_unused_colocs => :environment do
    if true#Date.today.day == 1 or Date.today.day == 7 or Date.today.day == 14 or Date.today.day == 21 or Date.today.day == 28
-		desc "Desctruction des colocations non utilisées"
+		desc "Destruction des colocations non utilisées"
 		_colocs = Coloc.all
 		_nbrcolocs_nouser = 0
 		_nbrcolocs_oneuser = 0
@@ -12,13 +12,13 @@ task :delete_unused_colocs => :environment do
 		_colocs.each do |col|
 			if (col.users.count == 0)
 				# Delete right away
-				#col.destroy
+				col.destroy
 				_nbrcolocs_nouser += 1
 				next
 			end
 			if (col.users.count == 1 && col.created_at <= 3.months.ago)
 				# Delete after three months
-				#col.destroy
+				col.destroy
 				puts col.id
 				_nbrcolocs_oneuser += 1
 				next
@@ -32,7 +32,7 @@ task :delete_unused_colocs => :environment do
 			if (col.users.count >= 2 && col.get_expenses.count > 0 && col.get_expenses.last.created_at <= 12.months.ago)
 				# Send confirmation email and delete after 12 months
 				begin
-					#UserMailer.reset_counters_email_batch(col).deliver
+					UserMailer.reset_counters_email_batch(col).deliver
 				rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError, NoMethodError, Errno::ECONNREFUSED => e
 					puts "Unable to send email for coloc " + col.id.to_s							
 				else

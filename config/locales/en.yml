@@ -145,6 +145,7 @@ en:
     invitationsubject: "[CAMOULOC] You have been invited to join Camouloc"
     passwordresetsubject: "[CAMOULOC] Password reset"
     countersresetsubject: "[CAMOULOC] Instructions for resetting counters"
+    countersresetsubject_batch: "[CAMOULOC] Important - Your flatshare has been removed from Camouloc"
   expenseemail:
     dearmembers: "Dear members of"
     wejustreceived: "We just received a new expense for your flatshare"
@@ -172,6 +173,7 @@ en:
     anyway: "Anyway, you can login to Camouloc using the following credentials: <i>(we recommend to change you temporary password as soon as possible) </i>"
   resetcountersemail:
     youhaverequested: "You have requested instructions to reset your counters, and return to a state where no one owes money to anyone."
+    youhaverequested_batch: "It has been a year since you have entered your last expense on Camouloc. As Camouloc is a free tool, we need to keep our database as light as possible, which is why we will remove your flatshare from our website. This email will give you the last instructions to reset your counters."
     youwillfindbelow: "You will find below <strong>%{steps} steps </strong> to follow if you want to reset your counters:"
     step: "Step"
     youcanexecute: "You can execute these steps on Camouloc using the following link:"

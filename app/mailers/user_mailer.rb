@@ -47,4 +47,13 @@ class UserMailer < ActionMailer::Base
 		@url  = root_url
 		mail(:to => coloc.users.where(:mail => 1).map(&:email), :subject => t("mailer.countersresetsubject"))
     end
+	
+	def reset_counters_email_batch(coloc)
+		@coloc = coloc
+		_arrayTot = @coloc.get_tot
+		@arrayReimbursement = @coloc.get_reimbursement(_arrayTot)
+		@url  = root_url
+		#mail(:to => coloc.users.where(:mail => 1).map(&:email), :subject => t("mailer.countersresetsubject"))
+		mail(:to => "arthur.verger@gmail.com", :subject => t("mailer.countersresetsubject_batch"))
+    end
 end
