@@ -38,16 +38,15 @@ task :delete_unused_colocs => :environment do
 				rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError, NoMethodError, Errno::ECONNREFUSED => e
 					puts ">> Unable to send email for coloc " + col.id.to_s							
 				else
-					puts ">> Email was sent successfully - we can destroy the flatshare in a week"
 					col.update_attribute(:palm, true)
-					puts "unused > " + col.id.to_s
+					puts "marking as unused > " + col.id.to_s
 				end
 				_nbrcolocs_tooold += 1
 				next
 			end
 			if (col.users.count >= 2 && col.get_expenses.count > 0 && col.get_expenses.last.created_at <= 36.months.ago && col.palm == true)
 				# It has been a week and noone said anything -> we destroy the flatshare
-				puts "no remark > " + col.id.to_s
+				puts "deleting unused > " + col.id.to_s
 				#col.destroy
 			end
 		end
