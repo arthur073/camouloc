@@ -46,6 +46,7 @@ task :delete_unused_colocs => :environment do
 			end
 			if (col.palm == true)
 				# It has been a week and noone said anything -> we destroy the flatshare
+				puts col.id
 				puts "deleting unused > " + col.id.to_s
 				#col.destroy
 			end
