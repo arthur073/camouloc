@@ -34,17 +34,18 @@ task :delete_unused_colocs => :environment do
 			if (col.users.count >= 2 && col.get_expenses.count > 0 && col.get_expenses.last.created_at <= 36.months.ago)
 				# Send confirmation email and delete after 12 months
 				begin
-					UserMailer.reset_counters_email_batch(col).deliver
+					#UserMailer.reset_counters_email_batch(col).deliver
 				rescue Net::SMTPAuthenticationError, Net::SMTPServerBusy, Net::SMTPSyntaxError, Net::SMTPFatalError, Net::SMTPUnknownError, NoMethodError, Errno::ECONNREFUSED => e
-					puts "Unable to send email for coloc " + col.id.to_s							
+					puts ">> Unable to send email for coloc " + col.id.to_s							
 				else
-					#puts "Email was sent successfully - we can destroy the flatshare"
-					#col.destroy
+					puts ">> Email was sent successfully - we can destroy the flatshare in a week from now"
+					col.update_attribute(:palm, true)
 					puts "unused > " + col.id.to_s
 				end
 				_nbrcolocs_tooold += 1
 				next
 			end
+			
 		end
 
 		_summary = "Colocs with no user: " + _nbrcolocs_nouser.to_s
