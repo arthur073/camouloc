@@ -2,6 +2,7 @@
 class UserMailer < ActionMailer::Base
 	default from: "Camouloc@noreply-camouloc.fr"
     default "Message-ID"=>"#{Digest::SHA2.hexdigest(Time.now.to_i.to_s)}@camouloc.fr"
+	before_filter :set_locale
 
 	def progress_email(user)
 		@firstname = user.nom.split(" ")[0]
@@ -49,7 +50,7 @@ class UserMailer < ActionMailer::Base
     end
 	
 	def reset_counters_email_batch(coloc)
-		I18n.locale = "fr"
+		#I18n.locale = "fr"
 		@coloc = coloc
 		_arrayTot = @coloc.get_tot
 		@arrayReimbursement = @coloc.get_reimbursement(_arrayTot)
