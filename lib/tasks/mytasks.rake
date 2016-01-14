@@ -44,7 +44,7 @@ task :delete_unused_colocs => :environment do
 				_nbrcolocs_tooold += 1
 				next
 			end
-			if (col.palm == true)
+			if (col.palm == 1)
 				# It has been a week and noone said anything -> we destroy the flatshare
 				puts col.id
 				puts "deleting unused > " + col.id.to_s
