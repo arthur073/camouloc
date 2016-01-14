@@ -1,7 +1,7 @@
 #encoding: utf-8 
 
 task :delete_unused_colocs => :environment do
-   if true#Date.today.day == 1 or Date.today.day == 7 or Date.today.day == 14 or Date.today.day == 21 or Date.today.day == 28
+   if Date.today.day == 1 or Date.today.day == 7 or Date.today.day == 14 or Date.today.day == 21 or Date.today.day == 28
 		desc "Destruction des colocations non utilisées"
 		_colocs = Coloc.all
 		_nbrcolocs_nouser = 0
@@ -44,7 +44,7 @@ task :delete_unused_colocs => :environment do
 				_nbrcolocs_tooold += 1
 				next
 			end
-			if (col.users.count >= 2 && col.get_expenses.count > 0 && col.get_expenses.last.created_at <= 36.months.ago && col.palm == true)
+			if (col.palm == true)
 				# It has been a week and noone said anything -> we destroy the flatshare
 				puts "deleting unused > " + col.id.to_s
 				#col.destroy
