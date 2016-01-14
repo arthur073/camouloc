@@ -2,7 +2,6 @@
 class UserMailer < ActionMailer::Base
 	default from: "Camouloc@noreply-camouloc.fr"
     default "Message-ID"=>"#{Digest::SHA2.hexdigest(Time.now.to_i.to_s)}@camouloc.fr"
-	before_filter :set_locale
 
 	def progress_email(user)
 		@firstname = user.nom.split(" ")[0]
