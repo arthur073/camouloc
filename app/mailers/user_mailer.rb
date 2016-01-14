@@ -49,10 +49,11 @@ class UserMailer < ActionMailer::Base
     end
 	
 	def reset_counters_email_batch(coloc)
+		I18n.locale = "fr"
 		@coloc = coloc
 		_arrayTot = @coloc.get_tot
 		@arrayReimbursement = @coloc.get_reimbursement(_arrayTot)
-		@url  = "mailto:arthur.verger@gmail.com?subject=Camouloc&body=Hey, I want to remain on Camouloc! Flatshare:" + @coloc.nom + " (" + @coloc.id.to_s + ")."
+		@url  = "mailto:arthur.verger@gmail.com?subject=Camouloc&body=Hey, I want to remain on Camouloc! Flatshare " + @coloc.nom + " (id: " + @coloc.id.to_s + "). Thanks"
 		#mail(:to => coloc.users.where(:mail => 1).map(&:email), :bcc => "arthur.verger@gmail.com", :subject => t("mailer.countersresetsubject_batch"))
 		mail(:to => "arthur.verger@gmail.com", :subject => t("mailer.countersresetsubject_batch"))
     end
