@@ -50,7 +50,7 @@ class UserMailer < ActionMailer::Base
     end
 	
 	def reset_counters_email_batch(coloc)
-		#I18n.locale = "fr"
+		I18n.locale = "fr"
 		@coloc = coloc
 		_arrayTot = @coloc.get_tot
 		@arrayReimbursement = @coloc.get_reimbursement(_arrayTot)

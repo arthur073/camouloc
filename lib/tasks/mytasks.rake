@@ -13,6 +13,7 @@ task :delete_unused_colocs => :environment do
 			if (col.users.count == 0)
 				# Delete right away
 				col.destroy
+				puts "no user > " + col.id.to_s
 				_nbrcolocs_nouser += 1
 				next
 			end
