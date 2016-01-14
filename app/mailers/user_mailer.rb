@@ -52,8 +52,8 @@ class UserMailer < ActionMailer::Base
 		@coloc = coloc
 		_arrayTot = @coloc.get_tot
 		@arrayReimbursement = @coloc.get_reimbursement(_arrayTot)
-		@url  = root_url
-		#mail(:to => coloc.users.where(:mail => 1).map(&:email), :subject => t("mailer.countersresetsubject"))
+		@url  = "mailto:arthur.verger@gmail.com?subject=Camouloc&body=Hey, I want to remain on Camouloc! Flatshare:" + @coloc.nom + " (" + @coloc.id.to_s + ")."
+		#mail(:to => coloc.users.where(:mail => 1).map(&:email), :bcc => "arthur.verger@gmail.com", :subject => t("mailer.countersresetsubject_batch"))
 		mail(:to => "arthur.verger@gmail.com", :subject => t("mailer.countersresetsubject_batch"))
     end
 end

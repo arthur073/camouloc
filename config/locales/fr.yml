@@ -145,7 +145,7 @@ fr:
     invitationsubject: "[CAMOULOC] Vous avez été invité(e) sur Camouloc"
     passwordresetsubject: "[CAMOULOC] Remise à zéro du mot de passe"
     countersresetsubject: "[CAMOULOC] Instructions pour remettre les comptes à zéro"
-    countersresetsubject_batch: "[CAMOULOC] Important - Votre colocation a été supprimée de Camouloc"
+    countersresetsubject_batch: "[CAMOULOC] Important - Votre colocation va être supprimée de Camouloc"
   expenseemail:
     dearmembers: "Chers colocataires de"
     wejustreceived: "Nous venons de recevoir une dépense pour la colocation"
@@ -173,10 +173,11 @@ fr:
     anyway: "Dans tous les cas, vous pouvez maintenant vos connecter sur Camouloc grâce aux informations suivantes: <i>(nous vous recommandons de changer votre mot de passe temporaire dès que possible) </i>"
   resetcountersemail:
     youhaverequested: "Vous avez demandé une remise à zéro de vos comptes afin de retourner dans un état où personne ne se doit de l'argent."
-    youhaverequested_batch: "Cela fait maintenant plus d'un an que vous n'avez pas saisi de nouvelle dépense sur Camouloc. Comme Camouloc est un outil gratuit et veut le rester, nous devons nous assurer que le nombre de colocations inactives est le plus petit possible, afin de réduire les coûts d'hébergement. En conséquence, nous devons supprimer votre colocation de Camouloc et nous vous envoyons cet email qui contient les instructions pour remettre vos comptes à jour."
+    youhaverequested_batch: "Cela fait maintenant plus d'un an que vous n'avez pas saisi de nouvelle dépense sur Camouloc. Comme Camouloc est un outil gratuit et veut le rester, nous devons nous assurer que le nombre de colocations inactives est le plus petit possible, afin de réduire les coûts d'hébergement. En conséquence, nous allons supprimer votre colocation dans 7 jours de Camouloc et nous vous envoyons cet email qui contient les instructions pour remettre vos comptes à jour."
     youwillfindbelow: "Vous trouverez ci-dessous <strong>%{steps} étapes </strong> à suivre pour remettre vos comptes à jour:"
     step: "Etape"
     youcanexecute: "Vous pouvez visualiser ces étapes sur Camouloc à l'aide du lien suivant:"
+    justincase: "Dans le cas où vous voudriez conserver votre colocation sur Camouloc, veuillez nous contacter dès que possible en utilisant le lien ci-dessous:"
   main:
     error404: "Attention: la page demandée n'existe pas"
     authsuccess: "Vous êtes connecté avec succès en utilisant %{auth_hash} !"
