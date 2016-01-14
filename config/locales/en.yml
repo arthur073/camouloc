@@ -57,6 +57,7 @@ en:
     notifcaption: "You have 1 notification"
     notifmessage: "Meet the new Camouloc!</strong><br>Camouloc has been rebuilt from the ground up to ensure you have the best user experience. Don't hesitate to <a href='mailto:arthur.verger@gmail.com?subject=User feedback' class='feedback'> give us your feedback </a> on this design."
     membersince: "Member since"
+    keepmyflat: "Keep my flatshare"
     profile: "Profile"    
     signout: "Sign out"
     online: "Online"
