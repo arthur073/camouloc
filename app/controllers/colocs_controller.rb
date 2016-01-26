@@ -91,7 +91,7 @@ class ColocsController < ApplicationController
 				_reason = params[:raison].gsub("_"," ").capitalize							
 				_coloc = Coloc.find(params[:coloc_id])	
 				_colocataires = _coloc.users.all
-				_colocataires_id = _colocataires.map{|c| c.id}
+				_colocataires_id = _colocataires.sort_by{|c| c[:created_at]}.map{|c| c.id}
 				_coloc_secret_received = params[:coloc_secret]
 				_roommates_involved = params[:roommates_involved]
 				
