@@ -55,7 +55,7 @@ en:
     providerflatsharename: "Give your flatshare a name"
   db:
     notifcaption: "You have 1 notification"
-    notifmessage: "Meet the new Camouloc!</strong><br>Camouloc has been rebuilt from the ground up to ensure you have the best user experience. Don't hesitate to <a href='mailto:arthur.verger@gmail.com?subject=User feedback' class='feedback'> give us your feedback </a> on this design."
+    notifmessage: "Meet the new Camouloc!</strong><br>Camouloc has been rebuilt from the ground up to ensure you have the best user experience. Don't hesitate to <a href='mailto:arthur.verger@gmail.com?subject=User feedback&body=%0D%0A%0D%0A%0D%0A--%0D%0AData collected to fix potential bugs:%0D%0AUserID=%{userid}%0D%0AFlatshareID=%{flatshareid}%0D%0AUrl=%{url}' class='feedback'> give us your feedback </a> on this design."
     membersince: "Member since"
     keepmyflat: "Keep my flatshare"
     profile: "Profile"    

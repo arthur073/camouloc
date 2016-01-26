@@ -55,7 +55,7 @@ fr:
     providerflatsharename: "Le nom de votre coloc"
   db:
     notifcaption: "Vous avez 1 notification"
-    notifmessage: "Voici le nouveau Camouloc!</strong><br>Camouloc a été reconstruite entièrement pour vous assurer la meilleure expérience utilisateur. N'hésitez pas à <a href='mailto:arthur.verger@gmail.com?subject=Feedback Utilisateur' class='feedback'> nous faire vos retours </a> sur ce nouveau design."
+    notifmessage: "Voici le nouveau Camouloc!</strong><br>Camouloc a été reconstruite entièrement pour vous assurer la meilleure expérience utilisateur. N'hésitez pas à <a href='mailto:arthur.verger@gmail.com?subject=Feedback Utilisateur&body=%0D%0A%0D%0A%0D%0A--%0D%0ACes données nous servent à identifier les erreurs:%0D%0AUserID=%{userid}%0D%0AFlatshareID=%{flatshareid}%0D%0AUrl=%{url}' class='feedback'> nous faire vos retours </a> sur ce nouveau design."
     membersince: "Membre depuis le "
     keepmyflat: "Garder ma coloc"
     profile: "Mon profil"    

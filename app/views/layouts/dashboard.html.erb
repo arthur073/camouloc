@@ -80,7 +80,7 @@
 								  <li class="header"><%= t "db.notifcaption" %></li>
 								  <li class="header">
 									<strong><i class="fa fa-envelope"></i> 
-									<%= t("db.notifmessage").html_safe %> 
+									<%= t("db.notifmessage", :userid => current_user.id, :flatshareid => current_user.coloc_id, :url => request.fullpath).html_safe %> 
 								  </li>
 								</ul>
 							  </li>
