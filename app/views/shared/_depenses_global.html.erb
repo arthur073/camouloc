@@ -291,11 +291,6 @@
 	$("#amount").on('keyup', function(e) {	
 		var tweetValue = $("#tweet").val();
 		var tweetValue = tweetValue.replace(/(^|\W)([ ]?[\d][\w-,.]*[ ]?€)/i, "");
-		/*if ($(this).val().substr($(this).val().length - 1) == "€") {
-			$("#tweet").val(tweetValue + " " + $(this).val());
-		} else if ($(this).val() == "") {
-			$("#tweet").val(tweetValue);
-		}*/
 		if ($(this).val() == "") {
 			$("#tweet").val(tweetValue);
 		} else {
