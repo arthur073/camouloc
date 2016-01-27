@@ -130,7 +130,7 @@ en:
     selectyourroommates: "Select your roommates"
     whymoneyspent: "Why have you spent this money?"
     howmuchmoneyspent: "How much money have you spent?"
-    howmuchmoneyspenterror: "Input can only be digits followed by \"€\" (ex: 1€ 1.23€ or 1,23€)"
+    howmuchmoneyspenterror: "Input can only be decimal numbers (ex: 1, 1.23 or 1,23)"
     expensetype: "Expense type"
     recurring: "Recurring"
     punctual: "Punctual"

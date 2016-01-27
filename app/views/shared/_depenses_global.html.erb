@@ -65,7 +65,7 @@
 							<label><%= t "db.value" %></label>
 							<%= text_field_tag "montant", nil, :id => "amount", :class => "form-control", 
 								:placeholder => t("db.howmuchmoneyspent"), :required => true, 
-								"pattern" => '^\d+[,.]?(\d*)?€', "data-error" => t("db.howmuchmoneyspenterror") %>
+								"pattern" => '^\d+[,.]?\d+', "data-error" => t("db.howmuchmoneyspenterror") %>
 							<span class="glyphicon glyphicon-euro form-control-feedback"></span>
 							<div class="help-block with-errors"></div>
 						  </div>
@@ -262,7 +262,7 @@
 				$multi.val(selectedRoommates.filter(function(elem) { return elem != ""})).trigger("change");
 			} else {
 				if (target == "amount") {
-					$("#amount").val(splitHash[2]);
+					$("#amount").val(splitHash[2].replace("€",""));
 				} else if (target == "reason") {
 					$("#reason").val(splitHash[2].substring(1));
 				}
@@ -288,13 +288,18 @@
 		}
 	});
 	
-	$("#amount").on('keyup', function(e) {
+	$("#amount").on('keyup', function(e) {	
 		var tweetValue = $("#tweet").val();
 		var tweetValue = tweetValue.replace(/(^|\W)([ ]?[\d][\w-,.]*[ ]?€)/i, "");
-		if ($(this).val().substr($(this).val().length - 1) == "€") {
+		/*if ($(this).val().substr($(this).val().length - 1) == "€") {
 			$("#tweet").val(tweetValue + " " + $(this).val());
 		} else if ($(this).val() == "") {
 			$("#tweet").val(tweetValue);
+		}*/
+		if ($(this).val() == "") {
+			$("#tweet").val(tweetValue);
+		} else {
+			$("#tweet").val(tweetValue + " " + $(this).val() + "€");
 		}
 	});
 
