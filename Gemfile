@@ -45,4 +45,4 @@ group :assets do
 end
 
 gem 'jqcloud-rails', '~> 1.0.0'
-
+gem 'rack-canonical-host', '~> 0.1.0'
