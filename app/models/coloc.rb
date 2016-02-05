@@ -28,6 +28,7 @@ class Coloc < ActiveRecord::Base
 		_roommates = self.users.order(:created_at)
 		_nbr_users = _roommates.count
 		_expenses = self.get_expenses
+		_expenses = _expenses.keep_if{|item| item.auto == 0}
 		
 		# Init return value
 		_array_tot = {}
@@ -65,6 +66,7 @@ class Coloc < ActiveRecord::Base
 		_nbr_users = self.users.count
 		_array_tot_sorted = []
 		_array_transactions = []
+		_expenses = _expenses.keep_if{|item| item.auto == 0}
 		
 		# passing variable by value
 		_array_tot_mod = []
@@ -96,6 +98,7 @@ class Coloc < ActiveRecord::Base
 		_roommates = self.users.order(:created_at)
 		_nbr_users = _roommates.count
 		_expenses = self.get_expenses
+		_expenses = _expenses.keep_if{|item| item.auto == 0}
 		
 		# generating array
 		_result_array = []
