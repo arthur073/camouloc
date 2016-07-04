@@ -51,6 +51,7 @@
 						  </div>
 						  <div class="form-group has-feedback">
 							<label><%= t "db.roommatesinvolved" %></label>
+							<a id="select_roommates_toggle" class="pull-right"><%= t("db.all_label") %></a>
 							<%= select_tag "roommates_involved", options_for_select(@roommates.map{ |c| [c.nom.gsub(" ","_"), c.id]}), {:id => "roommates", :class => "form-control", :multiple => true, :required => true } %>
 							<span class="glyphicon glyphicon-user form-control-feedback"></span>														
 							<div class="help-block with-errors"></div>
@@ -188,12 +189,14 @@
     });
 	
 	var multiOptions = []
+	var roommates_ids = []
 	$("#roommates > option").each(function() {
 		multiOptions.push({
 			text: this.text,
 			val: this.value,
 			enabled: false
 		});
+		roommates_ids.push(this.value);
 	});
 	
 	$('#tweetForm').validator({
@@ -336,5 +339,17 @@
 			},
 			"sEmptyTable": <%= raw t("db.datatablenorecord").to_json %>
 		  }
+	});
+	
+	$("#select_roommates_toggle").click(function() {
+		var all_label = <%= raw t("db.all_label").to_json %>;
+		var none_label = <%= raw t("db.none_label").to_json %>;
+		if ($("#select_roommates_toggle").text() == all_label) {
+			$multi.val(roommates_ids).trigger("change");
+			$("#select_roommates_toggle").text(none_label);
+		} else {
+			$multi.val(null).trigger("change");
+			$("#select_roommates_toggle").text(all_label);
+		}
 	});
 </script>

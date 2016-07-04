@@ -140,6 +140,8 @@ en:
     datatablepagesprevious: "Previous"
     datatablepagesnext: "Next"
     datatablenorecord: "No expense to display"
+    none_label: "None"
+    all_label: "All"
   mailer:
     expensesubject: "[CAMOULOC] New expense"
     welcomeaboardsubject: "[CAMOULOC] Welcome onboard! Your flatshare is almost ready"

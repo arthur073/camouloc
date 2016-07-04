@@ -140,6 +140,8 @@ fr:
     datatablepagesprevious: "Précédent"
     datatablepagesnext: "Suivant"
     datatablenorecord: "Pas de dépense à afficher"
+    none_label: "Aucun"
+    all_label: "Tous"
   mailer:
     expensesubject: "[CAMOULOC] Nouvelle dépense"
     welcomeaboardsubject: "[CAMOULOC] Bienvenue à bord! Votre coloc est presque prête"
