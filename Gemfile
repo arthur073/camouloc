@@ -19,6 +19,7 @@ gem 'jquery-rails', '~> 2.0.2'
 gem 'mail', '~> 2.4.4'
 gem 'rspec-rails', '~> 3.1.0'
 gem 'faker', '0.3.1'
+gem 'rest-client', '~> 1.8'
 
 # authentification avec facebook,...
 gem 'omniauth', '~> 1.2.2'
