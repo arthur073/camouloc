@@ -213,6 +213,24 @@ class ColocsController < ApplicationController
 			end
 		end
 		
+		def set_localization
+			if params[:coloc_id] && params[:coloc_secret] && params[:localization]
+				_coloc_secret_received = params[:coloc_secret]
+				_coloc_localization_received = params[:localization]
+				_coloc = Coloc.find(params[:coloc_id])
+				
+				if _coloc.secret.eql? _coloc_secret_received				
+					_coloc.localization = _coloc_localization_received
+					_coloc.save
+					render :text => "OK"
+				else
+					render :text => "Unauthorized"
+				end
+			else
+				render :status => 404
+			end
+		end
+		
 		private
 		
 	        def missing_flatshare

@@ -29,6 +29,7 @@ MyColoc::Application.routes.draw do
 	get "/removeroommate" => "users#remove_roommate", :as => "remove_roommmate"
 	get "/resetcounters" => "colocs#reset_counters", :as => "reset_counters"
 	post "/saveexpense" => "colocs#save_expense", :as => "save_expense"
+	post "/setlocalization" => "colocs#set_localization", :as => "set_localization"
 	root :to => 'pages#home'
 	match '*unmatched_route', :to => 'application#not_found'	
 end

@@ -376,11 +376,32 @@
 				})
 			};
 			
+			var getLocalizationFromIP = function() {				
+				$.get("http://ipinfo.io", function(response) {
+					var localization = "";
+					if (response.city != "") {
+						localization = response.city + ", " + response.region + ", " + response.country;
+					} else if (response.region != "") {
+						localization = reponse.region + ", " + response.country;
+					} else {
+						localization = response.country;
+					}
+					$.post("/setlocalization", {
+						coloc_id: <%= raw current_user.coloc_id %>, 
+						coloc_secret: <%= raw Coloc.find(current_user.coloc_id).secret.to_json %>, 
+						localization: localization
+					});
+				}, "jsonp");
+			};
+			
 			$( document ).ready(function() {
 				if (window.location.pathname.indexOf("colocs") > -1) {
 					$("#flatshare_link").addClass("active");
 				} else if (window.location.pathname.indexOf("users") > -1) {			
 					$("#user_link").addClass("active");
+					if ($("#coloc_localization_holder").text() == "") {
+						getLocalizationFromIP();
+					}
 				} else if (window.location.pathname.indexOf("penses") > -1) {
 					$("#expense_link").addClass("active");
 				}
