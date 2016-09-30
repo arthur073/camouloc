@@ -22,6 +22,8 @@ gem 'faker', '0.3.1'
 gem 'rest-client', '~> 1.8'
 
 # authentification avec facebook,...
+gem 'faraday', '~> 0.8'
+gem 'multi_json', '~> 1.3	'
 gem 'oauth2', '~> 1.0'
 gem 'omniauth', '~> 1.2'
 gem 'omniauth-oauth2', '~> 1.2'
