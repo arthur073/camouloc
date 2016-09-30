@@ -24,10 +24,10 @@ gem 'rest-client', '~> 1.8'
 # authentification avec facebook,...
 gem 'oauth2', '~> 1.0'
 gem 'omniauth', '~> 1.2.2'
-gem 'omniauth-oauth2', '~> 1.3.1'
-gem 'omniauth-facebook', '~> 3.0.0'
-gem 'omniauth-google-oauth2', '~> 0.2.8'
-gem 'fbgraph', '~> 1.10.1'
+#gem 'omniauth-oauth2', '~> 1.3.1'
+#gem 'omniauth-facebook', '~> 3.0.0'
+#gem 'omniauth-google-oauth2', '~> 0.2.8'
+#gem 'fbgraph', '~> 1.10.1'
 
 
 # utilisation de pg pour mysql sur heroku
