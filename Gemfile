@@ -25,7 +25,7 @@ gem 'rest-client', '~> 1.8'
 gem 'omniauth', '~> 1.2.2'
 #gem 'omniauth-facebook', '~> 3.0'
 #gem 'omniauth-google-oauth2', '~> 0.2.9'
-gem 'fbgraph', '~> 1.10.1'
+#gem 'fbgraph', '~> 1.10.1'
 
 
 # utilisation de pg pour mysql sur heroku
