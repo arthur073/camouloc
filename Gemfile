@@ -28,7 +28,7 @@ gem 'oauth2', '~> 1.0'
 gem 'omniauth', '~> 1.2'
 gem 'omniauth-oauth2', '~> 1.2.0'
 gem 'omniauth-facebook', '~> 3.0.0'
-gem 'omniauth-google-oauth2', '~> 0.2.9'
+gem 'omniauth-google-oauth2', '~> 0.2.8'
 gem 'fbgraph', '~> 1.10.1'
 
 
