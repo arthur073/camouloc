@@ -64,6 +64,7 @@ class UsersController < ApplicationController
 	  user.nom = params[:user][:nom]
 	  user.email = params[:email]
 	  user.password = params[:user][:password]
+	  user.mail = params[:user][:mail]
 	  
       if user.save
          redirect_to user

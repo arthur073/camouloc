@@ -4,6 +4,8 @@ en:
       default: "%b. %e, %Y"
       short: "%b. %Y"
   home:
+    yes: "Yes"
+    no: "No"
     home: "Home"
     values: "Our values"
     features: "Features"
@@ -142,6 +144,8 @@ en:
     datatablenorecord: "No expense to display"
     none_label: "None"
     all_label: "All"
+    email_settings: "Receive notifications?"
+    email_settings_label: "Receive notifications?"
   mailer:
     expensesubject: "[CAMOULOC] New expense"
     welcomeaboardsubject: "[CAMOULOC] Welcome onboard! Your flatshare is almost ready"

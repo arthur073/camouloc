@@ -334,7 +334,13 @@
 						<span class="glyphicon glyphicon-lock form-control-feedback"></span>
 						<span class="help-block"><%= t "db.passwordminimum"%></span>
 						<div class="help-block with-errors"></div>
-					</div>			
+					</div>
+					<div class="form-group">
+						<label class="control-sidebar-subheading">
+							<%= f.check_box :mail, :class => "form-control, pull-right" %> 
+							<%= t "db.email_settings" %>
+						</label>
+					</div>					
 				  <%= f.submit t("db.save"), :class => "btn btn-primary btn-block btn-flat"%>
 				<% end %>
               </div><!-- /.tab-pane -->

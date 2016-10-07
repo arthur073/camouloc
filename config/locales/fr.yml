@@ -4,6 +4,8 @@ fr:
       default: "%e %B %Y"
       short: "%B %Y"
   home:
+    yes: "Oui"
+    no: "Non"
     home: "Accueil"
     values: "Nos valeurs"
     features: "Fonctionnalités"
@@ -142,6 +144,8 @@ fr:
     datatablenorecord: "Pas de dépense à afficher"
     none_label: "Aucun"
     all_label: "Tous"
+    email_settings: "Recevoir les notifications ?"
+    email_settings_label: "Notifications activées ?"
   mailer:
     expensesubject: "[CAMOULOC] Nouvelle dépense"
     welcomeaboardsubject: "[CAMOULOC] Bienvenue à bord! Votre coloc est presque prête"

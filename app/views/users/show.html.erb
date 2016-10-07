@@ -24,6 +24,9 @@
             <li class="list-group-item">
               <b><%= t("db.roommates").titleize %></b> <span class="pull-right"><%= @coloc.users.count %></span>
             </li>
+            <li class="list-group-item">
+              <b><%= t("db.email_settings_label").titleize %></b> <span class="pull-right"><%= @user.mail == 1 ? "Yes" : "No" %></span>
+            </li>
           </ul>
 
           <%= mail_to @user.email, ("<i class='fa fa-envelope'></i> " + t("db.contact")+ " <b>" + @user.nom + "</b>").html_safe, :class => "btn btn-primary btn-block" %>
