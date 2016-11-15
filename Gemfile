@@ -20,6 +20,7 @@ gem 'mail', '~> 2.4.4'
 gem 'rspec-rails', '~> 3.1.0'
 gem 'faker', '0.3.1'
 gem 'rest-client', '~> 1.8'
+gem 'public_suffix', '~> 1.4.6'
 
 # authentification avec facebook,...
 #gem 'oauth2', '~> 1.0'
