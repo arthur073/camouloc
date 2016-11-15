@@ -31,7 +31,7 @@ task :delete_unused_colocs => :environment do
 				_nbrcolocs_no_expense += 1
 				next
 			end
-			if (col.users.count >= 2 && col.get_expenses.count > 0 && col.get_expenses.last.created_at <= 36.months.ago && col.palm == 0)
+			if (col.users.count >= 2 && col.get_expenses.count > 0 && col.get_expenses.last.created_at <= 24.months.ago && col.palm == 0)
 				# Send confirmation email and delete after 12 months
 				begin
 					UserMailer.reset_counters_email_batch(col).deliver
@@ -44,7 +44,7 @@ task :delete_unused_colocs => :environment do
 				_nbrcolocs_tooold += 1
 				next
 			end
-			if (col.users.count >= 2 && col.get_expenses.count > 0 && col.get_expenses.last.created_at <= 36.months.ago && col.palm == 1)
+			if (col.users.count >= 2 && col.get_expenses.count > 0 && col.get_expenses.last.created_at <= 24.months.ago && col.palm == 1)
 				# It has been a week and noone said anything -> we destroy the flatshare
 				puts "deleting unused > " + col.id.to_s
 				col.destroy
